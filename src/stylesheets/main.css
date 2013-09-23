@@ -1,0 +1,54 @@
+#toc{
+  position: fixed;
+  top: 30px;
+  padding-right: 30px;
+  font-size: 13px;
+}
+
+#chapters{
+  margin-left: 320px;
+}
+
+
+.divider{
+  margin: 150px 20px;
+}
+
+li{
+  list-style-type: none;
+}
+ol{
+  padding-left: 0px;
+}
+li > ol{
+  padding-left: 16px;
+}
+
+
+
+/*
+*   Headers
+*/
+h1{
+  font-size: 62px;
+}
+
+
+/*
+ *  Links
+ */
+a{
+  text-decoration: none;
+}
+a:hover, a:active, a:visited{
+  color: lightblue;
+}
+
+
+
+/*
+ *  Divider
+ */
+.divider{
+  color: #428bca !important;
+}

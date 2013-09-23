@@ -1,0 +1,50 @@
+h1 Länkar
+p 
+  |En länk är ett klickbart område och kan vara en text eller bild. Interna länkar är kommunikationen mellan sidorna
+  | i din webbplats och externa länkar leder till andra webbplatser. Märket för länk är 
+  code
+      = '<a href>' 
+p |(Anchor Hyperlink Reference).
+  | Du kan även ange "ankare", bokmärken, på en sida och länka mellan dem. 
+  |Den adress som länken leder till kallas även URL (Uniform Resource Locator) och kan vara absolut eller relativ. 
+  |För att skapa en länk så kommer detta se ut såhär: 
+  code
+      = '<a href="http://im.uu.se">Information och Media</a>' 
+
+h2 Absoluta länkar
+p |En absolut URL innehåller kommunikationsprotokollet HTTP och följs av ett domännamn. 
+  |Externa länkar som leder från en webbplats till en annan webbplats är absoluta. Exempel på absolut URL:
+  |http://im.uu.se
+h2 Relativa länkar
+p |En relativ URL används inom en webbplats och anger sökvägen mellan mappar och dokument. Inget 
+  |kommunikationsprotokoll HTTP eller domännamn behöver anges. Exempel på relativ URL:
+  |html/index.html.
+h2 Länkar och effekter med CSS
+p | Med hjälp av CSS så kan man skapa olika effekter på sina länkar beroende på vilket state som länken har. Exempelvis
+  | kan man få en länk att bli understruken när man "hovrar" över länken. följande CSS på till en länk gör detta. 
+pre
+  ="a:link { text-decoration: none; color: #CC3333}"
+  br
+  ="a:visited { text-decoration: none; color: #CC3333}"
+  br
+  ="a:active { text-decoration: none; color: #CC3333}"
+  br
+  ="a:hover { text-decoration: underline}"
+p |Det finns flera andra rollover-effekter och du ser några exempel nedan.
+pre
+  ="a:hover { color: #CC6600}" 
+  br
+  ="a:hover { background-color: #99CCFF}"
+  br
+  ="a:hover { text-decoration: underline overline}"
+  br
+  ="a:hover { font-style: italic}"
+  br
+  ="a:hover { background-image: url(egen_bild.gif)}"
+  br
+  ="a:hover { letter-spacing: 5px} a:hover { cursor: help}"
+  br
+  ="a:hover { cursor: e-resize} a:hover { color: #FFFFFF; background-color: #006699}"
+
+
+

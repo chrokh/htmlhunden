@@ -1,0 +1,171 @@
+h1 Formulär 
+p 
+	|För att kunna samla in data för att exempelvis lägga in i en databas eller processa för någon anledning. 
+	| Det är alltså bara ett enkelt typ av fomulär.
+h2 Form taggen 
+p Vi börjar med skalet till detta formulär och detta ser ut som denna:
+pre
+	="<form method=”post” action=”sida2.php”>"
+	br
+	="....."
+	br 
+	="</form>"
+p 
+	|Denna kod kommer inte att visa upp något utan vi måste fylla på mera för att skapa formuläret. Då kan vi kolla på action-attributet 
+	|som säger vad som skall hända när vi trycker exempelvis på en knapp.  Det är så att HTML är statiskt och med det menar jag att den kan 
+	|inte processa datat eller göra nåt med det, för att göra det så behöver man ett serverbaserat-script. Så HTML bygger bara upp själva 
+	|formuläret. Attributet method anger hur vi skall skicka datat till nästa sida. Då skiljer man på post och get. Post är att man skickar 
+	|datat ”osynligt” och syns inte i URL:en , men beakta att detta inte är säker överföring via nätet då datat fortfarande skickas som en 
+	|plan text och kan lyssnas av. Get fungerar att vi skickar datat i URL:en och syns när vi går över till nästa sida. Man brukar säga som 
+	|en generell regel att när vi bara ska skicka datat mellan två sidor så skall man använda Get men då man skall göra något med datat
+	|(lägga in i en databas, beräkna på osv) så skall man använda Post.
+h2 Input taggen 
+p 
+	|Input taggen har en del attribut på sig som man kan sätta och en av dessa är type. Denna type gör att man får 
+	|olika typer av input beroende på vad man anger. Dessa förklaras och illustreras nedan.
+h2 Olika typer av Input typer
+h3 Exempel på text input boxes: 
+form 
+	label skriv in ditt namn:
+	input(type="text", name="fornamn",size="20",)
+	br
+	label skriv in vad du önskar att du hette:
+	input(type="text", name="onskanamn",size="20",)
+p
+	|Här har vi skapat ett formulär som har två textfält där vi kan skriva in vårt namn och även vad vi skulle vilja heta. Koden för denna 
+	|är som nedanstående:
+pre
+	="<form>"
+	br
+	='<label>skriv in ditt namn:</label><input type="text" name="fornamn" size="20"/>'
+	br
+	="<br/>"
+	br
+	="<label>skriv in vad du Ã¶nskar att du hette:</label>"
+	br
+	='<input type="text" name="onskanamn" size="20"/>'
+	br
+	="</form>"
+
+p 
+	| Det som vi har här är alltså en formtagg och i denna så ligger två inputfält varav typen är text och name är namnet som vi kommer
+	| använda om vi skulle vilja hämta upp dessa värden med exempelvis PHP. Size anger vilken storlek denna skall ha och maxlength hur
+	| många bokstäver vi kan skriva in i textboxen.
+h3 Exempel på Checkboxes
+p Checkboxes används till att man skall kunna kryssa i flera alternativ om exempelvis vad man gillar för frukt etc.
+form 
+	label äpple:
+	input(type="checkbox", name="äpple",size="20", value="gillar äpple")
+	br
+	label banan:
+	input(type="checkbox", name="banan",size="20",value="gillar banan")
+p koden ser ut som följande:
+pre
+	="<form>"
+	br
+	='<label>Ãpple:</label><input type="checkbox" name="Ãpple" size="20" value="gillar Ãpple"/>'
+	br
+	="<br/>"
+	br
+	='<label>banan:</label><input type="checkbox" name="banan" size="20" value="gillar banan"/>'
+	="</form>"
+p 
+	|Förklaring på denna är att type är satt till checkbox och name är satt till vad checboxen heter och value är vilket
+	|värde som den har och kan alltså användas för att visas upp med hjälp avnåt scriptspråk.
+h3 Exempel på Radio Buttons
+p Radiobuttons är knappar där man bara kan använda ett alternativ per knappar som är grupperade tillsammans.
+form 
+	label Man:
+	input(type="radio", name="kön",size="20", value="man")
+	br
+	label kvinna:
+	input(type="radio", name="kön",size="20",value="kvinna")
+p För att skapa detta typ av knappar så är koden följande:
+pre
+	="<form>"
+	br
+	='<label>Man:</label><input type="radio" name="kön" size="20" value="man"/>'
+	br
+	="<br/>"
+	br
+	='<label>kvinna:</label><input type="radio" name="kön" size="20" value="kvinna"/>'
+	br
+	='</form>'
+p 
+	|Här har vi satt att typen skall vara till radio och name är satt till kön. Detta name attribut är det som gör att vi 
+	|grupperar ihop dessa radiobuttons, skulle jag exempelvis skapa en till input varav typen är radio men istället sätter 
+	|name till tyckerOm så skulle jag kunna kryssa i den OCH även kunna kryssa i en och endas en av de som tilllhör gruppen kön. Value är det
+	|värdet som ges om jag markerar den knappen.
+h3 Exempel på Submit Buttons
+p 
+	|För att kunna göra något med det som vi skriver in så måste vi kunna indikera när vi är klara med ifyllandet av data.
+	|Detta är att vi måste skapa en knapp
+form 
+	label tryck ok för att fortsätta:
+	input(type="submit",value="OK")
+p Koden för denna ser ut osm följande:
+pre
+	="<form>"
+	br
+	="<label>Man:</label>"
+	br
+	='<input type="submit" value="OK"/>'
+	br
+	='</form>'
+p 
+	|Vi har alltså skapat en input tagg som har typen submit och value är det som kommer skrivas på knappen. 
+	|Denna gör ingenting utifall vi skulle trycka på knappen för det så behöver vi ha något typ av script. Hur detta 
+	|action läggs till gick igenom tidigare i detta dokument.	
+h3 Exempel på List Boxes
+p Ibland så vill vi kunna skapa listor som fäller ut sig om man trycker på den.
+form
+	select(name="frukter")
+		option(value="banan")
+			label banan	
+		option(value="äpple")
+			label äpple
+		option(value="vindruvor")
+			label vindruvor
+p Denna kan vara bra om vi har många olika alternativ att välja mellan. 
+pre
+	='<form>'
+	br
+	='<select name="frukter">'
+	br
+	='<option value="banan">'
+	br
+	='<label>banan	</label>'
+	br
+	='</option><option value="Ã¤pple">'
+	br
+	='<label>Ã¤pple</label>'
+	br
+	='</option><option value="vindruvor">'
+	br
+	='<label>vindruvor</label>'
+	br
+	='</option>'
+	br
+	='</select>'
+	br
+	='</form>'
+p 
+	|Förklaring för denna är att name är att vi skapar en tag som heter select som vi omringar med detta är själva listboxen 
+	|(name är den som vi kommer använda om vi skall plocka upp det val vi gjorde) sedan får vi för varje val man kan göra skapa en option. 
+	|Value är det värdet som kommer ges om vi frågar om vilket val vi gjorde och det som ligger mellan start och slut taggen för option kommer 
+	|vara det som skrivs för varje rad.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
