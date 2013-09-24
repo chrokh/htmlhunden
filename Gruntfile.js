@@ -4,8 +4,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     watch: {
-      files: ['src/**/*.jade', 'src/**/*.js', 'src/**/*.css'],
-      tasks: ['jade', 'copy']
+      options: {
+        livereload: 35729
+      },
+      chapters: {
+        files: ['src/**/*.jade', 'src/**/*.js', 'src/**/*.css'],
+        tasks: ['jade', 'copy']
+      }
     },
 
     jade: {
@@ -21,8 +26,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 9001,
-          base: 'www',
-          keepalive: true
+          base: 'www'
         }
       }
     },
@@ -45,5 +49,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['connect', 'watch']);
 };
