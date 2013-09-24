@@ -32,7 +32,8 @@ p
         .panel-heading HTML
         .panel-body
           code
-            = 'Ett av orden ska vara i <b>fetstil</b>, men inte resten.'
+            |Ett av orden ska vara i<br>
+            | &lt;b&gt;fetstil&lt;/b&gt;, men inte resten.
   .col-md-6
     .panel.panel-default
         .panel-heading Resultat
@@ -41,7 +42,7 @@ p
           b  fetstil 
           | men inte resten.
 p
-  | Låt oss återgå till paragrag-taggen igen.
+  | Låt oss återgå till paragraf-taggen igen.
 .row
   .col-md-6
     .panel.panel-default
@@ -59,6 +60,26 @@ p
           p Första paragrafen
           p Andra paragrafen
 
+p Tänk på radavståndet som uppstår eftersom vi använder två paragraf-taggar. Jämför med nedan exempel.
+
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading HTML
+      .panel-body
+        code
+          | &lt;p&gt; Radbrytningar<br>
+          |   inom<br>
+          |   en<br>
+          |   p-tagg har ingen effekt.
+          | &lt;/p&gt;<br>
+  .col-md-6
+    .panel.panel-default
+        .panel-heading Resultat
+        .panel-body
+          p Radbrytningar inom en p-tagg har ingen effekt.
+
+
 h3 Element utan slut-taggar
 .lead Vissa element har bara en början och inget slut. Ett bra exempel på ett sådant element är 
   code
@@ -70,11 +91,13 @@ p
 blockquote
   p Ett element kan antingen innehålla ett annat element eller helt vanlig text.
 
+.panel.panel-default
+  .panel-heading Exempel på <code>&lt;hr&gt;</code>
+  .panel-body
+    hr
+
 h3 Attribut
-.lead Ett elements öppnande tag kan även innehålla attribut med värden. Exempel på ett attribut är
-  code
-    = 'href'
-  |, som används för att berätta var en hyperlänksresurs befinner sig någonstans. 
+.lead Ett elements öppnande tag kan även innehålla attribut med värden. Exempel på ett attribut är <code>&lt;href&gt;</code>, som används för att berätta var en hyperlänksresurs befinner sig någonstans. 
 p
   | För att skapa länkar använder vi elementet 
   code
@@ -84,13 +107,13 @@ p
     = 'href'
   |, och för att berätta vart länken ska gå ger vi attributet ett värde. Så för att skapa en länk skriver vi alltså:
   .row
-    .col-md-6
+    .col-md-8
       .panel.panel-default
           .panel-heading HTML
           .panel-body
             code
-              = '<a href="http://www.uu.se">Klicka på mig</a>'
-    .col-md-6
+              = '<a href="http://uu.se">Klicka på mig</a>'
+    .col-md-4
       .panel.panel-default
           .panel-heading Resultat
           .panel-body
