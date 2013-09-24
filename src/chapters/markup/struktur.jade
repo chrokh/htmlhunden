@@ -1,37 +1,27 @@
 .page-header
   h1
-    a(href="#dom", name="dom")
+    a(href="#struktur", name="struktur")
       .icon-link 
-      | Document Object Model
+      | Struktur &amp; indentering
 
 .lead Genom att bygga upp ett dokument m.h.a. element skapar vi vad som brukar kallas en DOM (Document Object Model). För att en webbläsare ska förstå din sida kan denna DOM då dock inte se ut hursomhelst.
 
 h2 Dokument-struktur
-.lead Ett mycket html-dokument bör följa nedan form:
+.lead Följande kod är ett exempel på det enklaste html-dokumentet vi kan skriva utan att bryta emot några regler (i standarden för html 5).
 
 .panel.panel-default
   .panel-heading Ett enkelt html-dokument
   .panel-body
     pre
-      = '<!DOCTYPE html>'
-      br
-      = '<html>'
-      br
-      = '  <head>'
-      br
-      = '    <title>'
-      br
-      = '      Min hemsida'
-      br
-      = '    </title>'
-      br
-      = '  </head>'
-      br
-      = '  <body>'
-      br
-      = '  </body>'
-      br
-      = '</html>'
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt; Min hemsida &lt;/title&gt; 
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
 
 h3 HTML-dokument kan ses som trädstrukturer
 .lead DOM:en kan alltså ses som en trädstruktur.
@@ -41,7 +31,7 @@ h3 HTML-dokument kan ses som trädstrukturer
     p Vi skulle kunna visualisera den som lådor i varandra.
     pre
       |  ---------------------------
-      | |          DOCTYPE          |
+      | |         DOCTYPE          |
       |  ---------------------------
       |  ---------------------------
       | |           html            |
@@ -67,7 +57,7 @@ h3 HTML-dokument kan ses som trädstrukturer
     p
       | Detta med indentering leder oss även in på en meningsfull vana html-utvecklare respekterar.
     blockquote
-      p Om en tagg är ett barn till taggen ovan, indentera ett steg.
+      p Om en tag är ett barn till tag:en ovan, indentera ett steg.
     p Notera alltså hur 
       code title
       |  är indenterad i relation till 
@@ -95,8 +85,7 @@ h3 Välformatterade trädstrukturer
           = '</span>'
   .col-md-6
     blockquote
-      p Ett sätt att ta reda på ifall ditt dokument bryter emot denna regel är att försöka rita en av ovan visualiseringar.
-      p Ett annat sätt att indentera rätt! :)
+      p Ett sätt att ta reda på ifall ett dokument är "dåligt" indenterat är att försöka rita en sådan lista som ritats ovan under "indenterad lista". Är det svårt att veta hur man ska rita den listan så betyder det antagligen att indenteringen är felaktig.
 
 h2 Indentering
 .lead Några fler exempel på indentering.
@@ -147,29 +136,3 @@ blockquote
     em går 
     | behöver det inte betyda att det är 
     em bra.
-
-
-h3 Huvud och kropp
-p.lead Ett validerande HTML-dokument måste innehålla ett par saker. En dokumenttypsdeklaration, ett huvud, en titel och en kropp. Detta låter fånigt när vi direktöversätter det, men studera nedan minimalistiska exempel för att skapa dig en uppfattning om vad vi pratar om. Tänk på dokumentets struktur, alltså vilka element som ligger i vilka element.
-
-.panel.panel-success
-  .panel-heading Ett minimalt HTML-dokument
-  .panel-body
-    pre
-      code.language-markup
-        | &lt;!DOCTYPE html&gt;
-        | &lt;html&gt;
-        |   &lt;head&gt;
-        |     &lt;title&gt; Page about kittenz! &lt;/title&gt; 
-        |   &lt;/head&gt;
-        |   &lt;body&gt;
-        |   &lt;/body&gt;
-        | &lt;html&gt;
-
-h3 HEAD -- Information om dokumentet
-.lead HEAD-elementet 
-
-h3 BODY
-.lead TODO
-
-p Låt oss beskriva senast

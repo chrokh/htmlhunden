@@ -14,13 +14,17 @@
   margin: 150px 20px;
 }
 
-li{
+
+/*
+ *   Table of Contents
+ */
+#toc li{
   list-style-type: none;
 }
-ol{
+#toc ol{
   padding-left: 0px;
 }
-li > ol{
+#toc li > ol{
   padding-left: 16px;
 }
 
@@ -32,15 +36,24 @@ li > ol{
 h1{
   font-size: 62px;
 }
+h2{
+  font-size: 36px;
+  margin-top: 36px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+h3{
+  margin-top: 36px;
+}
 
 
 /*
  *  Links
  */
 a{
-  text-decoration: none;
+  text-decoration: none !important;
 }
-a:hover, a:active, a:visited{
+a:hover, a:active{
   color: lightblue;
 }
 
