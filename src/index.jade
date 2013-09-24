@@ -3,19 +3,23 @@ include header
     #toc
       include table-of-contents
 
-    #chapters
-      include chapters/introduktion/start
-      
-      include divider
-      include chapters/introduktion/arkitektur
+    #flow
+      #title
+        include title
 
-      include divider
-      include chapters/markup/element
-      
-      include divider
-      include chapters/markup/struktur
+      #chapters
+        include chapters/introduktion/start
+        
+        include divider
+        include chapters/introduktion/arkitektur
 
-      include divider
-      include chapters/markup/head-och-body
+        include divider
+        include chapters/markup/element
+        
+        include divider
+        include chapters/markup/struktur
+
+        include divider
+        include chapters/markup/head-och-body
 
   script(src="http://localhost:35729/livereload.js") 
