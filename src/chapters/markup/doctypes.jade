@@ -1,0 +1,57 @@
+.page-header
+  h1
+    a(href="#doctypes", name="doctypes")
+      .icon-link 
+      | Doctypes
+
+.lead
+  | HTML har funnits i fler än ett par år, och det har länge funnits mer än en enda browser. Faktumet att de flesta browsers (självklarligen) vill äga majoriteten av marknaden har gett upphov till uttrycket 
+  a(href="http://en.wikipedia.org/wiki/Browser_wars", target="_blank") The Browser Wars
+  |.
+
+p Detta (bland annat) har gett upphov till att webbläsare i olika skeden implementerat olika delar av HTML-, CSS- och JavaScript-specifikationerna. Med andra ord, att olika "dialekter" av samma språk varit tillåtet i olika webbläsare. Med andra ord att vi kan skriva vissa saker i vissa webbläsare och andra i andra, vilket gör att webbläsare A kanske inte förstår uttryck B, som webbläsare C förstår.
+
+p Detta (bland annat) har gjort att det är viktigt att deklarera vilken standard av HTML, ett visst dokument följer. Så att webbläsaren, "intelligent" (utan att gissa) kan "parse":a (läsa) vår fil enligt rätt specifikation.
+
+p Om du har svårt att förstå varför vi behöver dessa standarder, stanna upp och fundera över faktumet att html-dokument egentligen bara är text. Ingenting annat. Precis som med naturligt språk, så måste mottagaren av meddelandet förstå hur den ska avkoda informationen. Vi kan alltså se doctype-deklarationen lite som att vi berättar för webbläsaren som ska läsa filen vilket dialekt av HTML vi pratar. Löst uttryckt.
+
+p Vi definerar doctypes genom att använda syntaxen <code>&lt;!DOCTYPE x&gt;</code>, allra först i dokumentet. Där <code>x</code> ersätts med den faktiska doctype:en. Nedan följer ett par exempel för hur man deklarerar doctypes.
+
+.panel.panel-default
+  .panel-heading Detta dokument deklarerar standarden HTML5
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;&lt;title&gt;Min sida&lt;/title&gt;&lt;/head&gt;
+        |   &lt;body&gt;&lt;/body&gt;
+        | &lt;/html&gt;
+
+h4 HTML 4.01 Strict
+p <code>HTML 4.01 Strict</code> tillåter alla HTML 4.01-element och -attribut, men tillåter inte de som exkluderats ("deprecated") ur HTML 4.01-standarden. Närmare bestämt, element och attribut som rör visuell presentation snarare än struktur och content, såsom elementet <code>&lt;font&gt;</code> eller attributet <code>bgcolor="#000000"</code>.
+
+.panel.panel-default
+  .panel-heading Doctype för HTML 4.01 Strict
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;
+
+
+h4 HTML 4.01 Transitional
+p Även <code>HTML 4.01 Transitional</code> tillåter alla element och attribut som är tillåtna i HTML 4.01, <em>inklusive</em> de som rör presentation (se förklaring i ovan paragraf).
+.panel.panel-default
+  .panel-heading Doctype för HTML 4.01 Transitional
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;
+
+
+h4 Och så vidare...
+p Det finns som sagt markant fler doctypes än dessa. Enklast numera är att helt enkelt hålla sig till <code>HTML5</code> och således deklarera <code>&lt;!DOCTYPE html&gt;</code>. Vill du läsa mer om doctypes kan du t.ex. göra det hos 
+  a(href="http://www.w3schools.com/tags/tag_doctype.asp", target="_blank") W3 Schools 
+  | eller på 
+  a(href="http://en.wikipedia.org/wiki/Document_type_declaration", target="_blank") Wikipedia
+  |.
