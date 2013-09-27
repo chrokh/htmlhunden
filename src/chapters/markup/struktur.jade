@@ -2,7 +2,7 @@
   h1
     a(href="#struktur", name="struktur")
       .icon-link 
-      | Struktur &amp; indentering
+      | Dokumenstruktur
 
 .lead Genom att bygga upp ett dokument m.h.a. element skapar vi vad som brukar kallas en DOM (Document Object Model). För att en webbläsare ska förstå din sida kan denna DOM då dock inte se ut hursomhelst.
 
@@ -86,53 +86,3 @@ h3 Välformatterade trädstrukturer
   .col-md-6
     blockquote
       p Ett sätt att ta reda på ifall ett dokument är "dåligt" indenterat är att försöka rita en sådan lista som ritats ovan under "indenterad lista". Är det svårt att veta hur man ska rita den listan så betyder det antagligen att indenteringen är felaktig.
-
-h2 Indentering
-.lead Några fler exempel på indentering.
-
-.row
-  .col-md-4
-    .panel.panel-success
-      .panel-heading Korrekt indentering
-      .panel-body
-        pre
-          = '<p>'
-          br
-          = '  <span>Vilken indenterare!</span>'
-          br
-          = '</p>'
-        pre
-          = '<p><span>Ok, men svårläsligt</span></p>'
-  .col-md-4
-    .panel.panel-danger
-      .panel-heading Inkorrekt indentering
-      .panel-body
-        pre
-          = '<p>'
-          br
-          = '<span>Oj oj oj..</span>'
-          br
-          = '</p>'
-  .col-md-4
-    .panel.panel-danger
-      .panel-heading Inkorrekt indentering
-      .panel-body
-        pre
-          = '<p>'
-          br
-          = '  <span>Bra!</span>'
-          br
-          = '</p>'
-          br
-          = '  <p>'
-          br
-          = '    <span>Åh nej..</span>'
-          br
-          = '  </p>'
-
-
-blockquote
-  p HTML är förlåtande, men bara för att någonting 
-    em går 
-    | behöver det inte betyda att det är 
-    em bra.
