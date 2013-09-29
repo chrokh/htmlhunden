@@ -1,0 +1,29 @@
+.page-header
+  h1
+    a(href="#tables", name="tables")
+      .icon-link 
+      | Tabeller
+.lead Tabeller används när man behöver strukturera information
+p Förr i tiden så strukturerade och positionerade man sin sida med tabeller. Nu använder man div:ar för att fixa detta. Ibland behöver vi dock tabeller för att strukturera information på en hemsida. 
+p Ett exempel: 
+table(border = "1")
+  tr 
+    td Hund
+    td Katt
+  tr
+    td Råtta
+    td Gris
+pre
+  code.language-markup
+    | 
+    | &lt;table border="1"&gt;
+    |   &lt;tr&gt;
+    |     &lt;td&gt; Hund&lt;/td&gt; 
+    |     &lt;td&gt; Katt&lt;/td&gt; 
+    |   &lt;/tr&gt;
+    |   &lt;tr&gt;
+    |     &lt;td&gt; Råtta&lt;/td&gt; 
+    |     &lt;td&gt; Gris&lt;/td&gt; 
+    |   &lt;/tr&gt;
+    | &lt;/table&gt;
+p Förklaring är att själva tabellen är &lt;table&gt; och att &lt;tr&gt; gör ny rad och varje &lt;td&gt; är en cell. På elementet table finns också border-attributet som är satt till 1. Denan skall göras korrekt med en CSS men används för förtydliga exemplet. 

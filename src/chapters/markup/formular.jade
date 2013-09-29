@@ -3,38 +3,60 @@
 		a(href="#formular", name="formular")
 			.icon-link 
 			| Formulär
+
 p.lead
-	|För att kunna samla in data för att exempelvis lägga in i en databas eller processa för någon anledning. 
-	| Det är alltså bara ett enkelt typ av fomulär.
-h2 Form taggen 
-p Vi börjar med skalet till detta formulär och detta ser ut som denna:
-pre
-	="<form method=”post” action=”sida2.php”>"
-	br
-	="....."
-	br 
-	="</form>"
+	| För att användare av webbsidor ska kunna skicka data mellan olika sidor använder vi oss (bl.a.) av formulär.
+	| För att vi som utvecklare ska kunna spara användardata i t.ex. en databas så behöver vi få in data ifrån "klient-sidan" (client-side) till "server-sidan" (server-side). Formulär ger oss ett mycket smidigt sätt att göra detta.
+
+h2 Form-taggen 
+p Låt oss börja med att skapa ett skal till ett formulär. 
+
+.panel.panel-default
+	.panel-heading Ett tomt formulär
+	.panel-body
+		pre
+			code.language-markup
+				| &lt;form method="post" action="process-data.php"&gt;
+				|    ...
+				| &lt;/form&gt;
 p 
-	|Denna kod kommer inte att visa upp något utan vi måste fylla på mera för att skapa formuläret. Då kan vi kolla på action-attributet 
-	|som säger vad som skall hända när vi trycker exempelvis på en knapp.  Det är så att HTML är statiskt och med det menar jag att den kan 
-	|inte processa datat eller göra nåt med det, för att göra det så behöver man ett serverbaserat-script. Så HTML bygger bara upp själva 
-	|formuläret. Attributet method anger hur vi skall skicka datat till nästa sida. Då skiljer man på post och get. Post är att man skickar 
-	|datat ”osynligt” och syns inte i URL:en , men beakta att detta inte är säker överföring via nätet då datat fortfarande skickas som en 
-	|plan text och kan lyssnas av. Get fungerar att vi skickar datat i URL:en och syns när vi går över till nästa sida. Man brukar säga som 
-	|en generell regel att när vi bara ska skicka datat mellan två sidor så skall man använda Get men då man skall göra något med datat
-	|(lägga in i en databas, beräkna på osv) så skall man använda Post.
-h2 Input taggen 
-p 
-	|Input taggen har en del attribut på sig som man kan sätta och en av dessa är type. Denna type gör att man får 
-	|olika typer av input beroende på vad man anger. Dessa förklaras och illustreras nedan.
-h2 Olika typer av Input typer
-h3 Exempel på text input boxes: 
-form 
-	label skriv in ditt namn:
-	input(type="text", name="fornamn",size="20",)
-	br
-	label skriv in vad du önskar att du hette:
-	input(type="text", name="onskanamn",size="20",)
+	|Ovan kod resulterar rent visuellt inte i någonting. Under ytan så kommer ju ovan markup absolut att <em>finnas</em> i dokumentet, men rent visuellt ser användaren ingenting.
+
+h2 Olika typer av input-fält 
+p Så, låt oss lägga till någonting som faktiskt kan vara till användning. Frågan är alltså: hur kan vi ge användaren en möjlighet att skriva in data? Först och främst måste vi helt enkelt välja vad vi menar med data? Det är ju alltså formulär vi behandlar. Vill vi att användaren ska kunna skriva in "fri-text", eller välja mellan tre val, eller välja en/fler/ingen mellan tre val o.s.v. Det finns alltså ett antal olika input-metoder vi kan erbjuda en användare och några presenteras således nedan.
+
+
+
+h3 Fri-text på en rad
+p Input-taggen har i huvudsak ett attribut vid namn <code>type</code>. Detta attribut kan vi använda för att bestämma vilken typ av input-box vi vill rendera på sidan. Dessa förklaras och illustreras nedan.
+
+p Följande är ett exempel på hur vi kan göra om vi vill ha ett en-rads-text-fält.
+.row
+	.col-md-6
+		.panel.panel-default
+			.panel-heading Input type text
+			.panel-body
+				pre
+					code.language-markup
+						| &lt;input type="text" placeholder="Your email"&gt;&lt;/input&gt;
+	.col-md-6
+		.panel.panel-default
+			.panel-heading Resultat
+			.panel-body
+				form 
+					input(type="text", placeholder="Your email").form-control
+
+
+.panel.panel-default
+	.panel-heading Resultat
+	.panel-body
+		form 
+			label skriv in ditt namn:
+			input(type="text", name="fornamn",size="20",)
+			br
+			label skriv in vad du önskar att du hette:
+			input(type="text", name="onskanamn",size="20",)
+
 p
 	|Här har vi skapat ett formulär som har två textfält där vi kan skriva in vårt namn och även vad vi skulle vilja heta. Koden för denna 
 	|är som nedanstående:
@@ -50,6 +72,35 @@ pre
 	='<input type="text" name="onskanamn" size="20"/>'
 	br
 	="</form>"
+
+
+h3 Radio buttons
+p Radio-knappar!
+.panel.panel-default
+	.panel-heading Radio buttons med labels
+	.panel-body
+		pre
+			code.language-markup
+				| &lt;label&gt;
+				| 	&lt;input type="radio" name="yes-or-no" value="yes"&gt;&lt;/input&gt;
+				| 	Ja
+				| &lt;/label&gt;
+				| &lt;label&gt;
+				| 	&lt;input type="radio" name="yes-or-no" value="no"&gt;&lt;/input&gt;
+				| 	Nej
+				| &lt;/label&gt;
+
+.panel.panel-default
+	.panel-heading Resultat
+	.panel-body
+		form
+			.radio
+				label Ja
+					input(type="radio", name="yes-or-no")
+			.radio
+				label Nej
+					input(type="radio", name="yes-or-no")
+
 
 p 
 	| Det som vi har här är alltså en formtagg och i denna så ligger två inputfält varav typen är text och name är namnet som vi kommer
@@ -159,6 +210,18 @@ p
 	|Value är det värdet som kommer ges om vi frågar om vilket val vi gjorde och det som ligger mellan start och slut taggen för option kommer 
 	|vara det som skrivs för varje rad.
 
+h2 Att posta formuläret
+p
+	|Då kan vi kolla på action-attributet 
+	|som säger vad som skall hända när vi trycker exempelvis på en knapp.  Det är så att HTML är statiskt och med det menar jag att den kan 
+	|inte processa datat eller göra nåt med det, för att göra det så behöver man ett serverbaserat-script. Så HTML bygger bara upp själva 
+	|formuläret. Attributet method anger hur vi skall skicka datat till nästa sida.
+p 
+	|Då skiljer man på post och get. Post är att man skickar 
+	|datat ”osynligt” och syns inte i URL:en , men beakta att detta inte är säker överföring via nätet då datat fortfarande skickas som en 
+	|plan text och kan lyssnas av. Get fungerar att vi skickar datat i URL:en och syns när vi går över till nästa sida. Man brukar säga som 
+	|en generell regel att när vi bara ska skicka datat mellan två sidor så skall man använda Get men då man skall göra något med datat
+	|(lägga in i en databas, beräkna på osv) så skall man använda Post.
 
 
 
