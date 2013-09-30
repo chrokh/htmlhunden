@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       compile: {
         files: [{
           src:     ["src/index.jade"],
-          dest:    "www/index.html"
+          dest:    "index.html"
         }]
       }
     },
@@ -25,8 +25,7 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: 9001,
-          base: 'www'
+          port: 9001
         }
       }
     },
@@ -34,8 +33,8 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          { expand:true, cwd:'src/', src:'javascripts/*.js', dest:'www', filter:'isFile' },
-          { expand:true, cwd:'src/', src:'stylesheets/*.css', dest:'www', filter:'isFile' }
+          { expand:true, cwd:'src/', src:'javascripts/*.js', dest:'assets', filter:'isFile' },
+          { expand:true, cwd:'src/', src:'stylesheets/*.css', dest:'assets', filter:'isFile' }
         ]
       }
     }
