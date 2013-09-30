@@ -1,0 +1,54 @@
+.page-header
+  h1
+    a(href="#indentering", name="indentering")
+      .icon-link 
+      | Indentering
+
+.lead Några fler exempel på indentering.
+
+.row
+  .col-md-4
+    .panel.panel-success
+      .panel-heading Korrekt indentering
+      .panel-body
+        pre
+          = '<p>'
+          br
+          = '  <span>Vilken indenterare!</span>'
+          br
+          = '</p>'
+        pre
+          = '<p><span>Ok, men svårläsligt</span></p>'
+  .col-md-4
+    .panel.panel-danger
+      .panel-heading Inkorrekt indentering
+      .panel-body
+        pre
+          = '<p>'
+          br
+          = '<span>Oj oj oj..</span>'
+          br
+          = '</p>'
+  .col-md-4
+    .panel.panel-danger
+      .panel-heading Inkorrekt indentering
+      .panel-body
+        pre
+          = '<p>'
+          br
+          = '  <span>Bra!</span>'
+          br
+          = '</p>'
+          br
+          = '  <p>'
+          br
+          = '    <span>Åh nej..</span>'
+          br
+          = '  </p>'
+
+
+blockquote
+  p HTML är förlåtande, men bara för att någonting 
+    em går 
+    | behöver det inte betyda att det är 
+    em bra.

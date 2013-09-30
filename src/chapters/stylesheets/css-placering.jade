@@ -1,0 +1,152 @@
+.page-header
+  h1
+    a(href="#css-placering", name="css-placering")
+      .icon-link
+      | Vart skall jag lägga CSS:en?
+p När du använder CSS för att formatera en sida kan du infoga CSS-formateringen på tre sätt:
+ol
+  li Extern CSS-mall
+    br
+    |en extern CSS-mall som kopplas till dokumentet
+  li I dokumentet
+    br
+    |i dokumentets huvud head-taggen
+  li Direkt i element)
+    br
+    |i elementet där CSS-formateringen ska utföras 
+h2 Extern CSS-mall
+p 
+  |Det här är den vanligaste användningen av CSS där ett externt dokument som innehåller formateringen kopplas till alla de 
+  |sidor som ska tillämpa formatet. Namnet på CSS-mallen måste ha filtilläget .css och namnet på mallen i exemplet nedan är 
+  |"mall.css". 
+  |Den här metoden är mest effektiv, om formateringen ska ändras behöver du bara göra det i ett enda mall-dokument. 
+  |Här uppfylls målet med att separera innehåll och struktur i dokumenten.
+  |Så här kan koden för sidorna som kopplas till mallen se ut:
+pre 
+  ="< html>"
+  br
+  ="< head>"
+  br
+  ="< title>Sidan namn</title>"
+  br
+  ='<link href="mall.css" rel="stylesheet" type="text/css">'
+  br
+  ="< /head>"
+  br
+  ="<body>"
+  br
+  ="< h1>Rubrik</h1>"
+  br
+  ="< /body>"
+  br
+  ="< /html>"
+p 
+  |Du kan koppla flera externa CSS-mallar till samma dokument. Om samma selektorer förekommer i båda
+  | mallarna men med olika formatering gäller den mall som angivits senast i radvis ordning. I exemplet nedan 
+  |gäller alltså "mall2.css" före "mall.css": 
+pre 
+  ="< html>"
+  br
+  ="< head>"
+  br
+  ="< title>Sidan namn</title>"
+  br
+  ='<link href="mall.css" rel="stylesheet" type="text/css">'
+  br
+  ='< link href="mall2.css" rel="stylesheet" type="text/css">'
+  br
+  ="< /head>"
+  br
+  ="<body>"
+  br
+  ="< h1>Rubrik</h1>"
+  br
+  ="< /body>"
+  br
+  ="< /html>"
+h2 I dokumentet
+p
+  |CSS-formatering angiven direkt i dokumentet kan användas när vissa sidor ska avvika från 
+  |huvudmallens formatering. Den här metoden är inte lika effektiv som att använda en extern CSS-mall.
+  | Om formateringen ska ändras måste det utföras i varje dokument som använder formateringen.
+  |Här formateras rubriken direkt i dokumentet:
+pre 
+  ="< html>"
+  br
+  ="< head>"
+  br
+  ="< title>Sidan namn</title>"
+  br
+  ='<style type="text/css">'
+  br
+  ='h1 { font-size: 24px; }'
+  br
+  ="< /style>"
+  br
+  ="< /head>"
+  br
+  ="<body>"
+  br
+  ="< h1>Rubrik</h1>"
+  br
+  ="< /body>"
+  br
+  ="< /html>"
+h2 Direkt i elementet som ska formateras 
+p 
+  |Den här metoden är minst effektiv och här uppfylls inte målet med att separera innehåll och
+  | struktur i dokumenten. CSS-formateringen anges i anslutning till de elementsom ska formateras. 
+  |När formatet ska användas i ett nytt elememnt måste CSS-koden anges på nytt och det innebär att sidorna 
+  |innehåller mycket kod och tar längre tid att laddas i webbläsaren.
+  |Så här kan koden se ut när rubriken formateras direkt i elementet:
+pre 
+  ="< html>"
+  br
+  ="< head>"
+  br
+  ="< title>Sidan namn</title>"
+  br
+  ="< /head>"
+  br
+  ="<body>"
+  br
+  ='< h1 style="font-size: 24px;"> Rubrik</h1>'
+  br
+  ="< /body>"
+  br
+  ="< /html>"
+p Prioriteringsordningen av formateringen är följande:
+ol
+  li  HTML-formatering
+  li CSS-kod i element eller avsnitt där formateringen ska tillämpas
+  li CSS-kod i dokumentet
+  li CSS i extern mall
+p 
+  |Detta innebär att du kan börja formateringen i en extern CSS-mall som du kopplar till dina dokument.
+  | Vill du sedan ange avvikande format lokalt i ett dokument formaterar du CSS direkt i dokumentet 
+  |(gäller då före den externa CSS-mallen). Om någon del av dokumentet ska avvika från övrig CSS-formatering 
+  |anger du detta direkt i avsnittet/objektet (gäller då före både CSS i dokumentets HEAD och CSS i en extern
+  | CSS-mall)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

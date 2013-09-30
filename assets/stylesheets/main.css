@@ -1,0 +1,92 @@
+#toc{
+  position: fixed;
+  top: 30px;
+  padding-right: 30px;
+  font-size: 13px;
+}
+
+#flow{
+  margin-left: 260px;
+}
+
+
+.divider{
+  margin: 150px 20px;
+}
+
+blockquote{
+  font-size: 18px;
+}
+
+
+/*
+ *   Table of Contents
+ */
+#toc li{
+  list-style-type: none;
+}
+#toc ol{
+  padding-left: 0px;
+}
+#toc li > ol{
+  padding-left: 16px;
+}
+
+
+/*
+ * Cover page
+ */
+#title{
+  text-align: center;
+  border-top: 2px dotted #dedede;
+  border-bottom: 2px dotted #dedede;
+  padding: 30px;
+  margin: 120px 0 220px 0;
+  color: #555;
+}
+#title h1{
+  font-size: 60px;
+}
+#title h2{
+  border: 0;
+  color: #888;
+  margin-top: 30px;
+}
+
+
+/*
+*   Headers
+*/
+h1{
+  font-size: 54px;
+  font-family: 'Lily Script One', inherit;
+}
+h2{
+  font-size: 36px;
+  margin-top: 36px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+h3{
+  margin-top: 36px;
+}
+
+
+/*
+ *  Links
+ */
+a{
+  text-decoration: none !important;
+}
+a:hover, a:active{
+  color: lightblue;
+}
+
+
+
+/*
+ *  Divider
+ */
+.divider{
+  color: #dedede !important;
+}
