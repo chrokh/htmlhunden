@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
       chapters: {
         files: ['src/**/*.jade', 'src/**/*.js', 'src/**/*.css'],
-        tasks: ['jade', 'copy']
+        tasks: ['compile']
       }
     },
 
@@ -37,6 +37,13 @@ module.exports = function(grunt) {
           { expand:true, cwd:'src/', src:'stylesheets/*.css', dest:'assets', filter:'isFile' }
         ]
       }
+    },
+
+    shell: {
+      publish: {
+        options:{ stdout: true },
+        command: 'git checkout gh-pages && git merge master && git push && git checkout master'
+      }
     }
 
   });
@@ -46,7 +53,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Default task(s).
   grunt.registerTask('default', ['connect', 'watch']);
+  grunt.registerTask('compile', ['jade', 'copy'])
+  grunt.registerTask('publish', ['compile', 'shell:publish'])
 };
