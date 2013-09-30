@@ -15,7 +15,18 @@
 }
 
 blockquote{
-  font-size: 18px;
+  font-size: 26px;
+  font-family: Georgia;
+  color: #666;
+}
+
+blockquote footer{
+  margin-top: 4px;
+  font-size: 12px;
+  width: 50%;
+  margin-left: 16px;
+  text-indent: -16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
