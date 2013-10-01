@@ -1,0 +1,92 @@
+.page-header
+  h1
+    a(href="#css-cascade", name="css-cascade")
+      .icon-link 
+      | Cascading
+
+p.lead Tänk på namnet &mdash; <em>Cascading Stylesheets</em> &mdash; stilmallar som "kaskadar". Vad menas egentligen med att de "kaskadar" och hur kan vi använda det till vår fördel?
+p Just ordet "<a href="http://sv.wikipedia.org/wiki/Kaskad" target="_blank">kaskad</a>" åsyftar idén om att någonting "faller" ned ifrån en nivå till en annan och så vidare i etapper. I relation till just CSS så handlar detta om att (de flesta) CSS-regler som appliceras på en förälder även gäller för alla förälderns barn.
+p Låt oss se till exempel för att bättre förstå vad vi pratar om.
+
+.panel.panel-default
+  .panel-heading Ett exempel på hur en regel kaskadar igenom ifrån föräldern till barnen
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;body&gt;
+        |   &lt;p&gt;First paragraph&lt;/p&gt;
+        |   &lt;div&gt;
+        |     &lt;p&gt;Second paragraph&lt;/p&gt;
+        |   &lt;div&gt;
+        | &lt;/body&gt;
+
+    pre
+      code.language-css
+        | body {
+        |   color: green;
+        | }
+
+    .panel.panel-default
+      .panel-heading Exempel på relativ positionering för två <code>&lt;div&gt;</code>:ar
+      .panel-body(style="color: green;")
+        p First paragraph
+        div
+          p Second paragraph
+
+
+blockquote Mer specifika regler skriver över mindre specifika regler oavsett i vilken ordning de dyker upp i css-filerna.
+p Att mer specifika regler skriver över mindre specifika regler innebär att vi kan utnyttja kaskadet till vår fördel. Genom att således definiera generella regler på en "hög" nivå och sedan skriva över med de specika ändringar som vi vill göra.
+
+.panel.panel-default
+  .panel-heading Ett exempel på hur en mer specifik regel <em>skriver över</em> en mindre specifik (kaskadad) regel
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;body&gt;
+        |   &lt;p&gt;First paragraph&lt;/p&gt;
+        |   &lt;div&gt;
+        |     &lt;p&gt;Second paragraph&lt;/p&gt;
+        |   &lt;div&gt;
+        | &lt;/body&gt;
+
+    pre
+      code.language-css
+        | body { color: green; }
+        | div p { color: blue; }
+
+    .panel.panel-default
+      .panel-heading Exempel på relativ positionering för två <code>&lt;div&gt;</code>:ar
+      .panel-body(style="color: green;")
+        p First paragraph
+        div
+          p(style="color: blue;") Second paragraph
+
+
+p Låt oss se till ett till exempel där vi använder ett elements ID för att kunna skriva över stilarna specifikt. Notera hur den andra paragrafen fortsätter att vara <b>fetstilad</b> eftersom den "ärver" den regeln av sin förälder. Alltså, egenskapen kaskadar ned ifrån föräldern till barnet.
+
+.panel.panel-default
+  .panel-heading Ett exempel på hur en mer specifik regel <em>skriver över</em> en mindre specifik (kaskadad) regel
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;First paragraph&lt;/p&gt;
+        | &lt;p id="selected"&gt;Second paragraph&lt;/p&gt;
+        | &lt;p&gt;Third paragraph&lt;/p&gt;
+
+    pre
+      code.language-css
+        | p {
+        |   color: red;
+        |   font-weight: bold;
+        | }
+        | #selected {
+        |   color: orange;
+        | }
+
+    .panel.panel-default
+      .panel-heading Exempel på relativ positionering för två <code>&lt;div&gt;</code>:ar
+      .panel-body(style="font-weight:bold; color:red;")
+        p First paragraph
+        p(style="color: orange") Second paragraph
+        p Third paragraph
+
