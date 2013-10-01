@@ -6,49 +6,43 @@
 
 .lead Några fler exempel på indentering.
 
-.row
-  .col-md-4
-    .panel.panel-success
-      .panel-heading Korrekt indentering
-      .panel-body
-        pre
-          = '<p>'
-          br
-          = '  <span>Vilken indenterare!</span>'
-          br
-          = '</p>'
-        pre
-          = '<p><span>Ok, men svårläsligt</span></p>'
-  .col-md-4
-    .panel.panel-danger
-      .panel-heading Inkorrekt indentering
-      .panel-body
-        pre
-          = '<p>'
-          br
-          = '<span>Oj oj oj..</span>'
-          br
-          = '</p>'
-  .col-md-4
-    .panel.panel-danger
-      .panel-heading Inkorrekt indentering
-      .panel-body
-        pre
-          = '<p>'
-          br
-          = '  <span>Bra!</span>'
-          br
-          = '</p>'
-          br
-          = '  <p>'
-          br
-          = '    <span>Åh nej..</span>'
-          br
-          = '  </p>'
+.panel.panel-success
+  .panel-heading Korrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;
+        |   &lt;span&gt;Detta är ok!&lt;/span&gt;
+        | &lt;/p&gt;
+
+.panel.panel-success
+  .panel-heading Korrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;&lt;span&gt;Också ok men svårläsligt!&lt;/span&gt;&lt;/p&gt;
+
+.panel.panel-danger
+  .panel-heading Inkorrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;
+        | &lt;span&gt;Strunta _inte_ i indenteringen!&lt;/span&gt;
+        | &lt;/p&gt;
+
+.panel.panel-danger
+  .panel-heading Inkorrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;
+        |   Indentera bara barn...
+        | &lt;/p&gt;
+        |   &lt;p&gt;
+        |     ...och inte syskon!
+        |   &lt;/p&gt;
 
 
 blockquote
-  p HTML är förlåtande, men bara för att någonting 
-    em går 
-    | behöver det inte betyda att det är 
-    em bra.
+  | HTML är förlåtande, men bara för att någonting <em>går</em> att göra behöver det inte betyda att det är <em>bra</em>.
