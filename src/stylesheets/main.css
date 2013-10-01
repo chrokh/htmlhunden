@@ -29,6 +29,10 @@ blockquote footer{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+blockquote code{
+  color: inherit;
+}
+
 
 /*
  *   Table of Contents
