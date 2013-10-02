@@ -1,12 +1,12 @@
 .page-header
   h1
     a(name="arkitektur") Hur fungerar en webbsida?
-  .lead
-    Hur fungerar egentligen en hemsida? Det här dokumentet ger dig kort och mycket övgripande information om hur allting hänger i.
+
+p.lead Hur fungerar egentligen en hemsida? Vad händer egentligen när vi öppnar webbläsaren och skriver in en adress? Det här kapitlet ger dig en kort och mycket övgripande introduktion om hur allting hänger ihop.
 
 h2 HTML
 .lead
-  | HTML (Hypertext markup language) är  ett skript-språk vi använder för att konstruera webbsidor. EnMedelst HTML kan vi endast skapa statiska sidor. Alltså sidor vars innehåll alltid ser likadant ut.
+  | HTML (<a href="http://sv.wikipedia.org/wiki/HTML" target="_blank">Hypertext markup language</a>) är  ett <a href="http://sv.wikipedia.org/wiki/M%C3%A4rkspr%C3%A5k" target="_blank">märkespråk</a> vi använder för att konstruera webbsidor. Kort sagt kan vi se det som att språket HTML är ett sätt att semanstiskt strukturera ett dokuments information.
 p
   | HTML skriver vi med hjälp av taggar. Nedan kan du se ett enkelt exempel på hur HTML fungerar.
   pre
@@ -17,16 +17,65 @@ p
       b fetstilat
 
 h3 Endast för statiska sidor
-p
-  | För att kunna skapa dynamiska sidor använder vi oss av server-side-språk såsom PHP, Ruby, Python, ASP.NET etc.
-p
-  | Varför lär vi oss då HTML? Jo, för att oavsett hur mycket dynamik vi vnå "under huven" så måste vi alltid nå HTML i slutändan.
+p.lead HTML är alltså ett statiskt språk. Men vad menar vi då med statiskt och vad skulle motsatsen innebära?
+p Med statiskt menar att om vi renderar ett HTML-dokument i en webbläsare, stänger webbläsaren, öppnar den igen och renderar samma sida igen &mdash; så kommer sidan se exakt likadan ut som första gången. HTML ger oss alltså inga möjligheter att t.ex. koppla till databaser, hämta information ifrån andra sidor (bortsett ifrån användandet av <a href="http://sv.wikipedia.org/wiki/IFRAME" target="_blank">iframe</a>'s som skulle kunna bädda in en annan sida som utför logik), räkna ut matematik eller utföra någon form av logik.
+p Som en tankelek. Föreställ dig ett dokument skrivet i Microsoft Word, Pages, Open Office eller dylik dokumenthanterare. Tänk nu på att vi har rubriker,  underrubriker, stycken, text-snuttar som är <b>fetstilta</b> och <i>kursiva</i>. Ett HTML-dokument är egentligen exakt samma dokument som i denna tankelek fast varje gång vi vill att någonting ska representeras som någonting annat än text rakt upp och ned på samma rad så måste vi använda oss av <em>taggar</em> och <em>element</em>.
+p Således kan vi se våra HTML-dokument som motsvarigheten till en <code>.doc</code>-fil, och våra webbläsare som <em>Open Office</em>. Med andra ord, HTML-filer är rakt upp och ned textfiler med inblandad <em>markup</em>, och webbläsare är tolkare av detta markupspråk.
+p Låt oss fundera lite på hur ovan beskriven process fungerar.
 
-h2 Arkitektur
-.lead
-  | Föreställ dig att vi ska bygga en blogg ifrån grunden. Vi vill att man ska kunna posta inlägg och att vem som helst ska kunnalämna kommentarer till ett i. Detta kan vi inte lösa med endast HTML. Så, låt oss snabbt fundera över hur HTML passar in i den övergripande arkitekturen.
+.panel.panel-default
+  .panel-heading Processen av en webbläsare (klient) som renderar en HTML-fil
+  .panel-body
+    pre
+      |  FIL          PROGRAM              RESULTAT
+      | =================================================
+      | .html   =>   webbläsare   =>   Renderad webbsida!
 
 
 
-figure
-  
+h2 Client-server architecture
+p.lead Innan vi kan gå djupare in på varför vi inte kan utföra komplex logik i html så behöver vi lära oss lite om ansvarsområden för <a href="http://sv.wikipedia.org/wiki/Klient%E2%80%93server" target="_blank">klienter och servrar</a>.
+
+.panel.panel-default
+  .panel-heading Ett exempel på hur en server konstruerar en fil, som den sedan skickar till klienten
+  .panel-body
+    pre
+      |  SERVER            =>    FIL       =>         CLIENT
+      |  genererar en...        .html           ..som tar emot den 
+
+blockquote En server <em>servererar</em> filer till en klient. 
+
+p Låt oss formulera det med andra ord. En server servererar filer till en klient. Men vad är då en server egentligen? När vi tänker på serverhallar så är det lätt att tänka sig stora mörka haller med dundrande monster till maskiner. Så må fallet vara ibland &mdash; men inte alltid. En server kan likväl vara din egen dator. När själva vi utvecklar dynamiska webbsidor kan det mycket väl hända att vi både kör en server och en klient på vår dator.
+
+
+
+h3 Request-response
+p Som sagt, så är en servers uppgift att servera ett <code>response</code> vid en förfrågan, alltså ett <code>request</code>. Låt oss se till det lite närmare. Vi har alltså (1) en server (t.ex. någon ananstans), (2) en klient (t.ex. vår egen dator) och (3) internet. Hur hänger då allt det här ihop?
+
+.panel.panel-default
+  .panel-heading Request/response för en webbsida över internet
+  .panel-body
+    pre
+      |       CLIENT              INTERNET             WEBSERVER
+      | 
+      |  skickar request   -->  över internet  -->   som behandlas     (REQUEST)
+      | 
+      |  som kan renderas  <--  över internet  <--   skickar response  (RESPONSE)
+
+p Ovan figur är alltså en visualisering av hur ett request-response-scenario skulle kunna spela ut sig, när en klient ber om en webbsida. Och i essens är det ungefär det här som händer <em>varje gång</em> vi öppnar vår webbläsare och skriver in en adress såsom <em>www.google.com</em>.
+
+
+
+h2 Server-side-språk
+p.lead Så, vad är då egentligen ett server-side-språk? Tänk så här. Vi skulle kunna ha en klient-server-arkitektur helt utan ett server-side-språk. Hur? Jo, klienten ber om en sida genom ett request som vandrar över internet och når rätt server som rakt av svarar med ett response som är en html-sida.
+
+p Men nu är det ju så att det moderna internet består av mycket mer komplexitet än statiska sidor. Den enda skillnaden vi introducerar i ovanstående process handlar då om att vi introducerar ett språk som ansvarar för att konstruera html-sidor beroende på response.
+
+p Vi omformulerar ovan paragraf. Ett server-side-språks huvudsakliga uppgift är alltså att "hitta på" ett html-dokument. Ett statiskt response skulle vara att bara svara med en existerande html-fil. Men ett dynamiskt response skulle innebära att server-side-språket först utför en del logik, och sen "on the fly" skapar den html-fil som servern svarar med.
+
+p Exempel på server-side-språk är t.ex. PHP, Ruby, Python, ASP.NET etc.
+
+blockquote Eftersom datorer är korkade, måste vi berätta exakt vad vi vill ha
+
+p Så om server-side-språket "genererar" HTML-filer &mdash; varför måste vi då lära oss att skriva det själva? Enkelt svarat &mdash; eftersom det är vi som skriver server-side-koden, och därmed även vi som definierar hur HTML-sidorna ska genereras. Det finns alltså inte någon magisk HTML-generator utan någonstans måste vi definera exakt hur HTML-sidorna ska genereras beroende på de request vi får in. Vi återkommer alltså till den gamla tanken mdash; eftersom datorer är korkade, så måste vi berätta för dem exakt vad vi vill ha.
+
