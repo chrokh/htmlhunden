@@ -1,12 +1,37 @@
-#toc{
+/*
+ * Table of contents
+ */
+#toc-desktop{
   position: fixed;
   top: 30px;
-  padding-right: 30px;
-  font-size: 13px;
 }
-
-#flow{
-  margin-left: 260px;
+#toc-mobile{
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 18px;
+}
+#toc-mobile h1{
+  margin-bottom: 32px;
+}
+#toc-mobile ol{
+  padding-left: 0;
+}
+#toc-mobile li{
+  list-style-type: none;
+}
+#toc-mobile li ol{
+  margin-bottom: 32px;
+}
+#toc-mobile ol li a{
+  background: rgb(240,240,240);
+  width: 100%;
+  margin: 6px;
+  padding: 6px;
+  display: block;
+}
+#toc-mobile ol li ol li{
+  width: 100%;
 }
 
 
@@ -57,7 +82,6 @@ blockquote code{
   border-bottom: 2px dotted #dedede;
   padding: 30px;
   margin: 120px 0 220px 0;
-  color: #555;
 }
 #title h1{
   font-size: 60px;
@@ -75,6 +99,7 @@ blockquote code{
 h1{
   font-size: 54px;
   font-family: 'Lily Script One', inherit;
+  color: #555;
 }
 h2{
   font-size: 36px;
