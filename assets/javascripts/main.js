@@ -47,10 +47,16 @@ lathunden.Examples.init = function(){
 lathunden.Examples.CSSPositionFixed.init = function(){
   var html = '';
   for(var i=0; i<20; i++){
+    html += '<!DOCTYPE html><html><head><title>HTMLHunden example</title></head><body>';
     html += '<div style="width:100px; height:100px; background:red; margin: 6px;"></div>';
+    html += '</body></html>';
   }
   html += '<div style="width:100px; height:100px; background:blue; position:fixed; left:30px; top:20px;"></div>';
-  $('iframe#example-css-position-fixed')[0].contentWindow.document.write(html);
+  var iframe = document.getElementById('example-css-position-fixed');
+  iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
+  iframe.document.open();
+  iframe.document.write(html);
+  iframe.document.close();
 }
 
 
