@@ -1,4 +1,12 @@
 /*
+ * Generics
+ */
+img{
+  max-width: 100%;
+}
+
+
+/*
  * Table of contents
  */
 #toc-desktop{
@@ -80,16 +88,41 @@ blockquote code{
   text-align: center;
   border-top: 2px dotted #dedede;
   border-bottom: 2px dotted #dedede;
-  padding: 30px;
-  margin: 120px 0 220px 0;
+  padding: 5% 0;
+  margin: 15% 0 220px 0;
 }
-#title h1{
-  font-size: 60px;
-}
+
 #title h2{
   border: 0;
   color: #888;
-  margin-top: 30px;
+}
+
+
+
+/* 
+ * Responsive
+ */
+ #title h1{
+  font-size: 38px;
+}
+#title h2{
+  font-size: 20px;
+}
+h1{
+  font-size: 32px;
+}
+h2{
+  font-size: 22px;
+}
+h3{
+  font-size: 18px;
+}
+@media (min-width: 768px) {
+  #title h1{ font-size: 60px; }
+  #title h2{ font-size: 36px;}
+  h1{ font-size: 54px; }
+  h2{ font-size: 36px; }
+  h3{ font-size: 30px;}
 }
 
 
@@ -97,13 +130,11 @@ blockquote code{
 *   Headers
 */
 h1{
-  font-size: 54px;
   font-family: 'Lily Script One', inherit;
   color: #555;
 }
 h2{
-  font-size: 36px;
-  margin-top: 36px;
+  margin-top: 22px;
   padding-bottom: 4px;
   border-bottom: 1px solid #eee;
 }
