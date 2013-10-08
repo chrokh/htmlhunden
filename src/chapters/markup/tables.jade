@@ -11,7 +11,11 @@ p Förr i tiden så strukturerade och positionerade man sin sida med tabeller. N
   .panel-body
     pre
       code.language-markup
-        | &lt;table border="1"&gt;
+        | &lt;table&gt;
+        |   &lt;tr&gt;
+        |     &lt;th&gt; Djur&lt;/th&gt;
+        |     &lt;th&gt; Bästa vän&lt;/th&gt;
+        |   &lt;/tr&gt;
         |   &lt;tr&gt;
         |     &lt;td&gt; Hund&lt;/td&gt; 
         |     &lt;td&gt; Katt&lt;/td&gt; 
@@ -26,6 +30,9 @@ p Förr i tiden så strukturerade och positionerade man sin sida med tabeller. N
       .panel-heading Resultat
       .panel-body
         table.table.table-bordered(style="width:auto;margin:auto 0;")
+          tr
+            th Djur
+            th Bästa vän
           tr
             td Hund
             td Katt
