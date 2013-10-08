@@ -89,15 +89,26 @@ html
 &lt;/body&gt;
 ...</code></pre></div></div><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#lankar" name="lankar"><div class="icon-link"> </div>Länkar</a></h1></div><p> 
 En länk är ett klickbart område och kan vara en text eller bild. Interna länkar är kommunikationen mellan sidorna
-i din webbplats och externa länkar leder till andra webbplatser. Märket för länk är <code>&lt;a href&gt;</code></p><p>|(Anchor Hyperlink Reference).
+i din webbplats och externa länkar leder till andra webbplatser. Märket för länkar är<code>&lt;a&gt;</code></p><p>(Anchor Hyperlink Reference).
 Du kan även ange "ankare", bokmärken, på en sida och länka mellan dem. 
 Den adress som länken leder till kallas även URL (Uniform Resource Locator) och kan vara absolut eller relativ. 
-För att skapa en länk så kommer detta se ut såhär: <code>&lt;a href=&quot;http://im.uu.se&quot;&gt;Information och Media&lt;/a&gt;</code></p><h2>Absoluta länkar</h2><p>|En absolut URL innehåller kommunikationsprotokollet HTTP och följs av ett domännamn. 
+För att skapa en länk så kommer detta se ut såhär: <code>&lt;a href="http://im.uu.se"&gt;Information och Media&lt;/a&gt;</code></p><h2>Absoluta länkar</h2><p>En absolut URL innehåller kommunikationsprotokollet HTTP och följs av ett domännamn. 
 Externa länkar som leder från en webbplats till en annan webbplats är absoluta. Exempel på absolut URL:
-http://im.uu.se</p><h2>Relativa länkar</h2><p>|En relativ URL används inom en webbplats och anger sökvägen mellan mappar och dokument. Inget 
+http://im.uu.se</p><h2>Relativa länkar</h2><p>En relativ URL används inom en webbplats och anger sökvägen mellan mappar och dokument. Inget 
 kommunikationsprotokoll HTTP eller domännamn behöver anges. Exempel på relativ URL:
-html/index.html.</p><h2>Länkar och effekter med CSS</h2><p>| Med hjälp av CSS så kan man skapa olika effekter på sina länkar beroende på vilket state som länken har. Exempelvis
-kan man få en länk att bli understruken när man "hovrar" över länken. följande CSS på till en länk gör detta. </p><pre>a:link { text-decoration: none; color: #CC3333}<br/>a:visited { text-decoration: none; color: #CC3333}<br/>a:active { text-decoration: none; color: #CC3333}<br/>a:hover { text-decoration: underline}</pre><p>|Det finns flera andra rollover-effekter och du ser några exempel nedan.</p><pre>a:hover { color: #CC6600}<br/>a:hover { background-color: #99CCFF}<br/>a:hover { text-decoration: underline overline}<br/>a:hover { font-style: italic}<br/>a:hover { background-image: url(egen_bild.gif)}<br/>a:hover { letter-spacing: 5px} a:hover { cursor: help}<br/>a:hover { cursor: e-resize} a:hover { color: #FFFFFF; background-color: #006699}</pre><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#lists" name="lists"><div class="icon-link"> </div>Listor</a></h1></div><p>För att kunna skapa listor används ul som står för "Unordered list". För varje item används li. Som ni ser så är oordnad sådan att det är en punkt framför varje item.</p><ul> <li>Katt</li><li>Hund</li><li>Sköldpadda</li></ul><p>Html-koden ser ut som följande:</p><pre><code class="language-markup">&lt;ul&gt;
+html/index.html.</p><h2>Länkar och effekter med CSS</h2><p>Med hjälp av CSS så kan man skapa olika effekter på sina länkar beroende på vilket state som länken har. Exempelvis
+kan man få en länk att bli understruken när man "hovrar" över länken. följande CSS på till en länk gör detta. </p><pre><code class="language-css">a:link{ text-decoration:none; color:#CC3333; }
+a:visited{ text-decoration:none; color:#CC3333; }
+a:active{ text-decoration:none; color:#CC3333; }
+a:hover{ text-decoration:underline; }</code></pre><p>Det finns flera andra rollover-effekter och du ser några exempel nedan.</p><pre><code class="language-css">a:hover { color:#CC6600; }
+a:hover { background-color:#99CCFF; }
+a:hover { text-decoration:underline overline; }
+a:hover { font-style: italic; }
+a:hover { background-image:url('egen_bild.gif'); }
+a:hover { letter-spacing:5px}
+a:hover { cursor:help; }
+a:hover { cursor:e-resize}
+a:hover { color:#FFFFFF; background-color:#006699; }</code></pre><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#lists" name="lists"><div class="icon-link"> </div>Listor</a></h1></div><p>För att kunna skapa listor används ul som står för "Unordered list". För varje item används li. Som ni ser så är oordnad sådan att det är en punkt framför varje item.</p><ul> <li>Katt</li><li>Hund</li><li>Sköldpadda</li></ul><p>Html-koden ser ut som följande:</p><pre><code class="language-markup">&lt;ul&gt;
   &lt;li&gt; Katt &lt;/li&gt;
   &lt;li&gt; Hund &lt;/li&gt;
   &lt;li&gt; Sköldpadda &lt;/li&gt;
