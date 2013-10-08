@@ -24,55 +24,51 @@ p
   | För att fortsätta ovan analogi, med ett klarare exempel. Tänk dig att du markerar ett stycke text och klickar på bold. Texten blir fetstilt. Detta uppnår vi i HTML såsom nedan:
 
 .panel.panel-default
-    .panel-heading HTML
+    .panel-heading Exempel på hur vi markerar text i fetstil
     .panel-body
-      code
-        |Ett av orden ska vara i<br>
-        | &lt;b&gt;fetstil&lt;/b&gt;, men inte resten.
+      pre
+        code.language-markup
+          |Ett av orden ska vara i<br>
+          | &lt;b&gt;fetstil&lt;/b&gt;, men inte resten.
 
+      .panel.panel-default
+          .panel-heading Resultat
+          .panel-body
+            | Ett av orden ska vara i <b>fetstil</b>, men inte resten
+
+p Låt oss återgå till paragraf-taggen igen.
 .panel.panel-default
-    .panel-heading Resultat
-    .panel-body
-      | Ett av orden ska vara i
-      b  fetstil 
-      | men inte resten.
-p
-  | Låt oss återgå till paragraf-taggen igen.
-.row
-  .col-md-6
+  .panel-heading Exempel på separata styckesindelning i paragrafer.
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;Första paragrafen&lt;/p&gt;
+        | &lt;p&gt;Andra paragrafen&lt;/p&gt;
+
     .panel.panel-default
-      .panel-heading HTML
+      .panel-heading Resultat
       .panel-body
-        code
-          = '<p>Första paragrafen</p>'
-        br
-        code
-          = '<p>Andra paragrafen</p>'
-  .col-md-6
-    .panel.panel-default
-        .panel-heading Resultat
-        .panel-body
-          p Första paragrafen
-          p Andra paragrafen
+        p Första paragrafen
+        p Andra paragrafen
 
 p Tänk på radavståndet som uppstår eftersom vi använder två paragraf-taggar. Jämför med nedan exempel.
+.panel.panel-default
+  .panel-heading HTML
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt; Radbrytningar<br>
+        |   inom<br>
+        |   en<br>
+        |   p-tagg har ingen effekt.
+        | &lt;/p&gt;<br>
 
-.row
-  .col-md-6
-    .panel.panel-default
-      .panel-heading HTML
-      .panel-body
-        code
-          | &lt;p&gt; Radbrytningar<br>
-          |   inom<br>
-          |   en<br>
-          |   p-tagg har ingen effekt.
-          | &lt;/p&gt;<br>
-  .col-md-6
     .panel.panel-default
         .panel-heading Resultat
         .panel-body
-          p Radbrytningar inom en p-tagg har ingen effekt.
+          p Radbrytningar
+            | inom
+            | en p-tagg har ingen effekt.
 
 
 h3 Element utan slut-taggar
@@ -92,7 +88,7 @@ blockquote
     hr
 
 h3 Attribut
-.lead Ett elements öppnande tag kan även innehålla attribut med värden. Exempel på ett attribut är <code>&lt;href&gt;</code>, som används för att berätta var en hyperlänksresurs befinner sig någonstans. 
+.lead Ett elements öppnande tag kan även innehålla attribut med värden. Exempel på ett attribut är <code>href</code>, som används för att berätta var en hyperlänksresurs befinner sig någonstans. 
 p
   | För att skapa länkar använder vi elementet 
   code
@@ -105,13 +101,15 @@ p
 .panel.panel-default
     .panel-heading HTML
     .panel-body
-      code
-        = '<a href="http://uu.se">Klicka på mig</a>'
+      pre
+        code.language-markup
+          | &lt;a href="http://uu.se"&gt;Klicka på mig&lt;/a&gt;
 
-.panel.panel-default
-    .panel-heading Resultat
-    .panel-body
-      a(href="http://www.uu.se") Klicka på mig
+      .panel.panel-default
+          .panel-heading Resultat
+          .panel-body
+            a(href="http://www.uu.se") Klicka på mig
+
 blockquote
   p Alla attribut är
     i  inte 
