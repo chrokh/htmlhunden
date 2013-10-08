@@ -22,76 +22,76 @@ p
   |Den här metoden är mest effektiv, om formateringen ska ändras behöver du bara göra det i ett enda mall-dokument. 
   |Här uppfylls målet med att separera innehåll och struktur i dokumenten.
   |Så här kan koden för sidorna som kopplas till mallen se ut:
-pre 
-  ="< html>"
-  br
-  ="< head>"
-  br
-  ="< title>Sidan namn</title>"
-  br
-  ='<link href="mall.css" rel="stylesheet" type="text/css">'
-  br
-  ="< /head>"
-  br
-  ="<body>"
-  br
-  ="< h1>Rubrik</h1>"
-  br
-  ="< /body>"
-  br
-  ="< /html>"
-p 
+
+.panel.panel-default
+  .panel-heading Exempel på referens till extern stilmall
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt; Sidans namn &lt;/title&gt; 
+        |     &lt;link href="mall.css" rel="stylesheet"&gt;
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |     &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+
+p
   |Du kan koppla flera externa CSS-mallar till samma dokument. Om samma selektorer förekommer i båda
   | mallarna men med olika formatering gäller den mall som angivits senast i radvis ordning. I exemplet nedan 
   |gäller alltså "mall2.css" före "mall.css": 
-pre 
-  ="< html>"
-  br
-  ="< head>"
-  br
-  ="< title>Sidan namn</title>"
-  br
-  ='<link href="mall.css" rel="stylesheet" type="text/css">'
-  br
-  ='< link href="mall2.css" rel="stylesheet" type="text/css">'
-  br
-  ="< /head>"
-  br
-  ="<body>"
-  br
-  ="< h1>Rubrik</h1>"
-  br
-  ="< /body>"
-  br
-  ="< /html>"
+
+
+.panel.panel-default
+  .panel-heading Exempel på ett html-dokument med referenser till flera stilmallar
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt; Sidans namn &lt;/title&gt; 
+        |     &lt;link href="mall.css" rel="stylesheet"&gt;
+        |     &lt;link href="en_till_mall.css" rel="stylesheet"&gt;
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |     &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+
+
+
+
+
 h2 I dokumentet
 p
   |CSS-formatering angiven direkt i dokumentet kan användas när vissa sidor ska avvika från 
   |huvudmallens formatering. Den här metoden är inte lika effektiv som att använda en extern CSS-mall.
   | Om formateringen ska ändras måste det utföras i varje dokument som använder formateringen.
   |Här formateras rubriken direkt i dokumentet:
-pre 
-  ="< html>"
-  br
-  ="< head>"
-  br
-  ="< title>Sidan namn</title>"
-  br
-  ='<style type="text/css">'
-  br
-  ='h1 { font-size: 24px; }'
-  br
-  ="< /style>"
-  br
-  ="< /head>"
-  br
-  ="<body>"
-  br
-  ="< h1>Rubrik</h1>"
-  br
-  ="< /body>"
-  br
-  ="< /html>"
+
+.panel.panel-default
+  .panel-heading Exempel på ett html-dokument med css definierad direkt i HEAD
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt; Sidans namn &lt;/title&gt; 
+        |     &lt;style type="text/css"&gt;
+        |       h1 { font-size: 24px; }
+        |     &lt;/style&gt;
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |     &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+
+
 h2 Direkt i elementet som ska formateras 
 p 
   |Den här metoden är minst effektiv och här uppfylls inte målet med att separera innehåll och
@@ -99,22 +99,22 @@ p
   |När formatet ska användas i ett nytt elememnt måste CSS-koden anges på nytt och det innebär att sidorna 
   |innehåller mycket kod och tar längre tid att laddas i webbläsaren.
   |Så här kan koden se ut när rubriken formateras direkt i elementet:
-pre 
-  ="< html>"
-  br
-  ="< head>"
-  br
-  ="< title>Sidan namn</title>"
-  br
-  ="< /head>"
-  br
-  ="<body>"
-  br
-  ='< h1 style="font-size: 24px;"> Rubrik</h1>'
-  br
-  ="< /body>"
-  br
-  ="< /html>"
+
+.panel.panel-default
+  .panel-heading Exempel på ett html-dokument med css definierad i ett element (även kallat: inline)
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt; Sidans namn &lt;/title&gt; 
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |     &lt;h1 style="font-size:24px;"&gt;En rubrik, yay!&lt;/h1&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+
 p Prioriteringsordningen av formateringen är följande:
 ol
   li  HTML-formatering

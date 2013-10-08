@@ -100,24 +100,27 @@ html/index.html.</p><h2>Länkar och effekter med CSS</h2><p>Med hjälp av CSS s�
 kan man få en länk att bli understruken när man "hovrar" över länken. följande CSS på till en länk gör detta. </p><pre><code class="language-css">a:link{ text-decoration:none; color:#CC3333; }
 a:visited{ text-decoration:none; color:#CC3333; }
 a:active{ text-decoration:none; color:#CC3333; }
-a:hover{ text-decoration:underline; }</code></pre><p>Det finns flera andra rollover-effekter och du ser några exempel nedan.</p><pre><code class="language-css">a:hover { color:#CC6600; }
-a:hover { background-color:#99CCFF; }
-a:hover { text-decoration:underline overline; }
-a:hover { font-style: italic; }
-a:hover { background-image:url('egen_bild.gif'); }
-a:hover { letter-spacing:5px}
-a:hover { cursor:help; }
-a:hover { cursor:e-resize}
-a:hover { color:#FFFFFF; background-color:#006699; }</code></pre><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#lists" name="lists"><div class="icon-link"> </div>Listor</a></h1></div><p>För att kunna skapa listor används ul som står för "Unordered list". För varje item används li. Som ni ser så är oordnad sådan att det är en punkt framför varje item.</p><ul> <li>Katt</li><li>Hund</li><li>Sköldpadda</li></ul><p>Html-koden ser ut som följande:</p><pre><code class="language-markup">&lt;ul&gt;
+a:hover{ text-decoration:underline; }</code></pre><p>Det finns flera andra rollover-effekter och du ser några exempel nedan.</p><pre><code class="language-css">a:hover{ color:#CC6600; }
+a:hover{ background-color:#99CCFF; }
+a:hover{ text-decoration:underline overline; }
+a:hover{ font-style: italic; }
+a:hover{ background-image:url('egen_bild.gif'); }
+a:hover{ letter-spacing:5px}
+a:hover{ cursor:help; }
+a:hover{ cursor:e-resize}
+a:hover{ color:#FFFFFF; background-color:#006699; }</code></pre><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#lists" name="lists"><div class="icon-link"> </div>Listor</a></h1></div><p>För att kunna skapa listor används ul som står för "Unordered list". För varje item används li. Som ni ser så är oordnad sådan att det är en punkt framför varje item. Låt oss se till ett exempel.</p><div class="panel panel-default"><div class="panel-heading">Exempel på oordnad (icke-numrerad) lista</div><div class="panel-body"><pre><code class="language-markup">&lt;ul&gt;
   &lt;li&gt; Katt &lt;/li&gt;
   &lt;li&gt; Hund &lt;/li&gt;
   &lt;li&gt; Sköldpadda &lt;/li&gt;
-&lt;/ul&gt;</code></pre><p>För att kunna skapa ordnade listor så används ol. </p><ol> <li>Katt</li><li>Hund</li><li>Sköldpadda</li></ol><p>Html-koden ser ut som följande:</p><pre><code class="language-markup">&lt;ol&gt;
+&lt;/ul&gt;</code></pre><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><ul> <li>Katt</li><li>Hund</li><li>Sköldpadda</li></ul></div></div></div></div><p>För att skapa ordnade (numrerade) listor så används ol. </p><div class="panel panel-default"><div class="panel-heading">Exempel på ordnad (numrerad) lista</div><div class="panel-body"><pre><code class="language-markup">&lt;ol&gt;
   &lt;li&gt; Katt &lt;/li&gt;
   &lt;li&gt; Hund &lt;/li&gt;
   &lt;li&gt; Sköldpadda &lt;/li&gt;
-&lt;/ol&gt;</code></pre><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#tables" name="tables"><div class="icon-link"> </div>Tabeller</a></h1></div><div class="lead">Tabeller används när man behöver strukturera information</div><p>Förr i tiden så strukturerade och positionerade man sin sida med tabeller. Nu använder man div:ar för att fixa detta. Ibland behöver vi dock tabeller för att strukturera information på en hemsida. </p><p>Ett exempel: </p><table border="1"><tr> <td>Hund</td><td>Katt</td></tr><tr><td>Råtta</td><td>Gris</td></tr></table><pre><code class="language-markup"> 
-&lt;table border="1"&gt;
+&lt;/ol&gt;</code></pre><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><ol> <li>Katt</li><li>Hund</li><li>Sköldpadda</li></ol></div></div></div></div><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#tables" name="tables"><div class="icon-link"> </div>Tabeller</a></h1></div><div class="lead">Tabeller används när man behöver strukturera information</div><p>Förr i tiden så strukturerade och positionerade man sin sida med tabeller. Nu använder man div:ar för att fixa detta. Ibland behöver vi dock tabeller för att strukturera information på en hemsida. </p><div class="panel panel-default"><div class="panel-heading">Exempel på tabell</div><div class="panel-body"><pre><code class="language-markup">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt; Djur&lt;/th&gt;
+    &lt;th&gt; Bästa vän&lt;/th&gt;
+  &lt;/tr&gt;
   &lt;tr&gt;
     &lt;td&gt; Hund&lt;/td&gt; 
     &lt;td&gt; Katt&lt;/td&gt; 
@@ -126,7 +129,7 @@ a:hover { color:#FFFFFF; background-color:#006699; }</code></pre><h1 class="text
     &lt;td&gt; Råtta&lt;/td&gt; 
     &lt;td&gt; Gris&lt;/td&gt; 
   &lt;/tr&gt;
-&lt;/table&gt;</code></pre><p>Förklaring är att själva tabellen är &lt;table&gt; och att &lt;tr&gt; gör ny rad och varje &lt;td&gt; är en cell. På elementet table finns också border-attributet som är satt till 1. Denan skall göras korrekt med en CSS men används för förtydliga exemplet. </p><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#formular" name="formular"><div class="icon-link"> </div>Formulär</a></h1></div><p class="lead">För att användare av webbsidor ska kunna skicka data mellan olika sidor använder vi oss (bl.a.) av formulär.
+&lt;/table&gt;</code></pre><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><table style="width:auto;margin:auto 0;" class="table table-bordered"><tr><th>Djur</th><th>Bästa vän</th></tr><tr><td>Hund</td><td>Katt</td></tr><tr><td>Råtta</td><td>Gris</td></tr></table></div></div></div></div><p>Förklaring är att själva tabellen är &lt;table&gt; och att &lt;tr&gt; gör ny rad och varje &lt;td&gt; är en cell. På elementet table finns också border-attributet som är satt till 1. Denan skall göras korrekt med en CSS men används för förtydliga exemplet. </p><h1 class="text-center divider"><div class="icon-html5"> </div><div class="icon-html5"> </div><div class="icon-html5"></div></h1><div class="page-header"><h1><a href="#formular" name="formular"><div class="icon-link"> </div>Formulär</a></h1></div><p class="lead">För att användare av webbsidor ska kunna skicka data mellan olika sidor använder vi oss (bl.a.) av formulär.
 För att vi som utvecklare ska kunna spara användardata i t.ex. en databas så behöver vi få in data ifrån "klient-sidan" (client-side) till "server-sidan" (server-side). Formulär ger oss ett mycket smidigt sätt att göra detta.</p><h2>Form-taggen </h2><p>Låt oss börja med att skapa ett skal till ett formulär. </p><div class="panel panel-default"><div class="panel-heading">Ett tomt formulär</div><div class="panel-body"><pre><code class="language-markup">&lt;form method="post" action="process-data.php"&gt;
    ...
 &lt;/form&gt;</code></pre></div></div><p> 
@@ -239,18 +242,55 @@ sidor som ska tillämpa formatet. Namnet på CSS-mallen måste ha filtilläget .
 "mall.css". 
 Den här metoden är mest effektiv, om formateringen ska ändras behöver du bara göra det i ett enda mall-dokument. 
 Här uppfylls målet med att separera innehåll och struktur i dokumenten.
-Så här kan koden för sidorna som kopplas till mallen se ut:</p><pre> &lt; html&gt;<br/>&lt; head&gt;<br/>&lt; title&gt;Sidan namn&lt;/title&gt;<br/>&lt;link href=&quot;mall.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;<br/>&lt; /head&gt;<br/>&lt;body&gt;<br/>&lt; h1&gt;Rubrik&lt;/h1&gt;<br/>&lt; /body&gt;<br/>&lt; /html&gt;</pre><p> 
-Du kan koppla flera externa CSS-mallar till samma dokument. Om samma selektorer förekommer i båda
+Så här kan koden för sidorna som kopplas till mallen se ut:</p><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+    &lt;link href="mall.css" rel="stylesheet"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><p>Du kan koppla flera externa CSS-mallar till samma dokument. Om samma selektorer förekommer i båda
 mallarna men med olika formatering gäller den mall som angivits senast i radvis ordning. I exemplet nedan 
-gäller alltså "mall2.css" före "mall.css": </p><pre> &lt; html&gt;<br/>&lt; head&gt;<br/>&lt; title&gt;Sidan namn&lt;/title&gt;<br/>&lt;link href=&quot;mall.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;<br/>&lt; link href=&quot;mall2.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;<br/>&lt; /head&gt;<br/>&lt;body&gt;<br/>&lt; h1&gt;Rubrik&lt;/h1&gt;<br/>&lt; /body&gt;<br/>&lt; /html&gt;</pre><h2>I dokumentet</h2><p>CSS-formatering angiven direkt i dokumentet kan användas när vissa sidor ska avvika från 
+gäller alltså "mall2.css" före "mall.css": </p><div class="panel panel-default"><div class="panel-heading">Exempel på ett html-dokument med referenser till flera stilmallar</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+    &lt;link href="mall.css" rel="stylesheet"&gt;
+    &lt;link href="en_till_mall.css" rel="stylesheet"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><h2>I dokumentet</h2><p>CSS-formatering angiven direkt i dokumentet kan användas när vissa sidor ska avvika från 
 huvudmallens formatering. Den här metoden är inte lika effektiv som att använda en extern CSS-mall.
 Om formateringen ska ändras måste det utföras i varje dokument som använder formateringen.
-Här formateras rubriken direkt i dokumentet:</p><pre> &lt; html&gt;<br/>&lt; head&gt;<br/>&lt; title&gt;Sidan namn&lt;/title&gt;<br/>&lt;style type=&quot;text/css&quot;&gt;<br/>h1 { font-size: 24px; }<br/>&lt; /style&gt;<br/>&lt; /head&gt;<br/>&lt;body&gt;<br/>&lt; h1&gt;Rubrik&lt;/h1&gt;<br/>&lt; /body&gt;<br/>&lt; /html&gt;</pre><h2>Direkt i elementet som ska formateras </h2><p> 
+Här formateras rubriken direkt i dokumentet:</p><div class="panel panel-default"><div class="panel-heading">Exempel på ett html-dokument med css definierad direkt i HEAD</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+    &lt;style type="text/css"&gt;
+      h1 { font-size: 24px; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><h2>Direkt i elementet som ska formateras </h2><p> 
 Den här metoden är minst effektiv och här uppfylls inte målet med att separera innehåll och
 struktur i dokumenten. CSS-formateringen anges i anslutning till de elementsom ska formateras. 
 När formatet ska användas i ett nytt elememnt måste CSS-koden anges på nytt och det innebär att sidorna 
 innehåller mycket kod och tar längre tid att laddas i webbläsaren.
-Så här kan koden se ut när rubriken formateras direkt i elementet:</p><pre> &lt; html&gt;<br/>&lt; head&gt;<br/>&lt; title&gt;Sidan namn&lt;/title&gt;<br/>&lt; /head&gt;<br/>&lt;body&gt;<br/>&lt; h1 style=&quot;font-size: 24px;&quot;&gt; Rubrik&lt;/h1&gt;<br/>&lt; /body&gt;<br/>&lt; /html&gt;</pre><p>Prioriteringsordningen av formateringen är följande:</p><ol><li> HTML-formatering</li><li>CSS-kod i element eller avsnitt där formateringen ska tillämpas</li><li>CSS-kod i dokumentet</li><li>CSS i extern mall</li></ol><p> 
+Så här kan koden se ut när rubriken formateras direkt i elementet:</p><div class="panel panel-default"><div class="panel-heading">Exempel på ett html-dokument med css definierad i ett element (även kallat: inline)</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1 style="font-size:24px;"&gt;En rubrik, yay!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><p>Prioriteringsordningen av formateringen är följande:</p><ol><li> HTML-formatering</li><li>CSS-kod i element eller avsnitt där formateringen ska tillämpas</li><li>CSS-kod i dokumentet</li><li>CSS i extern mall</li></ol><p> 
 Detta innebär att du kan börja formateringen i en extern CSS-mall som du kopplar till dina dokument.
 Vill du sedan ange avvikande format lokalt i ett dokument formaterar du CSS direkt i dokumentet 
 (gäller då före den externa CSS-mallen). Om någon del av dokumentet ska avvika från övrig CSS-formatering 
