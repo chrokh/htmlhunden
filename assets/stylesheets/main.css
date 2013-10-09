@@ -126,6 +126,7 @@ h3{
 }
 
 
+
 /*
 *   Headers
 */
@@ -160,4 +161,17 @@ a:hover, a:active{
  */
 .divider{
   color: #dedede !important;
+}
+
+
+
+/*
+ * Barometer Feedback plugin fixes
+ */
+#barometer_overlay #barometer_main #overlay_header{
+  height: 37px !important;
+}
+@media (max-width: 768px) { 
+  #barometer_overlay{  display: none !important; }
+  #barometer_tab{ display:none !important; }
 }
