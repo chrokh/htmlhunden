@@ -20,7 +20,7 @@ $(function(){
 lathunden.Anchors = {}
 lathunden.Anchors.init = function(){
   var $root = $('html, body');
-  $('a').click(function(e) {
+  $('.toc a').click(function(e) {
       var href = $.attr(this, 'href').substring(1);
       var selector = "*[name='" + href + "']";
       var $elem = $(selector);
