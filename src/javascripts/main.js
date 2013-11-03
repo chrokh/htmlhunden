@@ -70,7 +70,7 @@ lathunden.TOC.init = function(){
       'selectors': 'h1,h2',
       'container': '#chapters',
       'highlightOnScroll': true,
-      'highlightOffset': 200
+      'highlightOffset': 300
     });
   }, 4000);
 }
