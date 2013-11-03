@@ -130,14 +130,19 @@ blockquote code{
 /* 
  * Responsive
  */
- #title h1{
-  font-size: 38px;
-}
+
 #title h2{
   font-size: 20px;
 }
 h1{
+  text-align: center;
+  font-size: 80px !important;
+}
+h1 + .lead{
+  text-align: center;
   font-size: 32px;
+  color: #555;
+  margin-bottom: 180px;
 }
 h2{
   font-size: 22px;
