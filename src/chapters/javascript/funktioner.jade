@@ -1,0 +1,50 @@
+.page-header
+  h2
+    a(href="#funktioner")
+      .icon-link 
+      | Funktioner
+
+p.lead Nu börjar vi närma oss de signifikant mer intressanta delarna av programmering. Funktioner! Funktioner i programmering kan med fördel jämföras med funktioner i matematik. En funktion är som en maskin. En maskin där du kan stoppa in ett ting och få ut ett annat ting. Alltså en funktion (<code>F</code>) som tar emot ett ting (<code>x</code>) och returnerar ett annat ting (<code>y</code>), där detta andra ting, i matematik, kan uttryckas som en funktion applicerad på det första (<code>F(x)</code>).
+p PS. Vänligen anmäl oss inte till Högeskoleverket om det skulle vara så att våra matematiska metaforer är inkorrekta. Vi försöker bara använda de här för att skapa en förståelse.
+p Innan vi fortsätter prata om hur funktioner fungerar, låt oss se till ett exempel.
+.panel.panel-default
+    .panel-heading Funktionsdefinition
+    .panel-body
+        pre
+            code.language-javascript
+                | function addition(x, y){
+                |   return x + y;
+                | }
+        p Ovan definerar vi en funktion, som vi namnger <code>addition</code>, och som returnerar resultatet av en addition av dess två parametrar. Motsvarande funktion skulle matematiskt kunna uttryckas:
+        pre
+            | F(x, y) = x + y
+
+p Vi har nu sett hur man definierar en funktion. Men hur använder vi den då? Låt oss återigen se till några exempel.
+.panel.panel-default
+    .panel-heading Funktionsanrop
+    .panel-body
+        pre
+            code.language-javascript
+                | // Först definierar vi en funktion
+                | function addition(x, y){
+                |   return x + y;
+                | }
+                | 
+                | // Sen anropar vi funktionen
+                | addition(1, 1);                         // =&gt; 2
+                | addition(30, 5);                        // =&gt; 35
+                | addition(addition(1,2), 4)              // =&gt; 7
+                | addition(addition(1,addition(1,1)), 4)  // =&gt; 7
+        p Låt oss uttrycka samma sak i matematik för att skapa ytterligare förståelse för vad vi gör:
+        pre
+            code
+                | Först definierar vi funktionen...
+                | F(x, y) = x + y
+                | 
+                | Sen använder vi den...
+                |          F(1, 1) = 2
+                |         F(30, 5) = 35
+                |     F(F(1,2), 4) = 7
+                | F(F(1,F(1,1), 4) = 7
+p Notera alltså att vi kan skicka resultatet av en funktion som parameter (input) till en annan funktion. Precis som i matematik så måste den innersta beräkningen utföras först innan vi kan utföra den yttre.
+blockquote Precis som i matematik behöver det innersta uttrycket räknas ut först innan vi kan fortsätta "utåt".
