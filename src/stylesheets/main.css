@@ -7,12 +7,20 @@ img{
 
 
 /*
- * Table of contents
+ * TOC all devices
  */
-#toc-desktop{
-  position: fixed;
-  top: 30px;
+.toc ul{
+  list-style-type: none;
+  padding-left: 0;
 }
+.toc li{
+  padding-left: 0;
+}
+
+
+/*
+ * TOC mobile devices
+ */
 #toc-mobile{
   text-align: center;
   width: 90%;
@@ -22,24 +30,58 @@ img{
 #toc-mobile h1{
   margin-bottom: 32px;
 }
-#toc-mobile ol{
-  padding-left: 0;
-}
 #toc-mobile li{
-  list-style-type: none;
+  margin: 12px auto;
 }
-#toc-mobile li ol{
-  margin-bottom: 32px;
-}
-#toc-mobile ol li a{
-  background: rgb(240,240,240);
-  width: 100%;
-  margin: 6px;
-  padding: 6px;
+#toc-mobile li a{
   display: block;
-}
-#toc-mobile ol li ol li{
   width: 100%;
+  padding: 12px;
+  background: #dedede;
+  color: #333;
+}
+#toc-mobile li a:hover{
+  opacity: 0.8;
+}
+#toc-mobile .toc-h1 a{ background: transparent; }
+#toc-mobile .toc-h1{
+  width: 100%;
+  font-size: 36px;
+  margin-top: 26px;
+  font-weight: bold;
+}
+#toc-mobile .toc-h2{
+  width: 90%;
+}
+#toc-mobile .toc-h3{
+  display: none !important;
+}
+
+/*
+ *  TOC desktop devices
+ */
+ #toc-desktop{
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  padding: 12px 24px;
+  overflow: auto;
+  border-right: 1px solid #ccc;
+  background: rgba(0,0,0,.05);
+}
+#toc-desktop a{
+  color: #333;
+}
+#toc-desktop .toc-h1{
+  padding-top: 6px;
+  font-weight: bold;
+}
+#toc-desktop .toc-h2{
+  padding-left: 12px;
+}
+#toc-desktop .toc-h3{
+  padding-left: 22px;
 }
 
 
@@ -64,20 +106,6 @@ blockquote footer{
 
 blockquote code{
   color: inherit;
-}
-
-
-/*
- *   Table of Contents
- */
-#toc li{
-  list-style-type: none;
-}
-#toc ol{
-  padding-left: 0px;
-}
-#toc li > ol{
-  padding-left: 16px;
 }
 
 
@@ -168,6 +196,10 @@ a:hover, a:active{
 /*
  * Barometer Feedback plugin fixes
  */
+#barometer_tab{
+  right: -5px !important;
+  left: auto !important;
+}
 #barometer_overlay #barometer_main #overlay_header{
   height: 37px !important;
 }

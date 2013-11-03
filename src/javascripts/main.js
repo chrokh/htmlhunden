@@ -60,6 +60,18 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 }
 
 
+/*
+ * TOC
+ */
+lathunden.TOC = {};
+lathunden.TOC.init = function(){
+  $('.toc').toc({
+    'selectors': 'h1,h2',
+    'container': '#chapters'
+  });
+}
+
+
 
 /*
  * Initalizer
@@ -68,4 +80,5 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 lathunden.init = function(){
   lathunden.Anchors.init();
   lathunden.Examples.init();
+  lathunden.TOC.init();
 }
