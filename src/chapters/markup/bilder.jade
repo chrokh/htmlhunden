@@ -1,5 +1,5 @@
 .page-header
-  h1
+  h2
     a(name="bilder", id="bilder") Bilder
   
 p.lead
@@ -27,7 +27,7 @@ blockquote.text-info
 
 p Notera alltså att att adressen ovan (som antytt) pekar mot en URL som renderar en bild. (Tjänsten <a href="http://placekitten.com" target="_blank">placekitten</a> erbjuder helt enkelt bilder i olika storlekar under alla sina URL:er.) Således kan vi alltså ersätta den adressen med en bild som finns lokalt på vår dator, på vår egen server eller någon annanstans på internet. Attributet <code>src</code> förväntar sig helt enkelt en adress till en bild.
 
-h2 Alternativ
+h3 Alternativ
 p.lead Men vad händer om en bild inte kan renderas? Och vad händer när en <a href="http://en.wikipedia.org/wiki/Screen_reader" target="_blank">screen reader</a> upptäcker en bild. In kommer <code>alt</code>-attributet och räddar dagen! Låt oss se till ett exempel innan vi går vidare.
 
 .panel.panel-default
@@ -43,7 +43,7 @@ blockquote.text-danger
   | Attributen <code>alt</code> och <code>src</code> krävs båda för att en <code>&lt;img&gt;</code>-tagg ska vara valid.
 
 
-h2 Bildtexter
+h3 Bildtexter
 p.lead Om vi vill lägga till en bildtext till vår bild kommer de nya html5-elementen <code>&lt;figure&gt;</code> och <code>&lt;figcaption&gt;</code> väl till pass.
 
 p Dessa är <em>semantiska</em> attribut snarare än <em>visuella</em>. Med andra ord. Visst har <code>&lt;p&gt;</code>-taggen en semantisk innebörd &mdash; en paragraf representerar ju semantiskt ett stycke text, och således rimligen en tanke. Men i HTML så resulterar ju även en paragraf i någonting visuellt skillt ifrån plain-text och därmed 

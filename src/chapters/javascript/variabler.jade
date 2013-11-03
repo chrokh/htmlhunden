@@ -1,0 +1,129 @@
+.page-header
+  h2
+    a(href="#js-variabler", name="js-variabler")
+      .icon-link 
+      | Variabler
+
+p.lead Eftersom JavaScript, som namnet antyder, är ett skriptspråk har vi tillgång till mäktiga koncept såsom variabler och funktioner. En variabel kan metaforiskt ses som en box vi lägger någonting i, och det är just denna box vi kommer att fokusera på i detta kapitel.
+
+h3 Vad är variabler?
+p Variabler kan ses som en arbiträr box, av arbiträr storlek, där vi kan placera ett stycke, och endast ett stycke, arbiträr data. Tänk på det en stund. Låt oss formulera om samma sak. En variabel är en pekare mot en arbiträr plats i minnet, av arbiträr storlek, som innehåller arbiträr data. Det är lite närmare sanningen men fortfarande en metafor.
+blockquote Variabler kan ses som en arbiträr box, av arbiträr storlek, där vi kan placera ett och endast ett stycke arbiträr data.
+
+p Så hur deklarerar vi då en variabel? Låt oss se till ett exempel.
+.panel.panel-default
+    .panel-heading Variabeldeklaration och tilldelning
+    .panel-body
+        pre
+            code.language-javascript
+                | var name = "Dr. Zaius";
+p I ovan exempel deklarerar ("skapar") vi alltså en variabel och tilldelar den värdet av texten "Dr. Zeus". Således finns det alltså två saker vi gör här. Vi (1) deklarerar, och vi (2) tilldelar. Låt oss se till ett nytt exempel där vi gör dessa steg för steg.
+.panel.panel-default
+    .panel-heading Deklarering och tilldelning
+    .panel-body
+        pre
+            code.language-javascript
+                | // Deklaration
+                | var name;     // name =&gt; undefined
+                | var age;      // age  =&gt; undefined
+                | 
+                | // Tilldelning
+                | name = "Dr. Zaius";   // name =&gt; "Dr. Zaius"
+                | age = 42;             // age  =&gt; 42
+                | 
+                | // Deklaration och tilldelning samtidigt
+                | var species = "Orangutang";
+p Notera alltså att ovan exempel illustrerar att det är fullt möjligt att först deklarera en variabel och sedan tilldela den ett värde, i två steg. Detta kommer sig av den enkla anledningen att tilldelning och deklaration är två olika saker.
+
+dl.dl-horizontal
+    dt Deklaration
+    dd Att säga att någonting <em>existerar</em>
+        | (<code class="language-javascript">var foo;</code>)
+    dt Tilldelning
+    dd Att säga vad någonting <em>innehåller</em>
+        | (<code class="language-javascript">foo = "bar";</code>)
+
+p I många språk deklarerar vi variabler som olika <em>typer</em> beroende på vad för typ av innehåll vi vill kunna lagra i variabeln (text, heltalsnummer, decimaltal etc.) men i JavaScript räcker det med att vi deklarerar att variabeln <em>finns</em>. Vilken typ den sedan är av, avgörs av vad vi sedan väljer att lagra i den. JavaScript är alltså vad vi brukar kalla för ett <a href="http://sv.wikipedia.org/wiki/Typsystem">Dynamiskt typat språk</a>.
+
+
+h3 Datatyper
+p Vad kan vi lagra? Kort sagt: vad som helst som faller under JavaScripts tre <a href="http://msdn.microsoft.com/en-us/library/ie/7wkd9z69(v=vs.94).aspx" target="_blank">datatypskategorier</a>: primära datatyper, komposit-datatyper, eller speciella datatyper. Dessa är som följer:
+table.table.table-condensed
+    tr
+        th Datatyp
+        th Förklaring
+        th Exempel (separerade med ;)
+    tr
+        td(colspan="3").table-divider Primary datatypes
+    tr
+        td <code>number</code>
+        td Siffror
+        td
+            code.language-javascript
+                | 0;   12;   -432;   11.4;   -32.4;
+    tr
+        td <code>string</code>
+        td Text
+        td
+            code.language-javascript
+                "Ekonomikum 1A";
+    tr
+        td <code>boolean</code>
+        td Sant eller falskt
+        td
+            code.language-javascript
+                | true;   false;
+
+    tr
+        td(colspan="3").table-divider Composite datatypes
+    tr
+        td <code>array</code>
+        td Listor innehållandes andra datatyper
+        td
+            code.language-javascript
+                | [1, 3, 2];   ["Hello", 123];
+    tr
+        td <code>object</code>
+        td Text
+        td
+            code.language-javascript
+                "Ekonomikum 1A";
+
+    tr
+        td(colspan="3").table-divider Special datatypes
+    tr
+        td <code>null</code>
+        td Värdet för ingenting
+        td
+            code.language-javascript null;
+    tr
+        td <code>undefined</code>
+        td Värdet för avsaknaden av ett värde
+        td
+            code.language-javascript undefined;
+
+h3 Likhetstecknet
+p Någonting som ofta är förvirrande när det kommer till programmering är att likhetstecknet (<code>=</code>) i programmering skiljer sig signifikant ifrån likhetstecknet i matematik. Likhetstecknet i matematik implicerar ekvivalens medan likhetstecknet i programmering implicerar tilldelning. Vad är då skillnaden?
+p Om två uttryck är ekvivalenta menar vi att vi kan ersätta det första uttrycket med det andra och det betyder samma sak. Låt oss se till ett exempel.
+.panel.panel-default
+    .panel-heading Ekvivalens i matematik
+    .panel-body
+        pre
+            | (1 + 1)  =  (2)
+        | De två uttrycken, isolerade av paranteser, är ekvivalenta och vänstra ledet kan således ersättas med det högra. Detta gäller inte i programmering.
+blockquote Likhetstecknet i matematik implicerar ekvivalens medan likhetstecknet i programmering implicerar tilldelning.
+p Men om ekvivalens inte gäller i programmering, vad gäller då istället? Jo, tilldelning. Med matematisk ekvivalens menar vi att evalueringen (resultatet av att beräkna) av det vänstra ledet är exakt samma sak som evalueringen av det högra ledet. Med tilldelning däremot, menar vi att evalueringen (resultatet av beräkningen) av det högra ledet <em>representeras</em> av det vänstra ledet.
+p I matematik tänker vi ofta i termer av sanning, men för att lättare förstå hur imperativ programmering fungerar kan det vara fördelaktigt att istället försöka tänka i termer av att vi "räknar ut värden och lägger de i lådor (variabler)". Boxarna har ingen aning om vart värdena kom ifrån, och värdena har ingen aning om i vilka boxar de kommer placeras.
+p Kanske hade det varit lättare att förstå tilldelning om syntaxen (notationen) istället hade varit <code>a &lt;= 23</code>. Alltså: lagra värdet 23 i variabeln a.
+.panel.panel-default
+    .panel-heading Tilldelning i programmering
+    .panel-body
+        pre
+            code.language-javascript
+                | var a = 1;            // a =&gt; 1
+                | var b = a + 3;        // b =&gt; 4
+                | var c = a + b;        // c =&gt; 5
+                | var d = a + b + c;    // d =&gt; 10
+        | Läs ovan, rad för rad, och fundera över varför det resultat som sparas i variabeln blir det som visas i kommentaren till höger.
+blockquote När vi pratar om programmering är det lättare att tänka att vi "räknar ut värden och lägger resultaten i boxar".
+

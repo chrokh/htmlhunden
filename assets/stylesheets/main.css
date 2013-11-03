@@ -4,15 +4,39 @@
 img{
   max-width: 100%;
 }
+th{
+  font-weight: bold;
+}
+
+/*
+ * Tables
+ */
+.table td.table-divider{
+  color: #777;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.table td.table-divider:before{
+  content: "\2B07  ";
+}
 
 
 /*
- * Table of contents
+ * TOC all devices
  */
-#toc-desktop{
-  position: fixed;
-  top: 30px;
+.toc ul{
+  list-style-type: none;
+  padding-left: 0;
 }
+.toc li{
+  padding-left: 0;
+}
+
+
+/*
+ * TOC mobile devices
+ */
 #toc-mobile{
   text-align: center;
   width: 90%;
@@ -22,29 +46,70 @@ img{
 #toc-mobile h1{
   margin-bottom: 32px;
 }
-#toc-mobile ol{
-  padding-left: 0;
-}
 #toc-mobile li{
-  list-style-type: none;
+  margin: 12px auto;
 }
-#toc-mobile li ol{
-  margin-bottom: 32px;
-}
-#toc-mobile ol li a{
-  background: rgb(240,240,240);
-  width: 100%;
-  margin: 6px;
-  padding: 6px;
+#toc-mobile li a{
   display: block;
-}
-#toc-mobile ol li ol li{
   width: 100%;
+  padding: 12px;
+  background: #dedede;
+  color: #333;
+}
+#toc-mobile li a:hover{
+  opacity: 0.8;
+}
+#toc-mobile .toc-h1 a{ background: transparent; }
+#toc-mobile .toc-h1{
+  width: 100%;
+  font-size: 36px;
+  margin-top: 26px;
+  font-weight: bold;
+}
+#toc-mobile .toc-h2{
+  width: 90%;
+}
+#toc-mobile .toc-h3{
+  display: none !important;
+}
+
+/*
+ *  TOC desktop devices
+ */
+ #toc-desktop{
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  padding: 12px 24px;
+  overflow: auto;
+  border-right: 1px solid #ccc;
+  background: rgba(0,0,0,.05);
+}
+#toc-desktop a{
+  color: #333;
+}
+#toc-desktop li{
+  margin-bottom: 4px;
+}
+#toc-desktop .toc-active a{
+  color: #428bca;
+  font-weight: bold;
+}
+#toc-desktop .toc-h1{
+  padding-top: 6px;
+  font-weight: bold;
+}
+#toc-desktop .toc-h2{
+  padding-left: 12px;
+}
+#toc-desktop .toc-h3{
+  padding-left: 22px;
 }
 
 
 .divider{
-  margin: 150px 20px;
+  margin: 150px 150px;
 }
 
 blockquote{
@@ -68,32 +133,15 @@ blockquote code{
 
 
 /*
- *   Table of Contents
- */
-#toc li{
-  list-style-type: none;
-}
-#toc ol{
-  padding-left: 0px;
-}
-#toc li > ol{
-  padding-left: 16px;
-}
-
-
-/*
  * Cover page
  */
 #title{
   text-align: center;
-  border-top: 2px dotted #dedede;
-  border-bottom: 2px dotted #dedede;
-  padding: 5% 0;
-  margin: 15% 0 220px 0;
+  padding-top: 10%;
 }
 
 #title h2{
-  border: 0;
+  font-size: 32px !important;
   color: #888;
 }
 
@@ -102,14 +150,19 @@ blockquote code{
 /* 
  * Responsive
  */
- #title h1{
-  font-size: 38px;
-}
+
 #title h2{
   font-size: 20px;
 }
 h1{
+  text-align: center;
+  font-size: 80px !important;
+}
+h1 + .lead{
+  text-align: center;
   font-size: 32px;
+  color: #555;
+  margin-bottom: 180px;
 }
 h2{
   font-size: 22px;
@@ -137,7 +190,6 @@ h1{
 h2{
   margin-top: 22px;
   padding-bottom: 4px;
-  border-bottom: 1px solid #eee;
 }
 h3{
   margin-top: 36px;
@@ -168,6 +220,10 @@ a:hover, a:active{
 /*
  * Barometer Feedback plugin fixes
  */
+#barometer_tab{
+  right: -5px !important;
+  left: auto !important;
+}
 #barometer_overlay #barometer_main #overlay_header{
   height: 37px !important;
 }

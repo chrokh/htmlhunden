@@ -1,5 +1,5 @@
 .page-header
-  h1
+  h2
     a(href="#css-placering", name="css-placering")
       .icon-link
       | Vart skall jag lägga CSS:en?
@@ -14,7 +14,7 @@ ol
   li Direkt i element)
     br
     |i elementet där CSS-formateringen ska utföras 
-h2 Extern CSS-mall
+h3 Extern CSS-mall
 p 
   |Det här är den vanligaste användningen av CSS där ett externt dokument som innehåller formateringen kopplas till alla de 
   |sidor som ska tillämpa formatet. Namnet på CSS-mallen måste ha filtilläget .css och namnet på mallen i exemplet nedan är 
@@ -35,7 +35,7 @@ p
         |     &lt;link href="mall.css" rel="stylesheet"&gt;
         |   &lt;/head&gt;
         |   &lt;body&gt;
-        |     &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+        |     &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
         |   &lt;/body&gt;
         | &lt;/html&gt;
 
@@ -58,7 +58,7 @@ p
         |     &lt;link href="en_till_mall.css" rel="stylesheet"&gt;
         |   &lt;/head&gt;
         |   &lt;body&gt;
-        |     &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+        |     &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
         |   &lt;/body&gt;
         | &lt;/html&gt;
 
@@ -66,7 +66,7 @@ p
 
 
 
-h2 I dokumentet
+h3 I dokumentet
 p
   |CSS-formatering angiven direkt i dokumentet kan användas när vissa sidor ska avvika från 
   |huvudmallens formatering. Den här metoden är inte lika effektiv som att använda en extern CSS-mall.
@@ -83,16 +83,16 @@ p
         |   &lt;head&gt;
         |     &lt;title&gt; Sidans namn &lt;/title&gt; 
         |     &lt;style type="text/css"&gt;
-        |       h1 { font-size: 24px; }
+        |       h2 { font-size: 24px; }
         |     &lt;/style&gt;
         |   &lt;/head&gt;
         |   &lt;body&gt;
-        |     &lt;h1&gt;En rubrik, yay!&lt;/h1&gt;
+        |     &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
         |   &lt;/body&gt;
         | &lt;/html&gt;
 
 
-h2 Direkt i elementet som ska formateras 
+h3 Direkt i elementet som ska formateras 
 p 
   |Den här metoden är minst effektiv och här uppfylls inte målet med att separera innehåll och
   | struktur i dokumenten. CSS-formateringen anges i anslutning till de elementsom ska formateras. 
@@ -111,7 +111,7 @@ p
         |     &lt;title&gt; Sidans namn &lt;/title&gt; 
         |   &lt;/head&gt;
         |   &lt;body&gt;
-        |     &lt;h1 style="font-size:24px;"&gt;En rubrik, yay!&lt;/h1&gt;
+        |     &lt;h2 style="font-size:24px;"&gt;En rubrik, yay!&lt;/h2&gt;
         |   &lt;/body&gt;
         | &lt;/html&gt;
 
