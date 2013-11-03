@@ -76,6 +76,10 @@ img{
 #toc-desktop li{
   margin-bottom: 4px;
 }
+#toc-desktop .toc-active a{
+  color: #428bca;
+  font-weight: bold;
+}
 #toc-desktop .toc-h1{
   padding-top: 6px;
   font-weight: bold;

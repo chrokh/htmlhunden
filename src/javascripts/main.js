@@ -68,7 +68,8 @@ lathunden.TOC.init = function(){
   setTimeout(function(){
   $('.toc').toc({
       'selectors': 'h1,h2',
-      'container': '#chapters'
+      'container': '#chapters',
+      'highlightOnScroll': true
     });
   }, 4000);
 }
