@@ -49,3 +49,52 @@ p Ett ställe vi kan placera vår JavaScript på är rakt upp och ner i <code>&l
       .panel-heading Resultat
       .panel-body Denna text kommer inte att synas eftersom JavaScriptet skriver över den.
 
+
+h3 onClick
+p Ett annat ställe vi kan placera vår JavaScript-kod på är i onClick-attributet. Som namnet <code>onClick</code> antyder kommer då koden att exekveras just då &mdash; "on click". Alltså när användaren klickar på elementet i fråga.
+p Låt oss se till ett exempel, som använder sig av samma kod.
+.panel.panel-danger
+  .panel-heading Anonym funktion vid onClick
+  .panel-body
+    pre.line-numbers
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;button&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt;Exempel&lt;/title&gt; 
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |     &lt;a onClick="document.write('Evil rabbits...');"&gt;Engage descrution!&lt;/a&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body#example-js-onclick
+        button.btn.btn-warning Click to engage destruction!
+        script
+          $(function(){
+            $('#example-js-onclick button').click(function(e){
+              $('#example-js-onclick').text('Evil rabbits...');
+              e.preventDefault();
+            });
+          });
+
+p I ovan exempel finns det tre viktiga skillnader att notera i relation till det första exemplet. Först och främst. Vår JavaScript ligger nu inte längre inom <code>&lt;HEAD&gt;</code>-taggen utan inom <code>&lt;BODY&gt;</code>. Det betyder alltså att vi har specificerat vårt skript bland vårt content och inte vårt meta-content. Eftersom skript inte är content så borde det här ringa en varningssignal om att vi sysslar med en dålig "practice", men det återkommer vi till senare.
+p Den andra viktiga skillnaden vi bör inse är att vi inte längre kör vårt JavaScript när sidan laddas utan istället när användaren klickar på en knapp. Vi har alltså inte bara lagt vårt skript rakt av, utan vi har lagt det som en <em>anonym funktion</em> som kommer att köras när <em>event lyssnaren</em> <code>onClick</code> avfyras. Vi kommer att prata mer om <em>event listeners</em> senare men för nu kan du helt enkelt tänka dig det så här. Egenskapen <code>onClick</code> är ett nyckel-värde-par där värdet är en sträng. Denna sträng kommer inte att tolkas som vilken sträng som helst, utan kommer att exekveras som JavaScript. Vi hade således kunnat skriva vilken arbiträr mängd JavaScript som helst mellan de två citationstecknena som delimiterade värdet. Låt oss se till ett exempel till för att verkligen förstå hur det fungerar.
+.panel.panel-danger
+  .panel-heading Anonym funktion vid onClick
+  .panel-body
+    pre.line-numbers
+      code.language-markup
+        | &lt;a onClick="alert('Hello...'); alert('...you!');"&gt;Welcome me!&lt;/a&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body#example-js-onclick
+        button.btn.btn-warning(onClick="alert('Hello...');alert('...you!');") Welcome me!
+
+blockquote.text-danger Glöm nu allt du lärt dig om att skriva inline-javascript i <code>onClick</code> och glöm nästan allt du lärt dig om att skriva JavaScript direkt i <code>&lt;head&gt;</code> &mdash; det finns bättre sätt!
+p Som vanligt är detta bättre sätt baserat på idéen om "<a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a>" och innebär att vi flyttar vår JavaScript till en separat fil. Och det är detta vi kommer göra i nästa stycke.
+
+h3 JS i separat fil
+p TODO. Kommer snart...
+
