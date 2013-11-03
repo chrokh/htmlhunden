@@ -1,5 +1,5 @@
 .page-header
-	h1
+	h2
 		a(href="#formular", name="formular")
 			.icon-link 
 			| Formulär
@@ -8,7 +8,7 @@ p.lead
 	| För att användare av webbsidor ska kunna skicka data mellan olika sidor använder vi oss (bl.a.) av formulär.
 	| För att vi som utvecklare ska kunna spara användardata i t.ex. en databas så behöver vi få in data ifrån "klient-sidan" (client-side) till "server-sidan" (server-side). Formulär ger oss ett mycket smidigt sätt att göra detta.
 
-h2 Form-taggen 
+h3 Form-taggen 
 p Låt oss börja med att skapa ett skal till ett formulär. 
 
 .panel.panel-default
@@ -22,7 +22,7 @@ p Låt oss börja med att skapa ett skal till ett formulär.
 p 
 	|Ovan kod resulterar rent visuellt inte i någonting. Under ytan så kommer ju ovan markup absolut att <em>finnas</em> i dokumentet, men rent visuellt ser användaren ingenting.
 
-h2 Labels
+h3 Labels
 p.lead För att användaren ska veta vad hen ska fylla i vart, så använder vi oss av <code>&lt;label&gt;</code>'s.
 
 p Till synes så ser denna tagg inte mycket ut för världen eftersom den endast renderar ut som helt vanlig text. Men eftersom vi associerar labels med input-fält så gör (t.ex.) vissa browsers label-texten klickbar. För radiobuttons så innebär t.ex. ett klick på label:en då samma sak som ett klick på själva knappen.
@@ -42,14 +42,14 @@ p Vi använder egenskapen <code>for</code> för att specificiera vilken formulä
 	.panel-body
 		label Din e-post
 
-h2 Input, textarea &amp; select
+h3 Input, textarea &amp; select
 // p Så, låt oss lägga till någonting som faktiskt kan vara till användning. Frågan är alltså: hur kan vi ge användaren en möjlighet att skriva in data? Först och främst måste vi helt enkelt välja vad vi menar med data? Det är ju alltså formulär vi behandlar. Vill vi att användaren ska kunna skriva in "fri-text", eller välja mellan tre val, eller välja en/fler/ingen mellan tre val o.s.v. Det finns alltså ett antal olika input-metoder vi kan erbjuda en användare och några presenteras således nedan.
 p.lead För att skapa själva innehållet i formuläret använder vi oss i huvudsak av taggarna <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code> och <code>&lt;select&gt;</code>.
 p <code>&lt;input&gt;</code>-taggen kan vi använda till att skapa många olika typer av formulärsfält. Närmare bestämt: fritext, radioknappar, checkboxar och gömda fält. Vilken av dessa fält vi vill skapa bestämmer vi genom att sätta attributet <code>type</code>.
 
 
 
-h3 Fritext (en rad)
+h4 Fritext (en rad)
 p Följande är ett exempel på hur vi kan göra om vi vill ha ett en-rads-text-fält.
 .row
 	.col-md-6
@@ -67,7 +67,7 @@ p Följande är ett exempel på hur vi kan göra om vi vill ha ett en-rads-text-
 					input(type="text", placeholder="Your email").form-control
 
 
-h3 Radio buttons
+h4 Radio buttons
 p Radio-knappar ger användaren möjligheten att välja ett och endast ett av flera alternativ. Låt oss se till ett exempel, och notera även hur egenskapen <code>for</code> används till att peka <code>&lt;label&gt;</code>'s.
 .panel.panel-default
 	.panel-heading Radio buttons med labels
@@ -99,7 +99,7 @@ p
 
 
 
-h3 Checkboxes
+h4 Checkboxes
 p Checkboxes använder vi till skillnad ifrån radio buttons när vi vill ge användaren möjligheten att välja ett, eller flera alternativ av många. Mycket användbart när det kommer till frukt!
 
 .panel.panel-default
@@ -122,7 +122,7 @@ p Checkboxes använder vi till skillnad ifrån radio buttons när vi vill ge anv
 			input(id="alt-banana", type="checkbox", name="fruit", value="banana") 
 			label(for="alt-banana") Banan
 
-h4 Förklaring av attribut
+h5 Förklaring av attribut
 p Nedan gäller både för <code>radio button</code>'s och <code>checkbox</code>:ar.
 table.table.table-hover
 	tr
@@ -137,7 +137,7 @@ table.table.table-hover
 
 
 
-h3 Select list
+h4 Select list
 p Om vi vill erbjuda en användare många alternativ, som t.ex länder, kan radiobuttons och checkboxes ofta ta alldeles för stor plats. Då kan vi använda oss av <code>&lt;select&gt;</code>-listor. 
 
 .panel.panel-default
@@ -160,7 +160,7 @@ p Om vi vill erbjuda en användare många alternativ, som t.ex länder, kan radi
 			option(value="äpple") Äpple
 			option(value="vindruvor") Vindruvor
 
-h4 Multiple-choice select
+h5 Multiple-choice select
 p Om vi sätter egenskapen <code>multiple</code> så tillåter listan att användaren väljer flera alternativ genom att hålla in <code>ctrl</code> (Windows) eller <code>cmd</code> (Mac). Man kan även markera flera genom att trycka på en post, hålla ned <code>shift</code> och sen trycka på en till.
 
 .panel.panel-default
@@ -185,7 +185,7 @@ p Om vi sätter egenskapen <code>multiple</code> så tillåter listan att använ
 
 
 
-h3 Submit
+h4 Submit
 p För att skicka ett formulär måste vi in med en knapp, och använder oss då åter av taggen <code>&lt;input&gt;</code>, men denna gången med typ-attributet satt till <code>submit</code>.
 p Låt oss se till ett exempel.
 
@@ -207,7 +207,7 @@ p Låt oss se till ett exempel.
 
 
 
-h2 Att skicka formuläret
+h3 Att skicka formuläret
 p.När användaren klickar på en submit-knapp i ett formulär så skickas det ifyllda datat med i nästa request. Knappen leder oss till en ny sida som defineras genom attributet <code>action</code>
 p Tyvärr är det så att HTML i sig är otillräckligt för att göra någonting signifikant vad gäller processning av formulär-data. För att faktiskt spara datat i en databas eller på något annat sätt hantera det så behöver vi ett script-språk (ex: JavaScript, PHP, Ruby, ASP o.s.v.)
 .panel.panel-default
@@ -217,7 +217,7 @@ p Tyvärr är det så att HTML i sig är otillräckligt för att göra någontin
 			code.language-markup
 				|&lt;form action="process-form-data.php"&gt;
 
-h3 HTTP Method
+h4 HTTP Method
 p När vi konstruerar ett formulär som ska skicka data till en annan sida så gör vi det genom en <a href="http://www.w3schools.com/tags/ref_httpmethods.asp" target="_blank">HTTP-metod</a>. För nu kan vi ignorera detta eftersom vi endast pysslar med front-end-språk (html), men det kan ändå vara bra att känna till varför attributet finns där.
 
 p Attributet <code>method</code> kan alterneras mellan de två värdena <code>POST</code> och <code>GET</code>. Dessa är två olika typer av HTTP requests, och skillnaderna innefattar bl.a.a att förstnämnda "gömmer" datat som skickas i request:et, medan sistnämnda visar datat i URL:en. Läs mer i ovan nämnd länk!
@@ -229,7 +229,7 @@ p Som tumregel brukar man säga att anrop med "sido-effekter" bör utföras öve
 
 
 
-h2 Komplett exempel
+h3 Komplett exempel
 p
 	|Här har vi skapat ett formulär som har två textfält där vi kan skriva in vårt namn och även vad vi skulle vilja heta. Koden för denna 
 	|är som nedanstående:

@@ -1,5 +1,5 @@
 .page-header
-  h1
+  h2
     a(href="#head-och-body", name="head-och-body")
       .icon-link 
       | HEAD &amp; BODY
@@ -25,7 +25,7 @@ p Nyssnämnt är alltså fånigt direktöversatta begrepp av begreppen DOCTYPE, 
 
 p Notera även att det absolut yttersta elementet är <code>&lt;html&gt;</code>. Ett HTML-dokument måste innehålla ett och endast ett <code>&lt;html&gt;</code>-element. I detta element måste det finnas ett och endast ett <code>&lt;head&gt;</code>- och respektive <code>&lt;body&gt;</code>-element. I huvudet måste vi även ange en sidtitel med hjälp av <code>&lt;title&gt;</code>. Detta är det minsta dokumentet vi kan skapa som validerar, och det är även så här <em>alla</em> html-dokument är strukturerade i botten.
 
-h3 Head (meta-data)
+h4 Head (meta-data)
 .lead Så vad lägger vi då inanför <code>&lt;head&gt;</code>-taggarna? Det korta svaret är: meta-data.
 
 p Det längre svaret är att vi även laddar in externa referenser i huvudet. Följande kodruta är ett exempel på hur ett set av <code>&lt;head&gt;</code>-taggar skulle kunna se ut.
@@ -66,7 +66,7 @@ table.table.table-striped
     td 7
     td Definerar ett par <a href="http://www.w3schools.com/tags/tag_meta.asp">keywords</a> för sidan. Denna information används av bl.a. sökmotorer för att "förstå" sidans innehåll.
 
-h3 Body (Sidans faktiska innehåll)
+h4 Body (Sidans faktiska innehåll)
 .lead Om <code>&lt;head&gt;</code> beskrivs som sidans meta-content -- alltså content om content. Då skulle vi kunna säga att <code>&lt;body&gt;</code> är sidans faktiska content.
 
 .panel.panel-default
@@ -76,7 +76,7 @@ h3 Body (Sidans faktiska innehåll)
       code.language-markup
         | ...
         | &lt;body&gt;
-        |   &lt;h1&gt; Sidans titel &lt;/h1&gt; 
+        |   &lt;h2&gt; Sidans titel &lt;/h2&gt; 
         |   &lt;p&gt; Det här är en paragraf med text. &lt;p&gt;
         |   &lt;p&gt;
         |       Och det här är en till, som innehåller en

@@ -1,10 +1,10 @@
 .page-header
-  h1
+  h2
     a(name="arkitektur") Hur fungerar en webbsida?
 
 p.lead Hur fungerar egentligen en hemsida? Vad händer egentligen när vi öppnar webbläsaren och skriver in en adress? Det här kapitlet ger dig en kort och mycket övgripande introduktion om hur allting hänger ihop.
 
-h2 HTML
+h3 HTML
 .lead
   | HTML (<a href="http://sv.wikipedia.org/wiki/HTML" target="_blank">Hypertext markup language</a>) är  ett <a href="http://sv.wikipedia.org/wiki/M%C3%A4rkspr%C3%A5k" target="_blank">märkespråk</a> vi använder för att konstruera webbsidor. Kort sagt kan vi se det som att språket HTML är ett sätt att semanstiskt strukturera ett dokuments information.
 p
@@ -17,7 +17,7 @@ p
       | Sista ordet kommer bli 
       b fetstilat
 
-h3 Endast för statiska sidor
+h4 Endast för statiska sidor
 p.lead HTML är alltså ett statiskt språk. Men vad menar vi då med statiskt och vad skulle motsatsen innebära?
 p Med statiskt menar att om vi renderar ett HTML-dokument i en webbläsare, stänger webbläsaren, öppnar den igen och renderar samma sida igen &mdash; så kommer sidan se exakt likadan ut som första gången. HTML ger oss alltså inga möjligheter att t.ex. koppla till databaser, hämta information ifrån andra sidor (bortsett ifrån användandet av <a href="http://sv.wikipedia.org/wiki/IFRAME" target="_blank">iframe</a>'s som skulle kunna bädda in en annan sida som utför logik), räkna ut matematik eller utföra någon form av logik.
 p Som en tankelek. Föreställ dig ett dokument skrivet i Microsoft Word, Pages, Open Office eller dylik dokumenthanterare. Tänk nu på att vi har rubriker,  underrubriker, stycken, text-snuttar som är <b>fetstilta</b> och <i>kursiva</i>. Ett HTML-dokument är egentligen exakt samma dokument som i denna tankelek fast varje gång vi vill att någonting ska representeras som någonting annat än text rakt upp och ned på samma rad så måste vi använda oss av <em>taggar</em> och <em>element</em>.
@@ -34,7 +34,7 @@ p Låt oss fundera lite på hur ovan beskriven process fungerar.
 
 
 
-h2 Client-server architecture
+h3 Client-server architecture
 p.lead Innan vi kan gå djupare in på varför vi inte kan utföra komplex logik i html så behöver vi lära oss lite om ansvarsområden för <a href="http://sv.wikipedia.org/wiki/Klient%E2%80%93server" target="_blank">klienter och servrar</a>.
 
 .panel.panel-default
@@ -50,7 +50,7 @@ p Låt oss formulera det med andra ord. En server servererar filer till en klien
 
 
 
-h3 Request-response
+h4 Request-response
 p Som sagt, så är en servers uppgift att servera ett <code>response</code> vid en förfrågan, alltså ett <code>request</code>. Låt oss se till det lite närmare. Vi har alltså (1) en server (t.ex. någon ananstans), (2) en klient (t.ex. vår egen dator) och (3) internet. Hur hänger då allt det här ihop?
 
 .panel.panel-default
@@ -67,7 +67,7 @@ p Ovan figur är alltså en visualisering av hur ett request-response-scenario s
 
 
 
-h2 Server-side-språk
+h3 Server-side-språk
 p.lead Så, vad är då egentligen ett server-side-språk? Tänk så här. Vi skulle kunna ha en klient-server-arkitektur helt utan ett server-side-språk. Hur? Jo, klienten ber om en sida genom ett request som vandrar över internet och når rätt server som rakt av svarar med ett response som är en html-sida.
 
 p Men nu är det ju så att det moderna internet består av mycket mer komplexitet än statiska sidor. Den enda skillnaden vi introducerar i ovanstående process handlar då om att vi introducerar ett språk som ansvarar för att konstruera html-sidor beroende på response.
