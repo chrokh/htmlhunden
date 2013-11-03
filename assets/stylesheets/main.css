@@ -4,6 +4,22 @@
 img{
   max-width: 100%;
 }
+th{
+  font-weight: bold;
+}
+
+/*
+ * Tables
+ */
+.table td.table-divider{
+  color: #777;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.table td.table-divider:before{
+  content: "\2B07  ";
+}
 
 
 /*

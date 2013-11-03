@@ -48,17 +48,56 @@ p I många språk deklarerar vi variabler som olika <em>typer</em> beroende på 
 
 h3 Datatyper
 p Vad kan vi lagra? Kort sagt: vad som helst som faller under JavaScripts tre <a href="http://msdn.microsoft.com/en-us/library/ie/7wkd9z69(v=vs.94).aspx" target="_blank">datatypskategorier</a>: primära datatyper, komposit-datatyper, eller speciella datatyper. Dessa är som följer:
-ul
-    li Primary datatypes
-        ul
-            li Number
-            li String
-            li Boolean
-    li Composite datatypes
-        ul
-            li Array
-            li Object
-    li Special datatypes
-        ul
-            li Null
-            li Undefined
+table.table
+    tr
+        th Datatyp
+        th Förklaring
+        th Exempel (separerade med ;)
+    tr
+        td(colspan="3").table-divider Primary datatypes
+    tr
+        td <code>number</code>
+        td Siffror
+        td
+            code.language-javascript
+                | 0;   12;   -432;   11.4;   -32.4;
+    tr
+        td <code>string</code>
+        td Text
+        td
+            code.language-javascript
+                "Ekonomikum 1A";
+    tr
+        td <code>boolean</code>
+        td Sant eller falskt
+        td
+            code.language-javascript
+                | true;   false;
+
+    tr
+        td(colspan="3").table-divider Composite datatypes
+    tr
+        td <code>array</code>
+        td Listor innehållandes andra datatyper
+        td
+            code.language-javascript
+                | [1, 3, 2];   ["Hello", 123];
+    tr
+        td <code>object</code>
+        td Text
+        td
+            code.language-javascript
+                "Ekonomikum 1A";
+
+    tr
+        td(colspan="3").table-divider Special datatypes
+    tr
+        td <code>null</code>
+        td Värdet för ingenting
+        td
+            code.language-javascript null;
+    tr
+        td <code>undefined</code>
+        td Värdet för avsaknaden av ett värde
+        td
+            code.language-javascript undefined;
