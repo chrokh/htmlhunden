@@ -101,3 +101,29 @@ table.table.table-condensed
         td Värdet för avsaknaden av ett värde
         td
             code.language-javascript undefined;
+
+h3 Likhetstecknet
+p Någonting som ofta är förvirrande när det kommer till programmering är att likhetstecknet (<code>=</code>) i programmering skiljer sig signifikant ifrån likhetstecknet i matematik. Likhetstecknet i matematik implicerar ekvivalens medan likhetstecknet i programmering implicerar tilldelning. Vad är då skillnaden?
+p Om två uttryck är ekvivalenta menar vi att vi kan ersätta det första uttrycket med det andra och det betyder samma sak. Låt oss se till ett exempel.
+.panel.panel-default
+    .panel-heading Ekvivalens i matematik
+    .panel-body
+        pre
+            | (1 + 1)  =  (2)
+        | De två uttrycken, isolerade av paranteser, är ekvivalenta och vänstra ledet kan således ersättas med det högra. Detta gäller inte i programmering.
+blockquote Likhetstecknet i matematik implicerar ekvivalens medan likhetstecknet i programmering implicerar tilldelning.
+p Men om ekvivalens inte gäller i programmering, vad gäller då istället? Jo, tilldelning. Med matematisk ekvivalens menar vi att evalueringen (resultatet av att beräkna) av det vänstra ledet är exakt samma sak som evalueringen av det högra ledet. Med tilldelning däremot, menar vi att evalueringen (resultatet av beräkningen) av det högra ledet <em>representeras</em> av det vänstra ledet.
+p I matematik tänker vi ofta i termer av sanning, men för att lättare förstå hur imperativ programmering fungerar kan det vara fördelaktigt att istället försöka tänka i termer av att vi "räknar ut värden och lägger de i lådor (variabler)". Boxarna har ingen aning om vart värdena kom ifrån, och värdena har ingen aning om i vilka boxar de kommer placeras.
+p Kanske hade det varit lättare att förstå tilldelning om syntaxen (notationen) istället hade varit <code>a &lt;= 23</code>. Alltså: lagra värdet 23 i variabeln a.
+.panel.panel-default
+    .panel-heading Tilldelning i programmering
+    .panel-body
+        pre
+            code.language-javascript
+                | var a = 1;            // a =&gt; 1
+                | var b = a + 3;        // b =&gt; 4
+                | var c = a + b;        // c =&gt; 5
+                | var d = a + b + c;    // d =&gt; 10
+        | Läs ovan, rad för rad, och fundera över varför det resultat som sparas i variabeln blir det som visas i kommentaren till höger.
+blockquote När vi pratar om programmering är det lättare att tänka att vi "räknar ut värden och lägger resultaten i boxar".
+
