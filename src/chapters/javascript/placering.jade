@@ -1,0 +1,51 @@
+.page-header
+  h2
+    a(href="#vart-ska-jag-skriva-javascript")
+      .icon-link 
+      | Vart ska jag skriva JavaScript?
+
+p.lead Innan vi lärt oss ett dugg om JavaScript ska vi köra en djupdyk med näsan först, och skriva vårt första skript. Samtidigt kommer vi att diskutera var vi väljer att placera vår kod och hur man bör arbeta med JavaScript.
+
+h3 Ett exempelskript
+p Om det enkla skriptet i nästföljande figur körs på en webbsida så tar den helt sonika bort allt dokumentet innehåller och ersätter det med texten "Evil rabbits... osv". När vi använder det här skriptet som ett exempel i detta dokument så får du låtsas som om varje exempel-ruta är en egen webbsida. För om vis kulle köra <code class="language-javascript">document.write("");</code> på hela denna sida skulle vi ju rensa hela sidan vilket skulle göra det väldigt svårt för dig att fortsätta läsa denna text.
+
+.panel.panel-default
+  .panel-heading Exempelskriptet
+  .panel-body
+    pre
+      code.language-javascript
+        | document.write("Evil rabbits are taking over our servers! Must find carrots!");
+
+p Hursomhelst, låt oss nu istället diskutera lite olika platser vi skulle kunna lägga in detta skript på.
+
+h3 Direkt i HEAD
+p Ett ställe vi kan placera vår JavaScript på är rakt upp och ner i <code>&lt;HEAD&gt;</code>-taggen. Så länge som vi snurrar in vår JavaScript emellan starttaggen <code>&lt;script&gt;</code> och sluttaggen <code>&lt;/script&gt;</code>-taggarna. Nedan följer ett exempel i ett minimalistiskt HTML-dokument. När du läser exemplet, tänk framförallt på vart <code>&lt;script&gt;</code>-taggarna och ovan nämn javascript-rad är placerad/-e.
+.panel.panel-default
+  .panel-heading JavaScript i <code>&lt;HEAD&gt;</code>-taggen
+  .panel-body
+    pre.line-numbers
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt;Exempel&lt;/title&gt; 
+        |     &lt;script&gt;
+        |       document.write("Evil rabbits...");
+        |     &lt;/script&gt;
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |     &lt;p&gt;Denna text kommer inte att synas eftersom JavaScriptet skriver över den.&lt;/p&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body Evil rabbits...
+    p För att illustrera att detta är någonting som verkligen skapas av JavaScript, så tar vi och <em>kommenterar ut</em> rad 6 såsom nedan. Att kommentera ut en rad gör att den ignoreras av webbläsaren och således inte exekveras.
+    pre.line-numbers(data-start="6")
+      code.language-javascript
+        | // document.write("Evil rabbits...");
+    p ...så får vi istället nedan resultat.
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body Denna text kommer inte att synas eftersom JavaScriptet skriver över den.
+
