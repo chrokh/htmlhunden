@@ -65,10 +65,12 @@ lathunden.Examples.CSSPositionFixed.init = function(){
  */
 lathunden.TOC = {};
 lathunden.TOC.init = function(){
+  setTimeout(function(){
   $('.toc').toc({
-    'selectors': 'h1,h2',
-    'container': '#chapters'
-  });
+      'selectors': 'h1,h2',
+      'container': '#chapters'
+    });
+  }, 4000);
 }
 
 
