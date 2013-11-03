@@ -7,9 +7,10 @@ include header
             #title
                 include title
 
-    .toc#toc-mobile.visible-sm.visible-xs
-        h1 Table of contents
-        include table-of-contents
+    .row.visible-sm.visible-xs
+        include divider
+        .toc#toc-mobile
+            include table-of-contents
 
     .row
         .col-md-3

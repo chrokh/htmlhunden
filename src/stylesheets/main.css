@@ -125,6 +125,7 @@ blockquote code{
 }
 
 #title h2{
+  font-size: 32px !important;
   color: #888;
 }
 
