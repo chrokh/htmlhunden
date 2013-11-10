@@ -1,0 +1,75 @@
+.page-header
+  h2
+    a(href="#documentready")
+      .icon-link 
+      | $(document).ready
+p.lead I vår första djupdykning in i jQuery pratade vi kort om att det är viktigt att vänta tills hela DOM:en är inladdad innan vi börjar exekvera vår jQuery-beroende kod. I det här kapitlet kollar vi närmare på hur just <code>.ready()</code>-funktionen fungerar. Detta kapitel hjälper dig att skapa en djupare förståelse för både jQuery såväl som JavaScript.
+
+h3 När dokumentet är redo för manipulation
+p Denna mystiska ovan nämnda metod vid namn <code>.ready()</code> är en metod vi använder för att kunna vänta med att exekvera jQuery-kod tills webbläsaren har hunnit ladda in ("ned") hela sidan. Låt oss först se till ett exempel och sen diskutera det:
+
+.panel.panel-default
+  .panel-heading Att säga åt jQuery att vänta tills DOM:en är inläst
+  .panel-body
+    pre
+      code.language-javascript
+        | $(document).ready(function(){
+        |   alert("Hello world from jQuery");
+        | });
+
+p Ovan exempel använder jQuery för att avvakta tills webbläsaren har laddat in hela sidan. Sedan använder vi helt vanlig JavaScript för att poppa up en alert-ruta med meddelandet "Hello world...". Låt oss dissekera ovan kod, rad för rad och del för del, för att faktiskt förstå vad det är som händer.
+
+h4 $() är syntaktiskt socker för jQuery()
+p Först ut är detta mystiska dollartecken. Förklaringen till vad detta <em>är</em>, är egentligen ganska enkel. Förklaringen till varför vi <em>använder</em> tecknet inte lika. Men låt oss först diskutera vad det är. <code>$</code>-tecknet är egentligen ingenting annat än <a href="http://sv.wikipedia.org/wiki/Syntaktiskt_socker">syntaktiskt socker</a>. Alltså ett annat sätt att skriva någonting. Detta någonting är jQuery's huvudmetod med samma namn, alltså <code>jQuery</code>. Så, när vi med andra ord säger <code class="language-javascript">$(document)</code> är det <em>exakt samma sak</em> som när vi säger <code class="language-javascript">jQuery(document)</code>. Det förstnämnda är helt enkelt bara ett kortare sätt att uttrycka det på för att vi som programmerare ska slippa skriva så mycket.
+
+h4 Variabeln document är dokumentets rot
+p <code>document</code> är helt enkelt en <em>variabel</em>. Men notera här alltså att vi säger att document är en variabel, vi säger inte att det är ett keyword. Varför är det viktigt att tänka på? Jo, <code>var</code> är ett keyword, en <a href="http://en.wikipedia.org/wiki/Language_construct">language construct</a> som alltid finns i JavaScript oavsett vart vi kör språket. Variabeln window är däremot ett koncept som är uppfunnit sonika för browsers. Om vi kör en JavaScript-interpretator i en <a href="http://en.wikipedia.org/wiki/Bash_(Unix_shell)">terminal</a> (alltså inte en browser) så existerar inte variabeln <code>document</code>. I browsern däremot, för att överhuvudtaget kunna manipulera en webbsida, behöver vi något sätt att genom javascript komma åt noderna (elementen) i vårt HTML-dokument. Således är <code>document</code>, löst uttryckt, vår "entry-point" in till noderna i html-dokumentet. I variabeln <code>document</code> hittar vi elementet <code>&lt;html&gt;</code> och som barn till det elementet hittar vi förstås resten av noderna. För att sammanfatta så är alltså <code>document</code> den variabel som innehåller hela vårt html-dokument och således den variabel vi behöver interagera med för att manipulera vårt dokument.
+
+h4 $(document) eller jQuery(document)
+p Nu vet vi alltså att <code>$()</code> är en korthandssyntax, och således samma sak som att anropa <code>jQuery()</code>. Men vad gör då denna metod? Jo, metoden returnerar ett jQuery-objekt som innehåller det vi har skickat in till den. Vi kan alltså se det som att jQuery <em>dekorerar</em> det vi har skickat in med alla dessa fantastiska jQuery-metoder. Låt oss exemplifiera.
+
+pre
+  code.language-javascript
+    | // Dekorerar alla länkar med jquery
+    | // Sparar referensen i variabeln link
+    | var link = $('a');
+
+p Vi använder alltså denna "jquery-dekorerade version" av ett html-element för att anropa de fantastiska metoder jquery utökar våra element med. Låt oss exemplifiera.
+
+pre
+  code.language-javascript
+    | // Fade:a ut alla länkar
+    | $('a').fadeOut();
+    | 
+    | // Samma sak i två steg
+    | var link = $('a');
+    | link.fadeOut();
+
+p Det kan snabbt bli virrigt gällande vilka variabler som är jquery-dekorerade och vilka som inte är det. <a href="http://en.wikipedia.org/wiki/Coding_conventions">Konventionen</a> brukar således vara döpa sina variabler med ett initial <code>$</code>-tecken. Som så:
+pre
+  code.language-javascript
+    | // Konventionen är att döpa jquery variabler med ett intialt $-tecken
+    | var $link = $('a');
+
+p För att återgå till det här med <code class="language-javascript">$(document)</code>. Vad betyder det då alltså att skicka in dokumentet till jquerys dekorationsmetod? Jo att vi nu kan anropa alla de fantastiska metoderna jquery erbjuder på vår rotnod. Det vill säga hela dokumentet. Att dekorera dokumentet med jquery har egentligen exakt samma effekt som att dekorera ett enskilt element (t.ex. en länk).
+
+h4 För att veta när dokumentet är redo använder vi .ready()
+p Precis som rubriken säger så använder vi metoden för att helt enkelt veta när dokumentet (DOM:en) är färdigladdat. Tänk efter. Eftersom vi använder jQuery-metoden för att dekorera element i vårt dokument. Så är det viktigt att alla element är "konstruerade" innan vi försöker komma åt dem. Hur ska vi kunna hitta alla länkar om vi inte är säker på att webbläsaren har hunnit läsa in alla länkar?
+p Vi kan använda <a href="http://learn.jquery.com/using-jquery-core/document-ready/">.ready()</a>-metoden, men vi kan också använda <a href="http://api.jquery.com/load/">.load()</a>-metoden. Den första nöjer sig med att <a href="http://sv.wikipedia.org/wiki/Document_Object_Model">DOM</a>:en (vilket kan ses som dokumentets struktur) har laddat. Den senare väntar på att alla resurser såsom bilder o.s.v. har laddat.
+
+h4 Funktionen skickad till ready körs när dokumentet är redo
+p Så vad ska vi skicka som argument till denna funktion? Jo, en till funktion! Va? Vääänta nu. En funktion som tar en funktion som argument? Det låter ju helknäppt. Men det är faktiskt inte så knäppt. Faktum är att mycket kod vi skriver i JavaScript går ut på att just skicka funktioner till funktioner. För att kunna skapa <a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">"callbacks"</a>. Den funktion vi skickar till <code>.ready()</code>-funktionen kan ses som ett callback som körs när dokumentet har laddat.
+p Tänk dig.. vi anropar jquery ready-metoden, och säger "Hej, nu vill jag att du säger till mig när sidans DOM har laddat klart". Sedan skickar vi in en funktion till ready-metoden och då är det som att vi säger "..och när sidans DOM har laddat klart, då vill jag att du utför allt som står i den här andra funktionen". Inga konstigheter!
+
+h4 Allt i ett svep
+p Så, låt oss repetera den kod vi pratar om i helhet.
+pre.line-numbers
+  code.language-javascript
+    | $(document).ready(function(){
+    |   alert("Hello world from jQuery");
+    | });
+p Låt oss beskriva koden i ord, rad för rad.
+ol
+  li Skapa ett <code>jQuery</code>-objekt av innehållet i variabeln <code>document</code>. Anropa sedan funktionen <code>ready()</code> på det jquery-dekorerade dokumentet. Skicka en <em>anonym funktion</em> som argument.
+  li Låt den anonyma funktionen innehålla en enda rad. Denna rad anropar JavaScript-funktionen <code>alert()</code>, med strängen "Hello world.." som argument, och kommer således att visa göra så att alert-ruta "poppar upp" med texten "Hello world..".
+  li Stäng den anonyma funktionen med <code>}</code>. Stäng sedan funktionsanropet med <code>)</code>. Terminera raden med <code>;</code>.
