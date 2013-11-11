@@ -4,7 +4,7 @@
 			.icon-link 
 			| Formulär
 
-p.lead
+p
 	| För att användare av webbsidor ska kunna skicka data mellan olika sidor använder vi oss (bl.a.) av formulär.
 	| För att vi som utvecklare ska kunna spara användardata i t.ex. en databas så behöver vi få in data ifrån "klient-sidan" (client-side) till "server-sidan" (server-side). Formulär ger oss ett mycket smidigt sätt att göra detta.
 
@@ -23,7 +23,7 @@ p
 	|Ovan kod resulterar rent visuellt inte i någonting. Under ytan så kommer ju ovan markup absolut att <em>finnas</em> i dokumentet, men rent visuellt ser användaren ingenting.
 
 h3 Labels
-p.lead För att användaren ska veta vad hen ska fylla i vart, så använder vi oss av <code>&lt;label&gt;</code>'s.
+p För att användaren ska veta vad hen ska fylla i vart, så använder vi oss av <code>&lt;label&gt;</code>'s.
 
 p Till synes så ser denna tagg inte mycket ut för världen eftersom den endast renderar ut som helt vanlig text. Men eftersom vi associerar labels med input-fält så gör (t.ex.) vissa browsers label-texten klickbar. För radiobuttons så innebär t.ex. ett klick på label:en då samma sak som ett klick på själva knappen.
 
@@ -44,7 +44,7 @@ p Vi använder egenskapen <code>for</code> för att specificiera vilken formulä
 
 h3 Input, textarea &amp; select
 // p Så, låt oss lägga till någonting som faktiskt kan vara till användning. Frågan är alltså: hur kan vi ge användaren en möjlighet att skriva in data? Först och främst måste vi helt enkelt välja vad vi menar med data? Det är ju alltså formulär vi behandlar. Vill vi att användaren ska kunna skriva in "fri-text", eller välja mellan tre val, eller välja en/fler/ingen mellan tre val o.s.v. Det finns alltså ett antal olika input-metoder vi kan erbjuda en användare och några presenteras således nedan.
-p.lead För att skapa själva innehållet i formuläret använder vi oss i huvudsak av taggarna <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code> och <code>&lt;select&gt;</code>.
+p För att skapa själva innehållet i formuläret använder vi oss i huvudsak av taggarna <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code> och <code>&lt;select&gt;</code>.
 p <code>&lt;input&gt;</code>-taggen kan vi använda till att skapa många olika typer av formulärsfält. Närmare bestämt: fritext, radioknappar, checkboxar och gömda fält. Vilken av dessa fält vi vill skapa bestämmer vi genom att sätta attributet <code>type</code>.
 
 
