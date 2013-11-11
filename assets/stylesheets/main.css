@@ -84,16 +84,17 @@ th{
   padding: 12px 24px;
   overflow: auto;
   border-right: 1px solid #ccc;
-  background: rgba(0,0,0,.05);
+  background: #333;
 }
 #toc-desktop a{
-  color: #333;
+  color: #fff;
+  font-size: 110%;
 }
 #toc-desktop li{
   margin-bottom: 4px;
 }
 #toc-desktop .toc-active a{
-  color: #428bca;
+  color: #5cb85c;
   font-weight: bold;
 }
 #toc-desktop .toc-h1{
