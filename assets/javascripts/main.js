@@ -70,7 +70,7 @@ lathunden.TOC.init = function(){
       'selectors': 'h1,h2',
       'container': '#chapters',
       'highlightOnScroll': true,
-      'highlightOffset': 300,
+      'highlightOffset': 100,
       'anchorName': function(i, heading, prefix) {
         var slug = $(heading).text().trim().replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g,'-');
         return slug;
