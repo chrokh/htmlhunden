@@ -2,13 +2,11 @@
   h2
     a(name="arkitektur") Hur fungerar en webbsida?
 
-p.lead Hur fungerar egentligen en hemsida? Vad händer egentligen när vi öppnar webbläsaren och skriver in en adress? Det här kapitlet ger dig en kort och mycket övgripande introduktion om hur allting hänger ihop.
+p Hur fungerar egentligen en hemsida? Vad händer egentligen när vi öppnar webbläsaren och skriver in en adress? Det här kapitlet ger dig en kort och mycket övgripande introduktion om hur allting hänger ihop.
 
 h3 HTML
-.lead
-  | HTML (<a href="http://sv.wikipedia.org/wiki/HTML" target="_blank">Hypertext markup language</a>) är  ett <a href="http://sv.wikipedia.org/wiki/M%C3%A4rkspr%C3%A5k" target="_blank">märkespråk</a> vi använder för att konstruera webbsidor. Kort sagt kan vi se det som att språket HTML är ett sätt att semanstiskt strukturera ett dokuments information.
-p
-  | HTML skriver vi med hjälp av taggar. Nedan kan du se ett enkelt exempel på hur HTML fungerar.
+p HTML (<a href="http://sv.wikipedia.org/wiki/HTML" target="_blank">Hypertext markup language</a>) är  ett <a href="http://sv.wikipedia.org/wiki/M%C3%A4rkspr%C3%A5k" target="_blank">märkespråk</a> vi använder för att konstruera webbsidor. Kort sagt kan vi se det som att språket HTML är ett sätt att semanstiskt strukturera ett dokuments information.
+p HTML skriver vi med hjälp av taggar. Nedan kan du se ett enkelt exempel på hur HTML fungerar.
   pre
     code.language-markup
       | Sista ordet kommer bli &lt;b&gt;fetstilat&lt;/b&gt;.
@@ -18,7 +16,7 @@ p
       b fetstilat
 
 h4 Endast för statiska sidor
-p.lead HTML är alltså ett statiskt språk. Men vad menar vi då med statiskt och vad skulle motsatsen innebära?
+p HTML är alltså ett statiskt språk. Men vad menar vi då med statiskt och vad skulle motsatsen innebära?
 p Med statiskt menar att om vi renderar ett HTML-dokument i en webbläsare, stänger webbläsaren, öppnar den igen och renderar samma sida igen &mdash; så kommer sidan se exakt likadan ut som första gången. HTML ger oss alltså inga möjligheter att t.ex. koppla till databaser, hämta information ifrån andra sidor (bortsett ifrån användandet av <a href="http://sv.wikipedia.org/wiki/IFRAME" target="_blank">iframe</a>'s som skulle kunna bädda in en annan sida som utför logik), räkna ut matematik eller utföra någon form av logik.
 p Som en tankelek. Föreställ dig ett dokument skrivet i Microsoft Word, Pages, Open Office eller dylik dokumenthanterare. Tänk nu på att vi har rubriker,  underrubriker, stycken, text-snuttar som är <b>fetstilta</b> och <i>kursiva</i>. Ett HTML-dokument är egentligen exakt samma dokument som i denna tankelek fast varje gång vi vill att någonting ska representeras som någonting annat än text rakt upp och ned på samma rad så måste vi använda oss av <em>taggar</em> och <em>element</em>.
 p Således kan vi se våra HTML-dokument som motsvarigheten till en <code>.doc</code>-fil, och våra webbläsare som <em>Open Office</em>. Med andra ord, HTML-filer är rakt upp och ned textfiler med inblandad <em>markup</em>, och webbläsare är tolkare av detta markupspråk.
@@ -35,7 +33,7 @@ p Låt oss fundera lite på hur ovan beskriven process fungerar.
 
 
 h3 Client-server architecture
-p.lead Innan vi kan gå djupare in på varför vi inte kan utföra komplex logik i html så behöver vi lära oss lite om ansvarsområden för <a href="http://sv.wikipedia.org/wiki/Klient%E2%80%93server" target="_blank">klienter och servrar</a>.
+p Innan vi kan gå djupare in på varför vi inte kan utföra komplex logik i html så behöver vi lära oss lite om ansvarsområden för <a href="http://sv.wikipedia.org/wiki/Klient%E2%80%93server" target="_blank">klienter och servrar</a>.
 
 .panel.panel-default
   .panel-heading Ett exempel på hur en server konstruerar en fil, som den sedan skickar till klienten
@@ -68,7 +66,7 @@ p Ovan figur är alltså en visualisering av hur ett request-response-scenario s
 
 
 h3 Server-side-språk
-p.lead Så, vad är då egentligen ett server-side-språk? Tänk så här. Vi skulle kunna ha en klient-server-arkitektur helt utan ett server-side-språk. Hur? Jo, klienten ber om en sida genom ett request som vandrar över internet och når rätt server som rakt av svarar med ett response som är en html-sida.
+p Så, vad är då egentligen ett server-side-språk? Tänk så här. Vi skulle kunna ha en klient-server-arkitektur helt utan ett server-side-språk. Hur? Jo, klienten ber om en sida genom ett request som vandrar över internet och når rätt server som rakt av svarar med ett response som är en html-sida.
 
 p Men nu är det ju så att det moderna internet består av mycket mer komplexitet än statiska sidor. Den enda skillnaden vi introducerar i ovanstående process handlar då om att vi introducerar ett språk som ansvarar för att konstruera html-sidor beroende på response.
 

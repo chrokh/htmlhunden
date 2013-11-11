@@ -4,13 +4,13 @@
       .icon-link 
       | CSS Positionering
 
-p.lead Om man tar en sväng på internet och funderar lite på det vi hittills lärt oss om HTML och CSS så inser man snabbt att saker inte alls bara ligger rakt upp och ned i dokumentet. Texter ligger i mitten, vi har kolumner och rader, marginaler och boxar som verkar vara "sticky".
+p Om man tar en sväng på internet och funderar lite på det vi hittills lärt oss om HTML och CSS så inser man snabbt att saker inte alls bara ligger rakt upp och ned i dokumentet. Texter ligger i mitten, vi har kolumner och rader, marginaler och boxar som verkar vara "sticky".
 p I det här kapitlet går vi igenom de olika värden vi kan ge css-attributet <code>position</code>, närmare bestämt <code>absolute</code>, <code>relative</code> och <code>static</code>.
 p Om vi inte anger någonting annat så är alla element statiskt placerade. Det är värt att notera att även om namnet på attributet <code>position</code> verkar antyda det så är det verkligen inte det enda sättet webbutvecklare positionerar saker genom. Men med rätt förståelse för attributet finns det knappt någon positionering vi inte kommer kunna åstadkomma.
 
 
 h3 Static
-p.lead Om du inte anger någonting annat, kommer element att positioneras statiskt. Alltså följa sin naturliga plats i dokumentet.
+p Om du inte anger någonting annat, kommer element att positioneras statiskt. Alltså följa sin naturliga plats i dokumentet.
 p Det är viktigt att uppmärksamma att ett statiskt element på de (tänk dig en sida som ett koordinatsystem) koordinaterna <code>{0,0}</code>, omöjliggör att ett statiskt placerat syskon också placeras på <code>{0,0}</code>. Med andra ord tar statiskt placerade element upp plats och således kan syskon inte ligga på varandra utan placeras istället under (om de är <a href="http://en.wikipedia.org/wiki/HTML_element#Block_elements" target="_blank">block-level element</a>) eller bredvid (om de är <a href="http://en.wikipedia.org/wiki/HTML_element#Inline_elements" target="_blank">inline-level element</a>) varandra.
 blockquote Statiska element tar upp plats
 p Att ett statiskt element inte kan placeras på ett annat element gäller förstås bara element som är syskon. Ett elements barn placeras förstås naturligt "innuti" förälderelementet.
@@ -36,7 +36,7 @@ p Låt oss se till några exempel.
 
 h3 Fixed
 blockquote Fixerade element tar inte upp plats
-p.lead Med fixerad positionering säger vi åt ett element att ignorera sin "normala" plats i dokumentflödet och istället placera sig på en position i relation till webbläsarfönstret.
+p Med fixerad positionering säger vi åt ett element att ignorera sin "normala" plats i dokumentflödet och istället placera sig på en position i relation till webbläsarfönstret.
 p Med andra ord så är alltså (den tänkta koordinaten) <code>{0,0}</code> högst upp till vänster i webbläsaren. Detta förutsatt att vi sätter föregående värden för egenskaperna <code>left</code> och <code>top</code> vilket då i ett kordinatsystem skulle motsvaras av <code>x</code> och <code>y</code>. Således kan vi sluta oss till att origo är högst upp till vänster i webbläsaren.
 p Vad som gör positionering i css intressant är att vi även kan vända steken och istället sätta värden för egenskaperna <code>right</code> och <code>bottom</code>. Vi hanterar då fortfarande <code>x</code> och <code>y</code> i bemärkelsen horisontellt och vertikalt men vi har nu flyttat origo ner till högra hörnet. Plus att vårt koordinatsystem nu fungerar "baklänges". Ett högre värde för right innebär att vi flyttar vårt element längre åt vänster. Sätt detta i relation till att ett högre värde för left flyttar vårt element längre åt höger.
 blockquote Tänk på positioneringsteknikerna <code>fixed</code>, <code>absolute</code> och <code>relative</code> som positionering genom i ett  koordinatsystem.
@@ -64,7 +64,7 @@ p Relative ignorerar hur användaren scrollar i ett dokument. En tänkt koordina
 
 
 h3 Absolute
-p.lead Även med absolut positionering så säger vi åt ett element att ignorera sitt "normala" dokumentsflöde och istället placera sig på precis de koordinater vi specificierar.
+p Även med absolut positionering så säger vi åt ett element att ignorera sitt "normala" dokumentsflöde och istället placera sig på precis de koordinater vi specificierar.
 p Frågan är då bara &mdash; precis på de koordinaterna i relation till vad? I det normala fallet så betyder det i relation till fönstret. Men om någonting absolut positionerat befinner sig i någonting annat som är absolut eller relativt positionerat så räknar vi då i relation till den föräldern.
 p Ovan blir nog enklare att förstå om vi ser till ett par exempel.
 
@@ -103,7 +103,7 @@ p Ovan blir nog enklare att förstå om vi ser till ett par exempel.
 
 
 h3 Relative
-p.lead När vi positionerar ett element relativt så är det som om vi kombinerar metoderna statisk och absolut. Vi positionerar ett element relativt till dess statiska position.
+p När vi positionerar ett element relativt så är det som om vi kombinerar metoderna statisk och absolut. Vi positionerar ett element relativt till dess statiska position.
 p Med andra ord, elementet antar först den position den bör få i det statiska flödet, och vi ser nu den platsen som "nollpunkten" (origo). Sedan tas elementet ut ur dokumentflödet och vi placerar det absolut (enligt de koordinater vi angett) i relation till sin statiska placering. 
 
 .panel.panel-default
@@ -141,7 +141,7 @@ p Med andra ord, elementet antar först den position den bör få i det statiska
 
 
 h3 Video om centrering
-p.lead Om du finner ovan lite konfunderande finns nedan en film som applicerar några av dessa metoder i praktiken.
+p Om du finner ovan lite konfunderande finns nedan en film som applicerar några av dessa metoder i praktiken.
 p I videon är målet att centrera en <code>&lt;div&gt;</code> horisontellt och vertikalt på sidan. Detta vilket bl.a. leder oss in på en teknik som använder sig av positionering genom <code>absolute</code>.
 
 .panel.panel-default

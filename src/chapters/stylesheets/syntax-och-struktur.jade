@@ -3,7 +3,7 @@
     a(href="#css-syntax", name="css-syntax")
       .icon-link 
       | CSS syntax och struktur
-p.lead För att enklare förstå hur CSS hanteras, föreställ dig att webbläsaren består av två ninjateams. Det första ninjateamet läser HTML-filen och skriver ut en massa text, bilder, listor, tabeller och länkar på skärmen. När första teamet hittar en referens till en CSS-fil, skickar de det till det andra ninjateamet. Det andra ninjateamet går då lös med färgkritor och klipper och klistrar tills allt ser snyggt ut.
+p För att enklare förstå hur CSS hanteras, föreställ dig att webbläsaren består av två ninjateams. Det första ninjateamet läser HTML-filen och skriver ut en massa text, bilder, listor, tabeller och länkar på skärmen. När första teamet hittar en referens till en CSS-fil, skickar de det till det andra ninjateamet. Det andra ninjateamet går då lös med färgkritor och klipper och klistrar tills allt ser snyggt ut.
 
 p Även om ovanstående exempel är orimligt oseriöst är poängen att rendering av en webbsida (metaforiskt) sker i olika "pass". Där det första är att få ut resultatet av HTML:en på skärmen, och det andra att visuellt ändra på resultatet av HTML:en enligt det som definierats i CSS-filen. Du kommer upptäcka att det finns fler "pass" (och att ordningen kan variera) när vi kommer till JavaScript, men det lämnar vi för nu.
 
@@ -69,7 +69,7 @@ blockquote En css-<code>deklaration</code> består av en <code>property</code> (
 
 
 h3 Exempel på selectors genom klass och ID
-p.lead Utöver att skriva css-selectors som träffar html-element så kan vi även skriva selectors för <code>ID</code>:n och <code>klasser</code>.
+p Utöver att skriva css-selectors som träffar html-element så kan vi även skriva selectors för <code>ID</code>:n och <code>klasser</code>.
 p Vi använder ID:n för att defineira "unika" element. Vad menar vi med unika? Jo att om någonting har id:et <code>container</code> så får det endast finnas ett enda element på sidan som har just det ID:et. Vi kan självklart skriva flera css-regler som använder just den selectorn. Men i html-dokumentet får ID:t alltså endast förekomma en enda gång.
 
 p Behöver vi kunna referera till flera element så använder vi oss av klasser. Klasser fungerar på exakt samma sätt som ID:n förutom just det att det är tillåtet att flera element använder samma klass.
