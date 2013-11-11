@@ -108,9 +108,6 @@ th{
 }
 
 
-.divider{
-  margin: 150px 150px;
-}
 
 blockquote{
   font-size: 26px;
@@ -207,6 +204,9 @@ h2{
 h3{
   margin-top: 36px;
 }
+.page-header{
+  margin-top: 100px;
+}
 
 
 /*
@@ -226,7 +226,9 @@ a:hover, a:active{
  */
 .divider{
   color: #dedede !important;
+  margin: 200px auto;
 }
+
 
 
 
