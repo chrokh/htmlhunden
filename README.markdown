@@ -1,5 +1,3 @@
-# README
-
 ## Dependencies
 Detta projekt kräver `node`, `npm` och `grunt-cli`.
 
