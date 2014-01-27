@@ -54,46 +54,43 @@ p Låt oss se till ett par exempel på hur vi kan manipulera DOM:en.
 .panel.panel-default
     .panel-heading Exempel på att gömma ett element.
     .panel-body
-        pre
-            code.language-markup
-                | &lt;!DOCTYPE html&gt;
-                | &lt;html&gt;
-                |   &lt;head&gt;
-                |   &lt;/head&gt;
-                |   &lt;body&gt;
-                |       &lt;p id="secret"&gt; LYSSNA PÅ MIG! &lt;/p&gt; 
-                |   &lt;/body&gt;
-                | &lt;/html&gt;
-    .panel-body
-        pre
-            code.language-javascript
-                | var p = document.getElementById("secret");
-                | p.style.display = none;
+        .panel.panel-default
+            .panel-heading HTML
+            .panel-body
+                pre
+                    code.language-markup
+                        | &lt;p id="secret"&gt; LYSSNA PÅ MIG! &lt;/p&gt; 
+        .panel.panel-default
+            .panel-heading JavaScript
+            .panel-body
+                pre
+                    code.language-javascript
+                        | var p = document.getElementById("secret");
+                        | p.style.display = none;
 p Det enda vi gör är alltså att först hämta element med hjälp av id och sedan ändrar attributet display till none. Detta kan komprimeras till att skrivas på en enda rad, vet du hur?
 .panel.panel-default
     .panel-heading Exempel på att hämta med tagnamn.
     .panel-body
-        pre
-            code.language-markup
-                | &lt;!DOCTYPE html&gt;
-                | &lt;html&gt;
-                |   &lt;head&gt;
-                |   &lt;/head&gt;
-                |   &lt;body&gt;
-                |       &lt;p&gt; en paragraf&lt;/p&gt;
-                |       &lt;p&gt; två paragrager &lt;/p&gt;
-                |       &lt;p&gt; tre paragrager&lt;/p&gt;
-                |       &lt;p&gt; fyra paragrager &lt;/p&gt;
-                |   &lt;/body&gt;
-                | &lt;/html&gt;
-    .panel-body
-        pre
-            code.language-javascript
-                |  var as = menu.getElementsByTagName('p');  
-                |  as[0].innerHTML = "Första paragrafen";
-                |  as[1].innerHTML = "Andra paragrafen";
-                |  as[2].innerHTML = "Tredje paragrafen";
-                |  as[3].innerHTML = "Fjärde paragrafen";      
+        .panel.panel-default
+            .panel-heading HTML
+            .panel-body
+                pre
+                    code.language-markup
+                        | &lt;p&gt; en paragraf &lt;/p&gt;
+                        | &lt;p&gt; två paragrager &lt;/p&gt;
+                        | &lt;p&gt; tre paragrager &lt;/p&gt;
+                        | &lt;p&gt; fyra paragrager &lt;/p&gt;
+        .panel.panel-default
+            .panel-heading JavaScript
+            .panel-body
+                pre
+                    code.language-javascript
+                        |  var as = menu.getElementsByTagName('p');  
+                        |  as[0].innerHTML = "Första paragrafen";
+                        |  as[1].innerHTML = "Andra paragrafen";
+                        |  as[2].innerHTML = "Tredje paragrafen";
+                        |  as[3].innerHTML = "Fjärde paragrafen";
+
 p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av klassnamnet och därför returneras dessa i en array.
 
 
