@@ -43,8 +43,50 @@ p Om <code>setTimeout</code> hade varit en synkron metod hade exekveringen avsta
   .panel-body
     p Även om vi hade satt timeout-tiden ovan till 0ms så hade vi fått samma output. Varför? Jo, för att även om väntetiden för <code>setTimeout</code> är 0 så registrerar den funktionen till event-loopen utan att exekvera den på en gång. Således kan den givna funktionen inte exekveras förrän nästa lediga "tick" i event-loopen.
 
+p Varför är detta då viktigt? Jo, detta gäller alltså även för när vi registrerar event-lyssnare.
+
 
 
 h3 addEventListener
-p Varför är detta då viktigt? Jo, detta gäller alltså även för när vi registrerar event-lyssnare.
+p Istället för att gräva ned oss i mer teori, låt oss kolla på ett exempel kring hur vi kan använda <a href="p Varför är detta då viktigt? Jo, detta gäller alltså även för när vi registrerar event-lyssnare.">addEventListener</a>.
+
+.panel.panel-default
+  .panel-heading Exempel på asynkron exekvering i JavaScript
+  .panel-body
+    .panel.panel-default
+      .panel-heading HTML
+      .panel-body
+        pre
+          code.language-markup
+            | &lt;p id="eventlistener-example"&gt;
+            |   hello
+            | &lt;/p&gt;
+    .panel.panel-default
+      .panel-heading JavaScript
+      .panel-body
+        pre
+          code.language-javascript
+            | var tag = document.getElementById('eventlistener-example');
+            | tag.addEventListener("click", function(){
+            |   if(tag.innerHTML == "hello")
+            |     tag.innerHTML = "world";
+            |   else
+            |     tag.innerHTML = "hello";
+            | });
+    .panel.panel-default
+      .panel-heading Resultat (prova att klicka på texten!)
+      .panel-body
+        p#eventlistener-example hello
+
+script
+  var tag = document.getElementById('eventlistener-example');
+  tag.addEventListener("click", function(){
+    if(tag.innerHTML == "hello")
+      tag.innerHTML = "world";
+    else
+      tag.innerHTML = "hello";
+  });
+
+h4 Webbläsarstöd
+p Nu är en bra tid att prata om webbläsarstöd. Äldre webbläsare stödjer inte metoden addEventListener, så om ovan exempel inte fungerar för dig så betyder det att din webbläsare är för gammal. Internet Explorer, tidigare och upp till, 8 har en alternativ implementation där metoden heter <code>attachEvent</code>. Så för att ovan exempel även ska fungera i Internet Explorer 8 behöver vi välja vilken metod vi använder berodende på vilken som finns. Läs mer om det i denna tråd på <a href="http://stackoverflow.com/questions/6927637/addeventlistener-in-internet-explorer">Stack Overflow</a>.
 
