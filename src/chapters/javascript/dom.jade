@@ -97,7 +97,7 @@ p Vad vi gör ovan är alltså helt enkelt att vi först hämtar elementet med h
                 p C
                 p Två
 
-p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av tagnamnet och därför returneras dessa i en array. Med andra ord: när vi hämtar ett element genom ett ID kan vi alltid vara hundra på att det bara finns ett (eftersom ett ID endast får förekomma en gång i ett HTML-dokument). Men när vi söker element via tagnamn så kan vi omöjligen veta hur många instanser det finns av just den taggen. Således har man valt att låta <code>getElementsByTagName</code> returnera en array. Således är det även därför vi ovan använder bracket-notationen (<code>[n]</code>) för att arbeta med resultatet.
+p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av tagnamnet och därför returneras dessa i en array. Med andra ord: när vi hämtar ett element genom ett ID kan vi alltid vara hundra på att det bara finns ett (eftersom ett ID endast får förekomma en gång i ett HTML-dokument). Men när vi söker element via tagnamn så kan vi omöjligen veta hur många instanser det finns av just den taggen. Således har man valt att låta <code>getElementsByTagName</code> returnera en array. Således är det även därför vi ovan använder bracket-notationen (<code>[x]</code>) för att arbeta med resultatet.
 
 blockquote.text-warning Se till att du förstår varför outputen i exemplet ovan blir som den blir innan du går vidare
 
