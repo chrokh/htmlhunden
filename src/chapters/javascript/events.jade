@@ -58,7 +58,7 @@ p Istället för att gräva ned oss i mer teori, låt oss kolla på ett exempel 
       .panel-body
         pre
           code.language-markup
-            | &lt;p id="eventlistener-example"&gt;
+            | &lt;p id="eventlistener-example-1"&gt;
             |   hello
             | &lt;/p&gt;
     .panel.panel-default
@@ -66,7 +66,7 @@ p Istället för att gräva ned oss i mer teori, låt oss kolla på ett exempel 
       .panel-body
         pre
           code.language-javascript
-            | var tag = document.getElementById('eventlistener-example');
+            | var tag = document.getElementById('eventlistener-example-1');
             | tag.addEventListener("click", function(){
             |   if(tag.innerHTML == "hello")
             |     tag.innerHTML = "world";
@@ -76,10 +76,10 @@ p Istället för att gräva ned oss i mer teori, låt oss kolla på ett exempel 
     .panel.panel-default
       .panel-heading Resultat (prova att klicka på texten!)
       .panel-body
-        p#eventlistener-example hello
+        p#eventlistener-example-1 hello
 
 script
-  var tag = document.getElementById('eventlistener-example');
+  var tag = document.getElementById('eventlistener-example-1');
   tag.addEventListener("click", function(){
     if(tag.innerHTML == "hello")
       tag.innerHTML = "world";
@@ -87,6 +87,51 @@ script
       tag.innerHTML = "hello";
   });
 
+
 h4 Webbläsarstöd
 p Nu är en bra tid att prata om webbläsarstöd. Äldre webbläsare stödjer inte metoden addEventListener, så om ovan exempel inte fungerar för dig så betyder det att din webbläsare är för gammal. Internet Explorer, tidigare och upp till, 8 har en alternativ implementation där metoden heter <code>attachEvent</code>. Så för att ovan exempel även ska fungera i Internet Explorer 8 behöver vi välja vilken metod vi använder berodende på vilken som finns. Läs mer om det i denna tråd på <a href="http://stackoverflow.com/questions/6927637/addeventlistener-in-internet-explorer">Stack Overflow</a>.
 
+
+h4 Återanvändbara event handlers
+p Den funktion som körs när ett event avfyras, kallas för en <code>event handler</code>. Självklart hade vi ju kunnat skriva denna event handler som en function declaration eller function expression istället för att bara skriva den inline. Detta är bra eftersom vi då kan återanvända beteende. Såsom nedan:
+
+.panel.panel-default
+  .panel-heading Exempel på användning av addEventListener
+  .panel-body
+    .panel.panel-default
+      .panel-heading HTML
+      .panel-body
+        pre
+          code.language-markup
+            | &lt;p id="eventlistener-example-2"&gt;
+            |   hello
+            | &lt;/p&gt;
+    .panel.panel-default
+      .panel-heading JavaScript
+      .panel-body
+        pre
+          code.language-javascript
+            | var onClick = function(element){
+            |   if(element.toElement.innerHTML == "hello")
+            |     element.toElement.innerHTML = "world";
+            |   else
+            |     element.toElement.innerHTML = "hello";
+            | }
+            | 
+            | document.getElementById('eventlistener-example-2-1').addEventListener('click', onClick);
+            | document.getElementById('eventlistener-example-2-2').addEventListener('click', onClick);
+    .panel.panel-default
+      .panel-heading Resultat (prova att klicka på olika texterna!)
+      .panel-body
+        p#eventlistener-example-2-1 hello
+        p#eventlistener-example-2-2 world
+
+script
+  var onClick = function(element){
+    if(element.toElement.innerHTML == "hello")
+      element.toElement.innerHTML = "world";
+    else
+      element.toElement.innerHTML = "hello";
+  }
+  document.getElementById('eventlistener-example-2-1').addEventListener('click', onClick);
+  document.getElementById('eventlistener-example-2-2').addEventListener('click', onClick);
