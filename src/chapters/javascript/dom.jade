@@ -62,8 +62,8 @@ table.table.table-condensed
     .panel-body
         pre
             code.language-javascript
-                | var x=document.getElementById("secret");
-                | x.display = none;
+                | var p = document.getElementById("secret");
+                | p.style.display = none;
 p Det enda vi gör är alltså att först hämta element med hjälp av id och sedan ändrar attributet display till none. Detta kan komprimeras till att skrivas på en enda rad, vet du hur?
 .panel.panel-default
     .panel-heading Exempel på att hämta med tagnamn.

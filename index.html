@@ -522,8 +522,8 @@ haddock[getKey()];        // =&gt; 'Haddock'</code></pre></div></div><div class=
   &lt;body&gt;
       &lt;p id="secret"&gt; LYSSNA PÅ MIG! &lt;/p&gt; 
   &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-javascript">var x=document.getElementById("secret");
-x.display = none;</code></pre></div></div><p>Det enda vi gör är alltså att först hämta element med hjälp av id och sedan ändrar attributet display till none. Detta kan komprimeras till att skrivas på en enda rad, vet du hur?</p><div class="panel panel-default"><div class="panel-heading">Exempel på att hämta med tagnamn.</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-javascript">var p = document.getElementById("secret");
+p.style.display = none;</code></pre></div></div><p>Det enda vi gör är alltså att först hämta element med hjälp av id och sedan ändrar attributet display till none. Detta kan komprimeras till att skrivas på en enda rad, vet du hur?</p><div class="panel panel-default"><div class="panel-heading">Exempel på att hämta med tagnamn.</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
   &lt;/head&gt;
