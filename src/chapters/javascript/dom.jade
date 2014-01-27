@@ -30,22 +30,27 @@ table.table.table-condensed
     tr
         td <code>document.getElementsByClassName()</code>
         td Hämtar ett element med hjälp av dess klassnamn
+
+
+h3 Element
+p När vi hämtar ett element ur DOM:en genom någon av de metoder som diskuterades ovan, så kan vi sedan läsa och skriva information till det elementet. Ett element är alltså bara ännu ett objekt med ett antal egenskaper och metoder. Med andra ord kan vi inte bara läsa ifrån DOM:en, utan vi kan även förändra den. Nedan ser du några exempel på vad vi kan göra med ett element
+
+table.table.table-condensed
     tr
+        td(colspan="3").table-divider Antag att vi har ett element i variabeln elem
     tr
-        td(colspan="3").table-divider Ändra på element
-    tr
-        td <code>document.write(text)</code>
-        td Skriver ut direkt i HTML:en
-    tr
-        td <code>document.getElementById(id).innerHTML=</code>
+        td <code>elem.innerHTML</code>
         td Ändrar den inre HTML:en av ett element
     tr
-        td <code>document.getElementById(id).attribute=</code>
+        td <code>elem.attribute</code>
         td Ändrar ett elements attribut.
     tr
-        td <code> document.getElementById(id).style.attribute=</code>
-        td Ändrar ett elements style
+        td <code> elem.style</code>
+        td Ett objekt som vi kan läsa/skriva css från/till
 
+
+h3 Exempel
+p Låt oss se till ett par exempel på hur vi kan manipulera DOM:en.
 .panel.panel-default
     .panel-heading Exempel på att gömma ett element.
     .panel-body
