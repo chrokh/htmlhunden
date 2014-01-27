@@ -12,7 +12,7 @@ p Innan vi fortsätter prata om hur funktioner fungerar, låt oss se till ett ex
     .panel-body
         pre
             code.language-javascript
-                | function addition(x, y){
+                | var addition = function(x, y){
                 |   return x + y;
                 | }
         p Ovan definerar vi en funktion, som vi namnger <code>addition</code>, och som returnerar resultatet av en addition av dess två parametrar. Motsvarande funktion skulle matematiskt kunna uttryckas:
@@ -26,7 +26,7 @@ p Vi har nu sett hur man definierar en funktion. Men hur använder vi den då? L
         pre
             code.language-javascript
                 | // Först definierar vi en funktion
-                | function addition(x, y){
+                | var addition = function(x, y){
                 |   return x + y;
                 | }
                 | 
@@ -48,3 +48,47 @@ p Vi har nu sett hur man definierar en funktion. Men hur använder vi den då? L
                 | F(F(1,F(1,1), 4) = 7
 p Notera alltså att vi kan skicka resultatet av en funktion som parameter (input) till en annan funktion. Precis som i matematik så måste den innersta beräkningen utföras först innan vi kan utföra den yttre.
 blockquote Precis som i matematik behöver det innersta uttrycket räknas ut först innan vi kan fortsätta "utåt".
+
+
+h3 Olika sätt att deklarera funktioner
+p Eftersom JavaScript på gott och ont är väldigt flexibelt finns det olika sätt att deklarera funktioner.
+
+h4 Function statement
+p Detta är det klassiska sättet att deklarera funktioner i JavaScript.
+pre
+    code.language-javascript
+        | function myFunc(){ //work };
+p Denna metod gör att funktionsnamnet är tillgängligt i hela sitt scope. Även innan den är deklarerad.
+pre
+    code.language-javascript
+        | console.log(myFunc());  // => Hello
+        | function myFunc(){ return "Hello" };
+
+h4 Function expression
+p Detta sätt att deklarera kan ses som att vi tilldelar en anonym funktion till en variabel.
+pre
+    code.language-javascript
+        | var myFunc = function(){ //work };
+p När vi deklarerar en funktion så här så är den inte tillgänglig före deklarationen, endast efter.
+pre
+    code.language-javascript
+        | console.log(myFunc()); // => TypeError
+        | var myFunc = function(){ return "Hello" };
+
+
+
+h4 Kombination
+p Vi kan även kombinera ovan två metoder som så:
+pre
+    code.language-javascript
+        | var myFunc = function myFunc(){ // work };
+
+h4 Vilket sätt bör vi använda?
+p Så, istället för att gräva ned oss i vilket sätt man bör använda så föreslår vi att du följer <a href="http://www.unicodegirl.com/function-statement-versus-function-expression.html">Douglas Crockford's rekommendation</a> om att använda function expressions. Alltså:
+pre
+    code.language-javascript
+        | var myFunc = function(){ //work };
+
+blockquote.text-info
+    | Välj function expressions över function statements, tills den dag kommer du då intresserar dig av att lära dig varför.
+
