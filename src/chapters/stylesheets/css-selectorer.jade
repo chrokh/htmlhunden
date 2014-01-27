@@ -20,8 +20,10 @@ h4 Selektor: *
     .panel-body
     pre
       code.language-css
-        | *{ font-size: 24px; 
-        |    background:#ff6600;}
+        | *{
+        |   font-size: 24px; 
+        |   background:#ff6600;
+        |  }
 
 h4 Selektor: E
 .panel.panel-default
@@ -38,8 +40,10 @@ h4 Selektor: E
   .panel-body
     pre
       code.language-css
-        | p{ font-size: 24px; 
-        |    background:#ff6600;}
+        | p{
+        |   font-size: 24px; 
+        |   background:#ff6600;
+        | }
 h3 PseudoKlasser
 
 h4 E:link
@@ -56,8 +60,9 @@ h4 E:link
   .panel-body
     pre
       code.language-css
-        |   a:link{
-        |   color:pink;}
+        | a:link{
+        |   color:pink;
+        | }
 
 h4 E:visited
 .panel.panel-default
@@ -73,8 +78,9 @@ h4 E:visited
   .panel-body
     pre
       code.language-css
-        |   a:visited{
-        |   color:blue;}
+        | a:visited{
+        |   color:blue;
+        | }
 h4 E:hover
 .panel.panel-default
   .panel-heading Exempel på element som har muspekaren över sig.
@@ -89,8 +95,9 @@ h4 E:hover
   .panel-body
     pre
       code.language-css
-        |   a:hover{
-        |   color:green;}
+        | a:hover{
+        |   color:green;
+        | }
 h4 E:active
 .panel.panel-default
   .panel-heading Exempel på länk som är aktivt (exempelvis när användaren trycker ner knappen)
@@ -105,9 +112,9 @@ h4 E:active
   .panel-body
     pre
       code.language-css
-        |   a:active{
-        |   color:purple;}
-//h3 PseudoElement
+        | a:active{
+        |   color:purple;
+        | }
 h3 Kombinationer
 h4 EF
 .panel.panel-default
@@ -126,9 +133,10 @@ h4 EF
         | &lt;/div&gt;
   .panel-body
     pre
-      code.language-markup
+      code.language-css
         | .yttre p{
-        | color:pink;}
+        |   color:pink;
+        | }
 h4 E+F
 .panel.panel-default
   .panel-heading Exempel på referens till extern stilmall
@@ -148,9 +156,10 @@ h4 E+F
     pre
       code.language-css
         | p + p{
-        | color:pink;}
-h4 E > F
- 
+        |   color:pink;
+        | }
+
+h4 E > F 
 .panel.panel-default
   .panel-heading Exempel på element som är direkt barn av ett annat element. 
   .panel-body
@@ -168,6 +177,7 @@ h4 E > F
     pre
       code.language-css
         | .yttre > p{
-        | color:pink;}
+        |   color:pink;
+        | }
 // TODO: This really needs more flesh when it comes to selectors
 // There is yet nothing about pseudo elements, nesting nor siblings or

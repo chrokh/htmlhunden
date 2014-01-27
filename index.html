@@ -227,41 +227,50 @@ p{
     &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
     &lt;p&gt;En paragraf, yay!&lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code></pre><div class="panel-body"></div><pre><code class="language-css">*{ font-size: 24px; 
-   background:#ff6600;}</code></pre></div></div><h4>Selektor: E</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med E </div><div class="panel-body"><p>E står i detta fall att man använder elementets typ som selektor. </p><pre><code class="language-markup">&lt;html&gt;
+&lt;/html&gt;</code></pre><div class="panel-body"></div><pre><code class="language-css">*{
+  font-size: 24px; 
+  background:#ff6600;
+ }</code></pre></div></div><h4>Selektor: E</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med E </div><div class="panel-body"><p>E står i detta fall att man använder elementets typ som selektor. </p><pre><code class="language-markup">&lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;En paragraf, yay!&lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">p{ font-size: 24px; 
-   background:#ff6600;}</code></pre></div></div><h3>PseudoKlasser</h3><h4>E:link</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som är en länk som inte besökts än.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
+&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">p{
+  font-size: 24px; 
+  background:#ff6600;
+}</code></pre></div></div><h3>PseudoKlasser</h3><h4>E:link</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som är en länk som inte besökts än.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
   &lt;body&gt;
     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">  a:link{
-  color:pink;}</code></pre></div></div><h4>E:visited</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som har blivit besökt.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
+&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:link{
+  color:pink;
+}</code></pre></div></div><h4>E:visited</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som har blivit besökt.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
   &lt;body&gt;
     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">  a:visited{
-  color:blue;}</code></pre></div></div><h4>E:hover</h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som har muspekaren över sig.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
+&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:visited{
+  color:blue;
+}</code></pre></div></div><h4>E:hover</h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som har muspekaren över sig.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
   &lt;body&gt;
     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">  a:hover{
-  color:green;}</code></pre></div></div><h4>E:active</h4><div class="panel panel-default"><div class="panel-heading">Exempel på länk som är aktivt (exempelvis när användaren trycker ner knappen)</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
+&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:hover{
+  color:green;
+}</code></pre></div></div><h4>E:active</h4><div class="panel panel-default"><div class="panel-heading">Exempel på länk som är aktivt (exempelvis när användaren trycker ner knappen)</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
   &lt;body&gt;
     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">  a:active{
-  color:purple;}</code></pre></div></div><!--h3 PseudoElement--><h3>Kombinationer</h3><h4>EF</h4><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><p>Alla element F som kommer efter E. Alltså i detta fall alla tre första paragrafer. </p><pre><code class="language-markup">&lt;div class="yttre"&gt;
+&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:active{
+  color:purple;
+}</code></pre></div></div><h3>Kombinationer</h3><h4>EF</h4><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><p>Alla element F som kommer efter E. Alltså i detta fall alla tre första paragrafer. </p><pre><code class="language-markup">&lt;div class="yttre"&gt;
     &lt;p&gt;En första paragraf&lt;/p&gt;
     &lt;p&gt;En andra paragraf&lt;/p&gt;
     &lt;p&gt;En tredje paragraf&lt;/p&gt;
   &lt;div class="inre"&gt;
     &lt;p&gt;En fjärde paragraf&lt;/p&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre></div><div class="panel-body"><pre><code class="language-markup">.yttre p{
-color:pink;}</code></pre></div></div><h4>E+F</h4><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><p>alla element som direkt föregås av E. Alltså i detta fall kommer andra och tredje paragrafen att påverkas. </p><pre><code class="language-markup">&lt;div class="yttre"&gt;
+&lt;/div&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">.yttre p{
+  color:pink;
+}</code></pre></div></div><h4>E+F</h4><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><p>alla element som direkt föregås av E. Alltså i detta fall kommer andra och tredje paragrafen att påverkas. </p><pre><code class="language-markup">&lt;div class="yttre"&gt;
     &lt;p&gt;En första paragraf&lt;/p&gt;
     &lt;p&gt;En andra paragraf&lt;/p&gt;
     &lt;p&gt;En tredje paragraf&lt;/p&gt;
@@ -269,14 +278,16 @@ color:pink;}</code></pre></div></div><h4>E+F</h4><div class="panel panel-default
     &lt;p&gt;En rubrik, yay!&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">p + p{
-color:pink;}</code></pre></div></div><h4>E > F</h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som är direkt barn av ett annat element. </div><div class="panel-body"><p>Observera att alla första och andra paragrafen kommer att bli rosa men inte den fjärde.</p><pre><code class="language-markup">&lt;div class="yttre"&gt;
+  color:pink;
+}</code></pre></div></div><h4>E > F </h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som är direkt barn av ett annat element. </div><div class="panel-body"><p>Observera att alla första och andra paragrafen kommer att bli rosa men inte den fjärde.</p><pre><code class="language-markup">&lt;div class="yttre"&gt;
     &lt;p&gt;En första paragraf&lt;/p&gt;
     &lt;p&gt;En andra paragraf&lt;/p&gt;
   &lt;div class="inre"&gt;
     &lt;p&gt;En rubrik, yay!&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">.yttre > p{
-color:pink;}</code></pre></div></div><!-- TODO: This really needs more flesh when it comes to selectors--><!-- There is yet nothing about pseudo elements, nesting nor siblings or--><div class="page-header"><h2><a href="#css-placering" name="css-placering"><div class="icon-link"></div>Vart skall jag lägga CSS:en?</a></h2></div><p>När du använder CSS för att formatera en sida kan du infoga CSS-formateringen på tre sätt:</p><ol><li>Extern CSS-mall<br/>en extern CSS-mall som kopplas till dokumentet</li><li>I dokumentet<br/>i dokumentets huvud head-taggen</li><li>Direkt i element)<br/>i elementet där CSS-formateringen ska utföras </li></ol><h3>Extern CSS-mall</h3><p> 
+  color:pink;
+}</code></pre></div></div><!-- TODO: This really needs more flesh when it comes to selectors--><!-- There is yet nothing about pseudo elements, nesting nor siblings or--><div class="page-header"><h2><a href="#css-placering" name="css-placering"><div class="icon-link"></div>Vart skall jag lägga CSS:en?</a></h2></div><p>När du använder CSS för att formatera en sida kan du infoga CSS-formateringen på tre sätt:</p><ol><li>Extern CSS-mall<br/>en extern CSS-mall som kopplas till dokumentet</li><li>I dokumentet<br/>i dokumentets huvud head-taggen</li><li>Direkt i element)<br/>i elementet där CSS-formateringen ska utföras </li></ol><h3>Extern CSS-mall</h3><p> 
 Det här är den vanligaste användningen av CSS där ett externt dokument som innehåller formateringen kopplas till alla de 
 sidor som ska tillämpa formatet. Namnet på CSS-mallen måste ha filtilläget .css och namnet på mallen i exemplet nedan är 
 "mall.css". 
