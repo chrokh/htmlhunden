@@ -1,0 +1,50 @@
+.page-header
+  h2
+    a(href="#event-listners")
+      .icon-link 
+      | Event listeners
+
+p Nästa ämne vi ska prata om är eventlyssnare. Något som finns i många programmeringsspråk och som ofta beteer sig liknande, om än med olika syntax. För att förstå event listeners, fundera över följande: hur vet vi att en användare har klickat på en knapp?
+
+p Mer generellt uttryckt: Event listeners hjälper oss att exekvera specifik kod vid en specifik händelse. Det kan tyckas trivialt. Men tänk på när vi skriver ett program. Om vi inte hade events skulle hela programmet endast kunna köras i ett svep (rufft uttryckt). Programmet börjar exekveras, och oavsett hur mycket klasser och funktioner vi använder så kommer programmet att köras ifrån början till slut. Med events så kan vi däremot registrera vad som kallas för <code>lyssnare</code>. Programmets exekvering "fryser" inte. Programmet stannar alltså inte när vi registrerar en event listener utan fortsätter exekvera som vanligt. När den händelse som eventlyssnaren lyssnar efter (exempelvis en knapptryckning) händer så exekveras koden lyssnaren pekar på. Detta kallas ofta för <a href="http://en.wikipedia.org/wiki/Event-driven_programming">event-driven programming</a>.
+
+p Vi ska i det här kapitlet prata om metoden <code>addEventListener()</code>, men för att enklare förstå hur de fungerar behöver vi först prata om vad det betyder att JavaScript har en <code>Asynkron Event Model</code>. Beakta följande kodexempel:
+
+.panel.panel-default
+  .panel-heading Exempel på asynkron exekvering i JavaScript
+  .panel-body
+    pre
+      code.language-javascript
+        | console.log("a");
+        | 
+        | 
+        | // setTimeout är en funktion som kör en annan
+        | // funktion efter en given väntetid i millisekunder
+        | 
+        | setTimeout(function(){
+        |   console.log("b");
+        | }, 1000)
+        | 
+        | 
+        | console.log("c");
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p a
+        p c
+        p b
+
+p Hur kan det komma sig att vi fick outputen i ovan ordning? Detta har alltså att göra med den asynkrona event modellen i JavaScript. Den funktion som körs av <code>setTimeout</code> körs inte förrän väntetiden på <code>1000 ms</code> har passerat. Men, eftersom JavaScript har asynkrona event, så registreras denna funktion som ett event. Således kommer programmet fortsätta att exekvera. När tiden sedan gått ut, och event-loopen är "ledig" så exekveras den givna funktionen.
+
+p Om <code>setTimeout</code> hade varit en synkron metod hade exekveringen avstannat ("fryst") vid anropet till <code>setTimeout</code>, och inte fortsatt förrän väntetiden passerat.
+
+.panel.panel-info
+  .panel-heading Kuriosa
+  .panel-body
+    p Även om vi hade satt timeout-tiden ovan till 0ms så hade vi fått samma output. Varför? Jo, för att även om väntetiden för <code>setTimeout</code> är 0 så registrerar den funktionen till event-loopen utan att exekvera den på en gång. Således kan den givna funktionen inte exekveras förrän nästa lediga "tick" i event-loopen.
+
+
+
+h3 addEventListener
+p Varför är detta då viktigt? Jo, detta gäller alltså även för när vi registrerar event-lyssnare.
+
