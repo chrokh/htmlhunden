@@ -67,7 +67,7 @@ p Låt oss se till ett par exempel på hur vi kan manipulera DOM:en.
                     code.language-javascript
                         | var p = document.getElementById("secret");
                         | p.style.display = "none";
-p Det enda vi gör är alltså att först hämta element med hjälp av id och sedan ändrar attributet display till none. Detta kan komprimeras till att skrivas på en enda rad, vet du hur?
+p Vad vi gör ovan är alltså helt enkelt att vi först hämtar elementet med hjälp av dess ID. Sedan hämtar vi <code>style</code>-objektet på elementet. På <code>style</code>-elementet sätter vi egenskapen <code>display</code> till värdet <code>none</code>. JavaScriptkoden skulle kunna komprimeras till att skrivas på en enda rad, vet du hur?
 .panel.panel-default
     .panel-heading Exempel på att hämta med tagnamn.
     .panel-body
