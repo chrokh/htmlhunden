@@ -92,3 +92,33 @@ p Det enda vi gör är alltså att först hämta element med hjälp av id och se
 p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av klassnamnet och därför returneras dessa i en array.
 
 
+
+h3 onload
+p När vi skriver JavaScript som på något sätt interagerar med DOM:en, är det viktigt att vi är säkra på att DOM:en är redo (inladdad) innan vi börjar försöka nå den. Detta gör vi enkelt genom att använda oss av metoden <code>onload</code>.
+
+.panel.panel-default
+    .panel-heading Exempel på hur vi använder onload.
+    .panel-body
+        pre
+            code.language-javascript
+                | window.onload = function(){
+                |   // do all fancy work here
+                | }
+
+p Varför gör vi alltså detta? Jo, om vi inte skulle göra det så finns alltså risken för att de element vi försöker komma åt inom funktionskroppen i ovan exempel ännu inte finns.
+
+p Ovan kan förstås lika gärna göras i två steg, genom att registrera en redan deklarerad funktion.
+
+.panel.panel-default
+    .panel-heading Exempel på hur vi använder onload.
+    .panel-body
+        pre
+            code.language-javascript
+                | // Declare the init function
+                | var init = function(){
+                | }
+                | 
+                | // Register it as a listener to the onload event
+                | window.onload = init;
+
+
