@@ -50,10 +50,10 @@ p Notera alltså att vi kan skicka resultatet av en funktion som parameter (inpu
 blockquote Precis som i matematik behöver det innersta uttrycket räknas ut först innan vi kan fortsätta "utåt".
 
 
-h2 Olika sätt att deklarera funktioner
+h3 Olika sätt att deklarera funktioner
 p Eftersom JavaScript på gott och ont är väldigt flexibelt finns det olika sätt att deklarera funktioner.
 
-h3 Function statement
+h4 Function statement
 p Detta är det klassiska sättet att deklarera funktioner i JavaScript.
 pre
     code.language-javascript
@@ -64,7 +64,7 @@ pre
         | console.log(myFunc());  // => Hello
         | function myFunc(){ return "Hello" };
 
-h3 Function expression
+h4 Function expression
 p Detta sätt att deklarera kan ses som att vi tilldelar en anonym funktion till en variabel.
 pre
     code.language-javascript
@@ -77,13 +77,13 @@ pre
 
 
 
-h3 Kombination
+h4 Kombination
 p Vi kan även kombinera ovan två metoder som så:
 pre
     code.language-javascript
         | var myFunc = function myFunc(){ // work };
 
-h3 Vilket sätt bör vi använda?
+h4 Vilket sätt bör vi använda?
 p Så, istället för att gräva ned oss i vilket sätt man bör använda så föreslår vi att du följer <a href="http://www.unicodegirl.com/function-statement-versus-function-expression.html">Douglas Crockford's rekommendation</a> om att använda function expressions. Alltså:
 pre
     code.language-javascript
