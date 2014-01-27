@@ -76,22 +76,30 @@ p Vad vi gör ovan är alltså helt enkelt att vi först hämtar elementet med h
             .panel-body
                 pre
                     code.language-markup
-                        | &lt;p&gt; en paragraf &lt;/p&gt;
-                        | &lt;p&gt; två paragrager &lt;/p&gt;
-                        | &lt;p&gt; tre paragrager &lt;/p&gt;
-                        | &lt;p&gt; fyra paragrager &lt;/p&gt;
+                        | &lt;p&gt; A &lt;/p&gt;
+                        | &lt;p&gt; B &lt;/p&gt;
+                        | &lt;p&gt; C &lt;/p&gt;
+                        | &lt;p&gt; D &lt;/p&gt;
         .panel.panel-default
             .panel-heading JavaScript
             .panel-body
                 pre
                     code.language-javascript
                         |  var as = menu.getElementsByTagName('p');  
-                        |  as[0].innerHTML = "Första paragrafen";
-                        |  as[1].innerHTML = "Andra paragrafen";
-                        |  as[2].innerHTML = "Tredje paragrafen";
-                        |  as[3].innerHTML = "Fjärde paragrafen";
+                        |  as[0].innerHTML = "Ett";
+                        |  as[1].innerHTML = "Två";
+                        |  as[3].innerHTML = as[1].innerHTML;
+        .panel.panel-default
+            .panel-heading Resultat
+            .panel-body
+                p Ett
+                p Två
+                p C
+                p Två
 
-p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av klassnamnet och därför returneras dessa i en array.
+p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av tagnamnet och därför returneras dessa i en array. Med andra ord: när vi hämtar ett element genom ett ID kan vi alltid vara hundra på att det bara finns ett (eftersom ett ID endast får förekomma en gång i ett HTML-dokument). Men när vi söker element via tagnamn så kan vi omöjligen veta hur många instanser det finns av just den taggen. Således har man valt att låta <code>getElementsByTagName</code> returnera en array. Således är det även därför vi ovan använder bracket-notationen (<code>[n]</code>) för att arbeta med resultatet.
+
+blockquote.text-warning Se till att du förstår varför outputen i exemplet ovan blir som den blir innan du går vidare
 
 
 
