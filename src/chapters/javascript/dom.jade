@@ -4,14 +4,14 @@
       .icon-link 
       | Document Object Model
 
-p Document Object Model(DOM) är ett API för HTML och XML dokument. Den definierar den logiska strukturen och hur man kommer åt ett dokument och manipulera det. 
+p Document Object Model(DOM) är ett API för HTML och XML dokument. Den definierar den logiska strukturen och hur man kommer åt ett dokument och manipulerar det. 
 
 
 h3 Javascript och DOM 
 p Med denna modell kan vi nu med hjälp av Javascript kunna modifiera trädet och skapa dynamiska hemsidor. Det handlar alltså om att vi kan ta bort, komma åt, modifiera och lägga till element.
 
 h3 Document
-p Document är ett objekt som "Äger" alla andra objekt, med det menas att utifall du vill komma åt andra objekt i DOM:en görs detta genom <code> Document.method()</code>. 
+p Document är ett objekt som "Äger" alla andra objekt, med det menas att utifall du vill komma åt andra objekt i DOM:en görs detta genom <code> document.method()</code>. 
 
 table.table.table-condensed
     tr
@@ -30,66 +30,76 @@ table.table.table-condensed
     tr
         td <code>document.getElementsByClassName()</code>
         td Hämtar ett element med hjälp av dess klassnamn
+
+
+h3 Element
+p När vi hämtar ett element ur DOM:en genom någon av de metoder som diskuterades ovan, så kan vi sedan läsa och skriva information till det elementet. Ett element är alltså bara ännu ett objekt med ett antal egenskaper och metoder. Med andra ord kan vi inte bara läsa ifrån DOM:en, utan vi kan även förändra den. Nedan ser du några exempel på vad vi kan göra med ett element
+
+table.table.table-condensed
     tr
+        td(colspan="3").table-divider Antag att vi har ett element i variabeln elem
     tr
-        td(colspan="3").table-divider Ändra på element
-    tr
-        td <code>document.write(text)</code>
-        td Skriver ut direkt i HTML:en
-    tr
-        td <code>document.getElementById(id).innerHTML=</code>
+        td <code>elem.innerHTML</code>
         td Ändrar den inre HTML:en av ett element
     tr
-        td <code>document.getElementById(id).attribute=</code>
+        td <code>elem.attribute</code>
         td Ändrar ett elements attribut.
     tr
-        td <code> document.getElementById(id).style.attribute=</code>
-        td Ändrar ett elements style
+        td <code> elem.style</code>
+        td Ett objekt som vi kan läsa/skriva css från/till
 
+
+h3 Exempel
+p Låt oss se till ett par exempel på hur vi kan manipulera DOM:en.
 .panel.panel-default
     .panel-heading Exempel på att gömma ett element.
     .panel-body
-        pre
-            code.language-markup
-                | &lt;!DOCTYPE html&gt;
-                | &lt;html&gt;
-                |   &lt;head&gt;
-                |   &lt;/head&gt;
-                |   &lt;body&gt;
-                |       &lt;p id="secret"&gt; LYSSNA PÅ MIG! &lt;/p&gt; 
-                |   &lt;/body&gt;
-                | &lt;/html&gt;
-    .panel-body
-        pre
-            code.language-javascript
-                | var x=document.getElementById("secret");
-                | x.display = none;
-p Det enda vi gör är alltså att först hämta element med hjälp av id och sedan ändrar attributet display till none. Detta kan komprimeras till att skrivas på en enda rad, vet du hur?
+        .panel.panel-default
+            .panel-heading HTML
+            .panel-body
+                pre
+                    code.language-markup
+                        | &lt;p id="secret"&gt; LYSSNA PÅ MIG! &lt;/p&gt; 
+        .panel.panel-default
+            .panel-heading JavaScript
+            .panel-body
+                pre
+                    code.language-javascript
+                        | var p = document.getElementById("secret");
+                        | p.style.display = "none";
+p Vad vi gör ovan är alltså helt enkelt att vi först hämtar elementet med hjälp av dess ID. Sedan hämtar vi <code>style</code>-objektet på elementet. På <code>style</code>-elementet sätter vi egenskapen <code>display</code> till värdet <code>none</code>. JavaScriptkoden skulle kunna komprimeras till att skrivas på en enda rad, vet du hur?
 .panel.panel-default
     .panel-heading Exempel på att hämta med tagnamn.
     .panel-body
-        pre
-            code.language-markup
-                | &lt;!DOCTYPE html&gt;
-                | &lt;html&gt;
-                |   &lt;head&gt;
-                |   &lt;/head&gt;
-                |   &lt;body&gt;
-                |       &lt;p&gt; en paragraf&lt;/p&gt;
-                |       &lt;p&gt; två paragrager &lt;/p&gt;
-                |       &lt;p&gt; tre paragrager&lt;/p&gt;
-                |       &lt;p&gt; fyra paragrager &lt;/p&gt;
-                |   &lt;/body&gt;
-                | &lt;/html&gt;
-    .panel-body
-        pre
-            code.language-javascript
-                |  var as = menu.getElementsByTagName('p');  
-                |  as[0].innerHTML = "Första paragrafen";
-                |  as[1].innerHTML = "Andra paragrafen";
-                |  as[2].innerHTML = "Tredje paragrafen";
-                |  as[3].innerHTML = "Fjärde paragrafen";      
-p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av klassnamnet och därför returneras dessa i en array.
+        .panel.panel-default
+            .panel-heading HTML
+            .panel-body
+                pre
+                    code.language-markup
+                        | &lt;p&gt; A &lt;/p&gt;
+                        | &lt;p&gt; B &lt;/p&gt;
+                        | &lt;p&gt; C &lt;/p&gt;
+                        | &lt;p&gt; D &lt;/p&gt;
+        .panel.panel-default
+            .panel-heading JavaScript
+            .panel-body
+                pre
+                    code.language-javascript
+                        |  var as = menu.getElementsByTagName('p');  
+                        |  as[0].innerHTML = "Ett";
+                        |  as[1].innerHTML = "Två";
+                        |  as[3].innerHTML = as[1].innerHTML;
+        .panel.panel-default
+            .panel-heading Resultat
+            .panel-body
+                p Ett
+                p Två
+                p C
+                p Två
+
+p Ok, nu kanske det krävs en liten förklaring. Om vi som i första exemplet hämtar med id då vet vi att vi endast får ett objekt tillbaka. I andra exemplet ovan ber vi om objekten med hjälp av tagnamnet och därför returneras dessa i en array. Med andra ord: när vi hämtar ett element genom ett ID kan vi alltid vara hundra på att det bara finns ett (eftersom ett ID endast får förekomma en gång i ett HTML-dokument). Men när vi söker element via tagnamn så kan vi omöjligen veta hur många instanser det finns av just den taggen. Således har man valt att låta <code>getElementsByTagName</code> returnera en array. Således är det även därför vi ovan använder bracket-notationen (<code>[x]</code>) för att arbeta med resultatet.
+
+blockquote.text-warning Se till att du förstår varför outputen i exemplet ovan blir som den blir innan du går vidare
 
 
 
