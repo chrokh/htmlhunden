@@ -61,6 +61,7 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 
 
 
+
 /*
  * Initalizer
  */
@@ -68,4 +69,6 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 lathunden.init = function(){
   lathunden.Anchors.init();
   lathunden.Examples.init();
+  $('#chapters h1').find('a').removeAttr('href'); //TODO: Clean out all the anchors cuz they are broken
+  $('#chapters h2').find('a').removeAttr('href'); //TODO: Clean out all the anchors cuz they are brokn
 }
