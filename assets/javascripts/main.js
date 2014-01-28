@@ -22,8 +22,8 @@ lathunden.Anchors.init = function(){
   var $root = $('html, body');
   $('.toc a').click(function(e) {
       var href = $.attr(this, 'href').substring(1);
-      var selector = "*[name='" + href + "']";
-      var $elem = $(selector);
+      var selector = "*[id='" + href + "']";
+      var $elem = $(selector).first();
       $root.animate({
           scrollTop: $elem.offset().top
       }, 500, function () {
@@ -60,26 +60,6 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 }
 
 
-/*
- * TOC
- */
-lathunden.TOC = {};
-lathunden.TOC.init = function(){
-  setTimeout(function(){
-  $('.toc').toc({
-      'selectors': 'h1,h2',
-      'container': '#chapters',
-      'highlightOnScroll': true,
-      'highlightOffset': 100,
-      'anchorName': function(i, heading, prefix) {
-        var slug = $(heading).text().trim().replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g,'-');
-        return slug;
-      }
-    });
-  }, 4000);
-}
-
-
 
 /*
  * Initalizer
@@ -88,5 +68,4 @@ lathunden.TOC.init = function(){
 lathunden.init = function(){
   lathunden.Anchors.init();
   lathunden.Examples.init();
-  lathunden.TOC.init();
 }
