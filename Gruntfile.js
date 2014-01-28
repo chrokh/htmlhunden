@@ -57,6 +57,9 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['connect', 'watch']);
-  grunt.registerTask('compile', ['jade', 'copy'])
-  grunt.registerTask('publish', ['compile', 'shell:publish'])
+  grunt.registerTask('compile', ['jade', 'copy', 'build-toc']);
+  grunt.registerTask('publish', ['compile', 'shell:publish']);
+  grunt.registerTask('build-toc', function(){
+    require('./tasks/build-toc.js')(this.async());
+  });
 };
