@@ -21,15 +21,15 @@ lathunden.Anchors = {}
 lathunden.Anchors.init = function(){
   var $root = $('html, body');
   $('.toc a').click(function(e) {
-      var href = $.attr(this, 'href').substring(1);
-      var selector = "*[id='" + href + "']";
-      var $elem = $(selector).first();
-      $root.animate({
-          scrollTop: $elem.offset().top
-      }, 500, function () {
-          window.location.hash = href;
-      });
-      return false;
+    e.preventDefault();
+    var href = $.attr(this, 'href').substring(1);
+    var selector = "*[id='" + href + "']";
+    var $elem = $(selector).first();
+    $root.animate({
+        scrollTop: $elem.offset().top
+    }, 500, function () {
+        window.location.hash = href;
+    });
   });
 }
 
