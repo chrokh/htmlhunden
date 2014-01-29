@@ -1,0 +1,48 @@
+.page-header
+  h2
+    a(href="#jquery-event-listeners", name="jquery-event-listeners")
+      .icon-link 
+      | Event listeners i jQuery
+
+p En av styrkorna med jQuery är att vi kan binda event-lyssnare till flera element samtidigt. Jämför detta med att behöva iterera över en array med element, plocka ut ett för ett och applicera samma lyssnare. Markant enklare att göra det på alla samtidigt!
+
+p jQuery har några generella metoder för att applicera event-lyssnare (som med fördel kan jämföras med JavaScripts <code>addEventListener()</code>). Men jQuery har även några specifika för vanligt förekommande events som <code>click</code> och <code>hover</code>. Låt oss kolla på ett exempel, och kom ihåg att jQuery arbetar på kollektioner av element, alltså flera stycken samtidigt.
+
+.panel.panel-default
+  .panel-heading Exempel att applicera lyssnare på alla divar samtidigt
+  .panel-body
+    .panel.panel-default
+      .panel-heading HTML
+      .panel-body
+        pre
+          code.language-markup
+            | &lt;div&gt;Oh no no no...&lt;/div&gt;
+            | &lt;div&gt;Please do not click me, oh no no, please...&lt;/div&gt;
+            | &lt;div&gt;I don't want to fade, please...&lt;/div&gt;
+    .panel.panel-default
+      .panel-heading jQuery
+      .panel-body
+        pre
+          code.language-javascript
+            | var divs = $('div').click(function(){
+            |   $(this).fadeOut();
+            | });
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        style
+          .jquery-events-example-1{
+            width:100%; min-height:50px; background:rgb(200,200,200); margin:6px;
+            padding:10px; text-align:center; font-size:20px;
+          }
+        div(class="jquery-events-example-1") Oh no no no...
+        div(class="jquery-events-example-1") Please do not click me, oh no no, please...
+        div(class="jquery-events-example-1") I don't want to fade, please...
+        script
+          $('.jquery-events-example-1').click(function(){
+            $(this).fadeOut();
+          });
+
+p Om du försöker bygga ovan exempel med ren JavaScript kommer du snabbt märka varför det gör livet så hiskelens mycket enklare att arbeta med ett JavaScript-bibliotek såsom jQuery.
+
+

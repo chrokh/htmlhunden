@@ -1,0 +1,155 @@
+.page-header
+  h2
+    a(href="#jqueryobjects", name="objektet-jquery")
+      .icon-link 
+      | Objektet jQuery
+p I JavaScript-kapitlet använde vi rå JavaScript för att hämta och manipulera objekt i DOM:en. Vi har alltså direkt interagerat med DOM:ens API. Eftersom det lätt blir frustrerande att t.ex. skriva <code>document.getElementsByTagName</code> gång på gång så finns det ramverk som kan hjälpa oss. Därför ska vi nu istället göra detta med jQuery, och därför behöver vi prata om det mest grundläggande objektet i jQuery, själva jQuery-objektet. Således även reflektera över skillnaden mellan att arbeta med jQuery-objekt och <code>HTMLElement</code>-objekt.
+
+h3 Varför?
+p När vi hämtar element ifrån DOM:en m.h.a JavaScript får vi alltså tillbaka just DOM-element. Men när vi arbetar emot "råa" DOM-element blir många saker, som tidigare nämnt, ofta "tjatiga" och onödigt komplicerade. Beakta nedan exempel:
+
+.panel.panel-default
+  .panel-heading Hämta elementet <code>&lt;body&gt;</code>
+  .panel-body
+    .panel.panel-default
+      .panel-heading Med JavaScript
+      .panel-body
+        pre
+          code.language-javascript
+            | document.getElementsByTagName('body');
+    .panel.panel-default
+      .panel-heading Med jQuery
+      .panel-body
+        pre
+          code.language-javascript
+            | $('body')[0];
+
+p Uppenbart kräver jQuery-exempelet ovan att vi skriver markant mindre kod. Onödigt, kanske du tänker nu. Visst, vinsten i ovan exempel är inte massiv. Men låt oss istället se till ett mer avancerat exempel. Anta att vi skulle vilja ta bort alla <code>&lt;p&gt;</code>-element ur ett dokument. Nedan ser du hur vi först skulle kunna lösa det med JavaScript och sedan med jQuery.
+
+.panel.panel-default
+  .panel-heading Ta bort alla <code>&lt;p&gt;</code>-element
+  .panel-body
+    .panel.panel-default
+      .panel-heading Med JavaScript
+      .panel-body
+        pre
+          code.language-javascript
+            | var all = document.getElementsByTagName('p');
+            | for(i=all.length-1; i>=0; i--){
+            |   all[i].parentNode.removeChild(all[i]);
+            | }
+
+    .panel.panel-default
+      .panel-heading Med jQuery
+      .panel-body
+        pre
+          code.language-javascript
+            | $('p').remove();
+
+p Förhoppningsvis ser du nu styrkan! jQuery försökt att ta hand om den del vanligt återkommande problem och således försökt erbjuda oss utvecklare lite mindre huvudvärk. Nu kanske du redan fått huvudvärk flera gånger och känner den komma igen av att du behöver lära dig någonting nytt &mdash; men lugn! När du väl fått kläm på syntaxen kommer jQuery hjälpa dig ofantligt, och förhoppningsvis kommer du vara arg på att vi försökte lära dig JavaScript först.
+
+blockquote Förutom att jQuery gör det lättare för oss att utföra omständiga DOM-operationer gör den också att vi får mer webbläsarkompatibel kod, eftersom jQuery bygger på mycket "best practices".
+
+h3 Vad är det?
+p jQuery-objektet fungerar helt enkelt så att vi "wrappar" (omsluter/dekorerar) ett vanligt <code>HTMLElement</code> med jQuery. Helt plötsligt har vi ett helt vanligt <code>HTMLElement</code>, utan ett <code>HTMLElement</code> med en massa ytterligare kraftfulla metoder. istället och att den har mer metoder för att manipulera element. jQuery-objektet kan faktiskt göra fler saker än att hämta och manipulera element men nu ska vi fokusera på att det kan göra just det sistnämnda &mdash; alltså hämta element, och sedan manipulera dem. Låt oss se till det tidigare diskuterade exempelet som tog bort alla <code>&lt;p&gt;</code>-element ur ett dokument.
+
+.panel.panel-default
+  .panel-heading Ta bort alla &lt;p&gt;-element med jQuery
+  .panel-body
+    pre
+      code.language-javascript
+        | $('p').remove();
+
+p Det viktigaste vi måste förstå med ovan exempel, är att jQuery opererar på kollektioner av element och inte på enstaka element. Nu är det ju förstås så att det är fullt möjligt att vår kollektion endast innehåller ett element, men det är ändock en kollektion. För att dra en parallell så kan du tänka på hur JavaScript-metoden <code>document.getElementsByTagName()</code> fungerar. Namnet på metoden är pluraliserad eftersom även den returnerar en kollektion av <code>HTMLElement</code>. Detta alltså till skillnad ifrån <code>document.getElementById</code> som i alla fall returnerar max ett <code>HTMLElement</code>.
+
+blockquote jQuery opererar på kollektioner av element.
+
+p Men vad betyder då detta i praktiken? Jo, det betyder alltså att jQuery inte bryr sig om huruvida vi hittade ett eller flera element, när vi i ovan exempel anropar metoden <code>.remove()</code> så tar den alltså bort alla element i hela den kollektion den hade hittat. Låt oss se till ytterligare ett exempel för att illustrera detta:
+
+.panel.panel-default
+  .panel-heading Tänk på att jQuery alltid arbetar på kollektioner av element
+  .panel-body
+    .panel.panel-default
+      .panel-heading HTML
+      .panel-body
+        pre
+          code.language-markup
+            | &lt;p&gt; hello &lt;/p&gt;
+            | &lt;p&gt; world &lt;/p&gt;
+
+    .panel.panel-default
+      .panel-heading jQuery
+      .panel-body
+        pre.line-numbers
+          code.language-javascript
+            | $('p')[0].innerHTML;    // => "hello"
+            | $('p')[1].innerHTML;    // => "world"
+            | $('p').text();          // => "hello world"
+
+p Vi kan hantera jQuery-objektet som en array. På rad 1 och 2 i ovan exempel gör vi just det. När vi använder klammerparantesnotationen (<code>[i]</code>) och ger ett index, så hämtar vi alltså det <code>HTMLElement</code> som gömmer sig under det indexet. När vi sedan anropar <code>innerHTML</code> får vi ut den text som finns i just det <code>HTMLElementet</code>. När vi däremot på rad 3 anropar <code>text()</code>-metoden (som alltså är en jQuery-specifik metod) så opererar vi alltså på kollektionen av alla träffade element. Anledningen till att vi inte använder <code>text()</code>-metoden på rad 1 och 2 är alltså för att den metoden är specifik för jQuery. Eftersom vi på rad 1 och 2 redan plockat ut ett <code>HTMLElement</code> ur jQuery-objektet så har vi alltså inte längre tillgång till jQuery's metoder. Vice versa gäller alltså på rad 3. Eftersom vi inte plockat ut något <code>HTMLElement</code> ur jQuery-kollektionen kan vi inte använda "vanliga" <code>HTMLElement</code>-metoder (eftersom det är ett <code>jQuery object</code>) utan måste istället använda jQuery-specifika metoder. Vill vi använda de vanliga <code>HTMLElement</code>-metoderna behöver vi plocka ut ett specifikt element ur kollektionen.
+
+
+h3 Hämta element
+p Låt oss nu prata om vi hämtar element-kollektioner m.h.a. jQuery. Att hämta element med jQuery är egentligen mycket enkelt. Vi skriver helt enkelt <code>$(x)</code> där <code>x</code> ersätts med vilken css-selektor som helst. Med andra ord kan vi återanvända alla våra css-kunskaper nu när vi dyker in i jQuery.
+
+p Utan att snöa ner oss i svårare selektorer så kommer du förhoppningsvis ihåg de enklaste. De vanligaste css-selektorerna är:
+
+  dl.dl-horizontal
+    dt <code> x</code>
+    dd Element av typ x
+    dt <code>#x</code>
+    dd Element med id x
+    dt <code>.x</code>
+    dd Element med klassen x
+
+blockquote Om du behöver läsa på om css-selektorer, läs mer i css-kapitlet!
+
+p Ok, men nu var det ett väldigt generellt prat här. Låt oss istället se till några exempel där vi faktiskt använder dessa selektorer.
+
+.panel.panel-default
+  .panel-heading Hämta element av typ x
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;div&gt; Anta &lt;/div&gt;
+        | &lt;div&gt; att vi har &lt;/div&gt;
+        | &lt;div&gt; ett par div:ar &lt;/div&gt;
+    pre
+      code.language-javascript
+        | // Då väljer vi alla så här:
+        | var allaDivar = $('div');
+
+p Ovan hämtade vi alltså element baserat på deras <code>tagName</code>. Låt oss nu istället hämta alla element, oavsett typ, som har en viss <code>class</code>.
+
+.panel.panel-default
+  .panel-heading Hämta element med klassnamn
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;div class="dog"&gt; Woof! &lt;/div&gt;
+        | &lt;div class="cat"&gt; Mjau! &lt;/div&gt;
+        | &lt;div class="dog"&gt; Bark! &lt;/div&gt;
+    pre
+      code.language-javascript
+        |  // Använd klass-selektorn för att hämta alla element med en viss klass
+        |  var dogs = $(".dog");
+        | 
+        |  // För att illustrara att det verkligen fungerar
+        | dogs.text();    // => "Woof! Bark!"
+
+p Busenkelt! Du börjar se mönstret? Låt oss nu istället prova en sista gång genom att hämta alla element med ett visst <code>ID</code>.
+.panel.panel-default
+  .panel-heading Hämta element med ID
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p id="super-woman"&gt;Kryptonite!&lt;/p&gt;
+        | &lt;p id="cat-woman"&gt;In your house eating your cat food!&lt;/p&gt;
+        | &lt;p id="modesty-blaise"&gt;Secret agent&lt;/p&gt;
+    pre
+      code.language-javascript
+        | // Vi använder css-selektorn för ID
+        | var hero = $('#super-woman');
+        | 
+        | // Och har nu valt rätt element
+        | hero.text();   // => "Kryptonite!"
