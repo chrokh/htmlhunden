@@ -5,8 +5,53 @@
       | Objektet jQuery
 p I JavaScript-kapitlet använde vi rå JavaScript för att hämta och manipulera objekt i DOM:en. Vi har alltså direkt interagerat med DOM:ens API. Eftersom det lätt blir frustrerande att t.ex. skriva <code>document.getElementsByTagName</code> gång på gång så finns det ramverk som kan hjälpa oss. Därför ska vi nu istället göra detta med jQuery, och därför behöver vi prata om det mest grundläggande objektet i jQuery, själva jQuery-objektet. Således även reflektera över skillnaden mellan att arbeta med jQuery-objekt och HTMLElement-objekt.
 
-h3 Definition och varför jQuery Objekt
-p När vi hämtar element med hjälp av javascript får vi alltså ett DOM-element men när vi arbetar direkt mot DOM-element så kan vissa saker vara onödigt komplicerat eller "pratigt". jQuery har i detta fall försökt att ta hand om den del problem och försökt att skapa mindre huvudvärk för utvecklare. Nu kanske du skriker rakt ut och särskilt om du är ny till detta för du kanske redan fått huvudvärk flera gånger men lugn! Det brukar lösa sig i slutändan. Tillbaka till track att i JQuery så får vi tillbaka ett jQuery Objekt istället och att den har mer metoder för att manipulera element. Fördelarna anses vara att det blir mer kompatibelt och för bekvämare för utvecklaren. Just i detta nu behöver vi egentligen bara veta att när vi använder $("#myClass") så får vi tillbaka elementen i en samling och det får bli vår definition av vad ett jQuery objekt.
+h3 Varför?
+p När vi hämtar element ifrån DOM:en m.h.a JavaScript får vi alltså tillbaka just DOM-element. Men när vi arbetar emot "råa" DOM-element blir många saker, som tidigare nämnt, ofta "tjatiga" och onödigt komplicerade. Beakta nedan exempel:
+
+.panel.panel-default
+  .panel-heading Hämta elementet <code>&lt;body&gt;</code>
+  .panel-body
+    .panel.panel-default
+      .panel-heading Med JavaScript
+      .panel-body
+        pre
+          code.language-javascript
+            | document.getElementsByTagName('body');
+    .panel.panel-default
+      .panel-heading Med jQuery
+      .panel-body
+        pre
+          code.language-javascript
+            | $('body')[0];
+
+p Uppenbart kräver jQuery-exempelet ovan att vi skriver markant mindre kod. Onödigt, kanske du tänker nu. Visst, vinsten i ovan exempel är inte massiv. Men låt oss istället se till ett mer avancerat exempel. Anta att vi skulle vilja ta bort alla <code>&lt;p&gt;</code>-taggar ur ett dokument. Nedan ser du hur vi först skulle kunna lösa det med JavaScript och sedan med jQuery.
+
+.panel.panel-default
+  .panel-heading Ta bort alla <code>&lt;p&gt;</code>-element
+  .panel-body
+    .panel.panel-default
+      .panel-heading Med JavaScript
+      .panel-body
+        pre
+          code.language-javascript
+            | var all = document.getElementsByTagName('p');
+            | for(i=all.length-1; i>=0; i--){
+            |   all[i].parentNode.removeChild(all[i]);
+            | }
+
+    .panel.panel-default
+      .panel-heading Med jQuery
+      .panel-body
+        pre
+          code.language-javascript
+            | $('p').remove();
+
+p Förhoppningsvis ser du nu styrkan! jQuery försökt att ta hand om den del vanligt återkommande problem och således försökt erbjuda oss utvecklare lite mindre huvudvärk. Nu kanske du redan fått huvudvärk flera gånger och känner den komma igen av att du behöver lära dig någonting nytt &mdash; men lugn! När du väl fått kläm på syntaxen kommer jQuery hjälpa dig ofantligt, och förhoppningsvis kommer du vara arg på att vi försökte lära dig JavaScript först.
+
+blockquote Förutom att jQuery gör det lättare för oss att utföra omständiga DOM-operationer gör den också att vi får mer webbläsarkompatibel kod, eftersom jQuery bygger på mycket "best practices".
+
+h3 Vad är det?
+p jQuery-objektet fungerar helt enkelt så att vi "wrappar" (omsluter/dekorerar) ett vanligt HTMLElement med jQuery. Helt plötsligt har vi ett helt vanligt HTMLElement, utan ett HTMLElement med en massa ytterligare kraftfulla metoder. istället och att den har mer metoder för att manipulera element. Låt oss se till ett exempel.
 
 h3 Hämta element
 .panel.panel-default
