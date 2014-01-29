@@ -24,7 +24,7 @@ p När vi hämtar element ifrån DOM:en m.h.a JavaScript får vi alltså tillbak
           code.language-javascript
             | $('body')[0];
 
-p Uppenbart kräver jQuery-exempelet ovan att vi skriver markant mindre kod. Onödigt, kanske du tänker nu. Visst, vinsten i ovan exempel är inte massiv. Men låt oss istället se till ett mer avancerat exempel. Anta att vi skulle vilja ta bort alla <code>&lt;p&gt;</code>-taggar ur ett dokument. Nedan ser du hur vi först skulle kunna lösa det med JavaScript och sedan med jQuery.
+p Uppenbart kräver jQuery-exempelet ovan att vi skriver markant mindre kod. Onödigt, kanske du tänker nu. Visst, vinsten i ovan exempel är inte massiv. Men låt oss istället se till ett mer avancerat exempel. Anta att vi skulle vilja ta bort alla <code>&lt;p&gt;</code>-element ur ett dokument. Nedan ser du hur vi först skulle kunna lösa det med JavaScript och sedan med jQuery.
 
 .panel.panel-default
   .panel-heading Ta bort alla <code>&lt;p&gt;</code>-element
@@ -51,7 +51,43 @@ p Förhoppningsvis ser du nu styrkan! jQuery försökt att ta hand om den del va
 blockquote Förutom att jQuery gör det lättare för oss att utföra omständiga DOM-operationer gör den också att vi får mer webbläsarkompatibel kod, eftersom jQuery bygger på mycket "best practices".
 
 h3 Vad är det?
-p jQuery-objektet fungerar helt enkelt så att vi "wrappar" (omsluter/dekorerar) ett vanligt HTMLElement med jQuery. Helt plötsligt har vi ett helt vanligt HTMLElement, utan ett HTMLElement med en massa ytterligare kraftfulla metoder. istället och att den har mer metoder för att manipulera element. Låt oss se till ett exempel.
+p jQuery-objektet fungerar helt enkelt så att vi "wrappar" (omsluter/dekorerar) ett vanligt HTMLElement med jQuery. Helt plötsligt har vi ett helt vanligt HTMLElement, utan ett HTMLElement med en massa ytterligare kraftfulla metoder. istället och att den har mer metoder för att manipulera element. jQuery-objektet kan faktiskt göra fler saker än att hämta och manipulera element men nu ska vi fokusera på att det kan göra just det sistnämnda &mdash; alltså hämta element, och sedan manipulera dem. Låt oss se till det tidigare diskuterade exempelet som tog bort alla <code>&lt;p&gt;</code>-element ur ett dokument.
+
+.panel.panel-default
+  .panel-heading Ta bort alla &lt;p&gt;-element med jQuery
+  .panel-body
+    pre
+      code.language-javascript
+        | $('p').remove();
+
+p Det viktigaste vi måste förstå med ovan exempel, är att jQuery opererar på kollektioner av element och inte på enstaka element. Nu är det ju förstås så att det är fullt möjligt att vår kollektion endast innehåller ett element, men det är ändock en kollektion. För att dra en parallell så kan du tänka på hur JavaScript-metoden <code>document.getElementsByTagName()</code> fungerar. Namnet på metoden är pluraliserad eftersom även den returnerar en kollektion av <code>HTMLElement</code>. Detta alltså till skillnad ifrån <code>document.getElementById</code> som i alla fall returnerar max ett <code>HTMLElement</code>.
+
+blockquote jQuery opererar på kollektioner av element.
+
+p Men vad betyder då detta i praktiken? Jo, det betyder alltså att jQuery inte bryr sig om huruvida vi hittade ett eller flera element, när vi i ovan exempel anropar metoden <code>.remove()</code> så tar den alltså bort alla element i hela den kollektion den hade hittat. Låt oss se till ytterligare ett exempel för att illustrera detta:
+
+.panel.panel-default
+  .panel-heading Tänk på att jQuery alltid arbetar på kollektioner av element
+  .panel-body
+    .panel.panel-default
+      .panel-heading HTML
+      .panel-body
+        pre
+          code.language-markup
+            | &lt;p&gt; hello &lt;/p&gt;
+            | &lt;p&gt; world &lt;/p&gt;
+
+    .panel.panel-default
+      .panel-heading jQuery
+      .panel-body
+        pre.line-numbers
+          code.language-javascript
+            | $('p')[0].innerHTML;    // => "hello"
+            | $('p')[1].innerHTML;    // => "world"
+            | $('p').text();          // => "hello world"
+
+p Vi kan hantera jQuery-objektet som en array. På rad 1 och 2 i ovan exempel gör vi just det. När vi använder klammerparantesnotationen (<code>[i]</code>) och ger ett index, så hämtar vi alltså det <code>HTMLElement</code> som gömmer sig under det indexet. När vi sedan anropar <code>innerHTML</code> får vi ut den text som finns i just det <code>HTMLElementet</code>. När vi däremot på rad 3 anropar <code>text()</code>-metoden (som alltså är en jQuery-specifik metod) så opererar vi alltså på kollektionen av alla träffade element. Anledningen till att vi inte använder <code>text()</code>-metoden på rad 1 och 2 är alltså för att den metoden är specifik för jQuery. Eftersom vi på rad 1 och 2 redan plockat ut ett <code>HTMLElement</code> ur jQuery-objektet så har vi alltså inte längre tillgång till jQuery's metoder. Vice versa gäller alltså på rad 3. Eftersom vi inte plockat ut något <code>HTMLElement</code> ur jQuery-kollektionen kan vi inte använda "vanliga" <code>HTMLElement</code>-metoder (eftersom det är ett <code>jQuery object</code>) utan måste istället använda jQuery-specifika metoder. Vill vi använda de vanliga <code>HTMLElement</code>-metoderna behöver vi plocka ut ett specifikt element ur kollektionen.
+
 
 h3 Hämta element
 .panel.panel-default
