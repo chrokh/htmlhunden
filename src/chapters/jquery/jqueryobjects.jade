@@ -1,0 +1,70 @@
+.page-header
+  h2
+    a(href="#jqueryobjects")
+      .icon-link 
+      | jQuery Objekt
+p I föregående kapitel då vi använt javascript för att hämta och manipulera objekt i DOM:en har vi direkt användt DOM:s API och fått tillbaka DOM-element. Nu skall vi göra detta med jQuery och då pratar vi om jQuery objekt och förhoppningen är att ni skall förstå skillnaden.
+
+h3 Definition och varför jQuery Objekt
+p När vi hämtar element med hjälp av javascript får vi alltså ett DOM-element men när vi arbetar direkt mot DOM-element så kan vissa saker vara onödigt komplicerat eller "pratigt". jQuery har i detta fall försökt att ta hand om den del problem och försökt att skapa mindre huvudvärk för utvecklare. Nu kanske du skriker rakt ut och särskilt om du är ny till detta för du kanske redan fått huvudvärk flera gånger men lugn! Det brukar lösa sig i slutändan. Tillbaka till track att i JQuery så får vi tillbaka ett jQuery Objekt istället och att den har mer metoder för att manipulera element. Fördelarna anses vara att det blir mer kompatibelt och för bekvämare för utvecklaren. Just i detta nu behöver vi egentligen bara veta att när vi använder $("#myClass") så får vi tillbaka elementen i en samling och det får bli vår definition av vad ett jQuery objekt.
+
+h3 Hämta element
+.panel.panel-default
+  .panel-heading Hämta med tagnamn
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;div&gt; B &lt;/div&gt;
+        | &lt;div&gt; C &lt;/div&gt;
+        | &lt;div&gt; D &lt;/div&gt;
+  .panel-body
+    pre
+      code.language-javascript
+        | var allaDivar = $("div");
+        | 
+p Med denna kommer vi få tillbaka ett jQuery objekt med alla divar. För att då kunna komma åt första diven krävs att man skriver <code>allaDivar.get(0)</code> och därefter kan man börja manipulera elementet.
+.panel.panel-default
+  .panel-heading Hämta med klassnamn
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;div class="classB"&gt; B &lt;/div&gt;
+        | &lt;div class="classC"&gt; C &lt;/div&gt;
+        | &lt;div class="classD"&gt; D &lt;/div&gt;
+  .panel-body
+    pre
+      code.language-javascript
+        | var allaAvSammaKlass = $(".classB");
+p Detta exempel kommer att endast plocka den diven som i detta fall har classB som klassnamn, alltså första diven.
+.panel.panel-default
+  .panel-heading Hämta med id
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p id="idB"&gt; B &lt;/p&gt;
+        | &lt;p id="idC&gt; C &lt;/p&gt;
+        | &lt;p id="idD&gt; D &lt;/p&gt;
+  .panel-body
+    pre
+      code.language-javascript
+        | var allaMedSammaID = $("#idC");
+p Detta exempel kommer att endast plocka den diven som i detta fall har idC som id, alltså andra diven.
+p I jQuery behöver man inte ta ut alla element av en viss tagnamn för att sedan iterera igenom hela arrayen och sedan lägga exempelvis en lyssnare på elementen. Med jQuery gör man helt enkelt:
+.panel.panel-default
+  .panel-heading Exempel att lägga lyssnare på alla divar samtidigt
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;div&gt; B &lt;/div&gt;
+        | &lt;div&gt; C &lt;/div&gt;
+        | &lt;div&gt; D &lt;/div&gt;
+  .panel-body
+    pre
+      code.language-javascript
+        | var allaDivar = $("div").click(function()
+        | {
+        |   $( this ).slideUp();
+        | })
+        | 
+
+
