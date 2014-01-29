@@ -1,0 +1,26 @@
+.page-header
+  h2
+    a(href="#jquery-event-listeners", name="jquery-event-listeners")
+      .icon-link 
+      | Event listeners i jQuery
+
+p En av styrkorna med jQuery är att vi kan binda event-lyssnare till flera element samtidigt. Jämför detta med att behöva iterera över en array med element, plocka ut ett för ett och applicera samma lyssnare. Markant enklare att göra det på alla samtidigt!
+
+.panel.panel-default
+  .panel-heading Exempel att lägga lyssnare på alla divar samtidigt
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;div&gt; B &lt;/div&gt;
+        | &lt;div&gt; C &lt;/div&gt;
+        | &lt;div&gt; D &lt;/div&gt;
+  .panel-body
+    pre
+      code.language-javascript
+        | var allaDivar = $("div").click(function()
+        | {
+        |   $( this ).slideUp();
+        | })
+        | 
+
+

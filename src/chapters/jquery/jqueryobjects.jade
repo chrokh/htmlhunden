@@ -153,24 +153,3 @@ p Busenkelt! Du börjar se mönstret? Låt oss nu istället prova en sista gång
         | 
         | // Och har nu valt rätt element
         | hero.text();   // => "Kryptonite!"
-
-
-p I jQuery behöver man inte ta ut alla element av en viss tagnamn för att sedan iterera igenom hela arrayen och sedan lägga exempelvis en lyssnare på elementen. Med jQuery gör man helt enkelt:
-.panel.panel-default
-  .panel-heading Exempel att lägga lyssnare på alla divar samtidigt
-  .panel-body
-    pre
-      code.language-markup
-        | &lt;div&gt; B &lt;/div&gt;
-        | &lt;div&gt; C &lt;/div&gt;
-        | &lt;div&gt; D &lt;/div&gt;
-  .panel-body
-    pre
-      code.language-javascript
-        | var allaDivar = $("div").click(function()
-        | {
-        |   $( this ).slideUp();
-        | })
-        | 
-
-
