@@ -6,4 +6,136 @@
 
 p När vi väl lärt oss att välja element m.h.a. jQuery är det busenkelt att börja modifiera dessa. jQuery-objektet exponerar oss en mängd behändiga funktioner och egenskaper vi kan använda för att modifiera kollektionen av element som gömmer sig under objektet. I detta kapitel kommer vi att prata om några av de vanligaste.
 
-p [TODO: In writing...]
+h3 html()
+p Metoden <code>html()</code> kan ses som jQuery's motsvarighet till JavaScript's <code>innerHTML</code>. Lagom straight forward så hämtar den eller sätter helt enkelt ett elements <code>innerHTML</code>.
+
+p Oavsett vilket jQuery-metod vi använder är det alltid viktigt att komma ihåg att jQuery <b>inte</b> alltid arbetar på element-kollektioner, och denna metod är ett exempel på just ett sådant tillfälle. Anropar vi <code>.html()</code> på en element-kollektion kommer vi således alltså bara få den inre html:en för det första elementet i kollektionen.
+
+blockquote.text-warning Alla metoder på jQuery-objektet arbetar <u>inte</u> på alla element i kollektionen.
+
+h4 Exempel
+.panel.panel-default
+  .panel-heading jQuery-metoden html()
+  .panel-body
+    p Om vi har följande html..
+      pre
+        code.language-markup
+          | &lt;p&gt;
+          |   &lt;span&gt;En katt&lt;/span&gt;
+          | &lt;/p&gt;
+          | &lt;p&gt;satt i en hatt&lt;/p&gt;
+    p Kan vi läsa första paragrafen genom att säga...
+      pre
+        code.language-javascript
+          | $('p').html();         // => "&lt;span&gt;En katt&lt;/span&gt;"
+    p Men vi kan även modifiera den genom att säga...
+      pre
+        code.language-javascript
+          | $('p').html('En hund') // => Ändrar första p-taggens inre html till "En hund"
+    p Vilket förändrar vår html så att vi nu har...
+     pre
+        code.language-markup
+          | &lt;p&gt;En hund&lt;/p&gt;
+          | &lt;p&gt;satt i en hatt&lt;/p&gt;
+    p Notera alltså att vi "blev av" med <code>&lt;span&gt;</code>-elementet.
+
+
+p Kom ihåg att du alltid kan läsa mer i 
+  a(href="http://api.jquery.com/html/") jQuery-dokumentationen
+
+
+
+
+
+
+
+h3 text()
+p Metoden <code>text()</code> påminner mycket om metoden <code>html()</code> förutom att den fantastiskt nog ger oss innehållet i det första elementet i en element-kollektion utan html. Vi får alltså allt som webbläsaren faktiskt uppfattat som text, utan all störande html. Detta är en mycket användbar metod! Vi kan förstås, precis som med metoden <code>html()</code> använda den för att även skriva text till ett element. Låt oss se till några exempel:
+
+h4 Exempel
+.panel.panel-default
+  .panel-heading jQuery-metoden html()
+  .panel-body
+    p Om vi har följande html..
+      pre
+        code.language-markup
+          | &lt;p&gt;
+          |   En liten men 
+          |   &lt;span&gt;mästerlig&lt;/span&gt;
+          |   katt, satt en 
+          |   &lt;span&gt;solig dag &lt;/span&gt;
+          |   och beundrade en hatt.
+          | &lt;/p&gt;
+    p Och sedan hämtar <code>&lt;p&gt;</code>-elementets text så här...
+      pre
+        code.language-javascript
+          | $('p').text();   // Hämtar all text i elementet fritt ifrån alla html-element
+    p Så får vi...
+      pre
+        code.language-javascript
+          | "En liten men mästerlig katt, satt en solig dag och beundrade en hatt."
+    p Vilket ju är fantastiskt, för om vi istället hade använt metoden <code>html()</code> eller JavaScript's egna <code>innerHTML</code> hade vi istället fått...
+     pre
+        code.language-javascript
+          | "En liten men &lt;span&gt;mästerlig&lt;/span&gt; katt, satt en &lt;span&gt;solig dag &lt;/span&gt; och beundrade en hatt."
+    p Vilket förstås skulle vara mycket jobbigt att arbeta med om det skulle vara så att vi faktiskt bara vill åt texten, oavsett dess inre elementstruktur.
+
+
+
+
+h3 attr() &amp; prop()
+p Låt oss nu prata om två metoder som till synes verkar likna varandra. Metoden <code>attr()</code> hämtar och sätter <code>attribut</code> (<code>attributes</code>), medan metoden <code>prop</code> hämtar och sätter <code>egenskaper</code> (<code>properties</code>). För att förstå skillnaden mellan de två måste vi först förstå skillnaden mellan egenskap och attribut.
+
+h4 Attribut
+p När vi pratar om attribut så pratar vi attribut på html-element. Exempel på attribut är alltså <code>id</code>, <code>class</code>, <code>name</code> och <code>name</code>, för att nämna några. Med andra ord, attribut är sådant som vi "tilldelar" ett element i vår html. Självklart kan vi både hämta och sätta attribut via JavaScript, men för att förstå skillnaden mellan attribut och egenskaper är det lättast att tänka på attribut som det som vi sätter i html. Nedan följer ett exempel på ett html-element med ett antal attribut.
+  .panel.panel-default
+    .panel-heading Att läsa ett elements attribut
+    .panel-body
+      p Om vi har ett element med ett antal attribut...
+      pre
+        code.language-markup
+          | &lt;p class="quote" id="welcome"&gt;
+          |   What a wonderful world
+          | &lt;/p&gt;
+      p Så kan vi förstås läsa attributen med JavaScript som så...
+      pre
+        code.language-javascript
+          | document.getElementsByTagName('p')[0].getAttribute('class');
+          | // => "quote"
+          | 
+          | document.getElementsByTagName('p')[0].getAttribute('id');
+          | // => "welcome"
+      p Och förstås med jQuery som så...
+      pre
+        code.language-javascript
+          | $('p').attr('class');  // => "quote"
+          | $('p').attr('id');     // => "welcome"
+
+h4 Egenskaper
+p Egenskaper å andra sidan, refererar till egenskaper på ett <code>HTMLElement</code>-objekt när den hanteras i JavaScript. Med andra ord (löst uttryckt) publika instansvariabler på JavaScript-representationen av samma element. Vad skulle då egenskaper kunna vara för någonting?
+  .panel.panel-default
+    .panel-heading Att läsa ett elements egenskaper
+    .panel-body
+      p Anta att vi har ett <code>&lt;p&gt;</code>-element på sidan..
+      pre
+        code.language-javascript
+          | var p = document.getElementsByTagName('p')[0];
+          | var i = document.getElementsByTagName('input')[0];
+          | 
+          | p.tagName;  // => "P"
+          | i.tagName;  // => "INPUT"
+      p Således kan vi förstås göra samma sak genom jQuery...
+      pre
+        code.language-javascript
+          | $('p').prop('tagName');       // => "P"
+          | $('input').prop('tagName');   // => "INPUT"
+
+h4 Undantag
+p Av historiska skäl och förändringar över tid så beteer sig ovan metoder, i tidigare versioner av jQuery, tyvärr inte alltid såsom man kan tänka sig. Du kan läsa mer om det i jQuery-dokumentationen för
+  a(href="http://api.jquery.com/prop/") prop
+  |  eller
+  a(href="http://api.jquery.com/attr/") attr
+  |  eller helt enkelt på följande tråd på 
+  a(href="http://stackoverflow.com/questions/5874652/prop-vs-attr") StackOverflow
+  |.
+
