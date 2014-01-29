@@ -90,46 +90,71 @@ p Vi kan hantera jQuery-objektet som en array. På rad 1 och 2 i ovan exempel g�
 
 
 h3 Hämta element
+p Låt oss nu prata om vi hämtar element-kollektioner m.h.a. jQuery. Att hämta element med jQuery är egentligen mycket enkelt. Vi skriver helt enkelt <code>$(x)</code> där <code>x</code> ersätts med vilken css-selektor som helst. Med andra ord kan vi återanvända alla våra css-kunskaper nu när vi dyker in i jQuery.
+
+p Utan att snöa ner oss i svårare selektorer så kommer du förhoppningsvis ihåg de enklaste. De vanligaste css-selektorerna är:
+
+  dl.dl-horizontal
+    dt <code> x</code>
+    dd Element av typ x
+    dt <code>#x</code>
+    dd Element med id x
+    dt <code>.x</code>
+    dd Element med klassen x
+
+blockquote Om du behöver läsa på om css-selektorer, läs mer i css-kapitlet!
+
+p Ok, men nu var det ett väldigt generellt prat här. Låt oss istället se till några exempel där vi faktiskt använder dessa selektorer.
+
 .panel.panel-default
-  .panel-heading Hämta med tagnamn
+  .panel-heading Hämta element av typ x
   .panel-body
     pre
       code.language-markup
-        | &lt;div&gt; B &lt;/div&gt;
-        | &lt;div&gt; C &lt;/div&gt;
-        | &lt;div&gt; D &lt;/div&gt;
-  .panel-body
+        | &lt;div&gt; Anta &lt;/div&gt;
+        | &lt;div&gt; att vi har &lt;/div&gt;
+        | &lt;div&gt; ett par div:ar &lt;/div&gt;
     pre
       code.language-javascript
-        | var allaDivar = $("div");
+        | // Då väljer vi alla så här:
+        | var allaDivar = $('div');
+
+p Ovan hämtade vi alltså element baserat på deras <code>tagName</code>. Låt oss nu istället hämta alla element, oavsett typ, som har en viss <code>class</code>.
+
+.panel.panel-default
+  .panel-heading Hämta element med klassnamn
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;div class="dog"&gt; Woof! &lt;/div&gt;
+        | &lt;div class="cat"&gt; Mjau! &lt;/div&gt;
+        | &lt;div class="dog"&gt; Bark! &lt;/div&gt;
+    pre
+      code.language-javascript
+        |  // Använd klass-selektorn för att hämta alla element med en viss klass
+        |  var dogs = $(".dog");
         | 
-p Med denna kommer vi få tillbaka ett jQuery objekt med alla divar. För att då kunna komma åt första diven krävs att man skriver <code>allaDivar.get(0)</code> och därefter kan man börja manipulera elementet.
+        |  // För att illustrara att det verkligen fungerar
+        | dogs.text();    // => "Woof! Bark!"
+
+p Busenkelt! Du börjar se mönstret? Låt oss nu istället prova en sista gång genom att hämta alla element med ett visst <code>ID</code>.
 .panel.panel-default
-  .panel-heading Hämta med klassnamn
+  .panel-heading Hämta element med ID
   .panel-body
     pre
       code.language-markup
-        | &lt;div class="classB"&gt; B &lt;/div&gt;
-        | &lt;div class="classC"&gt; C &lt;/div&gt;
-        | &lt;div class="classD"&gt; D &lt;/div&gt;
-  .panel-body
+        | &lt;p id="super-woman"&gt;Kryptonite!&lt;/p&gt;
+        | &lt;p id="cat-woman"&gt;In your house eating your cat food!&lt;/p&gt;
+        | &lt;p id="modesty-blaise"&gt;Secret agent&lt;/p&gt;
     pre
       code.language-javascript
-        | var allaAvSammaKlass = $(".classB");
-p Detta exempel kommer att endast plocka den diven som i detta fall har classB som klassnamn, alltså första diven.
-.panel.panel-default
-  .panel-heading Hämta med id
-  .panel-body
-    pre
-      code.language-markup
-        | &lt;p id="idB"&gt; B &lt;/p&gt;
-        | &lt;p id="idC&gt; C &lt;/p&gt;
-        | &lt;p id="idD&gt; D &lt;/p&gt;
-  .panel-body
-    pre
-      code.language-javascript
-        | var allaMedSammaID = $("#idC");
-p Detta exempel kommer att endast plocka den diven som i detta fall har idC som id, alltså andra diven.
+        | // Vi använder css-selektorn för ID
+        | var hero = $('#super-woman');
+        | 
+        | // Och har nu valt rätt element
+        | hero.text();   // => "Kryptonite!"
+
+
 p I jQuery behöver man inte ta ut alla element av en viss tagnamn för att sedan iterera igenom hela arrayen och sedan lägga exempelvis en lyssnare på elementen. Med jQuery gör man helt enkelt:
 .panel.panel-default
   .panel-heading Exempel att lägga lyssnare på alla divar samtidigt
