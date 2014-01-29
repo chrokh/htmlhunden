@@ -42,3 +42,45 @@ h4 Exempel
 
 p Kom ihåg att du alltid kan läsa mer i 
   a(href="http://api.jquery.com/html/") jQuery-dokumentationen
+
+
+
+
+
+
+
+h3 text()
+p Metoden <code>text()</code> påminner mycket om metoden <code>html()</code> förutom att den fantastiskt nog ger oss innehållet i det första elementet i en element-kollektion utan html. Vi får alltså allt som webbläsaren faktiskt uppfattat som text, utan all störande html. Detta är en mycket användbar metod! Vi kan förstås, precis som med metoden <code>html()</code> använda den för att även skriva text till ett element. Låt oss se till några exempel:
+
+h4 Exempel
+.panel.panel-default
+  .panel-heading jQuery-metoden html()
+  .panel-body
+    p Om vi har följande html..
+      pre
+        code.language-markup
+          | &lt;p&gt;
+          |   En liten men 
+          |   &lt;span&gt;mästerlig&lt;/span&gt;
+          |   katt, satt en 
+          |   &lt;span&gt;solig dag &lt;/span&gt;
+          |   och beundrade en hatt.
+          | &lt;/p&gt;
+    p Och sedan hämtar <code>&lt;p&gt;</code>-elementets text så här...
+      pre
+        code.language-javascript
+          | $('p').text();   // Hämtar all text i elementet fritt ifrån alla html-element
+    p Så får vi...
+      pre
+        code.language-javascript
+          | "En liten men mästerlig katt, satt en solig dag och beundrade en hatt."
+    p Vilket ju är fantastiskt, för om vi istället hade använt metoden <code>html()</code> eller JavaScript's egna <code>innerHTML</code> hade vi istället fått...
+     pre
+        code.language-javascript
+          | "En liten men &lt;span&gt;mästerlig&lt;/span&gt; katt, satt en &lt;span&gt;solig dag &lt;/span&gt; och beundrade en hatt."
+    p Vilket förstås skulle vara mycket jobbigt att arbeta med om det skulle vara så att vi faktiskt bara vill åt texten, oavsett dess inre elementstruktur.
+
+
+p Kom ihåg att du alltid kan läsa mer i 
+  a(href="http://api.jquery.com/html/") jQuery-dokumentationen
+
