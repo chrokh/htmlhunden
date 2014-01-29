@@ -81,6 +81,61 @@ h4 Exempel
     p Vilket förstås skulle vara mycket jobbigt att arbeta med om det skulle vara så att vi faktiskt bara vill åt texten, oavsett dess inre elementstruktur.
 
 
-p Kom ihåg att du alltid kan läsa mer i 
-  a(href="http://api.jquery.com/html/") jQuery-dokumentationen
+
+
+h3 attr() &amp; prop()
+p Låt oss nu prata om två metoder som till synes verkar likna varandra. Metoden <code>attr()</code> hämtar och sätter <code>attribut</code> (<code>attributes</code>), medan metoden <code>prop</code> hämtar och sätter <code>egenskaper</code> (<code>properties</code>). För att förstå skillnaden mellan de två måste vi först förstå skillnaden mellan egenskap och attribut.
+
+h4 Attribut
+p När vi pratar om attribut så pratar vi attribut på html-element. Exempel på attribut är alltså <code>id</code>, <code>class</code>, <code>name</code> och <code>name</code>, för att nämna några. Med andra ord, attribut är sådant som vi "tilldelar" ett element i vår html. Självklart kan vi både hämta och sätta attribut via JavaScript, men för att förstå skillnaden mellan attribut och egenskaper är det lättast att tänka på attribut som det som vi sätter i html. Nedan följer ett exempel på ett html-element med ett antal attribut.
+  .panel.panel-default
+    .panel-heading Att läsa ett elements attribut
+    .panel-body
+      p Om vi har ett element med ett antal attribut...
+      pre
+        code.language-markup
+          | &lt;p class="quote" id="welcome"&gt;
+          |   What a wonderful world
+          | &lt;/p&gt;
+      p Så kan vi förstås läsa attributen med JavaScript som så...
+      pre
+        code.language-javascript
+          | document.getElementsByTagName('p')[0].getAttribute('class');
+          | // => "quote"
+          | 
+          | document.getElementsByTagName('p')[0].getAttribute('id');
+          | // => "welcome"
+      p Och förstås med jQuery som så...
+      pre
+        code.language-javascript
+          | $('p').attr('class');  // => "quote"
+          | $('p').attr('id');     // => "welcome"
+
+h4 Egenskaper
+p Egenskaper å andra sidan, refererar till egenskaper på ett <code>HTMLElement</code>-objekt när den hanteras i JavaScript. Med andra ord (löst uttryckt) publika instansvariabler på JavaScript-representationen av samma element. Vad skulle då egenskaper kunna vara för någonting?
+  .panel.panel-default
+    .panel-heading Att läsa ett elements egenskaper
+    .panel-body
+      p Anta att vi har ett <code>&lt;p&gt;</code>-element på sidan..
+      pre
+        code.language-javascript
+          | var p = document.getElementsByTagName('p')[0];
+          | var i = document.getElementsByTagName('input')[0];
+          | 
+          | p.tagName;  // => "P"
+          | i.tagName;  // => "INPUT"
+      p Således kan vi förstås göra samma sak genom jQuery...
+      pre
+        code.language-javascript
+          | $('p').prop('tagName');       // => "P"
+          | $('input').prop('tagName');   // => "INPUT"
+
+h4 Undantag
+p Av historiska skäl och förändringar över tid så beteer sig ovan metoder, i tidigare versioner av jQuery, tyvärr inte alltid såsom man kan tänka sig. Du kan läsa mer om det i jQuery-dokumentationen för
+  a(href="http://api.jquery.com/prop/") prop
+  |  eller
+  a(href="http://api.jquery.com/attr/") attr
+  |  eller helt enkelt på följande tråd på 
+  a(href="http://stackoverflow.com/questions/5874652/prop-vs-attr") StackOverflow
+  |.
 
