@@ -3,7 +3,7 @@
     a(href="#jqueryobjects", name="objektet-jquery")
       .icon-link 
       | Objektet jQuery
-p I JavaScript-kapitlet använde vi rå JavaScript för att hämta och manipulera objekt i DOM:en. Vi har alltså direkt interagerat med DOM:ens API. Eftersom det lätt blir frustrerande att t.ex. skriva <code>document.getElementsByTagName</code> gång på gång så finns det ramverk som kan hjälpa oss. Därför ska vi nu istället göra detta med jQuery, och därför behöver vi prata om det mest grundläggande objektet i jQuery, själva jQuery-objektet. Således även reflektera över skillnaden mellan att arbeta med jQuery-objekt och HTMLElement-objekt.
+p I JavaScript-kapitlet använde vi rå JavaScript för att hämta och manipulera objekt i DOM:en. Vi har alltså direkt interagerat med DOM:ens API. Eftersom det lätt blir frustrerande att t.ex. skriva <code>document.getElementsByTagName</code> gång på gång så finns det ramverk som kan hjälpa oss. Därför ska vi nu istället göra detta med jQuery, och därför behöver vi prata om det mest grundläggande objektet i jQuery, själva jQuery-objektet. Således även reflektera över skillnaden mellan att arbeta med jQuery-objekt och <code>HTMLElement</code>-objekt.
 
 h3 Varför?
 p När vi hämtar element ifrån DOM:en m.h.a JavaScript får vi alltså tillbaka just DOM-element. Men när vi arbetar emot "råa" DOM-element blir många saker, som tidigare nämnt, ofta "tjatiga" och onödigt komplicerade. Beakta nedan exempel:
@@ -51,7 +51,7 @@ p Förhoppningsvis ser du nu styrkan! jQuery försökt att ta hand om den del va
 blockquote Förutom att jQuery gör det lättare för oss att utföra omständiga DOM-operationer gör den också att vi får mer webbläsarkompatibel kod, eftersom jQuery bygger på mycket "best practices".
 
 h3 Vad är det?
-p jQuery-objektet fungerar helt enkelt så att vi "wrappar" (omsluter/dekorerar) ett vanligt HTMLElement med jQuery. Helt plötsligt har vi ett helt vanligt HTMLElement, utan ett HTMLElement med en massa ytterligare kraftfulla metoder. istället och att den har mer metoder för att manipulera element. jQuery-objektet kan faktiskt göra fler saker än att hämta och manipulera element men nu ska vi fokusera på att det kan göra just det sistnämnda &mdash; alltså hämta element, och sedan manipulera dem. Låt oss se till det tidigare diskuterade exempelet som tog bort alla <code>&lt;p&gt;</code>-element ur ett dokument.
+p jQuery-objektet fungerar helt enkelt så att vi "wrappar" (omsluter/dekorerar) ett vanligt <code>HTMLElement</code> med jQuery. Helt plötsligt har vi ett helt vanligt <code>HTMLElement</code>, utan ett <code>HTMLElement</code> med en massa ytterligare kraftfulla metoder. istället och att den har mer metoder för att manipulera element. jQuery-objektet kan faktiskt göra fler saker än att hämta och manipulera element men nu ska vi fokusera på att det kan göra just det sistnämnda &mdash; alltså hämta element, och sedan manipulera dem. Låt oss se till det tidigare diskuterade exempelet som tog bort alla <code>&lt;p&gt;</code>-element ur ett dokument.
 
 .panel.panel-default
   .panel-heading Ta bort alla &lt;p&gt;-element med jQuery
