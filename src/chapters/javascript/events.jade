@@ -112,10 +112,10 @@ p Den funktion som körs när ett event avfyras, kallas för en <code>event hand
         pre
           code.language-javascript
             | var onClick = function(element){
-            |   if(element.toElement.innerHTML == "hello")
-            |     element.toElement.innerHTML = "world";
+            |   if(element.target.innerHTML == "hello")
+            |     element.target.innerHTML = "world";
             |   else
-            |     element.toElement.innerHTML = "hello";
+            |     element.target.innerHTML = "hello";
             | }
             | 
             | document.getElementById('eventlistener-example-2-1').addEventListener('click', onClick);
@@ -128,10 +128,10 @@ p Den funktion som körs när ett event avfyras, kallas för en <code>event hand
 
 script
   var onClick = function(element){
-    if(element.toElement.innerHTML == "hello")
-      element.toElement.innerHTML = "world";
+    if(element.target.innerHTML == "hello")
+      element.target.innerHTML = "world";
     else
-      element.toElement.innerHTML = "hello";
+      element.target.innerHTML = "hello";
   }
   document.getElementById('eventlistener-example-2-1').addEventListener('click', onClick);
   document.getElementById('eventlistener-example-2-2').addEventListener('click', onClick);
