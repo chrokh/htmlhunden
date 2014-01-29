@@ -6,4 +6,39 @@
 
 p När vi väl lärt oss att välja element m.h.a. jQuery är det busenkelt att börja modifiera dessa. jQuery-objektet exponerar oss en mängd behändiga funktioner och egenskaper vi kan använda för att modifiera kollektionen av element som gömmer sig under objektet. I detta kapitel kommer vi att prata om några av de vanligaste.
 
-p [TODO: In writing...]
+h3 html()
+p Metoden <code>html()</code> kan ses som jQuery's motsvarighet till JavaScript's <code>innerHTML</code>. Lagom straight forward så hämtar den eller sätter helt enkelt ett elements <code>innerHTML</code>.
+
+p Oavsett vilket jQuery-metod vi använder är det alltid viktigt att komma ihåg att jQuery <b>inte</b> alltid arbetar på element-kollektioner, och denna metod är ett exempel på just ett sådant tillfälle. Anropar vi <code>.html()</code> på en element-kollektion kommer vi således alltså bara få den inre html:en för det första elementet i kollektionen.
+
+blockquote.text-warning Alla metoder på jQuery-objektet arbetar <u>inte</u> på alla element i kollektionen.
+
+h4 Exempel
+.panel.panel-default
+  .panel-heading jQuery-metoden html()
+  .panel-body
+    p Om vi har följande html..
+      pre
+        code.language-markup
+          | &lt;p&gt;
+          |   &lt;span&gt;En katt&lt;/span&gt;
+          | &lt;/p&gt;
+          | &lt;p&gt;satt i en hatt&lt;/p&gt;
+    p Kan vi läsa första paragrafen genom att säga...
+      pre
+        code.language-javascript
+          | $('p').html();         // => "&lt;span&gt;En katt&lt;/span&gt;"
+    p Men vi kan även modifiera den genom att säga...
+      pre
+        code.language-javascript
+          | $('p').html('En hund') // => Ändrar första p-taggens inre html till "En hund"
+    p Vilket förändrar vår html så att vi nu har...
+     pre
+        code.language-markup
+          | &lt;p&gt;En hund&lt;/p&gt;
+          | &lt;p&gt;satt i en hatt&lt;/p&gt;
+    p Notera alltså att vi "blev av" med <code>&lt;span&gt;</code>-elementet.
+
+
+p Kom ihåg att du alltid kan läsa mer i 
+  a(href="http://api.jquery.com/html/") jQuery-dokumentationen
