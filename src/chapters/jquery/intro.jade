@@ -53,16 +53,62 @@ p Tada!! Vi har nu använt oss av biblioteket jQuery. Låt oss prova någonting 
         |   var randomNum = function(){
         |     return Math.floor(Math.random()*101);
         |   }
+        | 
         |   $('a').click(function(){
+        |     e.preventDefault();
         |     var size = 75 + randomNum(),
-        |         x = randomNum() + '%',
-        |         y = randomNum() + '%',
-        |         styles = 'position:fixed;left:'+x+';top:'+y,
-        |         src = 'http://placekitten.com/'+size+'/'+size;
-        |     $('body').append('&lt;img src="'+src+'" style="'+styles+'"&gt;');
-        |     return false;
+        |     x = randomNum() + '%',
+        |     y = randomNum() + '%',
+        | 
+        |     $img = $('&lt;img/&gt;');
+        |     $img.attr('src', 'http://placekitten.com/'+size+'/'+size);
+        |     $img.css({
+        |       'position': 'fixed',
+        |       'left'    : x,
+        |       'top'     : y
+        |     });
+        | 
+        |     $('body').append($img);
         |   });
         | });
+
+p Om du inte själv har valt att implementera den fantastiska jQuery-koden ovan så kan du få en sneak-peak på vilken underbar värld som väntar genom att prova exemplet nedan!
+.panel.panel-default
+  .panel-heading Resultat (prova!)
+  .panel-body
+    p
+      a.btn.btn-large.btn-success.jquery-intro-example-1 All your base!
+    p
+      a.btn.btn-large.btn-danger.jquery-intro-example-2 Reset (you will need it I promise);
+    script
+      $(function(){
+        (function(){
+          $('.jquery-intro-example-2').click(function(e){
+            $('.jquery-intro-example-1-output').remove();
+          });
+          $('.jquery-intro-example-1').click(function(e){
+            e.preventDefault();
+            var randomNum = function(){
+              return Math.floor(Math.random()*101);
+            }
+
+            var size = 75 + randomNum(),
+            x = randomNum() + '%',
+            y = randomNum() + '%',
+
+            $img = $('<img/>');
+            $img.attr('src', 'http://placekitten.com/'+size+'/'+size);
+            $img.addClass('jquery-intro-example-1-output');
+            $img.css({
+              'position': 'fixed',
+              'left'    : x,
+              'top'     : y
+            });
+
+            $('body').append($img);
+          });
+        })();
+      });
 
 p Svårare än så är det inte! Så, när du använder jQuery behöver du helt enkelt komma ihåg tre saker.
 ol
