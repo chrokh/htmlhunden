@@ -11,13 +11,8 @@ h4 Selektor: *
   .panel-body
     pre
       code.language-markup
-        | &lt;html&gt;
-        |   &lt;body&gt;
-        |     &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
-        |     &lt;p&gt;En paragraf, yay!&lt;/p&gt;
-        |   &lt;/body&gt;
-        | &lt;/html&gt;
-    .panel-body
+        | &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
+        | &lt;p&gt;En paragraf, yay!&lt;/p&gt;
     pre
       code.language-css
         | *{
@@ -32,12 +27,7 @@ h4 Selektor: E
     p E står i detta fall att man använder elementets typ som selektor. 
     pre
       code.language-markup
-        | &lt;html&gt;
-        |   &lt;body&gt;
-        |     &lt;p&gt;En paragraf, yay!&lt;/p&gt;
-        |   &lt;/body&gt;
-        | &lt;/html&gt;
-  .panel-body
+        | &lt;p&gt;En paragraf, yay!&lt;/p&gt;
     pre
       code.language-css
         | p{
@@ -52,12 +42,7 @@ h4 E:link
   .panel-body
     pre
       code.language-markup
-        | &lt;html&gt;
-        |   &lt;body&gt;
-        |     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-        |   &lt;/body&gt;
-        | &lt;/html&gt;
-  .panel-body
+        | &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
     pre
       code.language-css
         | a:link{
@@ -70,12 +55,7 @@ h4 E:visited
   .panel-body
     pre
       code.language-markup
-        | &lt;html&gt;
-        |   &lt;body&gt;
-        |     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-        |   &lt;/body&gt;
-        | &lt;/html&gt;
-  .panel-body
+        | &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
     pre
       code.language-css
         | a:visited{
@@ -87,12 +67,7 @@ h4 E:hover
   .panel-body
     pre
       code.language-markup
-        | &lt;html&gt;
-        |   &lt;body&gt;
-        |     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-        |   &lt;/body&gt;
-        | &lt;/html&gt;
-  .panel-body
+        | &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
     pre
       code.language-css
         | a:hover{
@@ -104,34 +79,28 @@ h4 E:active
   .panel-body
     pre
       code.language-markup
-        | &lt;html&gt;
-        |   &lt;body&gt;
-        |     &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-        |   &lt;/body&gt;
-        | &lt;/html&gt;
-  .panel-body
+        | &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
     pre
       code.language-css
         | a:active{
         |   color:purple;
         | }
 h3 Kombinationer
-h4 EF
+h4 E F
 .panel.panel-default
   .panel-heading Exempel på referens till extern stilmall
   .panel-body
-    p Alla element F som kommer efter E. Alltså i detta fall alla tre första paragrafer. 
+    p Alla element F som kommer efter E. Alltså i detta fall alla fyra första paragrafer. 
     pre
       code.language-markup
         | &lt;div class="yttre"&gt;
-        |     &lt;p&gt;En första paragraf&lt;/p&gt;
-        |     &lt;p&gt;En andra paragraf&lt;/p&gt;
-        |     &lt;p&gt;En tredje paragraf&lt;/p&gt;
+        |   &lt;p&gt;En första paragraf&lt;/p&gt;
+        |   &lt;p&gt;En andra paragraf&lt;/p&gt;
+        |   &lt;p&gt;En tredje paragraf&lt;/p&gt;
         |   &lt;div class="inre"&gt;
         |     &lt;p&gt;En fjärde paragraf&lt;/p&gt;
         |   &lt;/div&gt;
         | &lt;/div&gt;
-  .panel-body
     pre
       code.language-css
         | .yttre p{
@@ -145,14 +114,13 @@ h4 E+F
     pre
       code.language-markup
         | &lt;div class="yttre"&gt;
-        |     &lt;p&gt;En första paragraf&lt;/p&gt;
-        |     &lt;p&gt;En andra paragraf&lt;/p&gt;
-        |     &lt;p&gt;En tredje paragraf&lt;/p&gt;
+        |   &lt;p&gt;En första paragraf&lt;/p&gt;
+        |   &lt;p&gt;En andra paragraf&lt;/p&gt;
+        |   &lt;p&gt;En tredje paragraf&lt;/p&gt;
         |   &lt;div class="inre"&gt;
         |     &lt;p&gt;En rubrik, yay!&lt;/p&gt;
         |   &lt;/div&gt;
         | &lt;/div&gt;
-  .panel-body
     pre
       code.language-css
         | p + p{
@@ -163,21 +131,30 @@ h4 E > F
 .panel.panel-default
   .panel-heading Exempel på element som är direkt barn av ett annat element. 
   .panel-body
-    p Observera att alla första och andra paragrafen kommer att bli rosa men inte den fjärde.
+    p Anta att vi har följande html...
     pre
       code.language-markup
         | &lt;div class="yttre"&gt;
-        |     &lt;p&gt;En första paragraf&lt;/p&gt;
-        |     &lt;p&gt;En andra paragraf&lt;/p&gt;
+        |   &lt;p&gt;En första paragraf&lt;/p&gt;
+        |   &lt;p&gt;En andra paragraf&lt;/p&gt;
         |   &lt;div class="inre"&gt;
-        |     &lt;p&gt;En rubrik, yay!&lt;/p&gt;
+        |     &lt;p&gt;En inre paragraf!&lt;/p&gt;
         |   &lt;/div&gt;
         | &lt;/div&gt;
-  .panel-body
+    p Och sedan skriver denna regel..
     pre
       code.language-css
         | .yttre > p{
         |   color:pink;
         | }
+    p Så kommer vi således alltså endast "träffa" de två första <code>&lt;p&gt;</code>-elementen eftersom endast de är <b>direkta</b> barn till elementet med klassen <code>.yttre</code>.
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        div
+          p(style="color:pink;") En första paragraf
+          p(style="color:pink;") En andra paragraf
+        div
+          p En inre paragraf
 // TODO: This really needs more flesh when it comes to selectors
 // There is yet nothing about pseudo elements, nesting nor siblings or
