@@ -279,15 +279,15 @@ p{
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">p + p{
   color:pink;
-}</code></pre></div></div><h4>E &gt; F </h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som är direkt barn av ett annat element. </div><div class="panel-body"><p>Observera att alla första och andra paragrafen kommer att bli rosa men inte den fjärde.</p><pre><code class="language-markup">&lt;div class="yttre"&gt;
-    &lt;p&gt;En första paragraf&lt;/p&gt;
-    &lt;p&gt;En andra paragraf&lt;/p&gt;
+}</code></pre></div></div><h4>E &gt; F </h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som är direkt barn av ett annat element. </div><div class="panel-body"><p>Anta att vi har följande html...</p><pre><code class="language-markup">&lt;div class="yttre"&gt;
+  &lt;p&gt;En första paragraf&lt;/p&gt;
+  &lt;p&gt;En andra paragraf&lt;/p&gt;
   &lt;div class="inre"&gt;
-    &lt;p&gt;En rubrik, yay!&lt;/p&gt;
+    &lt;p&gt;En inre paragraf!&lt;/p&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">.yttre &gt; p{
+&lt;/div&gt;</code></pre><p>Och sedan skriver denna regel..</p><pre><code class="language-css">.yttre &gt; p{
   color:pink;
-}</code></pre></div></div><!-- TODO: This really needs more flesh when it comes to selectors--><!-- There is yet nothing about pseudo elements, nesting nor siblings or--><div class="page-header"><div id="vart-skall-jag-lgga-cssen"></div><div id="vart-skall-jag-lgga-cssen"></div><h2><a href="#css-placering" name="css-placering"><div class="icon-link"></div>Vart skall jag lägga CSS:en?</a></h2></div><p>När du använder CSS för att formatera en sida kan du infoga CSS-formateringen på tre sätt:</p><ol><li>Extern CSS-mall<br />en extern CSS-mall som kopplas till dokumentet</li><li>I dokumentet<br />i dokumentets huvud head-taggen</li><li>Direkt i element)<br />i elementet där CSS-formateringen ska utföras </li></ol><h3>Extern CSS-mall</h3><p> 
+}</code></pre><p>Så kommer vi således alltså endast "träffa" de två första <code>&lt;p&gt;</code>-elementen eftersom endast de är <b>direkta</b> barn till elementet med klassen <code>.yttre</code>.</p><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><div><p style="color:pink;">En första paragraf</p><p style="color:pink;">En andra paragraf</p></div><div><p>En inre paragraf</p></div></div></div></div></div><!-- TODO: This really needs more flesh when it comes to selectors--><!-- There is yet nothing about pseudo elements, nesting nor siblings or--><div class="page-header"><div id="vart-skall-jag-lgga-cssen"></div><div id="vart-skall-jag-lgga-cssen"></div><h2><a href="#css-placering" name="css-placering"><div class="icon-link"></div>Vart skall jag lägga CSS:en?</a></h2></div><p>När du använder CSS för att formatera en sida kan du infoga CSS-formateringen på tre sätt:</p><ol><li>Extern CSS-mall<br />en extern CSS-mall som kopplas till dokumentet</li><li>I dokumentet<br />i dokumentets huvud head-taggen</li><li>Direkt i element)<br />i elementet där CSS-formateringen ska utföras </li></ol><h3>Extern CSS-mall</h3><p> 
 Det här är den vanligaste användningen av CSS där ett externt dokument som innehåller formateringen kopplas till alla de 
 sidor som ska tillämpa formatet. Namnet på CSS-mallen måste ha filtilläget .css och namnet på mallen i exemplet nedan är 
 "mall.css". 
