@@ -7,11 +7,7 @@
 p När vi väl lärt oss att välja element m.h.a. jQuery är det busenkelt att börja modifiera dessa. jQuery-objektet exponerar oss en mängd behändiga funktioner och egenskaper vi kan använda för att modifiera kollektionen av element som gömmer sig under objektet. I detta kapitel kommer vi att prata om några av de vanligaste.
 
 h3 html()
-p Metoden <code>html()</code> kan ses som jQuery's motsvarighet till JavaScript's <code>innerHTML</code>. Lagom straight forward så hämtar den eller sätter helt enkelt ett elements <code>innerHTML</code>.
-
-p Oavsett vilket jQuery-metod vi använder är det alltid viktigt att komma ihåg att jQuery <b>inte</b> alltid arbetar på element-kollektioner, och denna metod är ett exempel på just ett sådant tillfälle. Anropar vi <code>.html()</code> på en element-kollektion kommer vi således alltså bara få den inre html:en för det första elementet i kollektionen.
-
-blockquote.text-warning Alla metoder på jQuery-objektet arbetar <u>inte</u> på alla element i kollektionen.
+p Metoden <code>html()</code> kan ses som jQuery's motsvarighet till JavaScript's <code>innerHTML</code>. Lagom straight forward så hämtar den eller sätter helt enkelt elements <code>innerHTML</code>.
 
 h4 Exempel
 .panel.panel-default
@@ -31,26 +27,30 @@ h4 Exempel
     p Men vi kan även modifiera den genom att säga...
       pre
         code.language-javascript
-          | $('p').html('En hund') // => Ändrar första p-taggens inre html till "En hund"
+          | $('p').html('En hund') // => Ändrar ALLA p-elements inre html till "En hund"
     p Vilket förändrar vår html så att vi nu har...
      pre
         code.language-markup
           | &lt;p&gt;En hund&lt;/p&gt;
-          | &lt;p&gt;satt i en hatt&lt;/p&gt;
-    p Notera alltså att vi "blev av" med <code>&lt;span&gt;</code>-elementet.
+          | &lt;p&gt;En hund&lt;/p&gt;
+    p Notera alltså att vi "blev av" med <code>&lt;span&gt;</code>-elementet. Samt att <b>båda</b> <code>&lt;p&gt;</code>-elementens inre html rensades.
+
+p Men vänta nu, vad hände nu? Om du var uppmärksam så märkte du att när vi använde metoden <code>html()</code> för att <b>läsa</b> ifrån en element-kollektion så fick vi endast värdet ifrån det första elementet i kollektionen. Men när vi däremot använda <code>html()</code>-funktionen för att <b>skriva</b> så opererade vi på alla element i objekt-kollektionen. Vad händer nu egentligen?
+
+blockquote.text-warning Alla metoder på jQuery-objektet arbetar <u>inte alltid</u> på alla element i kollektionen.
 
 
-p Kom ihåg att du alltid kan läsa mer i 
-  a(href="http://api.jquery.com/html/") jQuery-dokumentationen
+h3 Vilka metoder opererar över hela kollektionen?
+p Oavsett vilket jQuery-metod vi använder är det alltså alltid viktigt att vara medveten om huruvida den arbetar på hela kollektionen eller ett specifikt element. En tumregel vi kan använda är att många av metoderna <b>läser ifrån det första</b> elementet i kollektionen och <b>skriver till alla</b> i kollektionen. Anropar vi alltså <code>html()</code> för att <b>läsa</b> kommer vi bara att få all inre html för det första elementet, medan om vi använder metoden till att skriva <code>html('something')</code> kommer vi förändra <code>innerHTML</code> för alla element i kollektionen.
 
-
+blockquote.info En bra tumregel är att många jQuery-metoder läser ifrån första elementet i en objekt-kollektion, och skriver till alla.
 
 
 
 
 
 h3 text()
-p Metoden <code>text()</code> påminner mycket om metoden <code>html()</code> förutom att den fantastiskt nog ger oss innehållet i det första elementet i en element-kollektion utan html. Vi får alltså allt som webbläsaren faktiskt uppfattat som text, utan all störande html. Detta är en mycket användbar metod! Vi kan förstås, precis som med metoden <code>html()</code> använda den för att även skriva text till ett element. Låt oss se till några exempel:
+p Metoden <code>text()</code> påminner mycket om metoden <code>html()</code> förutom att den fantastiskt nog ger oss innehållet i det första elementet i en element-kollektion utan html. Vi får alltså allt som webbläsaren faktiskt uppfattat som text, utan all störande html. Detta är en mycket användbar metod! Vi kan förstås, precis som med metoden <code>html()</code> använda den för att även skriva text till alla element i en kollektion. Låt oss se till några exempel:
 
 h4 Exempel
 .panel.panel-default
@@ -84,7 +84,7 @@ h4 Exempel
 
 
 h3 attr() &amp; prop()
-p Låt oss nu prata om två metoder som till synes verkar likna varandra. Metoden <code>attr()</code> hämtar och sätter <code>attribut</code> (<code>attributes</code>), medan metoden <code>prop</code> hämtar och sätter <code>egenskaper</code> (<code>properties</code>). För att förstå skillnaden mellan de två måste vi först förstå skillnaden mellan egenskap och attribut.
+p Låt oss nu prata om två metoder som till synes verkar likna varandra. Metoden <code>attr()</code> hämtar och sätter <code>attribut</code> (<code>attributes</code>), medan metoden <code>prop</code> hämtar och sätter <code>egenskaper</code> (<code>properties</code>). På samma sätt som <code>text()</code> och <code>html()</code> hämtar båda metoderna ifrån det första elementet, och skriver till alla i en kollektion. Men för att förstå skillnaderna mellan de två metoderna <code>attr()</code> och <code>prop()</code> behöver vi först förstå skillnaden mellan <code>attribut</code> och <code>egenskaper</code>.
 
 h4 Attribut
 p När vi pratar om attribut så pratar vi attribut på html-element. Exempel på attribut är alltså <code>id</code>, <code>class</code>, <code>name</code> och <code>name</code>, för att nämna några. Med andra ord, attribut är sådant som vi "tilldelar" ett element i vår html. Självklart kan vi både hämta och sätta attribut via JavaScript, men för att förstå skillnaden mellan attribut och egenskaper är det lättast att tänka på attribut som det som vi sätter i html. Nedan följer ett exempel på ett html-element med ett antal attribut.
