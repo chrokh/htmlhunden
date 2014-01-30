@@ -222,44 +222,20 @@ p{
 }
 #blueish{
   color: blue;
-}</code></pre><p>Resultat</p><div class="panel panel-default"><div class="panel-body"><p style="color:red;">As Gregor Samsa awoke one morning</p><p style="color:blue;">from uneasy dreams</p><p style="color:orange;">he found himself transformed in his bed</p><p style="color:red;">into a monstrous vermin.</p></div></div></div></div><!-- TODO: This really needs more flesh when it comes to selectors--><!-- There is yet nothing about pseudo elements, nesting nor siblings or--><div class="page-header"><div id="cssselectorer"></div><div id="cssselectorer"></div><h2><a href="#css-selectorer" name="css-selectorer"><div class="icon-link"></div>CSS-selectorer</a></h2></div><h3>Vanliga selektorer och atttribut</h3><p>Man kan ju tycka att det borde räcka med att kunna hänvisa till element bara via deras typ, klass eller typer. Detta är dock inte sant, suck! Det går att använda att komma åt element på andra sätt och detta gör det lättare man slipper sätta klass eller id på allt. Nedanför finner ni olika selektorer och exempel. Observera att det finns flera....Never ending story! </p><h4>Selektor: *</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med * </div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
-  &lt;body&gt;
-    &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
-    &lt;p&gt;En paragraf, yay!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre><div class="panel-body"></div><pre><code class="language-css">*{
+}</code></pre><p>Resultat</p><div class="panel panel-default"><div class="panel-body"><p style="color:red;">As Gregor Samsa awoke one morning</p><p style="color:blue;">from uneasy dreams</p><p style="color:orange;">he found himself transformed in his bed</p><p style="color:red;">into a monstrous vermin.</p></div></div></div></div><!-- TODO: This really needs more flesh when it comes to selectors--><!-- There is yet nothing about pseudo elements, nesting nor siblings or--><div class="page-header"><div id="cssselectorer"></div><div id="cssselectorer"></div><h2><a href="#css-selectorer" name="css-selectorer"><div class="icon-link"></div>CSS-selectorer</a></h2></div><h3>Vanliga selektorer och atttribut</h3><p>Man kan ju tycka att det borde räcka med att kunna hänvisa till element bara via deras typ, klass eller typer. Detta är dock inte sant, suck! Det går att använda att komma åt element på andra sätt och detta gör det lättare man slipper sätta klass eller id på allt. Nedanför finner ni olika selektorer och exempel. Observera att det finns flera....Never ending story! </p><h4>Selektor: *</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med * </div><div class="panel-body"><pre><code class="language-markup">&lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
+&lt;p&gt;En paragraf, yay!&lt;/p&gt;</code></pre><div class="panel-body"></div><pre><code class="language-css">*{
   font-size: 24px; 
   background:#ff6600;
- }</code></pre></div></div><h4>Selektor: E</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med E </div><div class="panel-body"><p>E står i detta fall att man använder elementets typ som selektor. </p><pre><code class="language-markup">&lt;html&gt;
-  &lt;body&gt;
-    &lt;p&gt;En paragraf, yay!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">p{
+ }</code></pre></div></div><h4>Selektor: E</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med E </div><div class="panel-body"><p>E står i detta fall att man använder elementets typ som selektor. </p><pre><code class="language-markup">&lt;p&gt;En paragraf, yay!&lt;/p&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">p{
   font-size: 24px; 
   background:#ff6600;
-}</code></pre></div></div><h3>PseudoKlasser</h3><h4>E:link</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som är en länk som inte besökts än.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
-  &lt;body&gt;
-    &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:link{
+}</code></pre></div></div><h3>PseudoKlasser</h3><h4>E:link</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som är en länk som inte besökts än.</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:link{
   color:pink;
-}</code></pre></div></div><h4>E:visited</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som har blivit besökt.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
-  &lt;body&gt;
-    &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:visited{
+}</code></pre></div></div><h4>E:visited</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som har blivit besökt.</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:visited{
   color:blue;
-}</code></pre></div></div><h4>E:hover</h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som har muspekaren över sig.</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
-  &lt;body&gt;
-    &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:hover{
+}</code></pre></div></div><h4>E:hover</h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som har muspekaren över sig.</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:hover{
   color:green;
-}</code></pre></div></div><h4>E:active</h4><div class="panel panel-default"><div class="panel-heading">Exempel på länk som är aktivt (exempelvis när användaren trycker ner knappen)</div><div class="panel-body"><pre><code class="language-markup">&lt;html&gt;
-  &lt;body&gt;
-    &lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:active{
+}</code></pre></div></div><h4>E:active</h4><div class="panel panel-default"><div class="panel-heading">Exempel på länk som är aktivt (exempelvis när användaren trycker ner knappen)</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre></div><div class="panel-body"><pre><code class="language-css">a:active{
   color:purple;
 }</code></pre></div></div><h3>Kombinationer</h3><h4>E F</h4><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><p>Alla element F som kommer efter E. Alltså i detta fall alla fyra första paragrafer. </p><pre><code class="language-markup">&lt;div class="yttre"&gt;
   &lt;p&gt;En första paragraf&lt;/p&gt;
