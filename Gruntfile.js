@@ -14,10 +14,22 @@ module.exports = function(grunt) {
     },
 
     jade: {
-      compile: {
+      together: {
         files: [{
           src:     ["src/index.jade"],
           dest:    "index.html"
+        }]
+      },
+      separate: {
+        options: {
+            pretty: false
+        },
+        files: [{
+          cwd:  'src/chapters/',
+          src:  ['*.jade'],
+          dest: 'dist/',
+          ext:  '.html',
+          expand: true
         }]
       }
     },
@@ -44,6 +56,18 @@ module.exports = function(grunt) {
         options:{ stdout: true },
         command: 'git checkout gh-pages && git merge master && git push && git checkout master'
       }
+    },
+
+    attach: {
+      all: {
+        files: [
+          {
+            src:  ['src/chapters/*.jade'],
+            dest: 'tmp/chapters/',
+            expand: true
+          }
+        ]
+      }
     }
 
   });
@@ -57,9 +81,12 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['connect', 'watch']);
-  grunt.registerTask('compile', ['jade', 'copy', 'build-toc']);
+  grunt.registerTask('compile', ['jade:separate', 'copy', 'build-toc']);
   grunt.registerTask('publish', ['compile', 'shell:publish']);
   grunt.registerTask('build-toc', function(){
     require('./tasks/build-toc.js')(this.async());
+  });
+  grunt.registerMultiTask('attach', 'Concats each file in a given folder with the given file', function(){
+    require('./tasks/attach.js')(this, grunt);
   });
 };
