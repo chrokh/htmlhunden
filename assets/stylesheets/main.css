@@ -7,6 +7,10 @@ img{
 th{
   font-weight: bold;
 }
+.container{
+  max-width: 820px;
+  margin: 0 auto;
+}
 
 /*
  * Tables
@@ -230,6 +234,18 @@ a:hover, a:active{
   margin: 200px auto;
 }
 
+
+
+/*
+ * Sections
+ */
+section.title{
+  margin: 0 auto;
+}
+section.title h1,
+section.title h2{
+  text-align: center;
+}
 
 
 
