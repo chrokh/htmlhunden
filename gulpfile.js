@@ -31,14 +31,25 @@ gulp.task('memorize-toc', function(){
     }));
 })
 
-gulp.task('paginated', function(){
-  return gulp.src('./src/chapters/*.jade')
-    .pipe(header(files.common_header))
-    .pipe(header(files.paginated_header))
-    .pipe(footer(files.paginated_footer))
-    .pipe(footer(files.common_footer))
-    .pipe(jade())
-    .pipe(gulp.dest('./dist/'));
+gulp.task('paginated', ['memorize-toc'], function(cb){
+  chapterIterator(function(chapter){
+    gulp.src(chapter.contents.origin)
+      .pipe(header(fs.readFileSync('./src/templates/pagination.jade')))
+      .pipe(header(files.paginated_header))
+      .pipe(header(files.common_header))
+      .pipe(footer(fs.readFileSync('./src/templates/pagination.jade')))
+      .pipe(footer(files.common_footer))
+      .pipe(jade({
+        locals:{
+          urls: {
+            next: findOffsetChapterURL(chapter.contents.url, 1),
+            prev: findOffsetChapterURL(chapter.contents.url, -1)
+          }
+        }
+      }))
+      .pipe(gulp.dest('./dist/'));
+  });
+  cb();
 });
 
 gulp.task('single', ['memorize-toc'], function(){
@@ -65,6 +76,7 @@ gulp.task('assets', function(){
 
 gulp.task('watch', function(){
   gulp.watch('src/**/*.jade', ['compile']);
+  gulp.watch('assets/**/*.*', ['assets']);
 });
 
 gulp.task('compile', ['index', 'paginated', 'single', 'assets'])
@@ -93,8 +105,9 @@ var addFileToTOC = function(filepath){
   var url = filename.split('.')[0] + '.html';
 
   var chapter = {
-    title: title,
-    url:   url
+    title  : title,
+    url    : url,
+    origin : filepath
   }
 
   if(level === 1)
@@ -106,4 +119,47 @@ var addFileToTOC = function(filepath){
     data.toc[data.toc.length-1].subchapters.push({
       contents:   chapter
     });
+}
+
+
+
+var chapterIterator = function(cb){
+  data.toc.forEach(function(chapter){
+    cb(chapter);
+    chapter.subchapters.forEach(function(subchapter){
+      cb(subchapter);
+    });
+  });
+};
+
+var chaptersAsFlatArray = function(){
+  var chapters = [];
+  chapterIterator(function(c){
+    chapters.push(c);
+  });
+  return chapters;
+};
+
+var indexOfChapter = function(url){
+  var chapters = chaptersAsFlatArray();
+  var index = -1;
+  chapters.forEach(function(c,i){
+    if(c.contents.url === url){
+      index = i;
+    }
+  });
+  return index;
+};
+
+var findOffsetChapterURL = function(url, offset){
+  var chapters = chaptersAsFlatArray(),
+      index    = indexOfChapter(url),
+      newIndex = index + offset;
+  if(newIndex < 0  ||  newIndex > chapters.length-1){
+    console.log("Not found refering to index");
+    return '/index.html';
+  }
+  else{
+    return chapters[newIndex].contents.url;
+  }
 }

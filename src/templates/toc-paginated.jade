@@ -2,10 +2,10 @@
   ul
     each chapter in locals.toc
       li.toc-h1
-        a(href="#{chapter.contents.url}")
+        a(href="dist/#{chapter.contents.url}")
           | #{chapter.contents.title}
       ul
         each subchapter in chapter.subchapters
           li.toc-h2
-            a(href="#{subchapter.contents.url}")
+            a(href="dist/#{subchapter.contents.url}")
               | #{subchapter.contents.title}
