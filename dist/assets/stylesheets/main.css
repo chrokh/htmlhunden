@@ -26,94 +26,6 @@ th{
 }
 
 
-/*
- * TOC all devices
- */
-.toc ul{
-  list-style-type: none;
-  padding-left: 0;
-}
-.toc li{
-  padding-left: 0;
-}
-
-
-/*
- * TOC mobile devices
- */
-#toc-mobile{
-  text-align: center;
-  width: 90%;
-  margin: -120px auto 0 auto;
-  font-size: 18px;
-}
-#toc-mobile h1{
-  margin-bottom: 32px;
-}
-#toc-mobile li{
-  margin: 12px auto;
-}
-#toc-mobile li a{
-  display: block;
-  width: 100%;
-  padding: 12px;
-  background: #dedede;
-  color: #333;
-}
-#toc-mobile li a:hover{
-  opacity: 0.8;
-}
-#toc-mobile .toc-h1 a{ background: transparent; }
-#toc-mobile .toc-h1{
-  width: 100%;
-  font-size: 36px;
-  margin-top: 26px;
-  font-weight: bold;
-}
-#toc-mobile .toc-h2{
-  width: 90%;
-}
-#toc-mobile .toc-h3{
-  display: none !important;
-}
-
-/*
- *  TOC desktop devices
- */
- #toc-desktop{
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  padding: 12px 24px;
-  overflow: auto;
-  border-right: 1px solid #ccc;
-  background: #333;
-}
-#toc-desktop a{
-  color: #fff;
-  font-size: 110%;
-}
-#toc-desktop li{
-  margin-bottom: 4px;
-}
-#toc-desktop .toc-active a{
-  color: #5cb85c;
-  font-weight: bold;
-}
-#toc-desktop .toc-h1{
-  padding-top: 6px;
-  font-weight: bold;
-}
-#toc-desktop .toc-h2{
-  padding-left: 12px;
-}
-#toc-desktop .toc-h3{
-  padding-left: 22px;
-}
-
-
-
 blockquote{
   font-size: 26px;
   font-family: Georgia;
@@ -245,6 +157,41 @@ section.title{
 section.title h1,
 section.title h2{
   text-align: center;
+}
+
+
+
+
+/*
+ * ==== TABLE OF CONTENTS ====
+ */
+#toc-single{
+  position: fixed;
+  width: 320px;
+  background: black;
+  top:    0;
+  bottom: 0;
+  left:   -280px;
+  overflow: auto;
+}
+#toc-single:hover{
+  left: 0;
+}
+#toc-single > #toggle-toc{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: right;
+  margin-bottom: 22px;
+}
+
+
+
+/*
+ * ==== PAGINATION BUTTONS ====
+ */
+#next-chapter{
+  float: right;
 }
 
 
