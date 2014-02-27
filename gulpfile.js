@@ -5,7 +5,8 @@ var gulp      = require('gulp'),
     footer    = require('gulp-footer'),
     jade      = require('gulp-jade'),
     intercept = require('gulp-intercept'),
-    concat    = require('gulp-concat');
+    concat    = require('gulp-concat'),
+    cheerio   = require('cheerio');
 
 
 var files = {
@@ -25,8 +26,9 @@ var data = {
 gulp.task('memorize-toc', function(){
   data.toc = [];
   return gulp.src('./src/chapters/*.jade')
+    .pipe(jade())
     .pipe(intercept(function(file){
-      addFileToTOC(file.path);
+      addFileToTOC(file);
       return file;
     }));
 })
@@ -88,37 +90,33 @@ gulp.task('default', ['compile']);//['paginated', 'single']);
 /*
  * helpers
 */
-var addFileToTOC = function(filepath){
-  var filename = path.basename(filepath);
-  var parts = filename.split('-');
-
-  var level = 2;
-  if(parts[1] === '00'){
-    level = 1;
-  }
-
-  // find chapter title
-  var title = (level===1) ? parts[2] : parts[3];
-  title = title.split('.')[0];
+var addFileToTOC = function(file){
+  var $       = cheerio.load(file.contents.toString()),
+      $h1     = $('h1'),
+      $h2     = $('h2'),
+      $header = $h1.length > 0 ? $h1 : $h2;
 
   // find chapter url
-  var url = filename.split('.')[0] + '.html';
+  var url = path.basename(file.path).split('.')[0] + '.html';
 
+  // create chapter object
   var chapter = {
-    title  : title,
+    title  : $header.text(),
     url    : url,
-    origin : filepath
+    origin : file.path
   }
 
-  if(level === 1)
+  // memorize chapter
+  if($h1.length > 0){
     data.toc.push({
       contents:    chapter,
       subchapters: []
     });
-  else
+  }else if($h2.length > 0){
     data.toc[data.toc.length-1].subchapters.push({
       contents:   chapter
     });
+  }
 }
 
 

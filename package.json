@@ -17,7 +17,8 @@
     "gulp-footer": "~1.0.4",
     "gulp-jade": "~0.4.2",
     "gulp-concat": "~2.1.7",
-    "gulp-intercept": "~0.1.0"
+    "gulp-intercept": "~0.1.0",
+    "cheerio": "~0.13.1"
   },
   "readmeFilename": "README.markdown"
 }
