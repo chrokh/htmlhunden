@@ -184,6 +184,12 @@ section.title h2{
 #toc-single.visible{
   position: static;
 }
+#content-peek{
+  position: fixed;
+  top:    0;
+  right:  0;
+  bottom: 0;
+}
 
 
 
