@@ -74,16 +74,15 @@ lathunden.TOC.toggleVisibility = function(){
 lathunden.TOC.show = function(){
   this.visible = true;
   this.lastContentY = $('body').scrollTop();
-  $('#toc-single').animate({'width': '100%'}, function(){
+  $('#single').fadeOut();
+  $('#toc-single').animate({'width': '90%'}, function(){
     $('#toc-single').addClass('visible');
-    $('body').scrollTop(0);
-    $('#single').css('display','none');
   });
 }
 lathunden.TOC.hide = function(){
   this.visible = false;
+  $('#single').show();
   $('#toc-single').removeClass('visible');
-  $('#single').css('display', 'block');
   $('body').scrollTop(this.lastContentY);
   $('#toc-single').animate({'width':'50px'});
 }
