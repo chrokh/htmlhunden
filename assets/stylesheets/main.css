@@ -167,7 +167,7 @@ section.title h2{
  */
 #toc-single{
   position: fixed;
-  width: 40px;
+  width: 50px;
   background: black;
   top:    0;
   bottom: 0;
@@ -176,11 +176,10 @@ section.title h2{
   z-index: 999;
 }
 #toc-single > #toggle-toc{
-  position: absolute;
-  top: 0;
   width: 100%;
   text-align: right;
   margin-bottom: 22px;
+  color: #fff !important;
 }
 #toc-single.visible{
   position: static;

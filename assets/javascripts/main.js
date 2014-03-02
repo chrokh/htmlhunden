@@ -85,7 +85,7 @@ lathunden.TOC.hide = function(){
   $('#toc-single').removeClass('visible');
   $('#single').css('display', 'block');
   $('body').scrollTop(this.lastContentY);
-  $('#toc-single').animate({'width':'40px'});
+  $('#toc-single').animate({'width':'50px'});
 }
 
 
