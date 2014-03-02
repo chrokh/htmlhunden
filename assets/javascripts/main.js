@@ -60,6 +60,35 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 }
 
 
+lathunden.TOC = {};
+lathunden.TOC.init = function(){
+  this.visible = false;
+  $('#toggle-toc').click(function(){ lathunden.TOC.toggleVisibility() });
+};
+lathunden.TOC.toggleVisibility = function(){
+  if(this.visible)
+    this.hide();
+  else
+    this.show();
+}
+lathunden.TOC.show = function(){
+  this.visible = true;
+  this.lastContentY = $('body').scrollTop();
+  $('#toc-single').animate({'width': '100%'}, function(){
+    $('#toc-single').addClass('visible');
+    $('body').scrollTop(0);
+    $('#single').css('display','none');
+  });
+}
+lathunden.TOC.hide = function(){
+  this.visible = false;
+  $('#toc-single').removeClass('visible');
+  $('#single').css('display', 'block');
+  $('body').scrollTop(this.lastContentY);
+  $('#toc-single').animate({'width':'40px'});
+}
+
+
 
 
 /*
@@ -67,6 +96,7 @@ lathunden.Examples.CSSPositionFixed.init = function(){
  */
 
 lathunden.init = function(){
+ lathunden.TOC.init();
   //lathunden.Anchors.init();
   //lathunden.Examples.init();
   //$('#chapters h1').find('a').removeAttr('href'); //TODO: Clean out all the anchors cuz they are broken

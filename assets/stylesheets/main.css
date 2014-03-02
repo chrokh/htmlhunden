@@ -167,15 +167,13 @@ section.title h2{
  */
 #toc-single{
   position: fixed;
-  width: 320px;
+  width: 40px;
   background: black;
   top:    0;
   bottom: 0;
-  left:   -280px;
+  left:   0;
   overflow: auto;
-}
-#toc-single:hover{
-  left: 0;
+  z-index: 999;
 }
 #toc-single > #toggle-toc{
   position: absolute;
@@ -183,6 +181,9 @@ section.title h2{
   width: 100%;
   text-align: right;
   margin-bottom: 22px;
+}
+#toc-single.visible{
+  position: static;
 }
 
 
