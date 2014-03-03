@@ -99,8 +99,9 @@ lathunden.TOC.show = function(){
       .click(function(){
         lathunden.TOC.hide();
       });
-    $('body').scrollTop(0);
-    $('body').append($peek);
+    $('body').scrollTop(0)
+             .append($peek)
+             .css('padding', 0);
     $('#toc-single').addClass('visible');
     lathunden.TOC.visible = true;
   });
@@ -108,7 +109,8 @@ lathunden.TOC.show = function(){
 lathunden.TOC.hide = function(){
   $('#chapters').show();
   $('#toc-single').removeClass('visible');
-  $('body').scrollTop(this.lastContentY);
+  $('body').scrollTop(this.lastContentY)
+           .css('padding', '');
   $('#content-peek').remove();
   $('#toc-single .toc-list').fadeOut();
   $('#toc-single').animate({'width':'50px'}, function(){
