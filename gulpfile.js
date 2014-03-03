@@ -8,13 +8,13 @@ var gulp       = require('gulp'),
     concat     = require('gulp-concat'),
     cheerio    = require('cheerio');
 
-var files = {
-  common_header    : fs.readFileSync('src/templates/common-header.jade'),
-  common_footer    : fs.readFileSync('src/templates/common-footer.jade'),
-  single_header    : fs.readFileSync('src/templates/single-header.jade'),
-  single_footer    : fs.readFileSync('src/templates/single-footer.jade'),
-  paginated_header : fs.readFileSync('src/templates/paginated-header.jade'),
-  paginated_footer : fs.readFileSync('src/templates/paginated-footer.jade')
+var paths = {
+  common_header    : 'src/templates/common-header.jade',
+  common_footer    : 'src/templates/common-footer.jade',
+  single_header    : 'src/templates/single-header.jade',
+  single_footer    : 'src/templates/single-footer.jade',
+  paginated_header : 'src/templates/paginated-header.jade',
+  paginated_footer : 'src/templates/paginated-footer.jade'
 };
 
 var tinylr;
@@ -37,10 +37,10 @@ gulp.task('paginated', ['memorize-toc'], function(cb){
   chapterIterator(function(chapter){
     gulp.src(chapter.contents.origin)
       .pipe(header(fs.readFileSync('./src/templates/pagination.jade')))
-      .pipe(header(files.paginated_header))
-      .pipe(header(files.common_header))
+      .pipe(header(fs.readFileSync(paths.paginated_header)))
+      .pipe(header(fs.readFileSync(paths.common_header)))
       .pipe(footer(fs.readFileSync('./src/templates/pagination.jade')))
-      .pipe(footer(files.common_footer))
+      .pipe(footer(fs.readFileSync(paths.common_footer)))
       .pipe(jade({
         locals:{
           urls: {
@@ -57,10 +57,10 @@ gulp.task('paginated', ['memorize-toc'], function(cb){
 gulp.task('single', ['memorize-toc'], function(){
   return gulp.src('./src/chapters/*.jade')
     .pipe(concat('full.html'))
-    .pipe(header(files.single_header))
-    .pipe(header(files.common_header))
-    .pipe(footer(files.single_footer))
-    .pipe(footer(files.common_footer))
+    .pipe(header(fs.readFileSync(paths.single_header)))
+    .pipe(header(fs.readFileSync(paths.common_header)))
+    .pipe(footer(fs.readFileSync(paths.single_footer)))
+    .pipe(footer(fs.readFileSync(paths.common_footer)))
     .pipe(jade({locals:{ toc: data.toc }}))
     .pipe(gulp.dest('./dist'));
 });
