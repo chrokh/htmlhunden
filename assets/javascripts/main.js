@@ -71,7 +71,8 @@ lathunden.TOC.listen = function(){
   $('#toc-single').click(function(){
     if($(this).get(0) != $('#toggle-toc').get(0))
       if(lathunden.TOC.visible === false)
-        lathunden.TOC.show()
+        if($('#toggle-toc').is(':visible'))
+          lathunden.TOC.show()
   });
 }
 lathunden.TOC.toggleVisibility = function(){
