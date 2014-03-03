@@ -62,6 +62,10 @@ gulp.task('single', ['memorize-toc'], function(){
     .pipe(footer(fs.readFileSync(paths.single_footer)))
     .pipe(footer(fs.readFileSync(paths.common_footer)))
     .pipe(jade({locals:{ toc: data.toc }}))
+    .pipe(intercept(function(file){
+      file.contents = new Buffer(injectAnchors(file.contents.toString()));
+      return file;
+    }))
     .pipe(gulp.dest('./dist'));
 });
 
@@ -136,6 +140,7 @@ var addFileToTOC = function(file){
   var chapter = {
     title  : $header.text(),
     url    : url,
+    slug   : url.substring(0, url.indexOf('.')),
     origin : origin
   }
 
@@ -193,4 +198,19 @@ var findOffsetChapterURL = function(url, offset){
   else{
     return chapters[newIndex].contents.url;
   }
+}
+
+
+var injectAnchors = function(html){
+  var $ = cheerio.load(html),
+      chapters = chaptersAsFlatArray();
+
+  $('h1, h2').each(function(n){
+    var slug = chapters[n].contents.slug;
+    $(this).attr('href', '#' + slug)
+           .attr('name', slug)
+           .attr('id', slug);
+  });
+
+  return '<!DOCTYPE html><html>' + $('html').html() + '</html>';
 }

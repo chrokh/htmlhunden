@@ -5,10 +5,10 @@
     span.glyphicon.glyphicon-align-justify
   each chapter in locals.toc
     .btn-group-vertical.toc-list
-      a.toc-h1.btn.btn-menu(href="#{chapter.contents.url}")
+      a.toc-h1.btn.btn-menu(href="\##{chapter.contents.slug}")
         b #{chapter.contents.title}
       each subchapter in chapter.subchapters
-        a.toc-h2.btn.btn-menu(href="#{subchapter.contents.url}")
+        a.toc-h2.btn.btn-menu(href="\##{subchapter.contents.slug}")
           | #{subchapter.contents.title}
     br
     br
