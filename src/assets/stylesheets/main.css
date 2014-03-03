@@ -12,6 +12,17 @@ th{
   margin: 0 auto;
 }
 
+
+
+/*
+ * Logotype
+ */
+.logo{
+  margin:  32px auto;
+  width:   260px;
+  display: block;
+}
+
 /*
  * Tables
  */
