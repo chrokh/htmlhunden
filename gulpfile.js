@@ -36,7 +36,6 @@ gulp.task('memorize-toc', function(){
 gulp.task('paginated', ['memorize-toc', 'pages'], function(cb){
   chapterIterator(function(chapter){
     gulp.src(chapter.contents.origin)
-      .pipe(header(fs.readFileSync('./src/templates/pagination.jade')))
       .pipe(header(fs.readFileSync(paths.paginated_header)))
       .pipe(header(fs.readFileSync(paths.common_header)))
       .pipe(footer(fs.readFileSync('./src/templates/pagination.jade')))

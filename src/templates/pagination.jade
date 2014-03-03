@@ -1,3 +1,14 @@
+.chapter-pagination
+  .visible-xs
+    .text-center
+      .btn-group
+        a.btn.btn-sm.btn-default.pagination-prev(href="#{locals.urls.prev}") Föregående
+        a.btn.btn-sm.btn-default.pagination-prev(href="/dist/toc.html") Innehållsförteckning
+        a.btn.btn-sm.btn-default.pagination-next(href="#{locals.urls.next}") Nästa
 
-a#next-chapter(href="#{locals.urls.next}") Next chapter
-a#prev-chapter(href="#{locals.urls.prev}") Previous chapter
+  .hidden-xs
+    .text-center
+      .btn-group
+        a.btn.btn-lg.btn-default.pagination-prev(href="#{locals.urls.prev}") Föregående
+        a.btn.btn-lg.btn-default.pagination-prev(href="/dist/toc.html") Innehållsförteckning
+        a.btn.btn-lg.btn-default.pagination-next(href="#{locals.urls.next}") Nästa
