@@ -63,8 +63,16 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 lathunden.TOC = {};
 lathunden.TOC.init = function(){
   this.visible = false;
-  $('#toggle-toc').click(function(){ lathunden.TOC.toggleVisibility() });
+  this.listen();
 };
+lathunden.TOC.listen = function(){
+  $('#toggle-toc').click(function(){ lathunden.TOC.toggleVisibility() });
+  $('#toc-single').click(function(){
+    if($(this).get(0) != $('#toggle-toc').get(0))
+      if(lathunden.TOC.visible === false)
+        lathunden.TOC.show()
+  });
+}
 lathunden.TOC.toggleVisibility = function(){
   if(this.visible)
     this.hide();
@@ -72,7 +80,6 @@ lathunden.TOC.toggleVisibility = function(){
     this.show();
 }
 lathunden.TOC.show = function(){
-  this.visible = true;
   this.lastContentY = $('body').scrollTop();
   $('#single').fadeOut();
   $('#toc-single').animate({'width': '90%'}, function(){
@@ -83,15 +90,17 @@ lathunden.TOC.show = function(){
       });
     $('body').append($peek);
     $('#toc-single').addClass('visible');
+    lathunden.TOC.visible = true;
   });
 }
 lathunden.TOC.hide = function(){
-  this.visible = false;
   $('#single').show();
   $('#toc-single').removeClass('visible');
   $('body').scrollTop(this.lastContentY);
   $('#content-peek').remove();
-  $('#toc-single').animate({'width':'50px'});
+  $('#toc-single').animate({'width':'50px'}, function(){
+    lathunden.TOC.visible = false;
+  });
 }
 
 
