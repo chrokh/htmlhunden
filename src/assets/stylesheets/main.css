@@ -229,6 +229,17 @@ section.title h2{
   bottom: 0;
 }
 @media (min-width: 1024px) { 
+  #toc-single{
+    opacity: .25;
+    -webkit-transition: opacity .25s ease-in-out;
+    -moz-transition:    opacity .25s ease-in-out;
+    -ms-transition:     opacity .25s ease-in-out;
+    -o-transition:      opacity .25s ease-in-out;
+    transition:         opacity .25s ease-in-out;
+  }
+  #toc-single:hover{
+    opacity: 1;
+  }
   #toc-single > #toggle-toc{
     display: none !important;
   }
