@@ -167,7 +167,7 @@ section.title h2{
 /*
  * ==== TABLE OF CONTENTS ====
  */
-#single{
+#single #chapters{
   margin: 10px 10px 10px 50px;
 }
 #toc-single{
@@ -226,11 +226,8 @@ section.title h2{
   #toc-single .btn-menu:hover{
     background: #ccc;
   }
-  body{
-    padding-left: 400px;
-  }
-  #single{
-    margin: 0;
+  body#single{
+    padding-left: 380px;
   }
 }
 
