@@ -162,9 +162,14 @@ section.title h2{
 
 
 
+
+
 /*
  * ==== TABLE OF CONTENTS ====
  */
+#single{
+  margin: 10px 10px 10px 50px;
+}
 #toc-single{
   position: fixed;
   width: 50px;
@@ -223,6 +228,9 @@ section.title h2{
   }
   body{
     padding-left: 400px;
+  }
+  #single{
+    margin: 0;
   }
 }
 
