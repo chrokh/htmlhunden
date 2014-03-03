@@ -300,6 +300,9 @@ body#single{
   padding-left: 6px;
   font-size: 1.1em;
 }
+#paginated #toc-overview .toc-h2{
+  display: none;
+}
 
 
 
