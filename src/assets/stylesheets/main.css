@@ -11,6 +11,9 @@ th{
   max-width: 920px;
   margin: 0 auto;
 }
+body#paginated{
+  padding: 1em;
+}
 
 
 
@@ -264,6 +267,40 @@ body#single{
     padding-left: 380px;
   }
 }
+
+
+
+/*
+ * TABLE OF CONTENTS -- PAGINATED
+ */
+#toc-paginated .toc-list{
+  width:   100%;
+}
+#toc-paginated .btn-menu{
+  font-size: 1em;
+  color:      #666;
+  background: #ededed;
+  border-bottom: 2px solid #dedede;
+  border-top: 1px solid #fff;
+  margin-bottom: 1px;
+  text-align: left;
+  padding: .5em;
+}
+#toc-paginated .btn-menu:hover,
+#toc-paginated .btn-menu:active{
+  background: #333;
+  color:      #fff;
+}
+#toc-paginated ol{
+  margin:  0;
+  padding: 0;
+}
+#toc-paginated li{
+  margin-left:  24px;
+  padding-left: 6px;
+  font-size: 1.1em;
+}
+
 
 
 
