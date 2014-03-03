@@ -57,84 +57,58 @@ blockquote code{
 }
 
 
+
 /*
- * Cover page
+ * Responsive typography
  */
-#title{
-  text-align: center;
-  padding-top: 10%;
+html{
+  font-size: 100%;
 }
-
-#title h2{
-  font-size: 32px !important;
-  color: #888;
+body{
+  font-size: 1em;
 }
-
+@media (min-width: 600px) {
+  body{ font-size: 1em; }
+}
+@media (min-width: 1024px) {
+  body{ font-size: 1.1em; }
+}
 
 
 /* 
- * Responsive
+ * Typography
  */
-
-#title h2{
-  font-size: 20px;
-}
-h1{
-  text-align: center;
-  font-size: 80px !important;
-}
-h1 + .lead{
-  text-align: center;
-  font-size: 32px;
-  color: #555;
-  margin-bottom: 180px;
-}
-h2{
-  font-size: 22px;
-}
-h3{
-  font-size: 18px;
-}
-@media (min-width: 768px) {
-  #title h1{ font-size: 60px; }
-  #title h2{ font-size: 36px;}
-  h1{ font-size: 54px; }
-  h2{ font-size: 36px; }
-  h3{ font-size: 30px;}
-}
-
-
-
-/*
- *  Leads
- */
- @media (min-width: 768px){
-  .page-header + p{
-    font-size: 20px;
-    color: #555;
-    font-weight: 200px;
-  }
- }
-
-
-
-/*
-*   Headers
-*/
-h1{
-  font-family: 'Lily Script One', inherit;
+#chapters p{
+  font-size: 0.9em;
   color: #555;
 }
-h2{
-  margin-top: 22px;
-  padding-bottom: 4px;
+#chapters h1,
+#chapters h2,
+#chapters h3{
+  font-family: Helvetica, Arial, sans-serif;
 }
-h3{
-  margin-top: 36px;
+/* h1 */
+#chapters h1{
+  font-size: 1.8em;
 }
-.page-header{
-  margin-top: 100px;
+#chapters h1 + .lead{
+  font-size: 1.3em;
 }
+/* h2 */
+#chapters h2{
+  font-size: 1.4em;
+}
+#chapters .page-header + p{
+  font-size: 1.1em;
+}
+/* h3 */
+#chapters h3{
+  font-size: 1.2em;
+}
+
+
+
+
 
 
 /*
