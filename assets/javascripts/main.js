@@ -13,6 +13,11 @@ $(function(){
 })
 
 
+$(window).on('resize', function(){
+  lathunden.TOC.onResize();
+});
+
+
 /*
  * Anchors
  */
@@ -105,6 +110,10 @@ lathunden.TOC.hide = function(){
     lathunden.TOC.visible = false;
     $('#toc-single .toc-list').hide();
   });
+}
+lathunden.TOC.onResize = function(){
+  if(this.visible)
+    this.hide();
 }
 
 
