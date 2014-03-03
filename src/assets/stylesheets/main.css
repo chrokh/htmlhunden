@@ -182,12 +182,16 @@ section.title h2{
   position: fixed;
   width: 50px;
   min-height: 100%;
-  background: black;
+  background: #111;
   top:    0;
   bottom: 0;
   left:   0;
   overflow: auto;
   z-index: 999;
+}
+#toc-single a{
+  font-size: 1.3em;
+  line-height: 1em;
 }
 #toc-single > #toggle-toc{
   width: 100%;
@@ -201,8 +205,19 @@ section.title h2{
 #toc-single .btn-menu{
   color:      #fff;
   background: #333;
-  border-bottom: 1px solid #555;
+  border-bottom: 2px solid #222;
+  border-top: 1px solid #444;
   margin-bottom: 1px;
+  text-align: left;
+  padding: 18px;
+}
+#toc-single .btn-menu:hover,
+#toc-single .btn-menu:active{
+  background: #dedede;
+  color:      #333;
+}
+#toc-single .toc-h1{
+  text-transform: uppercase;
 }
 #toc-single.visible{
   position: static;
@@ -224,15 +239,12 @@ section.title h2{
   #toc-single .toc-list{
     display: block !important;
   }
-  #toc-single .btn-menu{
+  #toc-single a.btn-menu{
     background: #fff;
     color: #333;
-    border-bottom: 0px;
-    text-align: left;
+    border: 0px;
+    border-top: 1px dotted #ededed;
     padding-left: 32px;
-  }
-  #toc-single .btn-menu:hover{
-    background: #ccc;
   }
   body#single{
     padding-left: 380px;
