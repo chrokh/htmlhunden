@@ -64,6 +64,7 @@ lathunden.TOC = {};
 lathunden.TOC.init = function(){
   this.visible = false;
   this.listen();
+  $('#toc-single .toc-list').hide();
 };
 lathunden.TOC.listen = function(){
   $('#toggle-toc').click(function(){ lathunden.TOC.toggleVisibility() });
@@ -81,6 +82,7 @@ lathunden.TOC.toggleVisibility = function(){
 }
 lathunden.TOC.show = function(){
   this.lastContentY = $('body').scrollTop();
+  $('#toc-single .toc-list').show();
   $('#single').fadeOut();
   $('#toc-single').animate({'width': '90%'}, function(){
     var $peek = $('<div id="content-peek"/>')
@@ -100,6 +102,7 @@ lathunden.TOC.hide = function(){
   $('#content-peek').remove();
   $('#toc-single').animate({'width':'50px'}, function(){
     lathunden.TOC.visible = false;
+    $('#toc-single .toc-list').hide();
   });
 }
 
