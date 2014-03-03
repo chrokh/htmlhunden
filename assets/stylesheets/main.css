@@ -182,6 +182,12 @@ section.title h2{
   margin-bottom: 22px;
   color: #fff !important;
 }
+#toc-single .toc-list{
+  width:   100%;
+}
+#toc-single .toc-list a{
+  color: #fff !important;
+}
 #toc-single.visible{
   position: static;
 }

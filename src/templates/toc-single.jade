@@ -1,16 +1,10 @@
 #toc-single.toc
   a#toggle-toc.btn.btn-lg.btn-inverse
     span.glyphicon.glyphicon-align-justify
-  br
-  br
-  ul
+  .btn-group-vertical.toc-list
     each chapter in locals.toc
-      li.toc-h1
-        br
-        a(href="#{chapter.contents.url}")
-          | #{chapter.contents.title}
-      ul
-        each subchapter in chapter.subchapters
-          li.toc-h2 ........ 
-            a(href="#{subchapter.contents.url}")
-              | #{subchapter.contents.title}
+      a.btn.btn-success(href="#{chapter.contents.url}")
+        | #{chapter.contents.title}
+      each subchapter in chapter.subchapters
+        a.btn.btn-inverse(href="#{subchapter.contents.url}")
+          | #{subchapter.contents.title}
