@@ -40,6 +40,7 @@ gulp.task('paginated', ['memorize-toc', 'pages'], function(cb){
       .pipe(header(fs.readFileSync(paths.paginated_header)))
       .pipe(header(fs.readFileSync(paths.common_header)))
       .pipe(footer(fs.readFileSync('./src/templates/pagination.jade')))
+      .pipe(footer(fs.readFileSync(paths.paginated_footer)))
       .pipe(footer(fs.readFileSync(paths.common_footer)))
       .pipe(jade({
         locals:{
@@ -129,11 +130,14 @@ var addFileToTOC = function(file){
   // find chapter url
   var url = path.basename(file.path).split('.')[0] + '.html';
 
+  // locate origin
+  var origin = file.path.substring(0, file.path.indexOf('.')) + '.jade';
+
   // create chapter object
   var chapter = {
     title  : $header.text(),
     url    : url,
-    origin : file.path
+    origin : origin
   }
 
   // memorize chapter
@@ -184,7 +188,7 @@ var findOffsetChapterURL = function(url, offset){
       index    = indexOfChapter(url),
       newIndex = index + offset;
   if(newIndex < 0  ||  newIndex > chapters.length-1){
-    console.log("Not found refering to index");
+    console.log("At end-file: Not found referring to index");
     return '/index.html';
   }
   else{
