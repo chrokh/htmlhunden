@@ -72,7 +72,7 @@ gulp.task('index', ['memorize-toc'], function(){
 });
 
 gulp.task('assets', function(){
-  return gulp.src('./assets/**/*.*')
+  return gulp.src('./src/assets/**/*.*')
     .pipe(gulp.dest('./dist/assets/'));
 });
 
@@ -91,7 +91,7 @@ gulp.task('livereload', function(){
 
 gulp.task('watch', ['server', 'livereload'], function(){
   gulp.watch('src/**/*.jade', ['compile']).on('change', onNotifyReload);
-  gulp.watch('assets/**/*.*', ['assets']).on('change', onNotifyReload);
+  gulp.watch('src/assets/**/*.*', ['assets']).on('change', onNotifyReload);
 });
 
 gulp.task('compile', ['index', 'paginated', 'single', 'assets'])
