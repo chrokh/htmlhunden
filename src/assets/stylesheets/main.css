@@ -23,7 +23,11 @@ body#paginated{
 .logo{
   margin:  32px auto;
   width:   260px;
+  max-width: 100%;
   display: block;
+}
+.logo-sm{
+  width: 240px;
 }
 
 /*
@@ -183,6 +187,10 @@ section.title h2{
 }
 body#single{
   padding: 10px 10px 10px 50px;
+}
+#toc-single .logo-sm{
+  width: ;
+  padding: 32px;
 }
 #toc-single{
   position: fixed;
