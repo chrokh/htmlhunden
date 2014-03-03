@@ -78,34 +78,49 @@ body{
 /* 
  * Typography
  */
-#chapters p{
-  font-size: 0.9em;
-  color: #555;
+body, h1, h2, h3{
+  font-family: 'myriad pro', Helvetica, Arial, sans-serif;
 }
-#chapters h1,
-#chapters h2,
-#chapters h3{
-  font-family: Helvetica, Arial, sans-serif;
-}
-/* h1 */
-#chapters h1{
-  font-size: 1.8em;
-}
-#chapters h1 + .lead{
-  font-size: 1.3em;
-}
-/* h2 */
-#chapters h2{
-  font-size: 1.4em;
-}
-#chapters .page-header + p{
-  font-size: 1.1em;
-}
-/* h3 */
-#chapters h3{
-  font-size: 1.2em;
+h1, h2, h3{
+  font-weight: bold;
 }
 
+p{
+  font-size: 1em;
+  line-height: 1.6em;
+  color: #555;
+}
+/* title h1 */
+.title h1{
+  font-size: 4.3em;
+}
+
+/* h1 */
+h1{
+  font-size: 2.5em;
+}
+h1 + .lead{
+  font-size: 1.4em;
+  color: #777;
+}
+
+/* h2 */
+h2{
+  font-size: 1.8em;
+}
+h2, h2 a{
+  color: #444;
+}
+.page-header + p{
+  font-size: 1.1em;
+  color: #444;
+}
+
+/* h3 */
+h3{
+  font-size: 1.2em;
+  color: #555;
+}
 
 
 
