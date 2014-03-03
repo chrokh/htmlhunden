@@ -313,9 +313,12 @@ body#single{
 .chapter-pagination{
   border-top: 1px solid #eee;
   width: 100%;
-  padding: 26px 0;
-  margin: 26px 0;
+  padding: 36px 0;
+  margin:  36px 0;
   text-align: center;
+}
+.chapter-pagination .btn-group{
+  padding: 22px 0;
 }
 
 
