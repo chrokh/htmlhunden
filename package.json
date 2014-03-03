@@ -18,7 +18,10 @@
     "gulp-jade": "~0.4.2",
     "gulp-concat": "~2.1.7",
     "gulp-intercept": "~0.1.0",
-    "cheerio": "~0.13.1"
+    "cheerio": "~0.13.1",
+    "express": "~3.4.8",
+    "connect-livereload": "~0.3.2",
+    "tiny-lr": "0.0.5"
   },
   "readmeFilename": "README.markdown"
 }

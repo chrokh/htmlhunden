@@ -1,13 +1,12 @@
-var gulp      = require('gulp'),
-    fs        = require('fs'),
-    path      = require('path'),
-    header    = require('gulp-header'),
-    footer    = require('gulp-footer'),
-    jade      = require('gulp-jade'),
-    intercept = require('gulp-intercept'),
-    concat    = require('gulp-concat'),
-    cheerio   = require('cheerio');
-
+var gulp       = require('gulp'),
+    fs         = require('fs'),
+    path       = require('path'),
+    header     = require('gulp-header'),
+    footer     = require('gulp-footer'),
+    jade       = require('gulp-jade'),
+    intercept  = require('gulp-intercept'),
+    concat     = require('gulp-concat'),
+    cheerio    = require('cheerio');
 
 var files = {
   common_header    : fs.readFileSync('src/templates/common-header.jade'),
@@ -18,6 +17,7 @@ var files = {
   paginated_footer : fs.readFileSync('src/templates/paginated-footer.jade')
 };
 
+var tinylr;
 
 var data = {
   toc: []
@@ -76,9 +76,22 @@ gulp.task('assets', function(){
     .pipe(gulp.dest('./dist/assets/'));
 });
 
-gulp.task('watch', function(){
-  gulp.watch('src/**/*.jade', ['compile']);
-  gulp.watch('assets/**/*.*', ['assets']);
+gulp.task('server', function() {
+  var express = require('express'),
+      app     = express();
+  app.use(require('connect-livereload')());
+  app.use(express.static(__dirname));
+  app.listen(4000);
+});
+
+gulp.task('livereload', function(){
+  tinylr = require('tiny-lr')();
+  tinylr.listen(35729);
+});
+
+gulp.task('watch', ['server', 'livereload'], function(){
+  gulp.watch('src/**/*.jade', ['compile']).on('change', onNotifyReload);
+  gulp.watch('assets/**/*.*', ['assets']).on('change', onNotifyReload);
 });
 
 gulp.task('compile', ['index', 'paginated', 'single', 'assets'])
@@ -90,6 +103,17 @@ gulp.task('default', ['compile']);//['paginated', 'single']);
 /*
  * helpers
 */
+
+function onNotifyReload(file){
+  var fileName = require('path').relative('.', file.path);
+  tinylr.changed({
+    body: {
+      files: [fileName]
+    }
+  });
+}
+
+
 var addFileToTOC = function(file){
   var $       = cheerio.load(file.contents.toString()),
       $h1     = $('h1'),
