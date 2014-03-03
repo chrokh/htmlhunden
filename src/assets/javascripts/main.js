@@ -72,7 +72,10 @@ lathunden.TOC.init = function(){
   $('#toc-single .toc-list').hide();
 };
 lathunden.TOC.listen = function(){
-  $('#toggle-toc').click(function(){ lathunden.TOC.toggleVisibility() });
+  $('#toggle-toc').click(function(event){
+    event.stopPropagation();
+    lathunden.TOC.toggleVisibility()
+  });
   $('#toc-single').click(function(){
     if($(this).get(0) != $('#toggle-toc').get(0))
       if(lathunden.TOC.visible === false)
