@@ -13,6 +13,11 @@ $(function(){
 })
 
 
+$(window).on('resize', function(){
+  lathunden.TOC.onResize();
+});
+
+
 /*
  * Anchors
  */
@@ -60,6 +65,64 @@ lathunden.Examples.CSSPositionFixed.init = function(){
 }
 
 
+lathunden.TOC = {};
+lathunden.TOC.init = function(){
+  this.visible = false;
+  this.listen();
+  $('#toc-single .toc-list').hide();
+};
+lathunden.TOC.listen = function(){
+  $('#toggle-toc').click(function(event){
+    event.stopPropagation();
+    lathunden.TOC.toggleVisibility()
+  });
+  $('#toc-single').click(function(){
+    if($(this).get(0) != $('#toggle-toc').get(0))
+      if(lathunden.TOC.visible === false)
+        if($('#toggle-toc').is(':visible'))
+          lathunden.TOC.show()
+  });
+}
+lathunden.TOC.toggleVisibility = function(){
+  if(this.visible)
+    this.hide();
+  else
+    this.show();
+}
+lathunden.TOC.show = function(){
+  this.lastContentY = $('body').scrollTop();
+  $('#toc-single .toc-list').fadeIn();
+  $('#chapters').fadeOut();
+  $('#toc-single').animate({'width': '90%'}, function(){
+    var $peek = $('<div id="content-peek"/>')
+      .width('10%')
+      .click(function(){
+        lathunden.TOC.hide();
+      });
+    $('body').scrollTop(0)
+             .append($peek)
+             .css('padding', 0);
+    $('#toc-single').addClass('visible');
+    lathunden.TOC.visible = true;
+  });
+}
+lathunden.TOC.hide = function(){
+  $('#chapters').show();
+  $('#toc-single').removeClass('visible');
+  $('body').scrollTop(this.lastContentY)
+           .css('padding', '');
+  $('#content-peek').remove();
+  $('#toc-single .toc-list').fadeOut();
+  $('#toc-single').animate({'width':'50px'}, function(){
+    lathunden.TOC.visible = false;
+  });
+}
+lathunden.TOC.onResize = function(){
+  if(this.visible)
+    this.hide();
+}
+
+
 
 
 /*
@@ -67,6 +130,7 @@ lathunden.Examples.CSSPositionFixed.init = function(){
  */
 
 lathunden.init = function(){
+ lathunden.TOC.init();
   //lathunden.Anchors.init();
   //lathunden.Examples.init();
   //$('#chapters h1').find('a').removeAttr('href'); //TODO: Clean out all the anchors cuz they are broken
