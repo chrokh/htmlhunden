@@ -33,7 +33,7 @@ gulp.task('memorize-toc', function(){
     }));
 })
 
-gulp.task('paginated', ['memorize-toc'], function(cb){
+gulp.task('paginated', ['memorize-toc', 'pages'], function(cb){
   chapterIterator(function(chapter){
     gulp.src(chapter.contents.origin)
       .pipe(header(fs.readFileSync('./src/templates/pagination.jade')))
@@ -69,6 +69,12 @@ gulp.task('index', ['memorize-toc'], function(){
   return gulp.src('./src/index.jade')
     .pipe(jade({locals:{toc:data.toc}}))
     .pipe(gulp.dest('./'))
+});
+
+gulp.task('pages', ['memorize-toc'], function(){
+  return gulp.src(['./src/*.jade', '!./src/index.jade'])
+    .pipe(jade({locals:{toc:data.toc}}))
+    .pipe(gulp.dest('./dist/'))
 });
 
 gulp.task('assets', function(){

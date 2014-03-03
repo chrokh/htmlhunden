@@ -7,14 +7,15 @@ section.title
   h2 En pragmatisk höghastighets-<br>guide till webbutveckling
   p Välkommen till HTMLHunden! En pragmatisk höghastighetsguide som inte bara lär dig att bygga webbsidor ifrån den absoluta grunden utan även hela tiden ser till att förklara varför vi gör såsom vi gör. HTMLHundens filosofi är inte att lära dig allt &mdash; utan att lära dig tillräckligt mycket för att du ska kunna lära dig själv! Det tror vi är det snabbaste sättet. Så på med rakethatten så kör vi!
 
-.panel.panel-info
-  .panel-heading Tips!
-  .panel-body
-    p Du kan även läsa hela HTMLhunden på en lång sida! Detta kan vara fördelaktigt om du t.ex. vill söka efter någonting.
-    a(href="dist/full.html").btn.btn-info Klicka för att läsa allt på en sida
+  .row
+    .col-md-12.text-center
+      br
+      .btn-group
+        a(href="dist/full.html").btn.btn-lg.btn-info Läs hela
+        a(href="dist/toc.html").btn.btn-lg.btn-danger Innehållsförteckning
 
 section
-  h2 Innehållsförteckning
+  h2 Delar
   include templates/toc-paginated.jade
 
 include templates/common-footer.jade
