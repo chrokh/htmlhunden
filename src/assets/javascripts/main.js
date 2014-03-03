@@ -99,6 +99,7 @@ lathunden.TOC.show = function(){
       .click(function(){
         lathunden.TOC.hide();
       });
+    $('body').scrollTop(0);
     $('body').append($peek);
     $('#toc-single').addClass('visible');
     lathunden.TOC.visible = true;
