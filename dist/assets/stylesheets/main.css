@@ -80,7 +80,7 @@ html{
   font-size: 100%;
 }
 body{
-  font-size: 1em;
+  font-size: 0.8em;
 }
 @media (min-width: 600px) {
   body{ font-size: 1em; }
@@ -95,6 +95,7 @@ body{
  */
 body, h1, h2, h3{
   font-family: 'myriad pro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0em;
 }
 h1, h2, h3{
   font-weight: bold;
@@ -105,9 +106,35 @@ p{
   line-height: 1.6em;
   color: #555;
 }
-/* title h1 */
+
+/* index page */
+.page-index h1,
+.page-index h2,
+.page-index h3{
+  text-align: center;
+}
+
+/* titles */
 .title h1{
-  font-size: 4.3em;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  line-height: 0.8em;
+}
+.title h2{
+  font-size: 1.3em;
+  margin-top: 0.5em;
+  margin-bottom: 0.6em;
+}
+.title p{
+  text-align: justify;
+}
+@media(min-width: 500px){
+  .title h1{
+    font-size: 5em;
+  }
+  .title h2{
+    font-size: 2.5em;
+  }
 }
 
 /* h1 */
@@ -164,16 +191,28 @@ a:hover, a:active{
 
 
 /*
- * Sections
+ * Title
  */
 section.title{
   margin: 0 auto;
-}
-section.title h1,
-section.title h2{
-  text-align: center;
+  width: 100%;
 }
 
+
+
+
+/*
+ * Index page
+ */
+.page-index .btn-group,
+.page-index .btn-group-vertical{
+  width: 100%;
+  margin-top:    0.5%;
+  margin-bottom: 5%;
+}
+.page-index .btn-group .btn{
+  width: 33.333%;
+}
 
 
 
