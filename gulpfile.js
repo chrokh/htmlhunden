@@ -49,7 +49,8 @@ gulp.task('paginated', ['memorize-toc', 'pages'], function(cb){
           }
         }
       }))
-      .pipe(gulp.dest('./dist/'));
+      .pipe(gulp.dest('./dist/'))
+      .pipe(intercept(onNotifyReload));
   });
   cb();
 });
@@ -66,7 +67,8 @@ gulp.task('single', ['memorize-toc'], function(){
       file.contents = new Buffer(injectAnchors(file.contents.toString()));
       return file;
     }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist'))
+    .pipe(intercept(onNotifyReload));
 });
 
 gulp.task('index', ['memorize-toc'], function(){
@@ -78,17 +80,20 @@ gulp.task('index', ['memorize-toc'], function(){
       }
     }))
     .pipe(gulp.dest('./'))
+    .pipe(intercept(onNotifyReload));
 });
 
 gulp.task('pages', ['memorize-toc'], function(){
   return gulp.src(['./src/*.jade', '!./src/index.jade'])
     .pipe(jade({locals:{toc:data.toc}}))
     .pipe(gulp.dest('./dist/'))
+    .pipe(intercept(onNotifyReload));
 });
 
 gulp.task('assets', function(){
   return gulp.src('./src/assets/**/*.*')
-    .pipe(gulp.dest('./dist/assets/'));
+    .pipe(gulp.dest('./dist/assets/'))
+    .pipe(intercept(onNotifyReload));
 });
 
 gulp.task('server', function() {
@@ -105,8 +110,8 @@ gulp.task('livereload', function(){
 });
 
 gulp.task('watch', ['server', 'livereload'], function(){
-  gulp.watch('src/**/*.jade', ['compile']).on('change', onNotifyReload);
-  gulp.watch('src/assets/**/*.*', ['assets']).on('change', onNotifyReload);
+  gulp.watch('src/**/*.jade', ['compile']);
+  gulp.watch('src/assets/**/*.*', ['assets']);
 });
 
 gulp.task('compile', ['index', 'paginated', 'single', 'assets'])
