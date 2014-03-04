@@ -110,7 +110,9 @@ gulp.task('livereload', function(){
 });
 
 gulp.task('watch', ['server', 'livereload'], function(){
-  gulp.watch('src/**/*.jade', ['compile']);
+  gulp.watch(['src/chapters/*.jade', 'src/templates/*.jade'], ['compile']);
+  gulp.watch('src/index.jade', ['index']);
+  gulp.watch(['src/*.jade', '!src/index.jade'], ['pages']);
   gulp.watch('src/assets/**/*.*', ['assets']);
 });
 
