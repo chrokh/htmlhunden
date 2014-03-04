@@ -7,10 +7,17 @@ section.title
   h2 En pragmatisk höghastighets-<br>guide till webbutveckling
   p Välkommen till HTMLHunden! En pragmatisk höghastighetsguide som inte bara lär dig att bygga webbsidor ifrån den absoluta grunden utan även hela tiden ser till att förklara varför vi gör såsom vi gör. HTMLHundens filosofi är inte att lära dig allt &mdash; utan att lära dig tillräckligt mycket för att du ska kunna lära dig själv! Det tror vi är det snabbaste sättet. Så på med rakethatten så kör vi!
 
-  .row
+  .row.hidden-xs
     .col-md-12.text-center
       br
       .btn-group
+        a(href="dist/full.html").btn.btn-lg.btn-info Läs allt
+        a(href="dist/#{locals.first.contents.url}").btn.btn-lg.btn-info Läs ifrån början
+        a(href="dist/toc.html").btn.btn-lg.btn-danger Innehållsförteckning
+  .row.visible-xs
+    .col-md-12.text-center
+      br
+      .btn-group-vertical
         a(href="dist/full.html").btn.btn-lg.btn-info Läs allt
         a(href="dist/#{locals.first.contents.url}").btn.btn-lg.btn-info Läs ifrån början
         a(href="dist/toc.html").btn.btn-lg.btn-danger Innehållsförteckning
