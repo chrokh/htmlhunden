@@ -80,7 +80,7 @@ html{
   font-size: 100%;
 }
 body{
-  font-size: 1em;
+  font-size: 0.8em;
 }
 @media (min-width: 600px) {
   body{ font-size: 1em; }
