@@ -197,6 +197,20 @@ section.title{
 
 
 
+/*
+ * Index page
+ */
+.page-index .btn-group,
+.page-index .btn-group-vertical{
+  width: 100%;
+}
+.page-index .btn-group .btn{
+  width: 33.333%;
+}
+
+
+
+
 
 /*
  * ==== TABLE OF CONTENTS ====

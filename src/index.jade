@@ -1,5 +1,6 @@
 include templates/common-header.jade
-include templates/paginated-header.jade
+<body id="paginated" class="page-index">
+<div class="container">
 
 section.title
   h1 HTMLHunden
@@ -13,9 +14,9 @@ section.title
   .col-md-12.text-center
     br
     .btn-group
-      a(href="dist/full.html").btn.btn-lg.btn-info Läs allt
-      a(href="dist/#{locals.first.contents.url}").btn.btn-lg.btn-info Läs ifrån början
-      a(href="dist/toc.html").btn.btn-lg.btn-danger Innehållsförteckning
+      a.order-left(href="dist/full.html").btn.btn-lg.btn-info Läs allt
+      a.order-middle(href="dist/#{locals.first.contents.url}").btn.btn-lg.btn-info Läs ifrån början
+      a.order-right(href="dist/toc.html").btn.btn-lg.btn-danger Innehållsförteckning
 .row.visible-xs
   .col-md-12.text-center
     br
