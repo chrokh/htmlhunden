@@ -125,6 +125,10 @@ gulp.task('default', ['compile']);//['paginated', 'single']);
 */
 
 function onNotifyReload(file){
+  // don't reload unless we're running a reload server
+  if(typeof tinylr === 'undefined')
+    return;
+
   var fileName = require('path').relative('.', file.path);
   tinylr.changed({
     body: {
