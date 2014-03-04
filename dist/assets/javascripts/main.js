@@ -123,6 +123,13 @@ lathunden.TOC.onResize = function(){
 }
 
 
+lathunden.FitText = {};
+lathunden.FitText.init = function(){
+  $('.title h1').fitText(0.7);
+  $('.title h2').fitText(1.45);
+}
+
+
 
 
 /*
@@ -131,6 +138,7 @@ lathunden.TOC.onResize = function(){
 
 lathunden.init = function(){
  lathunden.TOC.init();
+ lathunden.FitText.init();
   //lathunden.Anchors.init();
   //lathunden.Examples.init();
   //$('#chapters h1').find('a').removeAttr('href'); //TODO: Clean out all the anchors cuz they are broken
