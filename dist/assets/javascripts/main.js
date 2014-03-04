@@ -82,6 +82,25 @@ lathunden.TOC.listen = function(){
         if($('#toggle-toc').is(':visible'))
           lathunden.TOC.show()
   });
+  $('#toc-single .btn-group-vertical a').click(function(e){
+    e.preventDefault();
+
+    var anchor = $(this).attr('href'),
+        delay = lathunden.TOC.visible ? 300 : 0;
+
+    if(lathunden.TOC.visible)
+      lathunden.TOC.hide();
+
+    setTimeout(function(){
+      var goal = $(anchor).offset().top;
+      $('body').animate({
+        'scrollTop': goal
+      },function(){
+        window.location.hash = anchor;
+        $('body').animate({scrollTop: ($('body').scrollTop() - 15)}, 100);
+      });
+    }, delay)
+  })
 }
 lathunden.TOC.toggleVisibility = function(){
   if(this.visible)
