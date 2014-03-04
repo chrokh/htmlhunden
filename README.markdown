@@ -39,4 +39,4 @@ Sen är det bara att skriva på. Resten genereras. Kolla in något annat kapitel fö
 
 ### Viktigt
 - Ett kapitel får endast innehålla antingen `<h1>` eller en `<h2>`. Endast **en** gång på fil.
-- `<h1>`-instanser får endast förekomma i första kapitlet för en ny del ("part"). Använd i alla andra fall `<h2>`.
+- `<h1>` får endast förekomma i första kapitlet för en ny del ("part"). Använd i alla andra fall `<h2>`.
