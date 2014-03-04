@@ -71,7 +71,12 @@ gulp.task('single', ['memorize-toc'], function(){
 
 gulp.task('index', ['memorize-toc'], function(){
   return gulp.src('./src/index.jade')
-    .pipe(jade({locals:{toc:data.toc}}))
+    .pipe(jade({
+      locals:{
+        toc:   data.toc,
+        first: data.toc[0]
+      }
+    }))
     .pipe(gulp.dest('./'))
 });
 
