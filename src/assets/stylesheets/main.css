@@ -203,6 +203,8 @@ section.title{
 .page-index .btn-group,
 .page-index .btn-group-vertical{
   width: 100%;
+  margin-top:    0.5%;
+  margin-bottom: 5%;
 }
 .page-index .btn-group .btn{
   width: 33.333%;
