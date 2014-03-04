@@ -1,0 +1,135 @@
+.page-header
+  h2
+    a(href="#jquery-snabbstart")
+      .icon-link 
+      | jQuery snabbstart
+p <a href="http://jquery.com/">jQuery</a> är verkligen JavaScript-biblioteket med stort B. Biblioteket hjälper oss att göra allt ifrån <a href="http://api.jquery.com/animate/">animation</a>, <a href="http://api.jquery.com/each/">iteration</a>, till att bygga <a href="http://en.wikipedia.org/wiki/Single-page_application">one-pagers</a> som använder <a href="http://api.jquery.com/jQuery.post/">ajax</a> för att ladda in data, eller att bygga tangentbordsvänliga applikationer genom att fånga <a href="http://api.jquery.com/category/events/keyboard-events/">tangentbordstryckningar</a>. I detta kapitel ska vi dyka rakt in i och börja använda jQuery, utan att fundera särskilt mycket över varför saker fungerar som de fungerar.
+
+h3 jQuery är ett bibliotek
+p jQuery är ju alltså ett JavaScript-bibliotek. Ett bibliotek kan, oavsett språk, ses som någonting som utökar det språk vi skriver i för att underlätta vissa aktiviteter.
+p Säg att vi t.ex. ofta utför aktivitet <code>A</code>, <code>B</code> och <code>C</code> i följd. Någonting ett bibliotek ofta gör är då att t.ex. ge oss ett nytt namn &mdash; säg <code>Z</code>, vilket vi kan använda för att utföra alla tre aktiviteter samtidigt.
+p Ett bibliotek består då alltså av kod, i detta fall kod skriven i JavaScript. Så, för att kunna använda jQuery behöver vi "koppla in" jQuery i våra egna dokument. Låt oss uttrycka oss mer specifikt. Hela jQuery-biblioteket behöver laddas in på varje .html-sida som ska använda jQuery, innan vi försöker använda det.
+
+
+h3 Ladda in jQuery
+p Att ladda in jQuery är enkelt. Hela biblioteket får plats i fil. Vi har två alternativ. Antingen kan vi...
+ol
+  li Kopiera hela biblioteket, eller <a href="http://jquery.com/download/">ladda ned filen</a>, och spara filen i mappen som innehåller vår webbsida, eller..
+  li Låta våra html-sidor ladda ned jQuery via internet ifrån vad som kallas för en <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>.
+p För enkelhetens skull kommer vi att arbeta med det senare alternativet. Detta gör vi helt enkelt genom att placera följande script-element i vår .html-fil:
+.panel.panel-default
+  .panel-heading index.html
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+
+h3 Ladda in en fil som använder jQuery
+p Så, nu har vi jQuery tillgängligt i vårt dokument. Men efter detta behöver vi ladda in en till JavaScript-fil där vi faktiskt <em>använder</em> jQuery. Låt oss alltså skapa en till .js-fil och ladda in den direkt efter som så:
+.panel.panel-default
+  .panel-heading index.html
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;script src="main.js"&gt;&lt;/script&gt;
+
+h3 Använda jQuery
+p Låt oss nu faktiskt använda jQuery till att göra någonting. Vi fortsätter alltså skriva kod i filen <code>main.js</code>. Följande kod kommer att vänta tills <a href="http://sv.wikipedia.org/wiki/Document_Object_Model">DOM</a>:en (alltså HTML-trädet) har laddats in av webbläsaren, och sedan "poppa" up en alert-ruta. Prova att klistra in koden i <code>main.js</code> och ladda om din html-sida.
+.panel.panel-default
+  .panel-heading main.js
+  .panel-body
+    pre
+      code.language-javascript
+        | $(function(){
+        |   alert("Hello from jQuery");
+        | });
+p Tada!! Vi har nu använt oss av biblioteket jQuery. Låt oss prova någonting annat. Följande kod identifierar alla länkar (<code>&lt;a&gt;</code>-taggar) på din html-sida. Inaktiverar deras vanliga funktionalitet, och gör istället så att de klistrar in bilder på en massa fantastiska katter varje gång du klickar. Tänk på att du alltså behöver lägga in länkar i din html-sida för att nedan kod ska ha någon effekt. Annars har vi ju inga länkar att klicka på.
+.panel.panel-default
+  .panel-heading main.js
+  .panel-body
+    pre
+      code.language-javascript
+        | $(function(){
+        |   var randomNum = function(){
+        |     return Math.floor(Math.random()*101);
+        |   }
+        | 
+        |   $('a').click(function(){
+        |     e.preventDefault();
+        |     var size = 75 + randomNum(),
+        |     x = randomNum() + '%',
+        |     y = randomNum() + '%',
+        | 
+        |     $img = $('&lt;img/&gt;');
+        |     $img.attr('src', 'http://placekitten.com/'+size+'/'+size);
+        |     $img.css({
+        |       'position': 'fixed',
+        |       'left'    : x,
+        |       'top'     : y
+        |     });
+        | 
+        |     $('body').append($img);
+        |   });
+        | });
+
+p Om du inte själv har valt att implementera den fantastiska jQuery-koden ovan så kan du få en sneak-peak på vilken underbar värld som väntar genom att prova exemplet nedan!
+.panel.panel-default
+  .panel-heading Resultat (prova!)
+  .panel-body
+    p
+      a.btn.btn-large.btn-success.jquery-intro-example-1 All your base!
+    p
+      a.btn.btn-large.btn-danger.jquery-intro-example-2 Reset (you will need it I promise);
+    script
+      |$(function(){
+      |  (function(){
+      |    $('.jquery-intro-example-2').click(function(e){
+      |      $('.jquery-intro-example-1-output').remove();
+      |    });
+      |    $('.jquery-intro-example-1').click(function(e){
+      |      e.preventDefault();
+      |      var randomNum = function(){
+      |        return Math.floor(Math.random()*101);
+      |      }
+      | 
+      |      var size = 75 + randomNum(),
+      |      x = randomNum() + '%',
+      |      y = randomNum() + '%',
+      | 
+      |      $img = $('<img/>');
+      |      $img.attr('src', 'http://placekitten.com/'+size+'/'+size);
+      |      $img.addClass('jquery-intro-example-1-output');
+      |      $img.css({
+      |        'position': 'fixed',
+      |        'left'    : x,
+      |        'top'     : y
+      |      });
+      |      
+      |      $('body').append($img);
+      |    });
+      |  })();
+      |});
+
+p Svårare än så är det inte! Så, när du använder jQuery behöver du helt enkelt komma ihåg tre saker.
+ol
+  li Se till att du laddar in jQuery-biblioteket.
+  li Se till att din kod som använder jQuery laddas in efter själva biblioteket.
+  li Se till att den kod som använder jQuery ligger inom <code class="language-javascript">$(document).ready(function(){ /* din kod här */ });</code>.
+p Sedan är det bara att tuta och köra!
+
+.panel.panel-info
+  .panel-heading Tips!
+  .panel-body
+    p Ett kortare sätt att skriva..
+    pre
+      code.language-javascript
+        | $(document).ready(function(){
+        |   /* din kod här */
+        | });
+    p ...är att skriva så här...
+    pre
+      code.language-javascript
+        | $(function(){
+        |   // din kod här... 
+        | });
+    p Båda sätten ger samma resultat.

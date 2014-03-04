@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width initial-scale=1.0">
+<title>HTMLHunden | En pragmatisk höghastighetsguide till webbutveckling, använd vid Uppsala Universitet</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/assets/stylesheets/main.css">
+<link rel="stylesheet" href="/dist/assets/stylesheets/prism.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- Feedback tab--><link rel="stylesheet" href="http://getbarometer.s3.amazonaws.com/assets/barometer/css/barometer.css">
+<script src="http://getbarometer.s3.amazonaws.com/assets/barometer/javascripts/barometer.js"></script>
+<script>BAROMETER.load('zFXKA2467y8YdpZaQK3gq');</script>
+<script>
+if(document.location.hostname.search("localhost") === -1 && document.location.origin !== "file://"){
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-45465391-1', 'htmlhunden.se');
+ga('send', 'pageview');
+}
+</script>
+<body id="paginated">
+<div class="container"><div class="page-header"><h2><a href="#css-selectorer" name="css-selectorer"><div class="icon-link"></div>CSS-selectorer</a></h2></div><h3>Vanliga selektorer och atttribut</h3><p>Man kan ju tycka att det borde räcka med att kunna hänvisa till element bara via deras typ, klass eller typer. Detta är dock inte sant, suck! Det går att använda att komma åt element på andra sätt och detta gör det lättare man slipper sätta klass eller id på allt. Nedanför finner ni olika selektorer och exempel. Observera att det finns flera....Never ending story! </p><h4>Selektor: *</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med * </div><div class="panel-body"><pre><code class="language-markup">&lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
+&lt;p&gt;En paragraf, yay!&lt;/p&gt;</code></pre><pre><code class="language-css">*{
+  font-size: 24px; 
+  background:#ff6600;
+ }</code></pre></div></div><h4>Selektor: E</h4><div class="panel panel-default"><div class="panel-heading">Exempel på HTML och CSS med E </div><div class="panel-body"><p>E står i detta fall att man använder elementets typ som selektor. </p><pre><code class="language-markup">&lt;p&gt;En paragraf, yay!&lt;/p&gt;</code></pre><pre><code class="language-css">p{
+  font-size: 24px; 
+  background:#ff6600;
+}</code></pre></div></div><h3>PseudoKlasser</h3><h4>E:link</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som är en länk som inte besökts än.</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre><pre><code class="language-css">a:link{
+  color:pink;
+}</code></pre></div></div><h4>E:visited</h4><div class="panel panel-default"><div class="panel-heading">Exempel på ett element som har blivit besökt.</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre><pre><code class="language-css">a:visited{
+  color:blue;
+}</code></pre></div></div><h4>E:hover</h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som har muspekaren över sig.</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre><pre><code class="language-css">a:hover{
+  color:green;
+}</code></pre></div></div><h4>E:active</h4><div class="panel panel-default"><div class="panel-heading">Exempel på länk som är aktivt (exempelvis när användaren trycker ner knappen)</div><div class="panel-body"><pre><code class="language-markup">&lt;a href="http://htmlhunden.se"&gt;Värsta grymma grejen!&lt;/p&gt;</code></pre><pre><code class="language-css">a:active{
+  color:purple;
+}</code></pre></div></div><h3>Kombinationer</h3><h4>E F</h4><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><p>Alla element F som kommer efter E. Alltså i detta fall alla fyra första paragrafer. </p><pre><code class="language-markup">&lt;div class="yttre"&gt;
+  &lt;p&gt;En första paragraf&lt;/p&gt;
+  &lt;p&gt;En andra paragraf&lt;/p&gt;
+  &lt;p&gt;En tredje paragraf&lt;/p&gt;
+  &lt;div class="inre"&gt;
+    &lt;p&gt;En fjärde paragraf&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre><pre><code class="language-css">.yttre p{
+  color:pink;
+}</code></pre></div></div><h4>E+F</h4><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><p>alla element som direkt föregås av E. Alltså i detta fall kommer andra och tredje paragrafen att påverkas. </p><pre><code class="language-markup">&lt;div class="yttre"&gt;
+  &lt;p&gt;En första paragraf&lt;/p&gt;
+  &lt;p&gt;En andra paragraf&lt;/p&gt;
+  &lt;p&gt;En tredje paragraf&lt;/p&gt;
+  &lt;div class="inre"&gt;
+    &lt;p&gt;En rubrik, yay!&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre><pre><code class="language-css">p + p{
+  color:pink;
+}</code></pre></div></div><h4>E > F </h4><div class="panel panel-default"><div class="panel-heading">Exempel på element som är direkt barn av ett annat element. </div><div class="panel-body"><p>Anta att vi har följande html...</p><pre><code class="language-markup">&lt;div class="yttre"&gt;
+  &lt;p&gt;En första paragraf&lt;/p&gt;
+  &lt;p&gt;En andra paragraf&lt;/p&gt;
+  &lt;div class="inre"&gt;
+    &lt;p&gt;En inre paragraf!&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre><p>Och sedan skriver denna regel..</p><pre><code class="language-css">.yttre > p{
+  color:pink;
+}</code></pre><p>Så kommer vi således alltså endast "träffa" de två första <code>&lt;p&gt;</code>-elementen eftersom endast de är <b>direkta</b> barn till elementet med klassen <code>.yttre</code>.</p><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><div><p style="color:pink;">En första paragraf</p><p style="color:pink;">En andra paragraf</p></div><div><p>En inre paragraf</p></div></div></div></div></div><!-- TODO: This really needs more flesh when it comes to selectors--><!-- There is yet nothing about pseudo elements, nesting nor siblings or--><div class="chapter-pagination"><p class="text-muted">Det här kapitlet är en del av en den interaktiva och pragmatiska höghastighetsguiden till webbutveckling &mdash; <a href="http://htmlhunden.se">HTMLHunden</a>. Använd knapparna nedan för att läsa vidare eller navigera till innehållsförteckningen.</p><div class="visible-xs"><div class="text-center"><div class="btn-group"><a href="03-01-css-intro.html" class="btn btn-sm btn-default pagination-prev">Föregående</a><a href="/dist/toc.html" class="btn btn-sm btn-default pagination-prev">Innehållsförteckning</a><a href="03-03-css-syntax-och-struktur.html" class="btn btn-sm btn-default pagination-next">Nästa</a></div></div></div><div class="hidden-xs"><div class="text-center"><div class="btn-group"><a href="03-01-css-intro.html" class="btn btn-lg btn-default pagination-prev">Föregående</a><a href="/dist/toc.html" class="btn btn-lg btn-default pagination-prev">Innehållsförteckning</a><a href="03-03-css-syntax-och-struktur.html" class="btn btn-lg btn-default pagination-next">Nästa</a></div></div></div></div></div> <!-- container --><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body>

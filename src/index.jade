@@ -1,96 +1,24 @@
-include header
-  .container
+include templates/common-header.jade
+include templates/paginated-header.jade
 
-    .row
-        .col-md-3
-        .col-md-9
-            #title
-                include title
+section.title
+  img.logo(src="/dist/assets/images/logo.png")
+  h1 HTMLHunden
+  h2 En pragmatisk höghastighets-<br>guide till webbutveckling
+  p Välkommen till HTMLHunden! En pragmatisk höghastighetsguide som inte bara lär dig att bygga webbsidor ifrån den absoluta grunden utan även hela tiden ser till att förklara varför vi gör såsom vi gör. HTMLHundens filosofi är inte att lära dig allt &mdash; utan att lära dig tillräckligt mycket för att du ska kunna lära dig själv! Det tror vi är det snabbaste sättet. Så på med rakethatten så kör vi!
 
-    .row.visible-sm.visible-xs
-        include divider
-        .toc#toc-mobile
-            include table-of-contents
+  .row
+    .col-md-12.text-center
+      br
+      .btn-group
+        a(href="dist/full.html").btn.btn-lg.btn-info Läs allt
+        a(href="dist/#{locals.first.contents.url}").btn.btn-lg.btn-info Läs ifrån början
+        a(href="dist/toc.html").btn.btn-lg.btn-danger Innehållsförteckning
 
-    .row
-        .col-md-3
-            .toc#toc-desktop.hidden-sm.hidden-xs
-              include table-of-contents
+section
+  h2 Översikt
+  #toc-overview
+    include templates/toc-paginated.jade
 
-        .col-md-9
-              #chapters
-
-                // introduktion
-                include divider
-                h1 Introduktion
-                p.lead Välkommen till HTMLHunden! En pragmatisk höghastighetsguide som inte bara lär dig att bygga webbsidor ifrån den absoluta grunden utan även hela tiden ser till att förklara varför vi gör såsom vi gör. HTMLHundens filosofi är inte att lära dig allt &mdash; utan att lära dig tillräckligt mycket för att du ska kunna lära dig själv! Det tror vi är det snabbaste sättet. Så på med rakethatten så kör vi!
-                include chapters/introduktion/forord
-                include chapters/introduktion/start
-                include chapters/introduktion/arkitektur
-
-                // markup
-                include divider
-                h1 Hypertext Markup Language
-                p.lead Navet i det stora webbhjulet skulle vi nog kunna hävda är just HTML. Detta markup-language har hängt med länge och är just det språk vi använder för att strukturera upp information på ett sätt som en webbläsare förstår. Detta kapitel kommer lära dig hur HTML fungerar och hur vi skriver det.
-                include chapters/markup/element
-                include chapters/markup/kommentarer
-                include chapters/markup/struktur
-                include chapters/markup/indentering
-                include chapters/markup/head-och-body
-                include chapters/markup/lankar
-                include chapters/markup/lists
-                include chapters/markup/tables
-                include chapters/markup/formular
-                include chapters/markup/doctypes
-                include chapters/markup/encodings
-                include chapters/markup/bilder
-
-                // css
-                include divider
-                h1 Cascading Stylesheets
-                p.lead Om HTML beskriver en webbsidas innehåll så beskriver CSS hur detta innehåll ser ut. Om webben var en teaterpjäs skulle HTML vara manuset och CSS regissören. "Du ska stå där, du där och du där! Vänta nu, du behöver ha en grön hatt, och du behöver ha en mask och en cape!"
-                include chapters/stylesheets/intro
-                include chapters/stylesheets/syntax-och-struktur
-                include chapters/stylesheets/css-selectorer
-                include chapters/stylesheets/css-placering
-                include chapters/stylesheets/cascade
-                include chapters/stylesheets/boxmodell
-                include chapters/stylesheets/positionering
-
-                // javascript
-                include divider
-                h1 JavaScript
-                p.lead Den största limitationen med HTML och CSS skulle kunna beskrivas med ett att de är ett ord &mdash; statiska. De båda språken klarar av en viss nivå av interaktivitet, men i huvudsak behöver vi någonting mycket mer dynamiskt för att kunna uppnå seriös interaktivitet. Ridån faller.. och in kommer JavaScript!
-                include chapters/javascript/intro
-                include chapters/javascript/placering
-                include chapters/javascript/variabler
-                include chapters/javascript/funktioner
-                include chapters/javascript/objekt
-                include chapters/javascript/DOM
-                include chapters/javascript/events
-
-
-                // open source
-                include divider
-                h1 Open source
-                p.lead Mycket av världens mjukvara drivs av open source. Alltså mjukvara vars källkod är öppen för allmänheten. Men vad är egentligen open source? Hur kan vi använda det? Hur kan vi bidra?
-                include chapters/oss/intro
-
-
-                // jquery
-                include divider
-                h1 jQuery
-                p.lead Att koda JavaScript är en fröjd i många avseenden, men framförallt för att språket genomsyras av en fantastisk open-source-kultur där en multitud av problem redan är lösta. I den här sektionen pratar vi lite om open-source och js-bibliotek generellt. Men framförallt ska vi lära oss att skaka fram webbläsareffekter som en annan jQuery-Houdini. <code>slideIn(); fadeOut();</code>
-                include chapters/jquery/intro
-                include chapters/jquery/documentready
-                include chapters/jquery/jqueryobjects
-                include chapters/jquery/modify-elements
-                include chapters/jquery/jquery-event-listeners
-
-                // about
-                include divider
-                h1 Epilog
-                include chapters/efterord
-                include divider
-
-  script(src="http://localhost:35729/livereload.js") 
+include templates/common-footer.jade
+include templates/paginated-footer.jade

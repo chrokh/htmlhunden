@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width initial-scale=1.0">
+<title>HTMLHunden | En pragmatisk höghastighetsguide till webbutveckling, använd vid Uppsala Universitet</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+<link rel="stylesheet" href="/dist/assets/stylesheets/main.css">
+<link rel="stylesheet" href="/dist/assets/stylesheets/prism.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- Feedback tab--><link rel="stylesheet" href="http://getbarometer.s3.amazonaws.com/assets/barometer/css/barometer.css">
+<script src="http://getbarometer.s3.amazonaws.com/assets/barometer/javascripts/barometer.js"></script>
+<script>BAROMETER.load('zFXKA2467y8YdpZaQK3gq');</script>
+<script>
+if(document.location.hostname.search("localhost") === -1 && document.location.origin !== "file://"){
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-45465391-1', 'htmlhunden.se');
+ga('send', 'pageview');
+}
+</script>
+<body id="paginated">
+<div class="container"><div class="page-header"><h2><a href="#css-placering" name="css-placering"><div class="icon-link"></div>Vart skall jag lägga CSS:en?</a></h2></div><p>När du använder CSS för att formatera en sida kan du infoga CSS-formateringen på tre sätt:</p><ol><li>Extern CSS-mall<br/>en extern CSS-mall som kopplas till dokumentet</li><li>I dokumentet<br/>i dokumentets huvud head-taggen</li><li>Direkt i element)<br/>i elementet där CSS-formateringen ska utföras </li></ol><h3>Extern CSS-mall</h3><p>Det här är den vanligaste användningen av CSS där ett externt dokument som innehåller formateringen kopplas till alla de 
+sidor som ska tillämpa formatet. Namnet på CSS-mallen måste ha filtilläget .css och namnet på mallen i exemplet nedan är 
+"mall.css". 
+Den här metoden är mest effektiv, om formateringen ska ändras behöver du bara göra det i ett enda mall-dokument. 
+Här uppfylls målet med att separera innehåll och struktur i dokumenten.
+Så här kan koden för sidorna som kopplas till mallen se ut:</p><div class="panel panel-default"><div class="panel-heading">Exempel på referens till extern stilmall</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+    &lt;link href="mall.css" rel="stylesheet"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><p>Du kan koppla flera externa CSS-mallar till samma dokument. Om samma selektorer förekommer i båda
+mallarna men med olika formatering gäller den mall som angivits senast i radvis ordning. I exemplet nedan 
+gäller alltså "mall2.css" före "mall.css": </p><div class="panel panel-default"><div class="panel-heading">Exempel på ett html-dokument med referenser till flera stilmallar</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+    &lt;link href="mall.css" rel="stylesheet"&gt;
+    &lt;link href="en_till_mall.css" rel="stylesheet"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><h3>I dokumentet</h3><p>CSS-formatering angiven direkt i dokumentet kan användas när vissa sidor ska avvika från 
+huvudmallens formatering. Den här metoden är inte lika effektiv som att använda en extern CSS-mall.
+Om formateringen ska ändras måste det utföras i varje dokument som använder formateringen.
+Här formateras rubriken direkt i dokumentet:</p><div class="panel panel-default"><div class="panel-heading">Exempel på ett html-dokument med css definierad direkt i HEAD</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+    &lt;style type="text/css"&gt;
+      h2 { font-size: 24px; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;En rubrik, yay!&lt;/h2&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><h3>Direkt i elementet som ska formateras </h3><p>Den här metoden är minst effektiv och här uppfylls inte målet med att separera innehåll och
+struktur i dokumenten. CSS-formateringen anges i anslutning till de elementsom ska formateras. 
+När formatet ska användas i ett nytt elememnt måste CSS-koden anges på nytt och det innebär att sidorna 
+innehåller mycket kod och tar längre tid att laddas i webbläsaren.
+Så här kan koden se ut när rubriken formateras direkt i elementet:</p><div class="panel panel-default"><div class="panel-heading">Exempel på ett html-dokument med css definierad i ett element (även kallat: inline)</div><div class="panel-body"><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Sidans namn &lt;/title&gt; 
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2 style="font-size:24px;"&gt;En rubrik, yay!&lt;/h2&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div><p>Prioriteringsordningen av formateringen är följande:</p><ol><li> HTML-formatering</li><li>CSS-kod i element eller avsnitt där formateringen ska tillämpas</li><li>CSS-kod i dokumentet</li><li>CSS i extern mall</li></ol><p>Detta innebär att du kan börja formateringen i en extern CSS-mall som du kopplar till dina dokument.
+Vill du sedan ange avvikande format lokalt i ett dokument formaterar du CSS direkt i dokumentet 
+(gäller då före den externa CSS-mallen). Om någon del av dokumentet ska avvika från övrig CSS-formatering 
+anger du detta direkt i avsnittet/objektet (gäller då före både CSS i dokumentets HEAD och CSS i en extern
+CSS-mall)</p><div class="chapter-pagination"><p class="text-muted">Det här kapitlet är en del av en den interaktiva och pragmatiska höghastighetsguiden till webbutveckling &mdash; <a href="http://htmlhunden.se">HTMLHunden</a>. Använd knapparna nedan för att läsa vidare eller navigera till innehållsförteckningen.</p><div class="visible-xs"><div class="text-center"><div class="btn-group"><a href="03-03-css-syntax-och-struktur.html" class="btn btn-sm btn-default pagination-prev">Föregående</a><a href="/dist/toc.html" class="btn btn-sm btn-default pagination-prev">Innehållsförteckning</a><a href="03-05-css-cascade.html" class="btn btn-sm btn-default pagination-next">Nästa</a></div></div></div><div class="hidden-xs"><div class="text-center"><div class="btn-group"><a href="03-03-css-syntax-och-struktur.html" class="btn btn-lg btn-default pagination-prev">Föregående</a><a href="/dist/toc.html" class="btn btn-lg btn-default pagination-prev">Innehållsförteckning</a><a href="03-05-css-cascade.html" class="btn btn-lg btn-default pagination-next">Nästa</a></div></div></div></div></div> <!-- container --><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body>
