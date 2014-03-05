@@ -140,7 +140,7 @@ gulp.task('livereload', function(){
   tinylr.listen(35729);
 });
 
-gulp.task('watch', ['server', 'livereload'], function(){
+gulp.task('watch', ['server', 'livereload', 'compile'], function(){
   gulp.watch('src/chapters/*.jade', ['index', 'single', 'paginated', 'pages'])
     .on('change', function(event){
       data.changed = event;
