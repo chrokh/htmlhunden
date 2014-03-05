@@ -13,7 +13,7 @@
     "express": "~3.4.8",
     "connect-livereload": "~0.3.2",
     "tiny-lr": "0.0.5",
-    "gulp-util": "^2.2.14"
+    "gulp-util": "~2.2.14"
   },
   "readmeFilename": "README.markdown"
 }

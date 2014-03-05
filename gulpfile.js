@@ -6,7 +6,8 @@ var gulp       = require('gulp'),
     jade       = require('gulp-jade'),
     intercept  = require('gulp-intercept'),
     concat     = require('gulp-concat'),
-    cheerio    = require('cheerio');
+    cheerio    = require('cheerio'),
+    gutil      = require('gulp-util');
 
 
 /*
@@ -55,16 +56,20 @@ function memorizeToc(cb){
 }
 
 
-gulp.task('paginated', ['memorize-toc', 'pages'], function(cb){
-  chapterIterator(function(chapter){
-    compileChapter(chapter);
-  });
-  cb();
+gulp.task('paginated', ['memorize-toc', 'pages'], function(){
+  chapterIterator(compileChapter);
 });
 
 function compileChapterFile(filepath){
-  var chapter = findChapterWithOrigin(filepath, function(chapter){
-    compileChapter(chapter);
+  hasTocSignificantlyChanged(function(yes){
+    if(yes){
+      gutil.log("Silently Running", gutil.colors.cyan("'compileChapter'"), "on all files because TOC has significantly changed...");
+      chapterIterator(compileChapter); // compile all
+    }else{
+      var shortname = "..." + filepath.substring(filepath.lastIndexOf('/')-1);
+      gutil.log("Silently Running", gutil.colors.cyan("'compileChapter'"), "on single file", ("'"+shortname+"'") ,"because TOC has NOT significantly changed...");
+      compileChapter(findChapterWithOrigin(filepath)); // just single
+    }
   });
 }
 
@@ -212,25 +217,48 @@ var addFileToTOC = function(file){
   }
 }
 
+var hasTocSignificantlyChanged = function(cb){
+  if(data.toc === []) return cb(true);
 
-var findChapterWithOrigin = function(filepath, cb){
-  var found = false;
+  var oldness = [];
+  chapterIterator(function(c){ oldness.push(c); });
   memorizeToc(function(){
-    chapterIterator(function(chapter){
-      if(chapter.contents.origin  === filepath){
-        found = true;
-        cb(chapter);
-      }
-    });
-    if(!found) throw ("ERROR: Could not find chapter at path: " + filepath);
+    var newness = [];
+    chapterIterator(function(c){ newness.push(c); });
+
+    if(newness.length != oldness.length)
+      return cb(true);
+
+    for(var n=0; n<newness.length; n++)
+      if(newness[n].contents.origin != oldness[n].contents.origin)
+        return cb(true);
+
+    return cb(false);
   });
 }
 
+
+var findChapterWithOrigin = function(filepath){
+  var ret;
+  chapterIterator(function(chapter){
+    if(chapter.contents.origin  === filepath){
+      ret = chapter;
+    }
+  });
+  if(typeof ret != 'undefined')
+    return ret;
+  else
+    throw ("ERROR: Could not find chapter at path: " + filepath);
+}
+
 var chapterIterator = function(cb){
+  var n = 0;
   data.toc.forEach(function(chapter){
-    cb(chapter);
+    cb(chapter, n);
+    n++;
     chapter.subchapters.forEach(function(subchapter){
-      cb(subchapter);
+      cb(subchapter, n);
+      n++;
     });
   });
 };
