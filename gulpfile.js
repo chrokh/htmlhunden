@@ -141,17 +141,18 @@ gulp.task('livereload', function(){
 });
 
 gulp.task('watch', ['server', 'livereload', 'compile'], function(){
-  gulp.watch('src/chapters/*.jade', ['index', 'single', 'paginated', 'pages'])
+  gulp.watch('src/chapters/*.jade', ['jade'])
     .on('change', function(event){
       data.changed = event;
     })
-  gulp.watch('src/templates/*.jade', ['compile']);
+  gulp.watch('src/templates/*.jade', ['jade']);
   gulp.watch('src/index.jade', ['index']);
   gulp.watch(['src/*.jade', '!src/index.jade'], ['pages']);
   gulp.watch('src/assets/**/*.*', ['assets']);
 });
 
-gulp.task('compile', ['index', 'paginated', 'pages', 'single', 'assets'])
+gulp.task('compile', ['jade', 'assets'])
+gulp.task('jade', ['index', 'paginated', 'pages', 'single'])
 
 gulp.task('default', ['compile']);//['paginated', 'single']);
 
