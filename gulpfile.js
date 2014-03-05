@@ -28,7 +28,8 @@ var paths = {
 var tinylr;
 
 var data = {
-  toc: []
+  toc:     [],
+  changed: undefined
 };
 
 
@@ -56,24 +57,17 @@ function memorizeToc(cb){
 }
 
 
-gulp.task('paginated', ['memorize-toc', 'pages'], function(){
-  chapterIterator(compileChapter);
+gulp.task('paginated', ['memorize-toc'], function(){
+  if(data && data.changed && data.changed.type && data.changed.type == 'changed'){
+    var shortname = "..." + data.changed.path.substring(data.changed.path.lastIndexOf('/')+1);
+    gutil.log('Task', gutil.colors.cyan("'paginated'"), "is acting only on the single file: [", shortname, "]");
+    compilePaginatedChapter(findChapterWithOrigin(data.changed.path));
+  }else{
+    gutil.log('Task', gutil.colors.cyan("'paginated'"), "is acting on all chapters.");
+    chapterIterator(compilePaginatedChapter);
+  }
 });
-
-function compileChapterFile(filepath){
-  hasTocSignificantlyChanged(function(yes){
-    if(yes){
-      gutil.log("Silently Running", gutil.colors.cyan("'compileChapter'"), "on all files because TOC has significantly changed...");
-      chapterIterator(compileChapter); // compile all
-    }else{
-      var shortname = "..." + filepath.substring(filepath.lastIndexOf('/')-1);
-      gutil.log("Silently Running", gutil.colors.cyan("'compileChapter'"), "on single file", ("'"+shortname+"'") ,"because TOC has NOT significantly changed...");
-      compileChapter(findChapterWithOrigin(filepath)); // just single
-    }
-  });
-}
-
-function compileChapter(chapter){
+function compilePaginatedChapter(chapter){
   gulp.src(chapter.contents.origin)
     .pipe(header(fs.readFileSync(paths.paginated_header)))
     .pipe(header(fs.readFileSync(paths.common_header)))
@@ -147,16 +141,17 @@ gulp.task('livereload', function(){
 });
 
 gulp.task('watch', ['server', 'livereload'], function(){
+  gulp.watch('src/chapters/*.jade', ['index', 'single', 'paginated', 'pages'])
+    .on('change', function(event){
+      data.changed = event;
+    })
   gulp.watch('src/templates/*.jade', ['compile']);
-  gulp.watch('src/chapters/*.jade', ['single', 'pages', 'index'], function(event){
-    compileChapterFile(event.path);
-  });
   gulp.watch('src/index.jade', ['index']);
   gulp.watch(['src/*.jade', '!src/index.jade'], ['pages']);
   gulp.watch('src/assets/**/*.*', ['assets']);
 });
 
-gulp.task('compile', ['index', 'paginated', 'single', 'assets'])
+gulp.task('compile', ['index', 'paginated', 'pages', 'single', 'assets'])
 
 gulp.task('default', ['compile']);//['paginated', 'single']);
 
