@@ -8,6 +8,13 @@ var gulp       = require('gulp'),
     concat     = require('gulp-concat'),
     cheerio    = require('cheerio');
 
+
+/*
+ * = = = = = = = = = = = = = = = = = = = = 
+ *                STATE 
+ * = = = = = = = = = = = = = = = = = = = = 
+ */
+
 var paths = {
   common_header    : 'src/templates/common-header.jade',
   common_footer    : 'src/templates/common-footer.jade',
@@ -22,6 +29,16 @@ var tinylr;
 var data = {
   toc: []
 };
+
+
+
+
+/*
+ * = = = = = = = = = = = = = = = = = = = = 
+ *                TASKS 
+ * = = = = = = = = = = = = = = = = = = = = 
+ */
+
 
 gulp.task('memorize-toc', function(cb){
   memorizeToc(cb);
@@ -140,9 +157,13 @@ gulp.task('default', ['compile']);//['paginated', 'single']);
 
 
 
+
+
 /*
- * helpers
-*/
+ * = = = = = = = = = = = = = = = = = = = = 
+ *                HELPERS 
+ * = = = = = = = = = = = = = = = = = = = = 
+ */
 
 function onNotifyReload(file){
   // don't reload unless we're running a reload server
@@ -190,7 +211,6 @@ var addFileToTOC = function(file){
     });
   }
 }
-
 
 
 var findChapterWithOrigin = function(filepath, cb){
