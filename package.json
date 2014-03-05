@@ -4,7 +4,6 @@
   "main": "gulpfile.js",
   "devDependencies": {
     "gulp": "~3.5.2",
-    "gulp-util": "~2.2.14",
     "gulp-header": "~1.0.2",
     "gulp-footer": "~1.0.4",
     "gulp-jade": "~0.4.2",
@@ -13,7 +12,8 @@
     "cheerio": "~0.13.1",
     "express": "~3.4.8",
     "connect-livereload": "~0.3.2",
-    "tiny-lr": "0.0.5"
+    "tiny-lr": "0.0.5",
+    "gulp-util": "~2.2.14"
   },
   "readmeFilename": "README.markdown"
 }

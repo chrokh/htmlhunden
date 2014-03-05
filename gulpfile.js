@@ -6,7 +6,15 @@ var gulp       = require('gulp'),
     jade       = require('gulp-jade'),
     intercept  = require('gulp-intercept'),
     concat     = require('gulp-concat'),
-    cheerio    = require('cheerio');
+    cheerio    = require('cheerio'),
+    gutil      = require('gulp-util');
+
+
+/*
+ * = = = = = = = = = = = = = = = = = = = = 
+ *                STATE 
+ * = = = = = = = = = = = = = = = = = = = = 
+ */
 
 var paths = {
   common_header    : 'src/templates/common-header.jade',
@@ -20,40 +28,63 @@ var paths = {
 var tinylr;
 
 var data = {
-  toc: []
+  toc:     [],
+  changed: undefined
 };
 
-gulp.task('memorize-toc', function(){
+
+
+
+/*
+ * = = = = = = = = = = = = = = = = = = = = 
+ *                TASKS 
+ * = = = = = = = = = = = = = = = = = = = = 
+ */
+
+
+gulp.task('memorize-toc', function(cb){
+  memorizeToc(cb);
+})
+function memorizeToc(cb){
   data.toc = [];
-  return gulp.src('./src/chapters/*.jade')
+  gulp.src('./src/chapters/*.jade')
     .pipe(jade())
     .pipe(intercept(function(file){
       addFileToTOC(file);
       return file;
-    }));
-})
+    }))
+    .on('end', cb);
+}
 
-gulp.task('paginated', ['memorize-toc', 'pages'], function(cb){
-  chapterIterator(function(chapter){
-    gulp.src(chapter.contents.origin)
-      .pipe(header(fs.readFileSync(paths.paginated_header)))
-      .pipe(header(fs.readFileSync(paths.common_header)))
-      .pipe(footer(fs.readFileSync('./src/templates/pagination.jade')))
-      .pipe(footer(fs.readFileSync(paths.paginated_footer)))
-      .pipe(footer(fs.readFileSync(paths.common_footer)))
-      .pipe(jade({
-        locals:{
-          urls: {
-            next: findOffsetChapterURL(chapter.contents.url, 1),
-            prev: findOffsetChapterURL(chapter.contents.url, -1)
-          }
-        }
-      }))
-      .pipe(gulp.dest('./dist/'))
-      .pipe(intercept(onNotifyReload));
-  });
-  cb();
+
+gulp.task('paginated', ['memorize-toc'], function(){
+  if(data && data.changed && data.changed.type && data.changed.type == 'changed'){
+    var shortname = "..." + data.changed.path.substring(data.changed.path.lastIndexOf('/')+1);
+    gutil.log('Task', gutil.colors.cyan("'paginated'"), "is acting only on the single file: [", shortname, "]");
+    compilePaginatedChapter(findChapterWithOrigin(data.changed.path));
+  }else{
+    gutil.log('Task', gutil.colors.cyan("'paginated'"), "is acting on all chapters.");
+    chapterIterator(compilePaginatedChapter);
+  }
 });
+function compilePaginatedChapter(chapter){
+  gulp.src(chapter.contents.origin)
+    .pipe(header(fs.readFileSync(paths.paginated_header)))
+    .pipe(header(fs.readFileSync(paths.common_header)))
+    .pipe(footer(fs.readFileSync('./src/templates/pagination.jade')))
+    .pipe(footer(fs.readFileSync(paths.paginated_footer)))
+    .pipe(footer(fs.readFileSync(paths.common_footer)))
+    .pipe(jade({
+      locals:{
+        urls: {
+          next: findOffsetChapterURL(chapter.contents.url, 1),
+          prev: findOffsetChapterURL(chapter.contents.url, -1)
+        }
+      }
+    }))
+    .pipe(gulp.dest('./dist/'))
+    .pipe(intercept(onNotifyReload));
+}
 
 gulp.task('single', ['memorize-toc'], function(){
   return gulp.src('./src/chapters/*.jade')
@@ -109,22 +140,31 @@ gulp.task('livereload', function(){
   tinylr.listen(35729);
 });
 
-gulp.task('watch', ['server', 'livereload'], function(){
-  gulp.watch(['src/chapters/*.jade', 'src/templates/*.jade'], ['compile']);
+gulp.task('watch', ['server', 'livereload', 'compile'], function(){
+  gulp.watch('src/chapters/*.jade', ['jade'])
+    .on('change', function(event){
+      data.changed = event;
+    })
+  gulp.watch('src/templates/*.jade', ['jade']);
   gulp.watch('src/index.jade', ['index']);
   gulp.watch(['src/*.jade', '!src/index.jade'], ['pages']);
   gulp.watch('src/assets/**/*.*', ['assets']);
 });
 
-gulp.task('compile', ['index', 'paginated', 'single', 'assets'])
+gulp.task('compile', ['jade', 'assets'])
+gulp.task('jade', ['index', 'paginated', 'pages', 'single'])
 
 gulp.task('default', ['compile']);//['paginated', 'single']);
 
 
 
+
+
 /*
- * helpers
-*/
+ * = = = = = = = = = = = = = = = = = = = = 
+ *                HELPERS 
+ * = = = = = = = = = = = = = = = = = = = = 
+ */
 
 function onNotifyReload(file){
   // don't reload unless we're running a reload server
@@ -173,13 +213,48 @@ var addFileToTOC = function(file){
   }
 }
 
+var hasTocSignificantlyChanged = function(cb){
+  if(data.toc === []) return cb(true);
 
+  var oldness = [];
+  chapterIterator(function(c){ oldness.push(c); });
+  memorizeToc(function(){
+    var newness = [];
+    chapterIterator(function(c){ newness.push(c); });
+
+    if(newness.length != oldness.length)
+      return cb(true);
+
+    for(var n=0; n<newness.length; n++)
+      if(newness[n].contents.origin != oldness[n].contents.origin)
+        return cb(true);
+
+    return cb(false);
+  });
+}
+
+
+var findChapterWithOrigin = function(filepath){
+  var ret;
+  chapterIterator(function(chapter){
+    if(chapter.contents.origin  === filepath){
+      ret = chapter;
+    }
+  });
+  if(typeof ret != 'undefined')
+    return ret;
+  else
+    throw ("ERROR: Could not find chapter at path: " + filepath);
+}
 
 var chapterIterator = function(cb){
+  var n = 0;
   data.toc.forEach(function(chapter){
-    cb(chapter);
+    cb(chapter, n);
+    n++;
     chapter.subchapters.forEach(function(subchapter){
-      cb(subchapter);
+      cb(subchapter, n);
+      n++;
     });
   });
 };
