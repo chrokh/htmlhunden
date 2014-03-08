@@ -1,0 +1,145 @@
+.page-header
+  h2 Vanliga element
+p Låt oss prata om de vanligast förekommande elementen och taggarna.
+
+h3 Länkar
+p 
+  |En länk är ett klickbart område och kan vara en text eller bild. Interna länkar är kommunikationen mellan sidorna
+  | i din webbplats och externa länkar leder till andra webbplatser. Märket för länkar är
+  code &lt;a&gt;
+
+p (Anchor Hyperlink Reference).
+  | Du kan även ange "ankare", bokmärken, på en sida och länka mellan dem. 
+  |Den adress som länken leder till kallas även URL (Uniform Resource Locator) och kan vara absolut eller relativ. 
+  |För att skapa en länk så kommer detta se ut såhär: 
+  code &lt;a href="http://im.uu.se"&gt;Information och Media&lt;/a&gt;
+
+h4 Absoluta länkar
+p En absolut URL innehåller kommunikationsprotokollet HTTP och följs av ett domännamn. 
+  |Externa länkar som leder från en webbplats till en annan webbplats är absoluta. Exempel på absolut URL:
+  |http://im.uu.se
+h4 Relativa länkar
+p En relativ URL används inom en webbplats och anger sökvägen mellan mappar och dokument. Inget 
+  |kommunikationsprotokoll HTTP eller domännamn behöver anges. Exempel på relativ URL:
+  |html/index.html.
+h4 Länkar och effekter med CSS
+
+p Med hjälp av CSS så kan man skapa olika effekter på sina länkar beroende på vilket state som länken har. Exempelvis
+  | kan man få en länk att bli understruken när man "hovrar" över länken. följande CSS på till en länk gör detta. 
+pre
+  code.language-css
+    | a:link{ text-decoration:none; color:#CC3333; }
+    | a:visited{ text-decoration:none; color:#CC3333; }
+    | a:active{ text-decoration:none; color:#CC3333; }
+    | a:hover{ text-decoration:underline; }
+p Det finns flera andra rollover-effekter och du ser några exempel nedan.
+pre
+  code.language-css
+    | a:hover{ color:#CC6600; }
+    | a:hover{ background-color:#99CCFF; }
+    | a:hover{ text-decoration:underline overline; }
+    | a:hover{ font-style: italic; }
+    | a:hover{ background-image:url('egen_bild.gif'); }
+    | a:hover{ letter-spacing:5px}
+    | a:hover{ cursor:help; }
+    | a:hover{ cursor:e-resize}
+    | a:hover{ color:#FFFFFF; background-color:#006699; }
+
+
+
+
+
+
+
+
+h3 Listor
+
+p För att kunna skapa listor används ul som står för "Unordered list". För varje item används li. Som ni ser så är oordnad sådan att det är en punkt framför varje item. Låt oss se till ett exempel.
+.panel.panel-default
+  .panel-heading Exempel på oordnad (icke-numrerad) lista
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;ul&gt;
+        |   &lt;li&gt; Katt &lt;/li&gt;
+        |   &lt;li&gt; Hund &lt;/li&gt;
+        |   &lt;li&gt; Sköldpadda &lt;/li&gt;
+        | &lt;/ul&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        ul 
+          li Katt
+          li Hund
+          li Sköldpadda
+
+p För att skapa ordnade (numrerade) listor så används ol. 
+.panel.panel-default
+  .panel-heading Exempel på ordnad (numrerad) lista
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;ol&gt;
+        |   &lt;li&gt; Katt &lt;/li&gt;
+        |   &lt;li&gt; Hund &lt;/li&gt;
+        |   &lt;li&gt; Sköldpadda &lt;/li&gt;
+        | &lt;/ol&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        ol 
+          li Katt
+          li Hund
+          li Sköldpadda
+
+
+
+
+
+
+
+
+
+
+h3 Tabeller
+p Tabeller används när man behöver strukturera information
+p Förr i tiden så strukturerade och positionerade man sin sida med tabeller. Nu använder man div:ar för att fixa detta. Ibland behöver vi dock tabeller för att strukturera information på en hemsida. 
+
+.panel.panel-default
+  .panel-heading Exempel på tabell
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;table&gt;
+        |   &lt;tr&gt;
+        |     &lt;th&gt; Djur&lt;/th&gt;
+        |     &lt;th&gt; Bästa vän&lt;/th&gt;
+        |   &lt;/tr&gt;
+        |   &lt;tr&gt;
+        |     &lt;td&gt; Hund&lt;/td&gt; 
+        |     &lt;td&gt; Katt&lt;/td&gt; 
+        |   &lt;/tr&gt;
+        |   &lt;tr&gt;
+        |     &lt;td&gt; Råtta&lt;/td&gt; 
+        |     &lt;td&gt; Gris&lt;/td&gt; 
+        |   &lt;/tr&gt;
+        | &lt;/table&gt;
+
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        table.table.table-bordered(style="width:auto;margin:auto 0;")
+          tr
+            th Djur
+            th Bästa vän
+          tr
+            td Hund
+            td Katt
+          tr
+            td Råtta
+            td Gris
+
+p Förklaring är att själva tabellen är &lt;table&gt; och att &lt;tr&gt; gör ny rad och varje &lt;td&gt; är en cell. På elementet table finns också border-attributet som är satt till 1. Denan skall göras korrekt med en CSS men används för förtydliga exemplet. 
+
+
+
