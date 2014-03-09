@@ -331,6 +331,10 @@ body#single{
 /*
  * TABLE OF CONTENTS -- PAGINATED
  */
+#toc-paginated .toc-number{
+  float: right;
+  color: #999;
+}
 #toc-paginated .toc-list{
   width:   100%;
 }

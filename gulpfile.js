@@ -192,12 +192,20 @@ var addFileToTOC = function(file){
   // locate origin
   var origin = file.path.substring(0, file.path.indexOf('.')) + '.jade';
 
+  // determine number
+  var number;
+  if($h1.length > 0)
+    number = data.toc.length + 1;
+  else
+    number = data.toc.length + "." + (data.toc[data.toc.length-1].subchapters.length + 1);
+
   // create chapter object
   var chapter = {
     title  : $header.text(),
     url    : url,
     slug   : url.substring(0, url.indexOf('.')),
-    origin : origin
+    origin : origin,
+    number : number
   }
 
   // memorize chapter
