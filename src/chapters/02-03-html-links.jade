@@ -1,0 +1,159 @@
+.page-header
+  h2 Sökvägar och Hyperlänkar
+p Det, för HTML, kanske mest representativa elementet måste ju vara länken. En klickbar yta på skärmen som navigerar oss ifrån en webbsida till en annan. Den tagg vi använder för att denotera en länk är <code>&lt;a&gt;</code>. Ett komplett exempel på användandet av en länk skulle kunna se ut som följande.
+
+pre
+  code.language-markup
+    | &lt;a href="http://www.example.com"&gt;Klicka på mig&lt;/a&gt;
+
+p Vilket skulle rendera följande resultat:
+.panel.panel-default
+  .panel-body
+    a(href="http://example.com") Klicka på mig
+
+p Notera alltså användandet av attributet <code>href</code> i ovan exempel. Attributets namn är en förkortning av "hyper reference". Det kan vara bra att fundera över vad de olika förkortningarna du kommer i kontakt med faktiskt éxpanderar till. Då blir det lättare att komma ihåg/på vad attributen faktiskt gör.
+
+
+
+h3 Sökvägar
+p Attributet <code>href</code> specificerar alltså en sökväg till en annan webbsida. Men vad kan ge attributet för olika typer av värden? När vi pratar om sökvägar är det viktigt att förstå att det finns två sätt att ange sökvägar.
+ol
+  li Absoluta sökvägar
+  li Relativa sökvägar
+p Dessa begrepp är generella och stämmer precis lika bra överens med sökvägar i operativsystemet på din dator. För att förstå skillnaden mellan de två, låt oss använda operativsystemet som exempel.
+p Under <i>Microsoft Windows</i> så skulle ett exempel på en absolut sökväg t.ex. vara <code>C:/Users/Jon Snow/Pictures/me.jpg</code>. Under samma operativsystem skulle ett exempel på en relativ sökväg kunna vara <code>Pictures/me.jpg</code>. Den huvudsakliga skillanden emellan de två exemplena är alltså att den första börjar med <code>C:/</code>. Förhoppningsvis är du familjär med att varje hårddisk (fysisk eller virtuell) under Windows blir tilldelad en enhetsbokstav, såsom C:, D:, E: o.s.v. Den absoluta sökvägen i ovan exempel utgick alltså ifrån en av dessa enheter. Den relativa däremot utgår inte ifrån någonting explicit. Istället utgår den ifrån den mapp "du är i just nu".
+p Det lättaste sättet att förstå sökvägar är att reflektera över hur vi själva navigerar igenom filsystemet i våra operativsystem. Tänk på det. När vi letar efter en fil på hårddisken så öppnar vi först någon mapp. Sedan finns det två saker vi kan göra:
+ol
+  li Öppna en ny mapp i den befintliga mappen,
+  li Gå ett steg uppåt/bakåt, eller
+p Det är även dessa tre verktyg vi har att arbeta med när vi specificerar sökvägar. Varje ord motsvarar en mapp eller en fil. Varje slash-tecken (<code>/</code>) motsvarar idéen om att klicka sig in i en ny mapp. Där ordet efter slash-tecknet denoterar namnet på mappen. Notationen punkt-punkt (<code>..</code>) motsvarar idéen om att gå upp/bakåt en mapp i hierarkin.
+p Vi pratade tidigare lite om absoluta och relative sökvägar i relation till <i>Microsoft Windows</i>. Låt oss även prata om absoluta och relativa sökvägar i <a href="http://en.wikipedia.org/wiki/Unix-like">*nix-baserade system</a>. I nästan alla operativsystem fungerar idéen om sökvägar på samma sätt. Punkt refererar relativt till den nuvarande mappen. Punkt-punkt till en mapp uppåt. Ett ord till en fil eller mapp i nuvarande mapp. Och slash används för att koppla ihop dessa. Varje slash denoterar alltså i någon bemärkelse "nästa steg".
+blockuote Slash-tecknet denoterar "nästa steg" i en sökväg.
+p I t.ex. <i>Mac OS</i> och <i>Linux</i> så fungerar alltså sökvägar på samma sätt som ovan nämnt, med en skillnad. För att specificera absoluta sökvägar i *nix-baserade system så anger vi inte namnet på en enhet (ex: <code>C:</code>) såsom i Windows. Isället börjar vi helt enkelt med tecknet slash (<code>/</code>). Följande är alltså en absolut sökväg:
+pre
+  code /Users/jon-snow/pictures/me.jpg
+p Om vi i ett *nix-baserat system vill nå en annan enhet, på samma sätt som vi i Windows kan nå ex. D: så fungerar det ofta som så:
+pre
+  code /Volumes/MyOtherDisk
+p För att sammanfatta absoluta och relativa sökvägar så vill vi understryka att det egentligen alltså är mycket enkelt. En relativ sökväg utgår ifrån den mapp där den som använder sökvägen befinner sig. En absolut sökväg utgår ifrån "roten" av den nuvarande enheten.
+blockquote En relativ sökväg utgår ifrån nuvarande mapp. En absolut sökväg utgår ifrån någontings rot.
+p Förhoppningsvis blir du lite förvirrad av att ovan uttrycker sig i termer av "någontings rot". Det finns olika typer av absoluta sökvägar när vi börjar tala om nätverk, och det är dessa vi ska se närmare på strax.
+
+
+
+h3 Protokoll och URL:er
+p För att kunna diskutera sökvägar på internet behöver vi skapa oss en förståelse för två saker: protokoll och URL:er. Låt oss diskutera de en för en.
+p Som du nu vet baseras webbsidor på standarden HTML. När vi med andra ord ber webbläsaren hämta en webbsida så anropar den en server som ger oss ett response som innehåller ett HTML-dokument. Vi har kort diskuterat request-response-modellen. Men vi har inte diskuterat de protokoll som möjliggör det. TCP, IP och HTTP bl.a. För att hålla oss fokuserade kommer vi inte att gräva i dessa. Men för att kunna intelligent angripa idéen om URL:er måste vi skapa oss en viss förståelse för protokollet HTTP.
+p Men först, vad är ett protokoll? Kom ihåg att vi sa att en klient skickar ett request och en server svarar med ett response. Ett protokoll är helt enkelt en överenskommelse kring hur klienten och servern ska tala med varandra. När vi skickar saker över nätet så skickar vi de i fragmenterade paket och för att routrar, ISP:er och servrar ska veta vart våra paket är på väg, behöver vi protokoll. Här kommer TCP/IP in i bilden. För att servern ska kunna förstå vårt request och för att webbläsaren ska kunna förstå serverns response behöver vi protokollet HTTP (HyperText Transfer Protocol). Protokoll kan alltså liknas vid ett överenskommet språk emellan två parter.
+blockquote För att två parter ska kunna kommunicera krävs ett överenskommet språk - ett protokoll.
+p Du har säkert kommit i kontakt med både protokollet <code>http</code> och den säkrare varianten <code>https</code>. Varje gång du skriver in en adress i webbläsaren så anger vi <code>http://</code>. Om vi inte gör det själva är webbläsarna idag tillräckligt smarta för att slänga in det protokollet åt oss.
+p Nu när vi vet vad ett protokoll är &mdash; vad är då en URL (Uniform Resource Locator)? En URL är helt enkelt en webbadress. Den pekar på en plats på internet där en webbresurs bör finnas.
+blockquote En URL är en webbadress till en resurs på internet.
+p När vi skriver in en webbadress i vår webbläsare så skriver vi alltså in en URL. Som tidigare nämnt så hjälper de flesta moderna webbläsare oss att skriva korrekta URL:er. En URL måste nämligen bl.a. innehålla ett protokoll. Var sig det är HTTP, HTTPS, FTP, SFTP o.s.v.
+
+
+h3 Webbadresser i HTML
+p Låt oss nu prata om sökvägar/webbadresser i HTML. Som tidigare nämnt så hanterar webbläsaren endast adresser i URL-format. Oavsett om det är en adress som pekar internt inom samma sida eller externt ut till en annan sida så behöver de vara i URL-format.
+p En webbläsare behöver alltså ha en absolut sökväg i URL-formatet. Men när vi specificerar hyperlänkar i vår HTML. T.ex. genom att använda <code>&lt;a&gt;</code>-taggen, så behöver vi faktiskt inte alltid ange kompletta URL:er enligt URL-formatet. De fall då vi inte behöver göra det är alltså när vi refererar till resurser inom vår egen sida (domän). Om vi däremot vill referera till en resurs utanför vår domän så behöver vi ange en komplett adress i URL-formatet.
+blockquote I HTML behöver vi inte ange protokoll när vi refererar till en URL inom samma domän.
+p När vi refererar till en resurs inom vår egen domän så använder vi ett format som närmast liknar det *nix-system använder. Förnim dig det vi tidigare diskuterat! Alltså slash för att denotera nästa mapp, punkt-punkt för att vandra en mapp upp i hierarkin, och en initial slash för att denotera roten.
+p Detta blir antagligen enklare genom att diskutera ett par exempel. Anta att vi befinner oss på följande sida: <code>http://example.com/pages/links.html</code>. Nedan följer ett par exempel på hur webbläsaren kommer att översätta våra adresser, om vi specificerar de inom (t.ex.) en <code>&lt;a&gt;</code>-tagg.
+table.table.table-condensed.table-striped
+  tr
+    th Hyperlänk
+    th Webbläsarens tolkning
+    th Typ
+  tr
+    td images.html
+    td http://example.com/pages/images.html
+    td Relativ
+  tr
+    td ../images.html
+    td http://example.com/images.html
+    td Relativ
+  tr
+    td /images.html
+    td http://example.com/images.html
+    td Absolut
+  tr
+    td /images/album.html
+    td http://example.com/images/album.html
+    td Absolut
+
+blockquote.text-danger Om vi inte anger ett protokoll kommer webbläsaren att tolka vår URL som intern! Även om vi börjar URL:en med www.
+p Notera alltså att om vi inte anger ett protokoll så kommer webbläsaren att tolka våra URL:er som interna till vår domän. Ett vanligt misstag är således att glömma att ange protokollet när vi försöker ange en extern adress. Anta att vibefinner oss på <code>http://example.com</code> och skriver följande:
+pre
+  code.language-markup &lt;a href="www.google.com"&gt;Klicka här&lt;/a&gt;
+p Vi antar att länken ska ta användaren till google.com. Fallet är dock inte så. Eftersom vi inte angett protokoll tolkar webbläsaren adressen som intern. Webbläsaren översätter således adressen till följande:
+pre http://example.com/www.google.com
+p Inte riktigt vad vi menade förstås. Det korrekta sättet att skapa ovan URL är alltså genom att även ange protokollet.
+pre
+  code.language-markup &lt;a href="http://www.google.com"&gt;Klicka här&lt;/a&gt;
+
+
+
+
+h3 Ankare
+p En typ av länkar vi ännu inte pratat om är ankare. Ankare är ett sätt att länka till en specifik del av en sida. Föreställ dig en lång sida. Alltså en sida med mycket content där du kan scrolla långt. Ankare hjälper dig då att skapa länkar <b>inom samma sida</b>.
+blockquote Ett ankare kan appliceras i slutet av vilken URL som helst.
+p Ett ankare börjar med fyrkants-tecknet (hashtag) (<code>#</code>) och sedan vilken sträng som helst.
+pre
+  code #my_anchor
+p Vi applicerar alltså ett ankare i slutet av en vanlig URL.
+pre
+  code http://example.com/index.html#my_anchor 
+p Vi kan alltså använda oss av ankare för att ge användaren en möjlighet att navigera inom samma sida. När vi klickar på en länk med ett ankare så kommer alltså webbläsaren inte bara att ladda den sida vi angett &mdash; utan även scrolla ned till ankarets målposition. Vi kan med andra ord se ankare som en form av "bokmärken" för långa sidor.
+p Ankaren har även fler, mer avancerade tillämpningsområdet men det kommer vi in på mycket senare. 
+p Eftersom ankare är en del av URL:er så är det så att vi inte bara kan använda ankare när vi vill ge användaren en möjlighet att navigera inom samma sida. Vi kan även använda oss av dem när vi vill skicka användaren till ett visst ankare på en annan sida.
+p Låt oss exemplifiera för att göra det tydligare. Ponera att vi har en HTML-sida med följande länk i sig.
+pre
+  code.language-markup
+    | &lt;a href="#images"&gt;Bildgalleriet&lt;/a&gt;
+p Ovan länk kommer alltså inte att byta sida. Ovan länk är en relativ URL som i browsern kommer att översättas till samma URL som vi är vid, fast med ankaret "#images" pålagt i slutet.
+p Ponera om vi istället hade skapat en länk som pekade på en full URL med ett ankare i slutet, såsom nedan...
+pre
+  code.language-markup
+    | &lt;a href="http://example.com/index.html#images"&gt;Bildgalleriet&lt;/a&gt;
+p Om vi hade specificerat en URL såsom ovan, hade vi skickat användaren till index.html under domänen example.com. Oavsett vilken sida vi råkade vara på vid tillfället. Det viktiga att förstå är dock att ankaret kommer att fungera i vilket fall. När webbläsaren har nått den sida vi skickat användaren till så kommer den automatiskt att scrolla ned till den plats där ankaret är specificerat.
+p Det finns en sak vi ännu inte pratat om vad gäller ankare. Nu vet vi hur man skapar en länk <b>till</b> ett ankare. Men vi har inte pratat om hur man skapar ett ankare som man kan skickas till på en sida. Tidigare så använde vi exemplet <code>#my_anchor</code>, men vart hamnar användaren när den klickar på ankaret? Vart är "målet" för detta ankare specificerat?
+p Egentligen är det ganska enkelt. En länk till ett ankare specificeras där vi kan ange en URL, och ett mål för ett ankare specificeras i vilket element som helst, under attributet ID.
+blockquote Ankare pekar på egenskapen <code>id</code> i element.
+p Låt oss se till ett exempel.
+pre
+  code.language-markup
+    | &lt;!-- Om vi har någonting med ett ID --&gt;
+    | &lt;h1 id="images"&gt;Bildgalleriet&lt;/h1&gt;
+    | 
+    | &lt;!-- Så kan vi sedan länka till det som ett ankare --&gt;
+    | &lt;a href="#images"&gt;Gå till bildgalleriet&lt;/a&gt;
+p Med andra ord så kan vi skapa "bokmärken" på våra sidor genom att ge olika element ID:n. När vi sedan vill att en användare snabbt ska kunna navigera till en viss del av sidan (ett "bokmärke") så skapar vi en länk som pekar på just det ID:t, som ett ankare.
+p Detta är bara en av många funktioner som ID:n fyller, men det återkommer vi till senare.
+
+
+
+
+// TODO: This does not belong here
+// h4 Länkar och CSS
+// p Med hjälp av CSS så kan man skapa olika effekter på sina länkar beroende på vilket state som länken har. Exempelvis
+//   | kan man få en länk att bli understruken när man "hovrar" över länken. följande CSS på till en länk gör detta. 
+// pre
+//   code.language-css
+//     | a:link{ text-decoration:none; color:#CC3333; }
+//     | a:visited{ text-decoration:none; color:#CC3333; }
+//     | a:active{ text-decoration:none; color:#CC3333; }
+//     | a:hover{ text-decoration:underline; }
+// p Det finns flera andra rollover-effekter och du ser några exempel nedan.
+// pre
+//   code.language-css
+//     | a:hover{ color:#CC6600; }
+//     | a:hover{ background-color:#99CCFF; }
+//     | a:hover{ text-decoration:underline overline; }
+//     | a:hover{ font-style: italic; }
+//     | a:hover{ background-image:url('egen_bild.gif'); }
+//     | a:hover{ letter-spacing:5px}
+//     | a:hover{ cursor:help; }
+//     | a:hover{ cursor:e-resize}
+//     | a:hover{ color:#FFFFFF; background-color:#006699; }
+
+
+
