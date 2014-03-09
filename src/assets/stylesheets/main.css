@@ -90,6 +90,11 @@ body{
 }
 
 
+/*
+ * ==== TYPOGRAPHY ====
+ */
+
+
 /* 
  * Typography
  */
@@ -174,6 +179,24 @@ h4{
 h5{
   font-size: 0.8em;
   color: #666;
+}
+
+
+/*
+ *
+ * Single-specific typography
+ *
+ */
+body#single h1{
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 1.5em;
+  border-top: 1px solid #eee;
+}
+body#single h1 + p{
+  line-height: 1.6em;
 }
 
 
