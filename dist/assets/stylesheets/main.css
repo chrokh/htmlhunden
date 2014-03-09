@@ -164,6 +164,17 @@ h3{
   color: #555;
 }
 
+/* h4 */
+h4{
+  font-size: 1em;
+  color: #444;
+}
+
+/* h5 */
+h5{
+  font-size: 0.8em;
+  color: #666;
+}
 
 
 
