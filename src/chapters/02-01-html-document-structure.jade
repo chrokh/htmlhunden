@@ -1,0 +1,384 @@
+
+// MOVED FROM ARCHITECTURE CHAPTER
+// PUT HERE?
+// p Som en tankelek. Föreställ dig ett dokument skrivet i Microsoft Word, Pages, Open Office eller dylik dokumenthanterare. Tänk nu på att vi har rubriker,  underrubriker, stycken, text-snuttar som är <b>fetstilta</b> och <i>kursiva</i>. Ett HTML-dokument är egentligen exakt samma dokument som i denna tankelek fast varje gång vi vill att någonting ska representeras som någonting annat än text rakt upp och ned på samma rad så måste vi använda oss av <em>taggar</em> och <em>element</em>.
+// p Således kan vi se våra HTML-dokument som motsvarigheten till en <code>.doc</code>-fil, och våra webbläsare som <em>Open Office</em>. Med andra ord, HTML-filer är rakt upp och ned textfiler med inblandad <em>markup</em>, och webbläsare är tolkare av detta markupspråk.
+// p Låt oss fundera lite på hur ovan beskriven process fungerar.
+
+
+.page-header
+  h2 Syntax och dokumentstruktur
+
+p HTML-dokument bygger vi upp genom att huvudsakligen använda oss av <em>element</em> och <em>attribut</em>.
+
+h3 Element
+p Element skapar vi genom att använda oss av <code>&lt;</code>, och <code>&gt;</code>-tecken.
+
+h4 Element med start- och slut-taggar
+p De flesta tags har en start och en slut-tagg. Exempel på en sådan tagg är <code>&lt;p&gt;paragraf-taggen&lt;/p&gt;</code>.
+p Med paragraf-taggen definierar vi att allting emellan 
+  code
+    = '<p>'
+  | och 
+  code
+    = '</p>'
+  | tillhör en paragraf. Tänk dig att du skriver ett dokument i en textbehandlare. När du trycker ENTER skapas en ny paragraf på en ny rad och exakt samma effekt når du genom att stänga en befintlig paragraf och öppna en ny.
+p
+  | För att fortsätta ovan analogi, med ett klarare exempel. Tänk dig att du markerar ett stycke text och klickar på bold. Texten blir fetstilt. Detta uppnår vi i HTML såsom nedan:
+
+.panel.panel-default
+    .panel-heading Exempel på hur vi markerar text i fetstil
+    .panel-body
+      pre
+        code.language-markup
+          |Ett av orden ska vara i<br>
+          | &lt;b&gt;fetstil&lt;/b&gt;, men inte resten.
+
+      .panel.panel-default
+          .panel-heading Resultat
+          .panel-body
+            | Ett av orden ska vara i <b>fetstil</b>, men inte resten
+
+p Låt oss återgå till paragraf-taggen igen.
+.panel.panel-default
+  .panel-heading Exempel på separata styckesindelning i paragrafer.
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;Första paragrafen&lt;/p&gt;
+        | &lt;p&gt;Andra paragrafen&lt;/p&gt;
+
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p Första paragrafen
+        p Andra paragrafen
+
+p Tänk på radavståndet som uppstår eftersom vi använder två paragraf-taggar. Jämför med nedan exempel.
+.panel.panel-default
+  .panel-heading HTML
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt; Radbrytningar<br>
+        |   inom<br>
+        |   en<br>
+        |   p-tagg har ingen effekt.
+        | &lt;/p&gt;<br>
+
+    .panel.panel-default
+        .panel-heading Resultat
+        .panel-body
+          p Radbrytningar
+            | inom
+            | en p-tagg har ingen effekt.
+
+
+h4 Element utan slut-taggar
+p Vissa element har bara en början och inget slut. Ett bra exempel på ett sådant element är 
+  code
+    = '<hr>'
+  |  (horizontal ruler). Ett horisontellt streck rakt över sidan.
+p
+  | Ett koncept som ett streck innefattar ingen idé om innehåll. Visst ett streck har en start och en början men försök att föreställa dig start- och slut-taggar som att de innehåller, eller enkapsulerar någonting annat.  Generellt betyder det att:
+
+blockquote
+  p Ett element kan antingen innehålla ett annat element eller helt vanlig text.
+
+.panel.panel-default
+  .panel-heading Exempel på <code>&lt;hr&gt;</code>
+  .panel-body
+    hr
+
+h4 Attribut
+p Ett elements öppnande tag kan även innehålla attribut med värden. Exempel på ett attribut är <code>href</code>, som används för att berätta var en hyperlänksresurs befinner sig någonstans. 
+p
+  | För att skapa länkar använder vi elementet 
+  code
+    = '<a>'
+  | och för att berätta att det ska länka någonstans, använder vi attributet 
+  code
+    = 'href'
+  |, och för att berätta vart länken ska gå ger vi attributet ett värde. Så för att skapa en länk skriver vi alltså:
+
+.panel.panel-default
+    .panel-heading HTML
+    .panel-body
+      pre
+        code.language-markup
+          | &lt;a href="http://uu.se"&gt;Klicka på mig&lt;/a&gt;
+
+      .panel.panel-default
+          .panel-heading Resultat
+          .panel-body
+            a(href="http://www.uu.se") Klicka på mig
+
+blockquote
+  p Alla attribut är
+    i  inte 
+    | möjliga att använda på alla element, men många återkommer, såsom t.ex. 
+    code
+      ='title'
+    |, 
+    code
+      ='href'
+    | och 
+    code
+      ='src'
+
+
+
+
+
+h3 Kommentarer
+
+p All text vi skriver i ett HTML-dokument har således effekt på det renderade resultatet -- alltså webbsidan som visas i webbläsaren. Men hur skriver vi kommentarer till oss själva i HTML-dokument?
+p Kommentarer kan vi skriva i HTML-dokument av olika anledningar men t.ex. skulle vi kunna använda de till att skriva förklarande kommentarer, för att logiskt gruppera olika delar av HTML-dokumentet (för utvecklaren), eller kanske för att skriva en TODO-notis om någonting som måste bättras på senare.
+
+// comment YOYO
+.panel.panel-default
+  .panel-heading Exempel på en kommentar
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;En valig paragraf som syns&lt;/p&gt;
+        | &lt;!-- Det här är kommentar som alltså inte kommer synas --&gt;
+.panel.panel-default
+  .panel-heading Resultat
+  .panel-body
+    p En vanlig paragraf som syns
+
+
+
+
+
+h3 Dokumenstruktur
+
+p Genom att bygga upp ett dokument m.h.a. element skapar vi vad som brukar kallas en DOM (Document Object Model). För att en webbläsare ska förstå din sida kan denna DOM då dock inte se ut hursomhelst.
+
+h4 Dokument-struktur
+p Följande kod är ett exempel på det enklaste html-dokumentet vi kan skriva utan att bryta emot några regler (i standarden för html 5).
+
+.panel.panel-default
+  .panel-heading Ett enkelt html-dokument
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt; Min hemsida &lt;/title&gt; 
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+
+p DOM:en kan alltså ses som en trädstruktur.
+
+.row
+  .col-md-6
+    p Vi skulle kunna visualisera den som lådor i varandra.
+    pre
+      |  ---------------------------
+      | |         DOCTYPE          |
+      |  ---------------------------
+      |  ---------------------------
+      | |           html            |
+      | |   ---------------------   |
+      | |  |        head         |  |
+      | |  |   ---------------   |  |
+      | |  |  |     title     |  |  |
+      | |  |   ---------------   |  |
+      | |   ---------------------   |
+      | |   ---------------------   |
+      | |  |        body         |  |
+      | |   ---------------------   |
+      |  ---------------------------
+  .col-md-6
+    p Eller som en indenterad lista.
+    pre
+      | DOCTYPE
+      | html
+      |   head
+      |     title
+      |   body
+
+    p
+      | Detta med indentering leder oss även in på en meningsfull vana html-utvecklare respekterar.
+    blockquote
+      p Om en tag är ett barn till tag:en ovan, indentera ett steg.
+    p Notera alltså hur 
+      code title
+      |  är indenterad i relation till 
+      code head
+      |, men hur 
+      code body
+      i inte 
+      | är indenterad i relation till 
+      code head.
+
+p Eftersom vi jobbar med trädstrukturer gäller det att alla barn-taggar avslutas innan vi avslutar den omslutande föräldern.
+.row
+  .col-md-6
+    .panel.panel-danger
+      .panel-heading Oavstlutade barn-taggar
+      .panel-body
+        pre
+          = '<p>'
+          br
+          = '  <span>Vilken huvudvärk!'
+          br
+          = '  </p>'
+          br
+          = '</span>'
+  .col-md-6
+    blockquote
+      p Ett sätt att ta reda på ifall ett dokument är "dåligt" indenterat är att försöka rita en sådan lista som ritats ovan under "indenterad lista". Är det svårt att veta hur man ska rita den listan så betyder det antagligen att indenteringen är felaktig.
+
+
+
+
+
+
+h3 Indentering
+
+p Några fler exempel på indentering.
+
+.panel.panel-success
+  .panel-heading Korrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;
+        |   &lt;span&gt;Detta är ok!&lt;/span&gt;
+        | &lt;/p&gt;
+
+.panel.panel-success
+  .panel-heading Korrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;
+        |   &lt;span&gt;
+        |     Också ok!
+        |   &lt;/span&gt;
+        | &lt;/p&gt;
+
+
+.panel.panel-success
+  .panel-heading Korrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;&lt;span&gt;Också ok men svårläsligt!&lt;/span&gt;&lt;/p&gt;
+
+.panel.panel-danger
+  .panel-heading Inkorrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;
+        | &lt;span&gt;Strunta _inte_ i indenteringen!&lt;/span&gt;
+        | &lt;/p&gt;
+
+.panel.panel-danger
+  .panel-heading Inkorrekt indentering
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;p&gt;
+        |   Indentera barn...
+        | &lt;/p&gt;
+        |   &lt;p&gt;
+        |     ...men inte syskon!
+        |   &lt;/p&gt;
+
+
+blockquote
+  | HTML är förlåtande, men bara för att någonting <em>går</em> att göra behöver det inte betyda att det är <em>bra</em>.
+
+
+
+
+
+h3 HEAD &amp; BODY
+
+p Ett validerande HTML-dokument måste alltså innehålla ett par saker. En dokumenttypsdeklaration, ett huvud, en titel och en kropp.
+
+p Nyssnämnt är alltså fånigt direktöversatta begrepp av begreppen DOCTYPE, HEAD och BODY. Låt oss återgå till tidigare nämnt kod-exempel (se nedan), och fundera över vilka element som är nästlade i andra element.
+
+.panel.panel-default
+  .panel-heading Ett minimalt HTML-dokument
+  .panel-body
+    pre
+      code.language-markup
+        | &lt;!DOCTYPE html&gt;
+        | &lt;html&gt;
+        |   &lt;head&gt;
+        |     &lt;title&gt; Page about kittenz! &lt;/title&gt; 
+        |   &lt;/head&gt;
+        |   &lt;body&gt;
+        |   &lt;/body&gt;
+        | &lt;/html&gt;
+
+p Notera även att det absolut yttersta elementet är <code>&lt;html&gt;</code>. Ett HTML-dokument måste innehålla ett och endast ett <code>&lt;html&gt;</code>-element. I detta element måste det finnas ett och endast ett <code>&lt;head&gt;</code>- och respektive <code>&lt;body&gt;</code>-element. I huvudet måste vi även ange en sidtitel med hjälp av <code>&lt;title&gt;</code>. Detta är det minsta dokumentet vi kan skapa som validerar, och det är även så här <em>alla</em> html-dokument är strukturerade i botten.
+
+h4 Head (meta-data)
+p Så vad lägger vi då inanför <code>&lt;head&gt;</code>-taggarna? Det korta svaret är: meta-data.
+
+p Det längre svaret är att vi även laddar in externa referenser i huvudet. Följande kodruta är ett exempel på hur ett set av <code>&lt;head&gt;</code>-taggar skulle kunna se ut.
+
+.panel.panel-default
+  .panel-heading Ett exempel på HEAD
+  .panel-body
+    pre.line-numbers
+      code.language-markup
+        | ...
+        | &lt;head&gt;
+        |   &lt;title&gt; Hover cat &lt;/title&gt; 
+        |   &lt;link rel="stylesheet" href="stylesheets/main.css"&gt;
+        |   &lt;script src="javascripts/main.js"&gt;
+        |   &lt;meta charset="utf-8"&gt;
+        |   &lt;meta name="keywords" content="Kittens,Hovercrafts"&gt;
+        | &lt;/head&gt;
+        | ...
+
+p Låt oss diskutera ovan kod rad för rad. 
+table.table.table-striped
+  tr
+    th Rad
+    th Förklaring
+  tr
+    td 3
+    td Den titel som visas högst upp i en sidans "tab" i en webbläsare.
+  tr
+    td 4
+    td Säger åt webbläsaren att ladda in en <a href="#stylesheets">Stylesheet</a>-fil, som finns på platsen definerad av <code>href="sökväg-till-filen-här"</code>.
+  tr
+    td 5
+    td Säger åt webbläsaren att ladda in en <a href="#javascript">JavaScript</a>-fil, som finns på platsen definerad av <code>src="sökväg-till-filen-här"</code>.
+  tr
+    td 6
+    td Berättar för webbläsaren vilken "<a href="http://www.joelonsoftware.com/articles/Unicode.html">character encoding</a>" sidan är skriven i, så att tecken som åäö kan visas korrekt.
+  tr
+    td 7
+    td Definerar ett par <a href="http://www.w3schools.com/tags/tag_meta.asp">keywords</a> för sidan. Denna information används av bl.a. sökmotorer för att "förstå" sidans innehåll.
+
+h4 Body (Sidans faktiska innehåll)
+p Om <code>&lt;head&gt;</code> beskrivs som sidans meta-content -- alltså content om content. Då skulle vi kunna säga att <code>&lt;body&gt;</code> är sidans faktiska content.
+
+.panel.panel-default
+  .panel-heading Ett exempel på innehåll i BODY
+  .panel-body
+    pre.line-numbers
+      code.language-markup
+        | ...
+        | &lt;body&gt;
+        |   &lt;h2&gt; Sidans titel &lt;/h2&gt; 
+        |   &lt;p&gt; Det här är en paragraf med text. &lt;p&gt;
+        |   &lt;p&gt;
+        |       Och det här är en till, som innehåller en
+        |       &lt;a href="http://uu.se"&gt;länk&lt;/a&gt; till UU.
+        |   &lt;p&gt;
+        | &lt;/body&gt;
+        | ...
