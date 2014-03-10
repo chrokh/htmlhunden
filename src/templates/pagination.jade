@@ -7,13 +7,19 @@
   .visible-xs
     .text-center
       .btn-group
-        a.btn.btn-sm.btn-default.pagination-prev(href="#{locals.urls.prev}") Föregående
-        a.btn.btn-sm.btn-default.pagination-prev(href="/dist/toc.html") Innehållsförteckning
-        a.btn.btn-sm.btn-default.pagination-next(href="#{locals.urls.next}") Nästa
+        a.btn.btn-md.btn-default.pagination-prev(href="#{locals.urls.prev}",title="Föregående kapitel")
+          span.glyphicon.glyphicon-arrow-left
+        a.btn.btn-md.btn-default.pagination-prev(href="/dist/toc.html",title="Innehållsförteckning")
+          span.glyphicon.glyphicon-list
+        a.btn.btn-md.btn-default.pagination-next(href="#{locals.urls.next}",title="Nästa kapitel")
+          span.glyphicon.glyphicon-arrow-right
 
   .hidden-xs
     .text-center
       .btn-group
-        a.btn.btn-lg.btn-default.pagination-prev(href="#{locals.urls.prev}") Föregående
-        a.btn.btn-lg.btn-default.pagination-prev(href="/dist/toc.html") Innehållsförteckning
-        a.btn.btn-lg.btn-default.pagination-next(href="#{locals.urls.next}") Nästa
+        a.btn.btn-lg.btn-default.pagination-prev(href="#{locals.urls.prev}",title="Föregående kapitel")
+          span.glyphicon.glyphicon-arrow-left
+        a.btn.btn-lg.btn-default.pagination-prev(href="/dist/toc.html",title="Innehållsförteckning")
+         span.glyphicon.glyphicon-list
+        a.btn.btn-lg.btn-default.pagination-next(href="#{locals.urls.next}",title="Nästa kapitel")
+          span.glyphicon.glyphicon-arrow-right
