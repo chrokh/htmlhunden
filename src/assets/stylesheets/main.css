@@ -400,7 +400,7 @@ body#single{
 #toc-paginated .toc-h1{
   background: #fff;
   font-size: 1.25em;
-  padding-top: 1.5em;
+  margin-top: 1.5em;
 }
 #toc-paginated .toc-number{
   padding-right: 1.5em;
