@@ -1,0 +1,7 @@
+
+#toc-paginated.toc
+  .btn-group-vertical.toc-list
+    each chapter in locals.toc
+      a.toc-h1.btn.btn-menu(href="/dist/toc.html##{chapter.contents.slug}")
+        span.toc-number #{chapter.contents.number}
+        b #{chapter.contents.title}
