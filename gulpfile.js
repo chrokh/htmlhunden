@@ -192,12 +192,30 @@ var addFileToTOC = function(file){
   // locate origin
   var origin = file.path.substring(0, file.path.indexOf('.')) + '.jade';
 
+  // determine number
+  var number;
+  if($h1.length > 0)
+    number = data.toc.length + 1;
+  else
+    number = data.toc.length + "." + (data.toc[data.toc.length-1].subchapters.length + 1);
+
+  // coming soon?
+  var todo = false;
+  if($header.text().indexOf('kommer snart') != -1)
+    todo = true;
+  else if($h2.length > 0)
+    if(data.toc[data.toc.length-1].contents.title.indexOf('kommer snart') != -1)
+      todo = true;
+
+
   // create chapter object
   var chapter = {
-    title  : $header.text(),
-    url    : url,
-    slug   : url.substring(0, url.indexOf('.')),
-    origin : origin
+    title     : $header.text(),
+    url       : url,
+    slug      : url.substring(0, url.indexOf('.')),
+    origin    : origin,
+    number    : number,
+    todoClass : (todo ? 'toc-coming-soon' : '')
   }
 
   // memorize chapter
