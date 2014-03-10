@@ -355,16 +355,14 @@ body#single{
 
 
 /*
- * TABLE OF CONTENTS -- PAGINATED
+ * TABLE OF CONTENTS -- PAGINATED & OVERVIEW
  */
-#toc-paginated .toc-number{
-  float: right;
-  color: #999;
-}
-#toc-paginated .toc-list{
+#toc-paginated .toc-list,
+#toc-overview .toc-list{
   width:   100%;
 }
-#toc-paginated .btn-menu{
+#toc-paginated .btn-menu,
+#toc-overview .btn-menu{
   font-size: 1em;
   color:      #666;
   background: #ededed;
@@ -375,21 +373,51 @@ body#single{
   padding: .5em;
 }
 #toc-paginated .btn-menu:hover,
-#toc-paginated .btn-menu:active{
+#toc-paginated .btn-menu:active,
+#toc-overview .btn-menu:hover,
+#toc-overview .btn-menu:active{
   background: #333;
   color:      #fff;
 }
-#toc-paginated ol{
+#toc-paginated ol,
+#toc-overview ol{
   margin:  0;
   padding: 0;
 }
-#toc-paginated li{
-  margin-left:  24px;
-  padding-left: 6px;
+#toc-paginated,
+#toc-overview ol li{
   font-size: 1.1em;
 }
-#paginated #toc-overview .toc-h2{
+
+
+
+/*
+ * TABLE OF CONTENTS -- PAGINATED
+ */
+#toc-paginated{
+  font-size: .9em;
+}
+#toc-paginated .toc-h1{
+  background: #fff;
+  font-size: 1.25em;
+  padding-top: 1.5em;
+}
+#toc-paginated .toc-number{
+  padding-right: 1.5em;
+}
+
+
+
+
+/*
+ * TABLE OF CONTENTS -- OVERVIEW
+ */
+#toc-overview .toc-h2,
+#toc-overview .toc-h3{
   display: none;
+}
+#toc-overview .toc-number{
+  float: right;
 }
 
 
