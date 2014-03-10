@@ -405,6 +405,12 @@ body#single{
 #toc-paginated .toc-number{
   padding-right: 1.5em;
 }
+@media(min-width: 1024px){
+  #toc-paginated .toc-h2{
+    background: #fff;
+    border-bottom: 1px solid #eee;
+  }
+}
 
 
 
