@@ -258,6 +258,9 @@ section.title{
 .no-padding{
   padding: 0 !important;
 }
+.toc-coming-soon{
+  color: #aaa !important;
+}
 body#single{
   padding: 10px 10px 10px 50px;
 }

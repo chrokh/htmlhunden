@@ -199,13 +199,23 @@ var addFileToTOC = function(file){
   else
     number = data.toc.length + "." + (data.toc[data.toc.length-1].subchapters.length + 1);
 
+  // coming soon?
+  var todo = false;
+  if($header.text().indexOf('kommer snart') != -1)
+    todo = true;
+  else if($h2.length > 0)
+    if(data.toc[data.toc.length-1].contents.title.indexOf('kommer snart') != -1)
+      todo = true;
+
+
   // create chapter object
   var chapter = {
-    title  : $header.text(),
-    url    : url,
-    slug   : url.substring(0, url.indexOf('.')),
-    origin : origin,
-    number : number
+    title     : $header.text(),
+    url       : url,
+    slug      : url.substring(0, url.indexOf('.')),
+    origin    : origin,
+    number    : number,
+    todoClass : (todo ? 'toc-coming-soon' : '')
   }
 
   // memorize chapter
