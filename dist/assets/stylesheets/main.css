@@ -445,6 +445,39 @@ body#single{
 
 
 
+
+
+/*
+ * ==== HTML EXAMPLE TREE BOXES
+ */
+.html-box{
+  font-size: 0.9em;
+  color: #333 !important;
+  background: rgba(0,0,0,.07);
+  border: 1px solid #333 !important; /* fallback in lack of rgba-bgs */
+  border: 1px solid rgba(0,0,0,0) !important;
+}
+.html-box .html-box{
+  margin: 0.4em !important;
+  background: rgba(0,0,0,.15);
+  border: 1px solid #333 !important; /* fallback in lack of rgba-bgs */
+  border: 1px solid rgba(0,0,0,0) !important;
+}
+.html-box .panel-heading{
+  background: transparent;
+}
+.html-box .panel-body,
+.html-box .panel-heading{
+  padding: 0.4em !important;
+}
+.html-box .panel-heading{
+  border-bottom: 0px solid rgba(0,0,0,.25);
+}
+
+
+
+
+
 /*
  * Barometer Feedback plugin fixes
  */
