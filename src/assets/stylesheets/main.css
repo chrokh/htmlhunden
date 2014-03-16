@@ -200,6 +200,18 @@ body#single h1 + p{
 }
 
 
+/*
+ *
+ * Paginated-specific typography
+ *
+ */
+body#paginated h1{
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+
+
 
 
 /*
