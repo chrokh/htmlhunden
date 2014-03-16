@@ -3,7 +3,29 @@
 p Låt oss nu bekanta oss med de vanligast förekommande elementen och relevanta attribut.
 
 h3 Paragrafer och rubriker
-p Kommer snart...
+p Låt oss börja genom att diskutera de två kanske vanligaste elementen. Paragrafer och rubriker. Paragrafer skapar vi genom att använda oss av elementet <code>&lt;p&gt;</code> och element genom att använda någon av rubrikelementen.
+p Ett exempel på användande av paragrafer följer nedan.
+pre
+  code.language-markup
+    | &lt;p&gt;En paragraf denoterar alltså ett stycke text.&lt;/p&gt;
+    | &lt;p&gt;Varje ny paragraf börjar, om inte annat anges, på en ny rad.&lt;/p&gt;
+.panel.panel-default
+  .panel-heading Resultat
+  .panel-body
+    p En paragraf denoterar alltså ett stycke text.
+    p Varje ny paragraf börjar, om inte annat anges, på en ny rad.
+
+p De flesta dokument består ju inte bara av paragrafer utan även av rubriker. Vi skapar rubriker i HTML genom att använda oss av <code>&lt;hX&gt;</code>, där X ersätts med en siffra ifrån <code>1-6</code>. Alltså:
+pre
+  code.language-markup
+    | &lt;h1&gt;En rubrik&lt;/h1&gt;
+    | &lt;p&gt;Följd av en paragraf.&lt;/p&gt;
+    | &lt;h2&gt;En underrubrik&lt;/h2&gt;
+    | &lt;p&gt;Ytterligare en paragraf.&lt;/p&gt;
+p Och så kan vi fortsätta hela vägen ned till <code>h6</code>. Rubriken <code>h1</code> är alltså den viktigaste rubriken (den högsta nivån av rubriker) och <code>h6</code> den minst viktiga. Resten följer förstås i inbördes ordning däremellan.
+p Om vi skulle exemplifera användandet av rubriker på den här sidan, löper vi en stor risk att skapa förvirring kring vad som faktiskt är rubriker och vad som är exempel på rubriker. Så för att se ett exempel på hur rubriker fungerar så råder vi dig att ta en snabb titt på ett <a href="http://www.w3schools.com/html/tryit.asp?filename=tryhtml_headers">exempel ifrån w3schools</a>. 
+
+
 
 h3 Fetstil och kursivitet
 p Låt oss nu diskutera de vanligaste textformatteringselementen. Fetstil och kursivitet. För att uppnå fetstilt text, kan vi välja att använda någon av elementen <code>&lt;b&gt;</code> (bold) eller <code>&lt;strong&gt;</code>.
