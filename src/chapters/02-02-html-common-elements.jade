@@ -103,8 +103,15 @@ p Självklart är vi inte bundna till att använda just dessa typer av symboler 
 
 
 h3 Tabeller
-p Tabeller används när man behöver strukturera information
-p Förr i tiden så strukturerade och positionerade man sin sida med tabeller. Nu använder man div:ar för att fixa detta. Ibland behöver vi dock tabeller för att strukturera information på en hemsida. 
+p I de tidigare dagarna av HTML använde kreativa webbutvecklare ofta tabeller för att strukturera upp hela webbsidor. Tabeller i HTML är alltså helt vanliga tabeller. Kolumner, rader, rubriker och inget mer. Men eftersom tabeller betedde sig på ett mycket förutsägbart sätt så upptäckte man att det var tacksamt att strukturera sina sidor med hjälp av tabeller.
+p Idag används tabeller nästan uteslutande för att representera tabulär data. Såsom elementet rimligen var tänkt att användas ifrån början.
+p När vi kommer in på diskussionen om semantisk signifikans så kommer du förhoppningsvis förstå varför det är både viktigt och naturligt att inte använda tabeller till annat än representation av tabulär data. Men återigen handlar det om distiktionen mellan hur saker ser ut och vad de faktiskt innebär. Användandet av tabeller implicierar att ett stycke data kan behandlas tabulärt. Så om vi använder tabeller för att visuellt strukturera vår sida &mdash; så implicerar vi att vår sida är en enda stor tabell av strukturerad data. Vilket oftast inte är sant.
+p När vi diskuterar tabeller så finns det egentligen fyra element som vi behöver lära oss. För att skapa en tabell börjar vi alltid med elementet <code>&lt;table&gt;</code>. Detta element enkapsulerar hela tabellen. Alla dess rader, kolumner och data.
+p Innanför elementet <code>table</code> kan vi sedan placera ett valfritt antal element av typen <code>&lt;tr&gt;</code> (<em>table row</em>). Detta element skapar nya tabellrader. När vi skapar tabeller i HTML behöver vi alltså specificera kolumnerna i raderna och inte tvärtom. Syntaxen hade ju förstås likaväl kunnat fungera tvärtom men nu är fallet inte så.
+blockquote I tabeller specificerar vi först raderna &mdash; sedan kolumnerna. Aldrig tvärtom.
+p Innanför elementet <code>tr</code> kan vi sedan placera ett valfritt antal element av typen <code>&lt;td&gt;</code> (<em>table data</em>. För att underlätta den mentala modellen kan du alltså tänka att elementet <code>td</code> skapar kolumner. Om vi använder <code>tr</code> för att skapa rader i tabellen så använder vi <code>td</code> för att skapa kolumner i en rad.
+p Det sista elementet vi kan använda när vi arbetar med tabeller är <code>&gt;th&lt;</code> (<em>table header</em>). Detta element kan ersätta vilket <code>&lt;td&gt;</code> som helst. Vi använder alltså elementet för att denotera att en viss cell inte innehåller vanlig celldata. Utan snarare bör behandlas som en rubrik.
+p Låt oss se till ett komplett exempel.
 
 .panel.panel-default
   .panel-heading Exempel på tabell
@@ -113,16 +120,16 @@ p Förr i tiden så strukturerade och positionerade man sin sida med tabeller. N
       code.language-markup
         | &lt;table&gt;
         |   &lt;tr&gt;
-        |     &lt;th&gt; Djur&lt;/th&gt;
-        |     &lt;th&gt; Bästa vän&lt;/th&gt;
+        |     &lt;th&gt;Djur&lt;/th&gt;
+        |     &lt;th&gt;Storlek&lt;/th&gt;
         |   &lt;/tr&gt;
         |   &lt;tr&gt;
-        |     &lt;td&gt; Hund&lt;/td&gt; 
-        |     &lt;td&gt; Katt&lt;/td&gt; 
+        |     &lt;td&gt;Golden Retriever&lt;/td&gt; 
+        |     &lt;td&gt;Stor&lt;/td&gt; 
         |   &lt;/tr&gt;
         |   &lt;tr&gt;
-        |     &lt;td&gt; Råtta&lt;/td&gt; 
-        |     &lt;td&gt; Gris&lt;/td&gt; 
+        |     &lt;td&gt;Norsk Skogskatt&lt;/td&gt; 
+        |     &lt;td&gt;Liten&lt;/td&gt; 
         |   &lt;/tr&gt;
         | &lt;/table&gt;
 
@@ -132,15 +139,14 @@ p Förr i tiden så strukturerade och positionerade man sin sida med tabeller. N
         table.table.table-bordered(style="width:auto;margin:auto 0;")
           tr
             th Djur
-            th Bästa vän
+            th Storlek
           tr
-            td Hund
-            td Katt
+            td Golden Retriever
+            td.text-center L
           tr
-            td Råtta
-            td Gris
-
-p Förklaring är att själva tabellen är &lt;table&gt; och att &lt;tr&gt; gör ny rad och varje &lt;td&gt; är en cell. På elementet table finns också border-attributet som är satt till 1. Denan skall göras korrekt med en CSS men används för förtydliga exemplet. 
+            td Norks Skogskatt
+            td.text-center S
+p Var inte rädd för att använda tabeller! Men kom alltså ihåg att tabeller endast ska användas för data som är rimlig att presentera i tabeller.
 
 
 
