@@ -54,16 +54,19 @@ p Men varför finns det två sätt att denotera fetstil text och två sätt att 
 
 
 h3 Listor
-p För att kunna skapa listor används ul som står för "Unordered list". För varje item används li. Som ni ser så är oordnad sådan att det är en punkt framför varje item. Låt oss se till ett exempel.
+p För att skapa punktlistor i HTML behöver vi kombinera två olika element. Ett element som denoterar vilken typ av lista vi vill skapa. Innuti detta element behöver vi upprepat använda ett annat element &mdash; en gång per punkt i vår punktlista.
+p Vi nämnde alltså att det första elementet denoterar vilken typ av lista vi vill skapa. Det finns, i HTML, alltså två typer av listor &mdash; numrerade listor och onumrerade listor. Numrerade listor denoteras genom elementet <code>&lt;ol&gt;</code> (<em>ordered lists</em>) och onumrerade listor genom elementet <code>&lt;ul&gt;</code> (<em>unordered lists</em>).
+p Som nämnt behöver vi sedan denotera varje element (punkt) i listan för sig. Detta gör vi helt enkelt genom att använda elementet <code>&lt;li<&gt;</code> (list item). Samma element används alltså oavsett om det skall användas i en numrerad eller onumrerad lista.
+p Låt oss se till ett exempel på en onumrerad lista.
 .panel.panel-default
-  .panel-heading Exempel på oordnad (icke-numrerad) lista
+  .panel-heading Exempel på onumrerad lista
   .panel-body
     pre
       code.language-markup
         | &lt;ul&gt;
-        |   &lt;li&gt; Katt &lt;/li&gt;
-        |   &lt;li&gt; Hund &lt;/li&gt;
-        |   &lt;li&gt; Sköldpadda &lt;/li&gt;
+        |   &lt;li&gt;Katt&lt;/li&gt;
+        |   &lt;li&gt;Hund&lt;/li&gt;
+        |   &lt;li&gt;Sköldpadda&lt;/li&gt;
         | &lt;/ul&gt;
     .panel.panel-default
       .panel-heading Resultat
@@ -73,16 +76,16 @@ p För att kunna skapa listor används ul som står för "Unordered list". För 
           li Hund
           li Sköldpadda
 
-p För att skapa ordnade (numrerade) listor så används ol. 
+p Lagom intuitivt så är alltså skillnaden mellan en numrerad och en onumrerad lista att den numrerade listan använder nummer istället för symboler framför varje element i listan.
 .panel.panel-default
-  .panel-heading Exempel på ordnad (numrerad) lista
+  .panel-heading Exempel på numrerad lista
   .panel-body
     pre
       code.language-markup
         | &lt;ol&gt;
-        |   &lt;li&gt; Katt &lt;/li&gt;
-        |   &lt;li&gt; Hund &lt;/li&gt;
-        |   &lt;li&gt; Sköldpadda &lt;/li&gt;
+        |   &lt;li&gt;Katt  &lt;/li&gt;
+        |   &lt;li&gt;Hund&lt;/li&gt;
+        |   &lt;li&gt;Sköldpadda&lt;/li&gt;
         | &lt;/ol&gt;
     .panel.panel-default
       .panel-heading Resultat
@@ -91,9 +94,7 @@ p För att skapa ordnade (numrerade) listor så används ol.
           li Katt
           li Hund
           li Sköldpadda
-
-
-
+p Självklart är vi inte bundna till att använda just dessa typer av symboler och/eller nummer framför varje listelement. Istället för att använda vanliga siffror skulle vi t.ex. kunna använda romerska siffror. Alltså <code>I, II, II, IV</code> o.s.v. Detta kommer vi att exemplifiera när vi börjar tala om css.
 
 
 
