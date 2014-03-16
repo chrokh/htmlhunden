@@ -2,9 +2,33 @@
   h2 Vanligt förekommande element
 p Låt oss nu bekanta oss med de vanligast förekommande elementen och relevanta attribut.
 
-
-h3 Paragrafer, rubriker och textformattering
+h3 Paragrafer och rubriker
 p Kommer snart...
+
+h3 Fetstil och kursivitet
+p Låt oss nu diskutera de vanligaste textformatteringselementen. Fetstil och kursivitet. För att uppnå fetstilt text, kan vi välja att använda någon av elementen <code>&lt;b&gt;</code> (bold) eller <code>&lt;strong&gt;</code>.
+pre
+  code.language-markup
+    | All text &lt;b&gt;inom ett b-element&lt;/b&gt;
+    | eller ett &lt;strong&gt;strong-element&lt;/strong&gt;
+    | renderas i fetstil.
+.panel.panel-default
+  .panel-heading Resultat
+  .panel-body
+    | All text <b>inom ett b-element</b> eller ett <strong>strong-element</strong> renderas i fetstil.
+
+p Om vi istället skulle vilja ha kursiv text, även kallad <i>italics</i>, så kan vi välja att använda något utav elementen <code>&lt;i&gt;</code> (italics) eller <code>&lt;em&gt;</code> (emphasis).
+pre
+  code.language-markup
+    | All text &lt;i&gt;inom ett i-element&lt;/i&gt;
+    | eller ett &lt;em&gt;em-element&lt;/em&gt;
+    | renderas som kursiv text.
+.panel.panel-default
+  .panel-heading Resultat
+  .panel-body
+    | All text <i>inom ett i-element</i> eller ett <em>em-element</em> renderas som kursiv text.
+
+p Men varför finns det två sätt att denotera fetstil text och två sätt att denotera kursiv text? Du kommer lättare förstå skillnaden mellan de olika elementen när vi börjar diskutera semantisk signifikans. Men som kort svar så denoterar alltså t.ex. <code>i</code> mer presentation snarare än semantik, och <code>em</code> mer semantik snarare än presentation. Föreställ dig en blind person. Den visuella effekten av kursiv text är inte av signifikans för den blinde. Men idéen <em>extra empfas</em> är signifikant. Att det sedan råkar sig så att visualiseringen av extra emfas sker genom samma visuella effekt som kursivitet är alltså i någon bemärkelse ett sammanträffande.
 
 
 h3 Listor
