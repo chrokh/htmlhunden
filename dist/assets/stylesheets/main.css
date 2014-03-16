@@ -11,6 +11,9 @@ th{
   max-width: 920px;
   margin: 0 auto;
 }
+body.paginated-toc .container{
+  max-width: 1100px !important;
+}
 body#paginated{
   padding: 2em 1em;
 }
@@ -198,6 +201,18 @@ body#single h1{
 body#single h1 + p{
   line-height: 1.6em;
 }
+
+
+/*
+ *
+ * Paginated-specific typography
+ *
+ */
+body#paginated h1{
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
 
 
 
@@ -402,6 +417,10 @@ body#single{
   font-size: 1.25em;
   margin-top: 1.5em;
 }
+#toc-paginated .toc-h1,
+#toc-paginated .toc-h2{
+  white-space: pre-line;
+}
 #toc-paginated .toc-number{
   padding-right: 1.5em;
 }
@@ -409,6 +428,9 @@ body#single{
   #toc-paginated .toc-h2{
     background: #fff;
     border-bottom: 1px solid #eee;
+  }
+  #toc-paginated{
+    font-size: .75em;
   }
 }
 
