@@ -402,6 +402,10 @@ body#single{
   font-size: 1.25em;
   margin-top: 1.5em;
 }
+#toc-paginated .toc-h1,
+#toc-paginated .toc-h2{
+  white-space: pre-line;
+}
 #toc-paginated .toc-number{
   padding-right: 1.5em;
 }
@@ -409,6 +413,9 @@ body#single{
   #toc-paginated .toc-h2{
     background: #fff;
     border-bottom: 1px solid #eee;
+  }
+  #toc-paginated{
+    font-size: .75em;
   }
 }
 
