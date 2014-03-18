@@ -378,7 +378,6 @@ body#single{
 }
 #toc-paginated .btn-menu,
 #toc-overview .btn-menu{
-  font-size: 1em;
   color:      #666;
   background: #ededed;
   border-bottom: 2px solid #dedede;
@@ -409,13 +408,13 @@ body#single{
 /*
  * TABLE OF CONTENTS -- PAGINATED
  */
-#toc-paginated{
-  font-size: .9em;
-}
 #toc-paginated .toc-h1{
   background: #fff;
   font-size: 1.25em;
   margin-top: 1.5em;
+}
+#toc-paginated .toc-h2{
+  font-size: 1.05em;
 }
 #toc-paginated .toc-h1,
 #toc-paginated .toc-h2{
@@ -424,7 +423,7 @@ body#single{
 #toc-paginated .toc-number{
   padding-right: 1.5em;
 }
-@media(min-width: 1024px){
+@media(min-width: 992px){
   #toc-paginated .toc-h2{
     background: #fff;
     border-bottom: 1px solid #eee;
@@ -446,6 +445,9 @@ body#single{
 }
 #toc-overview .toc-number{
   float: right;
+}
+#toc-overview .btn-menu{
+  font-size: 1em;
 }
 
 
