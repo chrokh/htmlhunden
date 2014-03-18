@@ -62,7 +62,7 @@ table.table.table-condensed.table-striped
   tr
     th Hyperlänk
     th Typ
-    th Webbläsarens tolkning
+    th Webbläsarens tolkning...
   tr
     td images.html
     td Relativ
@@ -79,6 +79,9 @@ table.table.table-condensed.table-striped
     td /images/album.html
     td Absolut
     td http://example.com/images/album.html
+  tr
+    td(colspan="3") Ovan gäller alltså om vi antar att användaren befinner sig på sidan <code>http://example.com/pages/links.html</code>
+
 
 blockquote.text-danger Om vi inte anger ett protokoll kommer webbläsaren att tolka vår URL som intern! Även om vi börjar URL:en med www.
 p Notera alltså att om vi inte anger ett protokoll så kommer webbläsaren att tolka våra URL:er som interna till vår domän. Ett vanligt misstag är således att glömma att ange protokollet när vi försöker ange en extern adress. Anta att vibefinner oss på <code>http://example.com</code> och skriver följande:
