@@ -1,32 +1,52 @@
 .page-header
-  h2 Doctypes
+  h2 Doctypes och webbläsarstöd
 
-p HTML har funnits i fler än ett par år, och det har länge funnits mer än en enda browser. Faktumet att de flesta browsers (självklarligen) vill äga majoriteten av marknaden har gett upphov till uttrycket 
+p HTML har funnits i fler än ett par år, och med de åren på nacken kommer en mer än brokig historia. Det har länge funnits fler än en enda browser. Och eftersom de flesta browsers (självklarligen) vill äga majoriteten av marknaden har gett upphov till uttrycket 
   a(href="http://en.wikipedia.org/wiki/Browser_wars", target="_blank") The Browser Wars
-  |.
+  |. Webbläsare slåss om att vinna den stora majoriteten av användare.
 
-p Detta (bland annat) har gett upphov till att webbläsare i olika skeden implementerat olika delar av HTML-, CSS- och JavaScript-specifikationerna. Med andra ord, att olika "dialekter" av samma språk varit tillåtet i olika webbläsare. Med andra ord att vi kan skriva vissa saker i vissa webbläsare och andra i andra, vilket gör att webbläsare A kanske inte förstår uttryck B, som webbläsare C förstår.
+p Detta har (bland andra anledningar) gett upphov till att webbläsare i olika skeden implementerat olika delar av HTML-, CSS- och JavaScript-specifikationerna. Med andra ord, att olika "dialekter" av samma språk varit tillåtet i olika webbläsare. Med andra ord att vi kan skriva vissa saker i vissa webbläsare och andra i andra, vilket gör att webbläsare A kanske inte förstår uttryck B, som webbläsare C förstår.
 
-p Detta (bland annat) har gjort att det är viktigt att deklarera vilken standard av HTML, ett visst dokument följer. Så att webbläsaren, "intelligent" (utan att gissa) kan "parse":a (läsa) vår fil enligt rätt specifikation.
+p För att försöka vara i framkant har webbläsare implementerat experimentell funktionalitet. Sedan har webbutvecklare börjat använda dessa funktioner, och börjat förlita sig på existensen av dessa funktioner. Vilket har lett till problem när dessa webbsidor sedan läses i webbläsare som inte implementerat dessa funktioner. Kort sagt, så är det en soppa.
 
-p Om du har svårt att förstå varför vi behöver dessa standarder, stanna upp och fundera över faktumet att html-dokument egentligen bara är text. Ingenting annat. Precis som med naturligt språk, så måste mottagaren av meddelandet förstå hur den ska avkoda informationen. Vi kan alltså se doctype-deklarationen lite som att vi berättar för webbläsaren som ska läsa filen vilket dialekt av HTML vi pratar. Löst uttryckt.
+h3 Kan jag använda...
+p Om du ska ta med dig en poäng ifrån det här kapitlet så bör det vara denna. Anta aldrig att alla webbläsare stödjer den funktionalitet du vill använda. För att ta reda på vilka webbläsare som stödjer en viss funktionalitet du vill använda brukar en enkel webbsökning på funktionaliteten plus termen "browser support" göra jobbet. Om du vill undersöka någonting som är relaterat till HTML5- eller CSS3-standarden så är även <a href="http://caniuse.com/">caniuse.com</a> en mycket bra resurs.
 
-p Vi definerar doctypes genom att använda syntaxen <code>&lt;!DOCTYPE x&gt;</code>, allra först i dokumentet. Där <code>x</code> ersätts med den faktiska doctype:en. Nedan följer ett par exempel för hur man deklarerar doctypes.
+h3 Doctypes
+p Webbläsarkrigen har (bland andra anledningar) gjort att det är viktigt att deklarera vilken HTML-standard våra dokument följer. Detta så att webbläsaren, "intelligent" (utan att gissa) kan parse:a (tolka) vår fil enligt rätt specifikation.
 
-.panel.panel-default
-  .panel-heading Detta dokument deklarerar standarden HTML5
-  .panel-body
-    pre
-      code.language-markup
-        | &lt;!DOCTYPE html&gt;
-        | &lt;html&gt;
-        |   &lt;head&gt;&lt;title&gt;Min sida&lt;/title&gt;&lt;/head&gt;
-        |   &lt;body&gt;&lt;/body&gt;
-        | &lt;/html&gt;
+p Om du har svårt att förstå varför vi behöver dessa standarder, stanna upp och fundera över faktumet att html-dokument egentligen bara är text. Ingenting annat. Precis som med naturligt språk, så måste mottagaren av meddelandet förstå hur den ska avkoda informationen. Vi kan alltså se doctype-deklarationen lite som att vi berättar för webbläsaren som ska läsa filen vilket dialekt av HTML vi pratar. Eller kanske snarare vilken grammatik vi använder i vårt dokument. Tänk tillbaka till filtypskapitlet.
 
-h5 HTML 4.01 Strict
-p <code>HTML 4.01 Strict</code> tillåter alla HTML 4.01-element och -attribut, men tillåter inte de som exkluderats ("deprecated") ur HTML 4.01-standarden. Närmare bestämt, element och attribut som rör visuell presentation snarare än struktur och content, såsom elementet <code>&lt;font&gt;</code> eller attributet <code>bgcolor="#000000"</code>.
+p Eftersom det finns olika HTML-standarder så finns det alltså olika sätt att uttrycka HTML. Således betyder samma sak olika saker beroende på vilken standard vi använder när vi läser dokumentet.
 
+p FÖr att berätta för webbläsaren vilken standard dokumentet bör läsas med behöver vi på den absolut första raden i dokumentet ange en doctype. Vi definerar doctypes med syntaxen <code>&lt;!DOCTYPE x&gt;</code>. Där <code>x</code> ersätts med den faktiska doctype:en. Nedan följer ett par exempel för hur man deklarerar doctypes.
+p För att deklarera att ett dokument följer standarden HTML5 skriver vi helt enkelt följande...
+pre
+  code.language-markup &lt;!DOCTYPE html&gt;
+p Och i kontexten av ett HTML-dokument skulle det se ut som följande...
+pre
+  code.language-markup
+    | &lt;!DOCTYPE html&gt;
+    | &lt;html&gt;
+    |   &lt;head&gt;
+    |     &lt;title&gt;Min sida&lt;/title&gt;
+    |     ...
+    |   &lt;/head&gt;
+    |   &lt;body&gt;
+    |     ...
+    |   &lt;/body&gt;
+    | &lt;/html&gt;
+
+p Om du inte har en medveten anledning till att använda någonting annat än HTML5, så hävdar vi att det inte finns någon anledning att göra det. Med andra ord, så skulle vi uppmana dig till att antingen hålla dig till HTML5 eller läsa på mer om doctypes om du vill använda någon annan.
+blockquote Håll dig till HTML5, alltså <code>&lt;DOCTYPE html&gt;</code>, så länge du inte har en annan medveten anledning.
+
+
+
+
+h4 Äldre doctypes
+p Men det finns ju onekligen ett antal äldre doctypes som motsvarar äldre standarder. Låt oss snabbt diskutera igenom några stycken för att skapa oss en uppfattning om varför de har funnits och vad de har gjort.
+
+p <code>HTML 4.01 Strict</code> tillåter alla HTML 4.01-element och -attribut, men tillåter <em>inte</em> de som deprekerats ("deprecated") i HTML 4.01-standarden. Närmare bestämt, element och attribut som rör visuell presentation snarare än struktur och content, såsom elementet <code>&lt;font&gt;</code> eller attributet <code>bgcolor="#000000"</code>.
 .panel.panel-default
   .panel-heading Doctype för HTML 4.01 Strict
   .panel-body
@@ -34,8 +54,6 @@ p <code>HTML 4.01 Strict</code> tillåter alla HTML 4.01-element och -attribut, 
       code.language-markup
         | &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;
 
-
-h5 HTML 4.01 Transitional
 p Även <code>HTML 4.01 Transitional</code> tillåter alla element och attribut som är tillåtna i HTML 4.01, <em>inklusive</em> de som rör presentation (se förklaring i ovan paragraf).
 .panel.panel-default
   .panel-heading Doctype för HTML 4.01 Transitional
@@ -44,10 +62,4 @@ p Även <code>HTML 4.01 Transitional</code> tillåter alla element och attribut 
       code.language-markup
         | &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;
 
-
-h5 Och så vidare...
-p Det finns som sagt markant fler doctypes än dessa. Enklast numera är att helt enkelt hålla sig till <code>HTML5</code> och således deklarera <code>&lt;!DOCTYPE html&gt;</code>. Vill du läsa mer om doctypes kan du t.ex. göra det hos 
-  a(href="http://www.w3schools.com/tags/tag_doctype.asp", target="_blank") W3 Schools 
-  | eller på 
-  a(href="http://en.wikipedia.org/wiki/Document_type_declaration", target="_blank") Wikipedia
-  |.
+p Det finns som sagt markant fler doctypes än dessa. Men vi rekommenderar alltså att du helt enkelt håller dig till <code>HTML5</code>. Genom att således deklarera dokumenttypen <code>&lt;!DOCTYPE html&gt;</code>. Vill du läsa mer om doctypes kan du t.ex. göra det hos <a href="http://www.w3schools.com/tags/tag_doctype.asp">W3 Schools</a> eller på <a href="http://en.wikipedia.org/wiki/Document_type_declaration">Wikipedia</a>.
