@@ -1,84 +1,112 @@
 .page-header
-  h2
-    a(href="#formular", name="formular")
-      .icon-link 
-      | Formulär
+  h2 Formulär
 
-p
-  | För att användare av webbsidor ska kunna skicka data mellan olika sidor använder vi oss (bl.a.) av formulär.
-  | För att vi som utvecklare ska kunna spara användardata i t.ex. en databas så behöver vi få in data ifrån "klient-sidan" (client-side) till "server-sidan" (server-side). Formulär ger oss ett mycket smidigt sätt att göra detta.
+p För att användare ska kunna interagera med våra webbsidor har vi flera tillgänglia faciliteter. Vi har pratat om länkar som ger en användare möjligheten att navigera emellan sidor. Vi har pratat om ankare som ger användare möjligheten att navigera inom en och samma sida. Men om användaren vill ge oss data? Om vi t.ex. vill fråga användaren om dennes namn? In kommer formulär och räddar dagen.
 
-h3 Form-taggen 
-p Låt oss börja med att skapa ett skal till ett formulär. 
+p Låt oss, innan vi går vidare se till ett exempel för hur ett formulär skulle kunna se ut.
 
 .panel.panel-default
-  .panel-heading Ett tomt formulär
+  .panel-heading Exempelformulär
   .panel-body
-    pre
-      code.language-markup
-        | &lt;form method="post" action="process-data.php"&gt;
-        |    ...
-        | &lt;/form&gt;
-p 
-  |Ovan kod resulterar rent visuellt inte i någonting. Under ytan så kommer ju ovan markup absolut att <em>finnas</em> i dokumentet, men rent visuellt ser användaren ingenting.
+    form(action="#", method="GET")
+      .form-group
+        label(for="field-email") E-post
+        input(type="text", id="field-email", name="email", placeholder="Din e-post", required).form-control
+      .form-group
+        label(for="field-current-name") Lösenord
+        input(type="password", id="field-current-name", name="password", placeholder="Ditt lösenord", required).form-control
+      .form-group
+        .checkbox
+          input(id="field-gender-man", type="checkbox", name="remember" required) 
+          label(for="field-gender-man") Kom ihåg mig?
+      .form-group
+        input(type="submit", value="Skicka!").btn.btn-default
 
-h3 Labels
-p För att användaren ska veta vad hen ska fylla i vart, så använder vi oss av <code>&lt;label&gt;</code>'s.
+p Vanliga scenarion där vi använder formulär är t.ex. användarregistrering, inloggning, kontaktformulär, undersökningar, chat, forum, kommentarsfält, sökfält, etc. Listan är lång. Tänk på sidor som du vanligen brukar besöka. Varje gång du skriver in någon form av fritext på sidan, kryssar i en checkbox, radioknapp eller dyl. så interagerar du nästan alltid med ett formulär. Tänk 
 
-p Till synes så ser denna tagg inte mycket ut för världen eftersom den endast renderar ut som helt vanlig text. Men eftersom vi associerar labels med input-fält så gör (t.ex.) vissa browsers label-texten klickbar. För radiobuttons så innebär t.ex. ett klick på label:en då samma sak som ett klick på själva knappen.
-
-p Vi använder egenskapen <code>for</code> för att specificiera vilken formulärkontroll en viss label tillhör.
+h3 Att spara data
+p Viktigt att förstå är att vi med endast HTML inte kan göra särskilt mycket med formulär. Vi kan presentera de för användaren, men vi kan inte på några sätt "processa" den data som användaren matar in. För att bearbeta den data som användarna matar in i formulär behöver vi ett script- eller programmeringspråk. Med andra ord t.ex. <code>JavaScript</code>, <code>PHP</code>, <code>Ruby</code>, <code>ASP.NET</code>, eller dyl. För att persistent spara data som kan delas emellan flera datorer behöver vi någon form av <a href="http://sv.wikipedia.org/wiki/Databas">databas</a>. Om vi vill spara data på klientens dator och det inte spelar någon roll ifall andra kan komma åt datan eller ej &mdash; så räcker det med JavaScript och HTML5 (genom <a href="http://diveintohtml5.info/storage.html">persistant storage</a>). Men det viktiga är alltså att förstå att vi med hjälp av endast HTML inte kan spara eller processa datan användare matar in i våra formulär. Men vi kommer prata mer om att processa/spara data ifrån formulär när vi pratar om script- och programmeringsspråk.
 
 
+
+
+
+
+
+h3 Att skapa formulär
+p Låt oss skapa formulär. Vi tar det del för del och steg för steg.
+p Vi börjar helt enkelt med att använda <code>&lt;form&gt;</code>-element. På samma sätt som <code>table</code> enkapsulerar allt innehåll av en tabell &mdash; så enkapsulerar <code>form</code> allt innehåll av ett formulär. Vi skapar alltså "skalet" för ett formulär som så...
+pre
+  code.language-markup
+    | &lt;form method="POST" action="process-data.php"&gt;
+    |    ...
+    | &lt;/form&gt;
+p  Ovan kod resulterar rent visuellt inte i någonting alls. På den renderade sidan syns inget formulär. Däremot kommer sidan förstås onekligen innehålla markupen för formuläret. Men eftersom vi ännu inte placerat några formulärkomponenter i vårt formulär så syns ju ingenting.
+
+
+h4 Fritext
+p Låt oss börja med att kika på hur vi ger användaren möjlighet att mata in fritext. Vi har två alternativ att välja emellan.
+ul
+  li <code>&lt;textarea&gt;</code>
+  li <code>&lt;input type="text"&gt;</code>
+p Den förstnämnda använder vi när vi vill ge användaren att skriva en längre text. Såsom t.ex. en kommentar eller ett blogginlägg. När vi däremot bara söker kortare information ifrån användaren, såsom t.ex. ett namn eller en adress så passar det andra alternativet ypperligt.
+p Låt oss börja med att kika på ett exempel på användande av <code>input</code>. Elementet används för att denotera <a href="http://www.w3schools.com/tags/att_input_type.asp">en mängd olika formkontroller</a>. Allt ifrån checkboxar och radioknappar till fritext och datum. För att webbläsaren ska veta vilken typ av inputkontroll vi vill skapa behöver vi ge ett värde för <code>type</code>-attributet. Det enklaste alternativet är förstås fritext, vilket vi alltså denoterar genom att sätta <code>type="text"</code>.
+p Så om vi med andra ord skriver...
+pre
+  code.language-markup
+    | &lt;input type="text" placeholder="Vänligen skriv förnamn här..."&gt;
+p Så renderar webbläsaren följande resultat...
 .panel.panel-default
-  .panel-heading Exempel på label
   .panel-body
-    pre
-      code.language-markup
-        | &lt;label for="ett-input-id"&gt;Din e-post&lt;/label&gt;
+    input(type="text", placeholder="Vänligen skriv förnamn här...").form-control
+p Som du kanske märkte är alltså <code>placeholder</code> ett annat attribut vi kan använda på <code>input</code>-element. Detta attribut anger vi för att helt enkelt specificiera en platshållare för kontrollen. Undersök hur detta fungerar genom att skriva någonting i exempelfältet ovan. En platshållartext är helt enkelt en text som visas när kontrollen är "tom". Det vill säga både innan användaren har skrivit någonting i textfältet, men även så fort som användaren rensar nuvarande text i fältet. Notera att detta attribut <em>inte</em> stöds av alla äldre webbläsare.
+.panel.panel-info
+  .panel-heading Notera!
+  .panel-body Tänk på att <code>input</code>-elementet endast består av en tagg. Vi behöver alltså inte (och bör inte) ange en stängningstagg. I Tidigare versioner av standarden för HTML var det möjligt att ange en sluttagg. Således kommer detta inte att orsaka något fel i de flesta webbläsare. Men om vi följer standarden HTML5 så finns det ingen anledning att ange en stängningstagg.
 
+p Om vi behöver ge användaren en möjlighet att skriva mer än endast en rad text så passar elementet <code>textarea</code> utmärkt. Detta element består, till skillnad ifrån <code>input</code>, utav ett taggpar. Med andra ord en öppningstagg och en stängningstagg. Allt däremellan är text som kommer att visas i textfältet. Låt oss se till ett exempel.
+pre
+  code.language-markup
+    | &lt;textarea placeholder="Textarea stödjer placeholders"&gt;
+    |   Denna text renderas i textarean
+    | &lt;/textarea&gt;
 .panel.panel-default
   .panel-heading Resultat
   .panel-body
-    label Din e-post
-
-h3 Input, textarea &amp; select
-// p Så, låt oss lägga till någonting som faktiskt kan vara till användning. Frågan är alltså: hur kan vi ge användaren en möjlighet att skriva in data? Först och främst måste vi helt enkelt välja vad vi menar med data? Det är ju alltså formulär vi behandlar. Vill vi att användaren ska kunna skriva in "fri-text", eller välja mellan tre val, eller välja en/fler/ingen mellan tre val o.s.v. Det finns alltså ett antal olika input-metoder vi kan erbjuda en användare och några presenteras således nedan.
-p För att skapa själva innehållet i formuläret använder vi oss i huvudsak av taggarna <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code> och <code>&lt;select&gt;</code>.
-p <code>&lt;input&gt;</code>-taggen kan vi använda till att skapa många olika typer av formulärsfält. Närmare bestämt: fritext, radioknappar, checkboxar och gömda fält. Vilken av dessa fält vi vill skapa bestämmer vi genom att sätta attributet <code>type</code>.
+    textarea(placeholder="Textarea stödjer placeholders").form-control Denna text renderas i textarean
 
 
 
-h4 Fritext (en rad)
-p Följande är ett exempel på hur vi kan göra om vi vill ha ett en-rads-text-fält.
-.row
-  .col-md-6
-    .panel.panel-default
-      .panel-heading Input type text
-      .panel-body
-        pre
-          code.language-markup
-            | &lt;input type="text" placeholder="Your email"&gt;
-  .col-md-6
-    .panel.panel-default
-      .panel-heading Resultat
-      .panel-body
-        form 
-          input(type="text", placeholder="Your email").form-control
+
+
+h4 Labels
+p Platshållare (i.e. placeholders) kan onekligen användas för att ge användaren ett hum om vad som ska skrivas i vilket fält. Men i många fall behöver vi mer än bara platshållare.
+p Till exempel så stödjer inte alla webbläsare placeholders. Vilket skulle rendera fälten helt tomma. Och användaren skulle inte ha en aning om vad som ska skrivas vad. Ett annat problem är förstås att om det redan finns någonting skrivet i fältet (t.ex. eftersom användaren har skrivit det men sen glömt, eller för att webbläsaren har sparat texten). Detta skulle ju alltså göra att platshållartexten inte visas. Eftersom platshållartexten ju endast visas när det faktiskt inte finns en text i formkontrollen.
+p Istället för att bara använda placeholders så kan vi alltså även använda elementet <code>label</code>.
+p Det som huvudsak skiljer labels ifrån helt vanlig text är att vi kan associera en label med en formkontroll. Detta betyder att webbläsaren t.ex. kan göra så att när användaren klickar på etiketten (label) så hamnar respektive formkontroll i "fokus". Detta betyder även förstås att robotar (t.ex. sökspindlar) lättare kan läsa av vad en viss formkontroll är till för, eftersom de kan läsa etiketten.
+p Så låt oss associera en etikett med den fritextkontroll vi såg i tidigare exempel. Kom ihåg att prova klicka på etiketten.
+pre
+  code.language-markup
+    | &lt;label for="firstname"&gt;Förnamn&lt;/label&gt;
+    | &lt;input type="text" placeholder="Vänligen skriv förnamn här..." id="firstname"&gt;
+.panel.panel-default
+  .panel-heading Resultat
+  .panel-body
+    label(for="4750685-example-form-name") Förnamn
+    input(type="text", placeholder="Vänligen skriv förnamn här...", id="4750685-example-form-name").form-control
+
+
+
 
 
 h4 Radio buttons
-p Radio-knappar ger användaren möjligheten att välja ett och endast ett av flera alternativ. Låt oss se till ett exempel, och notera även hur egenskapen <code>for</code> används till att peka <code>&lt;label&gt;</code>'s.
-.panel.panel-default
-  .panel-heading Radio buttons med labels
-  .panel-body
-    pre
-      code.language-markup
-        |&lt;label for="alt-yes"&gt;Ja&lt;/label&gt;
-        |&lt;input type="radio" id="alt-yes" name="yes-or-no" value="yes"&gt;
-        |&lt;label for="alt-no"&gt;Nej&lt;/label&gt;
-        |&lt;input type="radio" id="alt-no" name="yes-or-no" value="no"&gt;
-
+p Radioknappar ger oss möjligheten att låta användaren välja ett och endast ett alternativ, givet flera. Låt oss se till ett exempel. Kom ihåg hur vi (som tidigare diskuterat) använder attributet <code>for</code> för att associera en ettikett med en formkontroll.
+pre
+  code.language-markup
+    |&lt;label for="alt-yes"&gt;Ja&lt;/label&gt;
+    |&lt;input type="radio" id="alt-yes" name="yes-or-no" value="yes"&gt;
+    |&lt;label for="alt-no"&gt;Nej&lt;/label&gt;
+    |&lt;input type="radio" id="alt-no" name="yes-or-no" value="no"&gt;
 .panel.panel-default
   .panel-heading Resultat
   .panel-body
@@ -89,116 +117,130 @@ p Radio-knappar ger användaren möjligheten att välja ett och endast ett av fl
       .radio
         label(for="alt-no") Nej
         input(type="radio", name="yes-or-no", id="alt-no")
-
-
-p 
-  | Det som vi har här är alltså en formtagg och i denna så ligger två inputfält varav typen är text och name är namnet som vi kommer
-  | använda om vi skulle vilja hämta upp dessa värden med exempelvis PHP. Size anger vilken storlek denna skall ha och maxlength hur
-  | många bokstäver vi kan skriva in i textboxen.
-
-
+p Prova knapparna! Både genom att klicka på själva radioknapparna, men även genom att klicka på dess etiketter.
+p Fundera på vad de olika attributen i ovan exempel faktiskt gör. Vi har inte pratat om attributet <code>name</code> tidigare. Attributet går att använda på alla formkontroller och är ett sätt att tilldela ett namn på en viss kontroll. Detta namn är av relevans när det kommer till att processa data i formuläret. Vi kommer som sagt inte riktigt att prata om detta än men du bör ändock veta om att det är vad attributet är till för.
+p De två radioknapparna i ovan exempel har ju alltså samma värde för attributet <code>name</code>. Detta innebär att de tillhör samma grupp. Vi sa ju tidigare att radioknappar gör att användaren kan välja ett och endast ett val. Men om vi har flera set av radioknappar på en och samma sida &mdash; hur ska då webbläsaren veta vilka radioknappar som inte får vara valda samtidigt. Jo, genom grupper. Så vi kan alltså omformulera oss som så: En och endast en radioknapp får vara vald per grupp. Och en grupp definierar vi ju alltså genom att ge flera radioknappar samma värde för attributet <code>name</code>.
+p Låt oss se till ett exempel.
+pre
+  code.language-markup
+    | &lt;label&gt;Ja eller nej?&lt;/label&gt;
+    | 
+    | &lt;label for="4307904643-alt-yes"&gt;Ja&lt;/label&gt;
+    | &lt;input type="radio" name="yes-or-no" id="4307904643-alt-yes"&gt;
+    | 
+    | &lt;label for="4307904643-alt-no"&gt;Nej&lt;/label&gt;
+    | &lt;input type="radio" name="yes-or-no" id="4307904643-alt-no"&gt;
+    | 
+    | &lt;label&gt;Vilken frukt?&lt;/label&gt;
+    | 
+    | &lt;label for="4307904643-alt-apple"&gt;Äpple&lt;/label&gt;
+    | &lt;input type="radio" name="fruit" id="4307904643-alt-apple"&gt;
+    | 
+    | &lt;label for="4307904643-alt-banana"&gt;Banan&lt;/label&gt;
+    | &lt;input type="radio" name="fruit" id="4307904643-alt-banana"&gt;
+.panel.panel-default
+  .panel-heading Resultat
+  .panel-body
+    label Ja eller nej?
+    .radio
+      label(for="4307904643-alt-yes") Ja
+      input(type="radio", name="yes-or-no", id="4307904643-alt-yes")
+    .radio
+      label(for="4307904643-alt-no") Nej
+      input(type="radio", name="yes-or-no", id="4307904643-alt-no")
+    label Vilken frukt?
+    .radio
+      label(for="4307904643-alt-apple") Äpple
+      input(type="radio", name="fruit", id="4307904643-alt-apple")
+    .radio
+      label(for="4307904643-alt-banana") Banan
+      input(type="radio", name="fruit", id="4307904643-alt-banana")
 
 
 h4 Checkboxes
-p Checkboxes använder vi till skillnad ifrån radio buttons när vi vill ge användaren möjligheten att välja ett, eller flera alternativ av många. Mycket användbart när det kommer till frukt!
+p Checkboxes använder vi till skillnad ifrån radio buttons när vi vill ge användaren möjligheten att välja ett, eller flera alternativ av många. Mycket användbart när det kommer till frukt! I övrigt fungerar de i stort sett som radioknappar.
 
-.panel.panel-default
-  .panel-heading Exempel på checkboxes med labels
-  .panel-body
-    pre
-      code.language-markup
-        | &lt;input type="checkbox" name="fruit" value="apple" id="alt-apple"&gt;
-        | &lt;label for="alt-apple"&gt;Apple&lt;/label&gt;
-        | &lt;input type="checkbox" name="fruit" value="banana" id="alt-banana"&gt;
-        | &lt;label for="alt-banana"&gt;Banan&lt;/label&gt;
+pre
+  code.language-markup
+    | &lt;input type="checkbox" name="fruit" value="apple" id="alt-apple"&gt;
+    | &lt;label for="alt-apple"&gt;Apple&lt;/label&gt;
+    | &lt;input type="checkbox" name="fruit" value="banana" id="alt-banana"&gt;
+    | &lt;label for="alt-banana"&gt;Banan&lt;/label&gt;
+    | &lt;input type="checkbox" name="fruit" value="grapes" id="alt-grapes"&gt;
+    | &lt;label for="alt-grapes"&gt;Vindruvor&lt;/label&gt;
 
 .panel.panel-default
   .panel-heading Resultat
   .panel-body
     .checkbox
-      input(id="alt-apple", type="checkbox", name="fruit", value="apple") 
-      label(for="alt-apple") Äpple
+      input(id="8769832-alt-apple", type="checkbox", name="fruit", value="apple") 
+      label(for="8769832-alt-apple") Äpple
     .checkbox
-      input(id="alt-banana", type="checkbox", name="fruit", value="banana") 
-      label(for="alt-banana") Banan
+      input(id="8769832-alt-banana", type="checkbox", name="fruit", value="banana") 
+      label(for="8769832-alt-banana") Banan
+    .checkbox
+      input(id="8769832-alt-grapes", type="checkbox", name="fruit", value="grapes") 
+      label(for="8769832-alt-grapes") Vindruvor
 
-h5 Förklaring av attribut
-p Nedan gäller både för <code>radio button</code>'s och <code>checkbox</code>:ar.
-table.table.table-hover
-  tr
-    td name
-    td Namnet på den grupp som valet tillhör. Detta kommer även att vara "nyckeln" vi använder för att hitta det/de värde/-n användaren valt när denne väl skickat formuläret.
-  tr
-    td value
-    td Eftersom detta inte är ett fritextfält så kommer värdet som skickas vara förbestämt. Med andra ord, detta attribut specificerar det värde vi kommer att se när användaren valt detta alternativ.
-  tr
-    td id
-    td Alla element kan ha unika id:n. I detta fall behöver vi id:n eftersom vi vill kunna referera till input-boxen via vår label.
+p Attributet <code>value</code> specificerar alltså vilket värde som kommer att associeras med respektive nyckel (alltså checkboxgruppen "fruit"). Vi återkommer till detta när vi pratar om vad som händer när man skickar ett formulär.
+
+
+
 
 
 
 h4 Select list
-p Om vi vill erbjuda en användare många alternativ, som t.ex länder, kan radiobuttons och checkboxes ofta ta alldeles för stor plats. Då kan vi använda oss av <code>&lt;select&gt;</code>-listor. 
+p Ibland har vi så många alternativ vi vill erbjuda en användare, att det skulle bli absurt att försöka presentera alla som t.ex. radioknappar. Ett vanligt use-case är t.ex. att välja land. Det finns så många länder i världen att sidan skulle bli jättelång om vi skulle presentera alla. In kommer <code>&lt;select&gt;</code>-listor och räddar dagen.
 
-.panel.panel-default
-  .panel-heading Exempel på select-lista
-  .panel-body
-    pre
-      code.language-markup
-        |&lt;select name="fruit"&gt;
-        | &lt;option value="banana"&gt;Banan&lt;/option&gt;
-        | &lt;option value="apple"&gt;Äpple&lt;/option&gt;
-        | &lt;option value="grapes"&gt;Vindruvor&lt;/option&gt;
-        |&lt;/select&gt;
 
+pre
+  code.language-markup
+    | &lt;select name="fruit"&gt;
+    |   &lt;option value="banana"&gt;Banan&lt;/option&gt;
+    |   &lt;option value="apple"&gt;Äpple&lt;/option&gt;
+    |   &lt;option value="grapes"&gt;Vindruvor&lt;/option&gt;
+    |   &lt;option value="orange"&gt;Apelsin&lt;/option&gt;
+    | &lt;/select&gt;
 .panel.panel-default
   .panel-heading Resultat
   .panel-body
     label(for="select-fruit") Vad vill du äta till frukost?
-    select(id="select-fruit", name="frukter").form-control
-      option(value="banan") Banan 
-      option(value="äpple") Äpple
-      option(value="vindruvor") Vindruvor
-
-h5 Multiple-choice select
-p Om vi sätter egenskapen <code>multiple</code> så tillåter listan att användaren väljer flera alternativ genom att hålla in <code>ctrl</code> (Windows) eller <code>cmd</code> (Mac). Man kan även markera flera genom att trycka på en post, hålla ned <code>shift</code> och sen trycka på en till.
-
-.panel.panel-default
-  .panel-heading Exempel på select-lista
-  .panel-body
-    pre
-      code.language-markup
-        |&lt;select name="fruit" multiple&gt;
-        | ...
-        |&lt;/select&gt;
-
-
+    select(id="select-fruit", name="fruits").form-control
+      option(value="banana") Banan 
+      option(value="apple") Äpple
+      option(value="grapes") Vindruvor
+      option(value="orange") Apelsin
+p Återigen så använder vi alltså attributet <code>value</code> för att denotera vad som kommer att skickas om användaren har valt just det valet (<code>option</code>).
+p I vanliga <code>select</code>-listor kan användaren bara välja ett alternativ i listan. Men om vi istället sätter egenskapen <code>multiple</code> så tillåter listan användaren att välja flera alternativ. Beroende på vilken webbläsare användaren befinner sig i så fungerar detta på lite olika sätt. Men oftast fungerar det att (1) klicka och dra, (2) hålla in <code>ctrl</code> (Windows) eller <code>cmd</code> (Mac) och välja en i taget, eller (3) hålla in shift för att välja två stycken och alla däremellan. Du känner rimligen igen dessa konventioner ifrån när vi markerar filer i operativsystemet. Nästan oavsett operativsystem.
+p Att implementationen av denna <code>select</code>-kontroll skiljer sig ifrån webbläsare till webbläsare understryker en viktig poäng. Webbläsare väljer själva hur de ska implementera standarden. Detta betyder att vissa element (du kommer t.ex. att märka detta när vi pratar om elementet <code>&lt;video&gt;</code>) renderas på helt olika sätt i olika webbläsare. Detta av naturliga skäl. En webbläsare för mobiltelefoner måste rimligen hantera en (t.ex.) <code>select</code>-lista annorlunda. Det senare eftersom mobilanvändare ju interagerar med (t.ex.) touch, och inte mus + tangentbord.
+pre
+  code.language-markup
+    |&lt;select name="fruit" multiple&gt;
+    |  ...
+    |&lt;/select&gt;
 .panel.panel-default
   .panel-heading Resultat
   .panel-body
-    label(for="select-fruit") Vad vill du äta till frukost?
-    select(id="select-fruit", name="frukter", multiple).form-control
-      option(value="banan") Banan 
-      option(value="äpple") Äpple
-      option(value="vindruvor") Vindruvor
+    label(for="89437059324-select-fruit") Vad vill du äta till frukost?
+    select(id="89437059324-select-fruit", name="fruits", multiple).form-control
+      option(value="banana") Banan
+      option(value="apple") Äpple
+      option(value="grapes") Vindruvor
+      option(value="orange") Apelsin
+
 
 
 
 
 h4 Submit
-p För att skicka ett formulär måste vi in med en knapp, och använder oss då åter av taggen <code>&lt;input&gt;</code>, men denna gången med typ-attributet satt till <code>submit</code>.
-p Låt oss se till ett exempel.
-
-.panel.panel-default
-  .panel-heading Exempel på submit-knapp
-  .panel-body
-    pre
-      code.language-markup
-        |&lt;input type="submit" value="Skicka!"&gt;
-
+p Så när vi har komponterat ihop det formulär vi vill ha så måste vi ju ge användaren en möjlighet att skicka iväg formuläret. För det behöver vi en submit-knapp. Vi använder då åter elementet <code>&lt;input&gt;</code>, men sätter attributet <code>type</code> till <code>submit</code>.
+p Easy as pancakes! Låt oss se till ett exempel.
+pre
+  code.language-markup
+    |&lt;input type="submit" value="Skicka!"&gt;
 .panel.panel-default
   .panel-heading Resultat
-  .panel-body
+  .panel-body 
     input(type="submit", value="Skicka!").btn.btn-default
 
 
@@ -208,93 +250,107 @@ p Låt oss se till ett exempel.
 
 
 h3 Att skicka formuläret
-p.När användaren klickar på en submit-knapp i ett formulär så skickas det ifyllda datat med i nästa request. Knappen leder oss till en ny sida som defineras genom attributet <code>action</code>
-p Tyvärr är det så att HTML i sig är otillräckligt för att göra någonting signifikant vad gäller processning av formulär-data. För att faktiskt spara datat i en databas eller på något annat sätt hantera det så behöver vi ett script-språk (ex: JavaScript, PHP, Ruby, ASP o.s.v.)
-.panel.panel-default
-  .panel-heading Exempel på action
-  .panel-body
-    pre
-      code.language-markup
-        |&lt;form action="process-form-data.php"&gt;
+p Men vad händer egentligen när användaren skickar ett formulär? Vart skickas datan? Hur kan vi hantera den? Försök förnimma dig om att vi tidigare i detta kapitel talade om att HTML i sig inte är tillräckligt för att processa formulär. Det är fortfarande sant.
+p När användaren klickar på en submit-knapp i ett formulär så skickas det ifyllda datat med i nästa request. Vad betyder det? Ett request är ju alltså när vår webbläsare ber om en ny sida. Vår webbläsare skickar ett HTTP request som tas emot av en server, som i sin tur svarar med ett response. Ett response som slutligen renderas av vår webbläsareKnappen leder oss till en ny sida som defineras genom attributet <code>action</code>.
+p Så, när användaren klickar på en submit-knapp i ett formulär så skickas det ifyllda datat med i nästa request. Det betyder att när requestet kommer till servern som ska hantera request:et och svara med ett response, så har servern tillgång till den data användaren fyllde i formuläret.
+p Men vart skickas datat mer specifikt? Jo, det request som kommer göras är alltså det som finns specificerat i <code>action</code>-attributet i formulärets <code>form</code>-tagg. Med andra ord är submit-knappar egentligen som en helt vanlig länk. När vi klickar på knappen så skickas vi dit där attributet <code>action</code> pekar. När vi klickar på en vanlig länk så skickas vi dit där attributet <code>href</code> pekar. Men den huvudsakliga skillnaden mellan en vanlig länk och en submit-knapp för ett formulär är alltså att datat i formuläret kodas och skickas med i request:et.
+p Action-attributet används alltså som så:
+pre
+  code.language-markup
+    | &lt;form action="put/target/url/here"&gt; &lt;/form&gt;
 
-h4 HTTP Method
-p När vi konstruerar ett formulär som ska skicka data till en annan sida så gör vi det genom en <a href="http://www.w3schools.com/tags/ref_httpmethods.asp" target="_blank">HTTP-metod</a>. För nu kan vi ignorera detta eftersom vi endast pysslar med front-end-språk (html), men det kan ändå vara bra att känna till varför attributet finns där.
+h4 HTTP Methods
+p När användaren klickar på en submit-knapp i ett formulär så skickas alltså datat med i ett request som görs emot den url som specificeras i action-attributet. Ok, men hur skickas datat med? För att förstå det måste vi förstå att det finns två olika metoder att skicka formulärdata över HTTP.
+ul
+  li POST, och
+  li GET
+p Anta att vi skapar ett formulär på sidan <code>http://example.com/login.php</code>. Anta att formulärets action pekar på <code>http://example.com/process_login.php</code>. Om vi använder oss av HTTP-metoden <code>GET</code> så skulle det request som konstrueras se ut något sånt här:
+pre http://example.com/process_login.php?username=snow&amp;password=supersecret&amp;remember=1
+p Formulärdatat skickas alltså direkt i URL:en. Allting efter frågetecknet (<code>?</code>) är en urlkodad sträng av formulärdatat. Datat är kodat enligt principen nyckel/värde. Om vi analyserar strängen lite närmare upptäcker vi att den följer följande konvention.
+pre
+  code key=value
+p Där <code>key</code> ersätts med det värde vi gett <code>name</code>-attribuet för respektive formkontroll. Ordet <code>value</code> ersätts i sin tur av det faktiska värdet för den formkontrollen.
+p Sedan märker vi även att varje nyckel-värde-par avdelas med hjälp av ett och-tecken (<code>&amp;</code>). Som så...
+pre
+  code key1=value1&amp;key2=value2&amp;key3=value3...
+.panel.panel-warning
+  .panel-heading Varning!
+  .panel-body Viss formulärdata (såsom t.ex. login) bör <strong>inte</strong> skickas i <code>GET</code>. Du kommer att få förklaringar till varför när vi pratar om den andra metoden &mdash; <code>POST</code>.
 
-p Attributet <code>method</code> kan alterneras mellan de två värdena <code>POST</code> och <code>GET</code>. Dessa är två olika typer av HTTP requests, och skillnaderna innefattar bl.a.a att förstnämnda "gömmer" datat som skickas i request:et, medan sistnämnda visar datat i URL:en. Läs mer i ovan nämnd länk!
+h3 URL Encoding
+p Både nycklarna såväl som värdena kodas med en teknik som kallas <a href="http://www.w3schools.com/tags/ref_urlencode.asp">urlencoding</a>. Detta innebär icke-numeriska och icke-alfabetiska tecken ersätts med någon form av kod. Varför? Jo, för att undvika <a href="http://en.wikipedia.org/wiki/Parsing">parsing</a>-problem. Eftersom värdena skickas konkatenerade i en enda lång sträng, så betyder det att den som ska använda värdena måste parse:a dem. Att parse:a ett givet stycke text betyder innebär i stort sett att "tolka" det givna stycket enligt ett givet set "grammatiska" regler.
+p För att göra behovet av urlencoding mer uppenbart. Föreställ dig ett formulär med ett fritextfält. Föreställ dig sedan att användaren fyller i någon text med ett och-tecken (<code>&amp;</code>) i mitten. Eftersom och-tecknet används som avdelare emellan set av nyckel-värde-par, så kommer parser:n (alltså det program/maskin som parse:ar strängen) bli tokförvirrad. Så fort parser:n stöter på ett och-tecken kommer den att avsluta nuvarande nyckel-värde-par och anta att nästa börjar. 
+p Urlencoding är alltså anledning till att mellanslag ersätts med <code>%20</code> i url:er. Detta vilket du kanske redan stött på.
 
-p Som tumregel brukar man säga att anrop med "sido-effekter" bör utföras över <code>POST</code> och övriga  över <code>GET</code>. Uttryckt i mer klarspråk: om postningen av formuläret kommer att <em>förändra</em> någonting på servern (ofta spara någonting i en databas) (t.ex. en kommentar), så bör vi arbeta över <code>POST</code>. Om postningen däremot endast syftar till att <em>hämta</em> någonting ifrån servern (t.ex. en sökning) så bör vi arbeta över <code>GET</code>.
+h4 HTTP POST vs HTTP GET
+p Vi nämnde tidigare att det finns två sätt att skicka formulärdata över HTTP. <code>POST</code> och <code>GET</code>. Vi har även kort nämnt att de olika metoderna är olika passande för olika situationer. Detta reflekteras även av deras namn. Tänk på det. Post och get. Förstnämnda är designad för att posta data. Sistnämnda är designad för att hämta data. Distinktionen mellan dessa är förstås varken solkar eller svartvit. Men om vi ser det som en tumregel kan det bli lättare att välja vilken teknik (POST eller GET) vi ska använda.
+p <code>POST</code> bör vi alltså huvudsakligen använda när vi på något sätt vill skicka data till servern. Föreställ dig till exempel ett registreringsformulär. Vi vill skicka data till servern. Vi vill säga "det här är mina uppgifter, vänligen skapa ett konto åt mig". Eller föreställ dig ett kommentarsfält. Vad säger vi till servern? "Här har du min kommentar! Vänligen posta den."
+p Den mer formella tumregeln är att requests som riskerar att ha <a href="http://en.wikipedia.org/wiki/Side_effect_(computer_science)">sidoeffekter</a> bör utföras över POST. Vi kommer att prata mer om vad sidoeffekter när vi pratar om programmering. Men med requests som riskerar sidoeffekter, så menar vi här requests som riskerar att förändra state på servern. T.ex. förändra något i en databas. Därav t.ex. registrering.
+p <code>GET</code> å andra sidan bör vi alltså huvudsakligen använda när vi på något sätt vill hämta data. Exempel på detta kan t.ex. vara <a href="http://en.wikipedia.org/wiki/Pagination">paginering</a>. Med paginering menar vi alltså när en stor mängd content delas upp på flera sidor. Det är då vanligt förekommande att man använder sig av <code>GET</code>-tekniken för i request:et skicka med vilket sidnummer vi vill se.
+p Ett annat lämpligt scenario för GET är t.ex. sökningar och filtrering. Föreställ dig en webbshop med en sökruta. När vi söker efter en produkt så förändrar vi ju självklart inte några produkter på webbshop:ens server. Vi använder då GET för att berätta för servern vilken/vilka term/-er vi har sökt &mdash; så att servern kan svara med rätt response.
+p Den kanske mest uppenbara skillnaden emellan <code>GET</code> och <code>POST</code> är förstås <em>hur</em> formulärdatan skickas. Med förstnämnda tekniken skickas formulärdatat i URL:en själv. Således är formulärdatat uppenbart synligt för användaren. Genom att däremot använda sistnämnda tekniken (POST) så skickas formulärdatan som en HTTP-header. Således är datan inte synlig i URL och inte uppenbart synlig för användaren.
+p Notera att vi uttrycker oss i termer av <em>uppenbart synlig</em>. Detta är medvetet. Även HTTP headers går att analysera. Så bara för att vi skickar data genom POST betyder det inte att vi är helt säkra. Även POST-data går att analysera. Dock krävs det då en lite mer tekniskt händig användare.
 
+table.table.table.striped
+  tr
+    th Metod
+    th Skickas..
+    th Användningsområde
+  tr
+    td GET
+    td ..i slutet av URL:en
+    td När vi vill använda formulärdatat för att hämta någonting.
+  tr
+    td POST
+    td ..som en HTTP-header
+    td När vi vill använda formulärdatat för att förändra någonting på servern.
 
 
 
 
 
 h3 Komplett exempel
-p
-  |Här har vi skapat ett formulär som har två textfält där vi kan skriva in vårt namn och även vad vi skulle vilja heta. Koden för denna 
-  |är som nedanstående:
+p Låt oss, innan vi snurrar ihop detta kapitels säck, kolla in ett komplett formulärexempel.
 
-.panel.panel-default
-  .panel-heading Komplett formulär-exempel
-  .panel-body
-    pre
-      code.language-markup
-        |&lt;form action="#" method="GET"&gt;
-
-        | &lt;div class="form-group"&gt;
-        |   &lt;label for="field-current-name"&gt;Nuvarande namn&lt;/label&gt;
-        |   &lt;input type="text" id="field-current-name" name="current-name" placeholder="Ditt nuvarande namn" required&gt;
-        | &lt;/div&gt;
-
-        | &lt;div class="form-group"&gt;
-        |   &lt;label for="field-new-name"&gt;Önskat namn&lt;/label&gt;
-        |   &lt;input type="text" id="field-new-name" name="new-name" placeholder="Ditt önskade namn" required&gt;
-        | &lt;/div&gt;
-
-        | &lt;div class="form-group"&gt;
-        |   &lt;div class="radio"&gt;
-        |     &lt;label for="field-gender-man"&gt;Man&lt;/label&gt;
-        |     &lt;input type="radio" id="field-gender-man" name="gender" value="man"&gt;
-        |   &lt;/div&gt;
-        | &lt;/div&gt;
-
-        | &lt;div class="form-group"&gt;
-        |   &lt;div class="radio"&gt;
-        |     &lt;label for="field-gender-woman"&gt;Kvinna&lt;/label&gt;
-        |     &lt;input type="radio" id="field-gender-woman" name="gender" value="kvinna"&gt;
-        |   &lt;/div&gt;
-        | &lt;/div&gt;
-
-        | &lt;input type="submit" value="Skicka!"&gt;
-        |&lt;/form&gt;
-
-blockquote.text-danger Notera att alla <code>div</code>-taggar i ovanstående exempel egentligen är överflödiga. De är endast där för att orsaka radbrytningar mellan varje formulärgrupp och ge oss möjligheten att applicera css-stilar.
-
-
+pre
+  code.language-markup
+    |&lt;form action="#" method="GET"&gt;
+    |   &lt;label for="field-name"&gt;Ditt namn&lt;/label&gt;
+    |   &lt;input type="text" id="field-name" name="name" placeholder="Ditt namn" required&gt;
+    | 
+    |   &lt;label&gt;Vad vill du äta till frukost?&lt;/label&gt;
+    | 
+    |   &lt;label for="field-pancakes"&gt;Pannkakor&lt;/label&gt;
+    |   &lt;input type="radio" id="field-pancakes" name="breakfast" value="pancakes"&gt;
+    | 
+    |   &lt;label for="field-scrambled"&gt;Äggröra&lt;/label&gt;
+    |   &lt;input type="radio" id="field-scrambled" name="breakfast" value="scrambled"&gt;
+    | 
+    |   &lt;label for="field-toast"&gt;Övrigt&lt;/label&gt;
+    |   &lt;input type="radio" id="field-toast" name="breakfast" value="toast"&gt;
+    | 
+    |   &lt;input type="submit" value="Skicka!"&gt;
+    |&lt;/form&gt;
 .panel.panel-default
   .panel-heading Resultat
   .panel-body
     form(action="#", method="GET")
       .form-group
-        label(for="field-current-name") Nuvarande namn
-        input(type="text", id="field-current-name", name="current-name", placeholder="Ditt nuvarande namn", required).form-control
-      .form-group
-        label(for="field-new-name") Önskat namn
-        input(type="text", id="field-new-name", name="new-name", placeholder="Ditt önskade namn", required).form-control
-      p Vänligen uppge ditt kön
+        label(for="99986458-field-name") Ditt namn
+        input(type="text", id="99986458-field-name", name="name", placeholder="Ditt namn", required).form-control
+      label Vad vill du äta till frukost?
       .form-group
         .radio
-          input(id="field-gender-man", type="radio", name="gender", value="man", required) 
-          label(for="field-gender-man") Man
+          input(id="99986458-field-pancakes", type="radio", name="breakfast", value="pancakes", required) 
+          label(for="99986458-field-pancakes") Pannkakor
         .radio
-          input(id="field-gender-woman", type="radio", name="gender", value="woman", required) 
-          label(for="field-gender-woman") Kvinna
+          input(id="99986458-field-scrambled", type="radio", name="breakfast", value="scrambled", required) 
+          label(for="99986458-field-scrambled") Äggröra
         .radio
-          input(id="field-gender-other", type="radio", name="gender", value="other", required) 
-          label(for="field-gender-other") Övrigt
+          input(id="99986458-field-toast", type="radio", name="breakfast", value="toast", required) 
+          label(for="99986458-field-toast") Toast
       input(type="submit", value="Skicka!").btn.btn-default
-
-blockquote.text-info Prova gärna att skicka formuläret och notera dels vad attributet <code>required</code> orsakar, samt vad som händer i webbläsarens adressfält.
+p Prova att skicka formuläret och notera dels vad attributet <code>required</code> orsakar, samt vad som händer i webbläsarens adressfält.
 
 
 
