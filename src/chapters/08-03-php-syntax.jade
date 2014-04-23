@@ -1,2 +1,28 @@
 h2 PHP Syntax
 p Kommer snart...
+h3 variabler
+p Eftersom vi redan behandlat och pratat om variabler så kommer vi prata mer om hur vi gör det i PHP.
+.panel.panel-default
+    .panel-heading Deklarering och tilldelning
+    .panel-body
+        pre
+            code.language-javascript
+                | &lt;?php
+                | $x=5;
+                | ?&gt;
+                | // En variabel börjar alltid med ett dollartecken.
+                | // En variabel får inte börja med ett tal.
+                | // En variabel är case sensitive, därav är $x och $X olika variabler          
+h3 Selektion
+.panel.panel-default
+    .panel-heading Exempel på selektion
+    .panel-body
+        pre
+            code.language-javascript
+                | &lt;?php
+                | $tid = date("H");
+                | if ($tid > "20") {
+                |    echo "Godnatt och sov så gott!"
+                | }
+                | ?&gt;
+h3 Iteration
