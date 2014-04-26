@@ -1,18 +1,66 @@
 h2 PHP Syntax
-p Kommer snart...
-h3 variabler
-p Eftersom vi redan behandlat och pratat om variabler så kommer vi prata mer om hur vi gör det i PHP.
+p.lead <code>PHP</code> är ett av de där språken som de flesta kan känna igen sig lite i. Nästan oavsett vilket/vilka språk du kommer ifrån innan. Eftersom vi förväntar oss att du redan har en viss grundläggande kunskap om objektorienterad programmering så kommer vi alltså i huvudsak fokusera på synax och <a href="http://en.wikipedia.org/wiki/Language_construct">språkkonstruktorer</a>. Vi kommer således inte gå in på djupet och diskutera varför. Poängen med detta kapitel är att ge dig tillräckligt mycket kunskap för att kunna läsa identifiera olika delar av ett program skrivet i <code>PHP</code>.
+
+h3 Echo
+p För att skriva ut information till användaren genom att använda någon av de två <a href="#">language constructs</a>:en <code>echo</code> eller <code>print</code>. <a href="http://stackoverflow.com/questions/1647322/whats-the-difference-between-echo-print-and-print-r-in-php">Skillnaderna mellan dessa är subtila</a>, och vet du inte varför du väljer den ena över den andra var åtminstone konsistent i ditt användande.
 .panel.panel-default
-    .panel-heading Deklarering och tilldelning
-    .panel-body
-        pre
-            code.language-javascript
-                | &lt;?php
-                | $x=5;
-                | ?&gt;
-                | // En variabel börjar alltid med ett dollartecken.
-                | // En variabel får inte börja med ett tal.
-                | // En variabel är case sensitive, därav är $x och $X olika variabler          
+  .panel-heading Skriva till skärmen i php
+  .panel-body
+    pre
+      code.language-php
+        | &lt;?php
+        |   echo "Hello worldizzle";
+        | ?&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p Hello woldizzle
+p Självklart kan vi ju inte bara ge <code>echo</code> strängar. Vi kan ge den vilket uttryck som helst som evaluerar till en sträng, eller implicit kan omvandlas till en sträng. Det senare är sant för nedan uyttryck:
+pre
+  code.language-php
+    | &lt;?php
+    |   echo 100 + 20 + 33;
+    |   // Skriver ut 153
+    | ?&gt;
+
+p <code>echo</code> tar alltså antingen ett literal-värde, ett uttryck eller en variabel.
+
+
+h3 Variabler
+p Låt oss nu istället prata om variabler. En variabel deklareras i <code>php</code> genom att placera ett dollartecken (<code>$</code>) före ett ord. Ordet blir då vår identifierare för variabeln.
+
+pre
+  code.language-php
+    | $my_variable_name;
+
+p Ett par regler gäller när vi namnger våra variabler.
+ul
+  li Namnet måste börja med en bokstav eller underscore (<code>_</code>).
+  li Namnet kan <em>inte</em> börja med en siffra.
+  li Namnet får endast innehålla alpha-numeriska tecken och underscrores. Alltså (<code>A-z</code>, <code>0-9</code>, och <code>_</code> ).
+  li Variabelnamn är skiftlägeskänsliga. <code>$hej</code> och <code>$Hej</code> är alltså två olika variabler.
+
+p Men nu har vi ju bara deklarerat en variabel. Vi har inte diskuterat hur man tilldelar till den. Som i de flesta språk tilldelar vi med hjälp av likhetstecknet (<code>=</code>). Och som i de flesta språk kan vi tilldela en varibel ett literal-värde, en annan variabel, eller evalueringen av ett uttryck. Alla nedan är alltså rimliga tilldelningar.
+
+.panel.panel-default
+  .panel-heading Deklarering och tilldelning av variabler i <code>php</code>
+  .panel-body
+    pre
+      code.language-php
+        | &lt;?php
+        |   // Assigning literals
+        |   $age    = 22;
+        |   $name   = "Snow"
+        |   
+        |   // Assigning variables
+        |   $anos   = $age;
+        |   $nombre = $name;
+        |   
+        |   // Assigning an evaluated expression
+        |   $born   = $current_year - $age;
+        | ?&gt;
+
+       
 h3 Selektion
 .panel.panel-default
     .panel-heading Exempel på selektion
