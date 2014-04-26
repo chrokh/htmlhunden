@@ -117,13 +117,48 @@ p Men eftersom <code>php</code> även stödjer <code>switch case</code>-satser s
         |     echo "Good night... sleep well."
         | }
 
+// TODO: Användandet av ordet ting nedan. Använd istället den korrekta delimitationen.
+p När vi använder <code>if-else</code> konstruktionen så behöver vi ju förstås göra jämförelser. En <code>if</code>-sats förväntar sig ett boolskt värde. Och eftersom alla värden kan ersättas med uttryck så kan vi ju (precis som i nästan alla programmeringsspråk) ge ett uttryck istället för ett värde. Detta uttryck skulle kunna vara en jämförelse emellan två ting. Och om vi ska göra jämförelser så behöver vi förstås som vanligt jämförelseoperatorer. Även i <code>php</code> hittar vi då de vanligaste jämförelseoperatorer.
 
-h4 Switch case
-p TODO
+table.table.table-condensed.table-striped
+  tr
+    th Operator
+    th Namn
+    th Förklaring
+  tr
+    td <code>==</code>
+    td Equality
+    td Sant om $A och $B är exakt ekvivalenta.
+  tr
+    td <code>===</code>
+    td Identical
+    td Sant om $A och $B är exakt ekvivalenta, och de är av samma datatyp. 
+  tr
+    td <code>!=</code> eller <code>&lt;&gt;</code>
+    td Not equal
+    td Sant om $A och $B inte är lika.
+  tr
+    td <code>!==</code>
+    td Not identical
+    td Sant om $A och $B inte är lika, eller om de inte är av samma datatyp.
+  tr
+    td <code>&lt;</code>
+    td Less than
+    td Sant om $A är lägre än $B.
+  tr
+    td <code>&gt;</code>
+    td Greater than
+    td Sant om $A är högre än $B.
+  tr
+    td <code>&lt;=</code>
+    td Less than or equal
+    td Sant om $A är lägre än eller lika låg som $B.
+  tr
+    td <code>&gt;=</code>
+    td Greater than or equal
+    td Sant om $A är högre eller lika hög som än $B.
 
 
-h4 Jämförelseoperatorer
-p TODO
 
 
 
