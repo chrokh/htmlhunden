@@ -719,9 +719,31 @@ $('p').click(onClick);</code></pre></p><p>Detta kommer nu alltså att ge oss fö
   
   // Assigning an evaluated expression
   $born   = $current_year - $age;
-?&gt;</code></pre></div></div><h3>Selektion</h3><p>TODO</p><h4>If..else</h4><p>TODO</p><div class="panel panel-default"><div class="panel-heading">If..else i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">&lt;?php
-$tid = date("H");
-if ($tid > "20") {
-   echo "Godnatt och sov så gott!"
+?&gt;</code></pre></div></div><h3>Selektion</h3><p>I <code>php</code> kan vi, precis som i de flesta andra språk, förändra ett programs exekveringsbana genom att konditionella selektioner. Låt oss börja med att kika på ett exempel på hur vi skriver en enkel <code>if-else</code>-selektion i <code>php</code>.</p><div class="panel panel-default"><div class="panel-heading">If-else i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">if (3 > 5){
+  echo "The world has gone mad!";
+}else{
+  echo "Puh.. sanity remains..";
+}</code></pre></div></div><p>Självklart kan vi ju som vanligt "kedja" hur många <code>else if</code>'s vi vill. Såsom nedan:</p><div class="panel panel-default"><div class="panel-heading">If-else i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">if (timeOfDay() == "morning"){
+  echo "Good morning.";
+}else if(timeOfDay() == "day"){
+  echo "Good day.";
+}else if(timeOfDay == "evening"){
+  echo "Good evening."
+}else{
+  echo "Good night... sleep well."
 }
-?&gt;</code></pre></div></div><h4>Switch case</h4><p>TODO</p><h3>Iteration</h3><p>TODO</p><p>for-loop (TODO)</p><p>while-loop (TODO)</p><p>foreach (TODO)</p><h3>Funktioner</h3><p>TODO</p><h3>Jämförelseoperatorer</h3><p>TODO</p><h2 href="#08-04-php-organizing-code" name="08-04-php-organizing-code" id="08-04-php-organizing-code">Kodorganisation</h2><p>Kommer snart...</p><h2 href="#08-05-php-data-forms" name="08-05-php-data-forms" id="08-05-php-data-forms">Skicka data till servern</h2><p>Kommer snart...</p><h2 href="#08-06-php-oop" name="08-06-php-oop" id="08-06-php-oop">Objektorienterad PHP</h2><p>Kommer snart...</p><h2 href="#08-07-php-debugging" name="08-07-php-debugging" id="08-07-php-debugging">Felsökningstekniker</h2><p>Kommer snart...</p><h1 href="#30-00-efterord-intro" name="30-00-efterord-intro" id="30-00-efterord-intro">Epilog</h1><div class="page-header"><h2 href="#30-01-efterord-intro" name="30-01-efterord-intro" id="30-01-efterord-intro">Efterord</h2></div><p>HTML-hunden är skriven av <span class="authors"><em class="author">Christopher Okhravi</em> (<a href="http://twitter.com/chrokh" target="_blank">@chrokh</a>) och <em>Madelen Hermelin</em>. Guiden är skriven för att användas under kurser vid <a href="http://www.im.uu.se/" target="_blank">Institutionen för informatik och media</a> under <a href="http://www.uu.se" target="_blank">Uppsala universitet</a> men du är förstås välkommen att använda den vemän du är :) </span></p><p>Projektet har <a href="http://sv.wikipedia.org/wiki/%C3%96ppen_k%C3%A4llkod" target="_blank">öppen källkod</a>, och om du således är intresserad av att bidra på något sätt så välkomnar vi alla tankar, idéer och korrigeringar. Projektet tillsammans med dokumentation finns på <a href="https://github.com/chrokh/htmlhunden" target="_blank">GitHub</a>.</p></div><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/jquery.fittext.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body></html>
+ 
+// The above assumes we have a function called timeOfDay()
+// that returns the time of day as a nice string :)</code></pre></div></div><p>Men eftersom <code>php</code> även stödjer <code>switch case</code>-satser så kan vi likväl använda en sådan om vi skulle vilja lösa ovan problem.</p><div class="panel panel-default"><div class="panel-heading">Switch case i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">switch( timeOfDay() ){
+  "morning":
+    echo "Good morning.";
+    break;
+  "day":
+    echo "Good day.";
+    break;
+  "evening":
+    echo "Good evening."
+    break;
+  default:
+    echo "Good night... sleep well."
+}</code></pre></div></div><h4>Switch case</h4><p>TODO</p><h4>Jämförelseoperatorer</h4><p>TODO</p><h3>Iteration</h3><p>TODO</p><p>for-loop (TODO)</p><p>while-loop (TODO)</p><p>foreach (TODO)</p><h3>Funktioner</h3><p>TODO</p><h2 href="#08-04-php-organizing-code" name="08-04-php-organizing-code" id="08-04-php-organizing-code">Kodorganisation</h2><p>Kommer snart...</p><h2 href="#08-05-php-data-forms" name="08-05-php-data-forms" id="08-05-php-data-forms">Skicka data till servern</h2><p>Kommer snart...</p><h2 href="#08-06-php-oop" name="08-06-php-oop" id="08-06-php-oop">Objektorienterad PHP</h2><p>Kommer snart...</p><h2 href="#08-07-php-debugging" name="08-07-php-debugging" id="08-07-php-debugging">Felsökningstekniker</h2><p>Kommer snart...</p><h1 href="#30-00-efterord-intro" name="30-00-efterord-intro" id="30-00-efterord-intro">Epilog</h1><div class="page-header"><h2 href="#30-01-efterord-intro" name="30-01-efterord-intro" id="30-01-efterord-intro">Efterord</h2></div><p>HTML-hunden är skriven av <span class="authors"><em class="author">Christopher Okhravi</em> (<a href="http://twitter.com/chrokh" target="_blank">@chrokh</a>) och <em>Madelen Hermelin</em>. Guiden är skriven för att användas under kurser vid <a href="http://www.im.uu.se/" target="_blank">Institutionen för informatik och media</a> under <a href="http://www.uu.se" target="_blank">Uppsala universitet</a> men du är förstås välkommen att använda den vemän du är :) </span></p><p>Projektet har <a href="http://sv.wikipedia.org/wiki/%C3%96ppen_k%C3%A4llkod" target="_blank">öppen källkod</a>, och om du således är intresserad av att bidra på något sätt så välkomnar vi alla tankar, idéer och korrigeringar. Projektet tillsammans med dokumentation finns på <a href="https://github.com/chrokh/htmlhunden" target="_blank">GitHub</a>.</p></div><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/jquery.fittext.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body></html>

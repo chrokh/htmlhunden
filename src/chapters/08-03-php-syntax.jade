@@ -62,25 +62,68 @@ p Men nu har vi ju bara deklarerat en variabel. Vi har inte diskuterat hur man t
 
        
 h3 Selektion
-p TODO
+p I <code>php</code> kan vi, precis som i de flesta andra språk, förändra ett programs exekveringsbana genom att konditionella selektioner. Låt oss börja med att kika på ett exempel på hur vi skriver en enkel <code>if-else</code>-selektion i <code>php</code>.
 
-h4 If..else
-p TODO
 .panel.panel-default
-  .panel-heading If..else i <code>php</code>
+  .panel-heading If-else i <code>php</code>
   .panel-body
     pre
       code.language-javascript
-        | &lt;?php
-        | $tid = date("H");
-        | if ($tid > "20") {
-        |    echo "Godnatt och sov så gott!"
+        | if (3 > 5){
+        |   echo "The world has gone mad!";
+        | }else{
+        |   echo "Puh.. sanity remains..";
         | }
-        | ?&gt;
+
+p Självklart kan vi ju som vanligt "kedja" hur många <code>else if</code>'s vi vill. Såsom nedan:
+
+.panel.panel-default
+  .panel-heading If-else i <code>php</code>
+  .panel-body
+    pre
+      code.language-javascript
+        | if (timeOfDay() == "morning"){
+        |   echo "Good morning.";
+        | }else if(timeOfDay() == "day"){
+        |   echo "Good day.";
+        | }else if(timeOfDay == "evening"){
+        |   echo "Good evening."
+        | }else{
+        |   echo "Good night... sleep well."
+        | }
+        | 
+        | // The above assumes we have a function called timeOfDay()
+        | // that returns the time of day as a nice string :)
+
+
+p Men eftersom <code>php</code> även stödjer <code>switch case</code>-satser så kan vi likväl använda en sådan om vi skulle vilja lösa ovan problem.
+
+.panel.panel-default
+  .panel-heading Switch case i <code>php</code>
+  .panel-body
+    pre
+      code.language-javascript
+        | switch( timeOfDay() ){
+        |   "morning":
+        |     echo "Good morning.";
+        |     break;
+        |   "day":
+        |     echo "Good day.";
+        |     break;
+        |   "evening":
+        |     echo "Good evening."
+        |     break;
+        |   default:
+        |     echo "Good night... sleep well."
+        | }
+
 
 h4 Switch case
 p TODO
 
+
+h4 Jämförelseoperatorer
+p TODO
 
 
 
@@ -94,10 +137,4 @@ p foreach (TODO)
 
 
 h3 Funktioner
-p TODO
-
-
-
-
-h3 Jämförelseoperatorer
 p TODO

@@ -38,9 +38,31 @@ ga('send', 'pageview');
   
   // Assigning an evaluated expression
   $born   = $current_year - $age;
-?&gt;</code></pre></div></div><h3>Selektion</h3><p>TODO</p><h4>If..else</h4><p>TODO</p><div class="panel panel-default"><div class="panel-heading">If..else i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">&lt;?php
-$tid = date("H");
-if ($tid > "20") {
-   echo "Godnatt och sov så gott!"
+?&gt;</code></pre></div></div><h3>Selektion</h3><p>I <code>php</code> kan vi, precis som i de flesta andra språk, förändra ett programs exekveringsbana genom att konditionella selektioner. Låt oss börja med att kika på ett exempel på hur vi skriver en enkel <code>if-else</code>-selektion i <code>php</code>.</p><div class="panel panel-default"><div class="panel-heading">If-else i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">if (3 > 5){
+  echo "The world has gone mad!";
+}else{
+  echo "Puh.. sanity remains..";
+}</code></pre></div></div><p>Självklart kan vi ju som vanligt "kedja" hur många <code>else if</code>'s vi vill. Såsom nedan:</p><div class="panel panel-default"><div class="panel-heading">If-else i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">if (timeOfDay() == "morning"){
+  echo "Good morning.";
+}else if(timeOfDay() == "day"){
+  echo "Good day.";
+}else if(timeOfDay == "evening"){
+  echo "Good evening."
+}else{
+  echo "Good night... sleep well."
 }
-?&gt;</code></pre></div></div><h4>Switch case</h4><p>TODO</p><h3>Iteration</h3><p>TODO</p><p>for-loop (TODO)</p><p>while-loop (TODO)</p><p>foreach (TODO)</p><h3>Funktioner</h3><p>TODO</p><h3>Jämförelseoperatorer</h3><p>TODO</p><div class="chapter-pagination"><p class="text-muted">Det här kapitlet är en del av en den interaktiva och pragmatiska höghastighetsguiden till webbutveckling &mdash; <a href="http://htmlhunden.se">HTMLHunden</a>. Använd knapparna nedan för att läsa vidare eller navigera till innehållsförteckningen.</p><div class="text-center"><div class="btn-group"><a href="08-02-php-installation.html" title="Föregående kapitel" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-arrow-left"></span></a><a href="/" title="Hem" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-home"></span></a><a href="/dist/toc.html" title="Innehållsförteckning" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-list"></span></a><a href="08-04-php-organizing-code.html" title="Nästa kapitel" class="btn btn-lg btn-default pagination-next"><span class="glyphicon glyphicon-arrow-right"></span></a></div></div></div></div> <!-- container --><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/jquery.fittext.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body>
+ 
+// The above assumes we have a function called timeOfDay()
+// that returns the time of day as a nice string :)</code></pre></div></div><p>Men eftersom <code>php</code> även stödjer <code>switch case</code>-satser så kan vi likväl använda en sådan om vi skulle vilja lösa ovan problem.</p><div class="panel panel-default"><div class="panel-heading">Switch case i <code>php</code></div><div class="panel-body"><pre><code class="language-javascript">switch( timeOfDay() ){
+  "morning":
+    echo "Good morning.";
+    break;
+  "day":
+    echo "Good day.";
+    break;
+  "evening":
+    echo "Good evening."
+    break;
+  default:
+    echo "Good night... sleep well."
+}</code></pre></div></div><h4>Switch case</h4><p>TODO</p><h4>Jämförelseoperatorer</h4><p>TODO</p><h3>Iteration</h3><p>TODO</p><p>for-loop (TODO)</p><p>while-loop (TODO)</p><p>foreach (TODO)</p><h3>Funktioner</h3><p>TODO</p><div class="chapter-pagination"><p class="text-muted">Det här kapitlet är en del av en den interaktiva och pragmatiska höghastighetsguiden till webbutveckling &mdash; <a href="http://htmlhunden.se">HTMLHunden</a>. Använd knapparna nedan för att läsa vidare eller navigera till innehållsförteckningen.</p><div class="text-center"><div class="btn-group"><a href="08-02-php-installation.html" title="Föregående kapitel" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-arrow-left"></span></a><a href="/" title="Hem" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-home"></span></a><a href="/dist/toc.html" title="Innehållsförteckning" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-list"></span></a><a href="08-04-php-organizing-code.html" title="Nästa kapitel" class="btn btn-lg btn-default pagination-next"><span class="glyphicon glyphicon-arrow-right"></span></a></div></div></div></div> <!-- container --><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/jquery.fittext.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body>
