@@ -87,7 +87,7 @@ p Låt oss återgå till idéen om att inkludera innehållet av en fil i en anna
         | include 'db_connect.php';
         | $result = db_query("SELECT * FROM posts WHERE id='.$post_id.'");
         | ...
-    p Mycket bättre :) Nu har vi inte pratat om objektorienterad <code>php</code> ännu. Men låt oss bara nämna att vi hade kunnat skriva den här koden ännu snyggare om vi hade skrev den objektorienterat. Men det återkommer vi till senare. Poängen här är alltså att vi har generaliserat och brytit ut vanligt förekommande kod till metoder.
+    p Mycket bättre :) Nu har vi inte pratat om objektorienterad <code>php</code> ännu. Men låt oss bara nämna att vi hade kunnat skriva den här koden ännu snyggare om vi hade skrivit den objektorienterat. Men det återkommer vi till senare. Poängen här är alltså att vi har generaliserat och brytit ut vanligt förekommande kod till metoder.
     // TODO: The db connection is never closed, and new ones always created so the example might need some tweaking to not be misleading.
 
 p Det kan tyckas konstigt att ovan exempel skulle vara någonting smart. Vi gick ifrån mindre kod och färre filer till mer kod och fler filer. Men faktum är att <em>rader kod</em> är ett mycket dåligt mått på en kodbas komplexitet. Eller som Bill Gates uttryckte det &mdash; <span class="quote"><a href="http://c2.com/cgi/wiki?LinesOfCode">"Measuring software productivity by lines of code is like measuring progress on an airplane by how much it weighs"</a></span>.
