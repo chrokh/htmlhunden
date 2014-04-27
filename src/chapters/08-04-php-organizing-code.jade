@@ -148,10 +148,41 @@ pre
     | Warning: require(non_existent_file.php): failed to open stream: No such file or directory in /www/syntax.php on line 5
     | Fatal error: require(): Failed opening required 'non_existent_file.php' (include_path='.:') in /www/syntax.php on line 5
 
+
+
 h4 Inkludera filer med <code>require_once</code>
-p TODO
+p Det sista alternativet för att inkludera filer i filer som vi ska kika på är <code>require_once</code>. Denna konstruktion beteer sig egentligen precis som sin syster <code>require</code>. Den viktiga skillnaden är dock att <code>require_once</code> håller koll på om en fil tidigare har laddats in. Med andra ord laddas en fil endast in en gång när vi använder <code>require_once</code>. Ett exempel gör det rimligen tydligare.
 
+.panel.panel-default
+  .panel-heading Exempel på skillnaden emellan <code>require</code> och <code>require_once</code>.
+  .panel-body
+    p Anta att vi har följande fil.
+    pre
+      code.language-php
+        | /* hello.php */
+        | echo 'hello ';
 
+    p Låt oss använda en <code>for</code>-loop för att inkludera samma fil tre gånger. Om vi använder oss av <code>require</code> eller <code>include</code> får vi följande resultat:
+    pre
+      code.language-php
+        | for($i=0; $i<3; $i++){
+        |   require 'hello.php' ;
+        | }
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p hello hello hello
+
+    p Men om vi kör samma <code>for</code>-loop men istället använder oss av <code>require_once</code> så får vi följande resultat:
+    pre
+      code.language-php
+        | for($i=0; $i<3; $i++){
+        |   require_once 'hello.php' ;
+        | }
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p hello 
 
 h3 Strategier för att bädda in <code>html</code>
 p TODO
