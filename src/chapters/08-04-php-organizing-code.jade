@@ -1,2 +1,243 @@
 h2 Kodorganisation
+p.lead Uttrycket <a href="http://agilemanifesto.org/">responding to change</a>, har blivit mycket viktigt inom mjuvaruutveckling. I essens belyser det idéen om att världen runtomkring oss (kunder, teknik, krav, etc.) förändras så snabbt att vi alltid måste vara beredda att förändra våra applikationer. Därför är det alltså viktigt att vi skriver kod som är hanterbar. Vi måste kontrollera vår kod och inte låta vår kod kontrollera oss. I detta kapitel ska vi alltså prata om lite olika strategier för att öka nivån av struktur i våra <code>php</code>-applikationer.
+
+
+
+h3 Inkludera filer
+p De flesta <em>server-side</em>-språk har ett sätt att inkludera innehållet av en fil i en annan. Detta är ett ypperligt sätt att undvika duplicering av kod. Föreställ dig att vi bygger en blogg. Vi har (t.ex.) en sida som listar alla inlägg, och vi har en sida per specifikt inlägg. Båda dessa sidor behöver göra <em>queries</em> till databasen och således behöver alltså båda sidorna sätta upp en databaskoppling. De två frågorna vi vill ställa databasen är olika, men just själva uppsättandet av databaskopplingen kommer vara exakt likadan.
+
+// TODO: Länka kommentaren om databaskoppling till php-delen som förklarar hur man gör en databaskoppling.
+
+p Duplicerad kod kan alltid tolkas som en varningssignal för att vi antagligen behöver refaktorera och generalisera. Låt oss kort reflektera över varför duplicerad kod är så farligt. Föreställ dig igen ovan nämnt bloggexempel. Anta att vi sätter upp databaskopplingen först i varenda fil som behöver komma åt databasen. Säg omkring 25 filer. Om vi nu av någon anledning t.ex. behöver byta namn på databasen. Då behöver vi ändra databaskopplingen i alla dessa 25 filer. Trivialt kan tyckas. Men anta att det är 125 filer. Eller 1025 filer. Anta att vi bara ändrar i 24 filer och glömmer en. Anta att vi glömmer att kolla att just den sidan fungerar. Då har vi helt plötsligt "haft sönder" vår applikation utan att ens veta om det. Duplicerad kod är farlig kod. <a href="http://en.wikipedia.org/wiki/Code_smell">Duplicerad kod luktar illa</a>.
+
+p Låt oss återgå till idéen om att inkludera innehållet av en fil i en annan fil. Konceptet kan egentligen liknas vid att bryta ut ett gäng rader kod till en metod. När vi märker att vi har duplicerat kod så bryter vi ut den duplicerade koden till en metod och anropar istället metoden på de båda ställena. Om vi i <code>php</code> märker att vi har duplicerat kod emellan två filer, så bryter vi ut den duplicerade koden till en separat fil och inkluderar istället den filen i de andra två. Låt oss se till ett exempel.
+
+.panel.panel-default
+  .panel-heading Exempel på hur vi skulle kunna använda <code>include</code> i <code>php</code>.
+  .panel-body
+    p Anta att vi har byggt en blogg. Anta att vi har två sidor. Där den ena listar alla inlägg och den visar ett specifikt inlägg. Så i filen som listar alla inlägg har vi någonting i stil med nedan:
+    pre
+      code.language-php
+        | /* list_all_posts.php */
+        | 
+        | $link   = mysqli_connect("db.example.com","user","pwd","db") or die("Error " . mysqli_error($link));
+        | $query  = "SELECT * FROM posts";
+        | $result = $link->query($query) or die("Error in the consult.." . mysqli_error($link));
+        | ...
+
+    p Och i filen som visar ett specifikt inlägg har vi någonting typ nedan:
+
+    pre
+      code.language-php
+        | /* show_single_post.php */
+        | 
+        | $link   = mysqli_connect("db.example.com","user","pwd","db") or die("Error " . mysqli_error($link));
+        | $query  = "SELECT * FROM posts WHERE id='.$post_id.'";
+        | $result = $link->query($query) or die("Error in the consult.." . mysqli_error($link));
+        | ...
+    p Jämför de två kodexemplena med varandra en stund. Uppenbart har vi en hel del duplikation. Låt oss naivt flytta över själva databaskopplingen.
+
+    pre
+      code.language-php
+        | /* db_connect.php */
+        | $link   = mysqli_connect("db.example.com","user","pwd","db") or die("Error " . mysqli_error($link));
+    pre
+      code.language-php
+        | /* list_all_posts.php */
+        | 
+        | include 'db_connect.php';
+        | $query  = "SELECT * FROM posts";
+        | $result = $link->query($query) or die("Error in the consult.." . mysqli_error($link));
+        | ...
+     pre
+      code.language-php
+        | /* show_single_post.php */
+        | 
+        | include 'db_connect.php';
+        | $query  = "SELECT * FROM posts WHERE id='.$post_id.'";
+        | $result = $link->query($query) or die("Error in the consult.." . mysqli_error($link));
+        | ...
+
+    p Lite bättre. Men om vi kombinerar inkluderingsstrategin tillsammans med att bryta ut metoder kan vi förstås göra det ännu bättre.
+
+    pre
+      code.language-php
+        | /* db_functions.php */
+        | 
+        | function db_connect(){
+        |   $link = mysqli_connect("db.example.com","user","pwd","db") or die("Error " . mysqli_error($link));
+        |   return $link;
+        | }
+        | 
+        | function db_query($query){
+        |   $link = db_connect();
+        |   return $link->query($query) or die("Error in the consult.." . mysqli_error($link));
+        | }
+    pre
+      code.language-php
+        | /* list_all_posts.php */
+        | 
+        | include 'db_connect.php';
+        | $result = db_query("SELECT * FROM posts");
+        | ...
+     pre
+      code.language-php
+        | /* show_single_post.php */
+        | 
+        | include 'db_connect.php';
+        | $result = db_query("SELECT * FROM posts WHERE id='.$post_id.'");
+        | ...
+    p Mycket bättre :) Nu har vi inte pratat om objektorienterad <code>php</code> ännu. Men låt oss bara nämna att vi hade kunnat skriva den här koden ännu snyggare om vi hade skrivit den objektorienterat. Men det återkommer vi till senare. Poängen här är alltså att vi har generaliserat och brytit ut vanligt förekommande kod till metoder.
+    // TODO: The db connection is never closed, and new ones always created so the example might need some tweaking to not be misleading.
+
+p Det kan tyckas konstigt att ovan exempel skulle vara någonting smart. Vi gick ifrån mindre kod och färre filer till mer kod och fler filer. Men faktum är att <em>rader kod</em> är ett mycket dåligt mått på en kodbas komplexitet. Eller som Bill Gates uttryckte det &mdash; <span class="quote"><a href="http://c2.com/cgi/wiki?LinesOfCode">"Measuring software productivity by lines of code is like measuring progress on an airplane by how much it weighs"</a></span>.
+
+p Låt oss istället, i relation till ovan exempel, kontemplera hur redo vi är på att reagera på inkommande förändringskrav. Om vi nu t.ex. skulle vilja döpa om databasen behöver vi bara göra det på en plats, oavsett hur många filer vi har som kopplar till databasen. Om vi skulle vilja förändra felhanteringen om en query misslyckas behöver vi bara göra det på ett ställe. Eller felhanteringen för om själva databaskopplingen misslyckas.
+
+p Om vi skulle hamna i en situation då vi skulle vilja byta databas, till någonting annat än <code>mysql</code> så är vi <em>mer</em> beredda än tidigare &mdash; men vi har fortfarande en lång väg att gå. För att hantera den typen av scenarion måste vi gå längre. Ett mycket vanligt tillvägagångssätt är att skriva egna eller använda sig av befintliga ORM:er (<a href="http://en.wikipedia.org/wiki/Object-relational_mapping">Object Relational Mapping</a>). En ORM är helt enkelt kod som skapar ett abstraktionslager emellan databasen och vår kod. Så när vi vill ställa frågor (queries) till databasen gör vi det helt i vårt programspråk och aldrig i vårt databasspråk. Det betyder att om vi i framtiden vill byta databas, behöver vi bara förändra vår ORM och inte all vår applikationskod. 
+
+
+
+
+h4 Inkludera filer med <code>include</code>
+p Det finns olika sätt att inkludera filer med <code>php</code>. I ovan exempel använde vi oss utav <code>include</code>. Låt oss repetera syntaxen.
+
+.panel.panel-default
+  .panel-heading Att inkludera en annan fil med 
+    code include
+  .panel-body
+    pre
+      code.language-php
+        | include 'some_file.php';
+        | 
+        | // Or using a variable..
+        | 
+        | $filename = 'another_file.php';
+        | include $filename;
+
+p Om den fil vi försöker inkludera av någon anledning inte går att hitta, kommer <code>php</code> att spotta ur sig en <code>warning</code> såsom nedan.
+pre
+  code.language-php
+    | Warning: include(non_existent_file.php): failed to open stream: No such file or directory in /www/syntax.php on line 5
+    | Warning: include(): Failed opening 'non_existent_file.php' for inclusion (include_path='.:') in /www/syntax.php on line 5
+
+p Det viktiga att förstå är att en varning <strong>inte</strong> avbryter exekveringen. Med andra ord &mdash; om en fil inte hittas kommer först en varning att spottas ut på sidan med sedan kommer resten av filen ändå exekveras precis som vanligt. Detta betyder att just konstruktionen <code>include</code> faktiskt <a href="http://stackoverflow.com/questions/3633900/difference-between-include-and-require-in-php">inte lämpar sig för applikationskritiska inkluderingar</a>. Såsom databaskopplingen ovan, eller autentisering av användare. Låt oss nu diskutera några andra alternativ...
+
+
+h4 Inkludera filer med <code>require</code>
+p Ett annat alternativ vi kan använda för att inkludera filer är konsturktionen <code>require</code>. Till skillnad ifrån <code>include</code> så orsakar inte denna metod en <code>warning</code> om det skulle vara så att den inte lyckas ladda en fil. Istället orsakar den ett <code>fatal error</code>. Detta avbryter exekveringen. Alltså kommer ingen kod efter den misslyckade <code>require</code>:en att köras.
+
+p Således är <code>require</code> ett bättre sätt att inkludera applikationskritiska filer, än <code>include</code>. Föreställ dig t.ex. att alla sidor som kräver inloggning inkluderar en fil som heter <code>authorize.php</code>. I det fallet förlitar vi oss på att autentiseringsfilen omdirigerar användaren bort ifrån sidan den försöker komma åt. Anta att vi skulle använda <code>include</code> för att inkludera filen <code>authorize.php</code>. Om det av någon anledning skulle vara så att <code>php</code> inte lyckas få tag på filen så skulle vår sida som kräver inloggning inte längre vara skyddad. Eftersom exekveringen fortsätter trots att vi inte lyckats hämta filen som ska autentisera användaren.
+
+p Syntaxmässigt så används <code>require</code> på samma sätt som <code>include</code>. Alltså:
+.panel.panel-default
+  .panel-heading Att inkludera en annan fil med 
+    code require
+  .panel-body
+    pre
+      code.language-php
+        | require 'some_file.php';
+        | 
+        | // Or using a variable..
+        | 
+        | $filename = 'another_file.php';
+        | require $filename;
+
+pre
+  code.language-php
+    | Warning: require(non_existent_file.php): failed to open stream: No such file or directory in /www/syntax.php on line 5
+    | Fatal error: require(): Failed opening required 'non_existent_file.php' (include_path='.:') in /www/syntax.php on line 5
+
+
+
+h4 Inkludera filer med <code>require_once</code>
+p Det sista alternativet för att inkludera filer i filer som vi ska kika på är <code>require_once</code>. Denna konstruktion beteer sig egentligen precis som sin syster <code>require</code>. Den viktiga skillnaden är dock att <code>require_once</code> håller koll på om en fil tidigare har laddats in. Med andra ord laddas en fil endast in en gång när vi använder <code>require_once</code>. Ett exempel gör det rimligen tydligare.
+
+.panel.panel-default
+  .panel-heading Exempel på skillnaden emellan <code>require</code> och <code>require_once</code>.
+  .panel-body
+    p Anta att vi har följande fil.
+    pre
+      code.language-php
+        | /* hello.php */
+        | echo 'hello ';
+
+    p Låt oss använda en <code>for</code>-loop för att inkludera samma fil tre gånger. Om vi använder oss av <code>require</code> eller <code>include</code> får vi följande resultat:
+    pre
+      code.language-php
+        | for($i=0; $i<3; $i++){
+        |   require 'hello.php' ;
+        | }
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p hello hello hello
+
+    p Men om vi kör samma <code>for</code>-loop men istället använder oss av <code>require_once</code> så får vi följande resultat:
+    pre
+      code.language-php
+        | for($i=0; $i<3; $i++){
+        |   require_once 'hello.php' ;
+        | }
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p hello 
+
+
+
+
+
+h3 Strategier för att bädda in <code>html</code>
+p Eftersom vi pratar om att använda <code>php</code> till att skapa webbsidor så behöver vi förstås blanda <code>html</code> och <code>php</code>. Något vi tidigare diskuterat är idéen om <a href="http://en.wikipedia.org/wiki/Separation_of_presentation_and_content">separera presentation och content</a>. Då i relation till ansvarsskillnader mellan <code>html</code> och <code>css</code>. Ett annat vanligt idiom inom programmering är <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a>. Det är en mer generell idé än den om just behovet av att separera presentation ifrån content. När vi nu använder ett kraftfullare skriptspråk, såsom <code>php</code>, kommer vi plötsligt ha en mängd nya "concerns". T.ex. <a href="http://en.wikipedia.org/wiki/Business_logic">Business logic</a> (affärslogik) och databaslogik. Om vi ska respektera idéen om att separera concerns så behöver vi alltså hitta strategier för att separera t.ex. affärslogik ifrån presentation.
+
+p Låt oss först prata om varför det är viktigt att separera olika "concerns". Kom ihåg tidigare diskussion om att vi behöver sikta på en hög nivå av beredskap inför förändring. Vår applikation behöver vara lätt att förändra. Så när (ps: vi väljer medvetet ordet <em>när</em> och inte <em>om</em>) vi väl behöver utföra en förändring löper vi inte risken att behöva koda om hela systemet ifrån grunden. Föreställ dig t.ex. att vi utvecklar en webbshop. Anta att vi har listat shoppens produkterna på listform. Anta nu att vi får in ett nytt krav på att även kunna presentera produkterna som ett rutnät. Jahapp tänker vi, och börjar kika på koden. Om vår databaskod då är beblandad med vår presentationskod så kommer förändringen bli mycket dyrare än om de är ordentligt separerade.
+
+p Utan att gräva ned oss i det här för mycket så kan vi säga att det finns en uppsjö av <a href="http://en.wikipedia.org/wiki/Software_design_pattern">design patterns</a> &mdash; alltså dokumenterade kodstruktureringsstrategier &mdash; som syftar just till att angripa denna typ av problem. Men det får vi diskutera på djupet en annan gång. Vad vi vill belysa i detta kapitel är hur det går att identifiera två vanliga strategier utvecklare använder för att "blanda" <code>html</code> och <code>php</code>. Antingen så...
+  ul
+    li skriver vi <code>php</code> och <code>echo</code>:ar <code>html</code>,
+    li eller så skriver vi <code>html</code> och lägger in små block av <code>php</code>
+
+  .panel.panel-default
+    .panel-heading Exempel på de två huvudsakliga strategierna för att blanda <code>php</code> och <code>html</code>.
+    .panel-body
+      p Om vi hela tiden <code>echo</code>/<code>print</code>:ar ut <code>html</code> blir det lätt att få sig en uppfattning om det "logiska" flödet i programmet, men mycket svårt med det visuella. Vid första anblick skulle vi argumentera att det inte är solklart vad nedan program gör.
+      pre
+        code.language-php
+          | &lt;?php
+          |   $name   = "John";
+          |   $number = "070 123 45 67";
+          |   echo "&lt;h1&gt;Hello, $name ($number).&lt;/h1&gt;";
+          |   echo "&lt;ul&gt;";
+          |   for($i=0; $i<3; $i++){
+          |     echo "&lt;li&gt;Missed call ($i).&lt;/li&gt;"
+          |   }
+          |   echo "&lt;/ul&gt;"
+          | ?&gt;
+      .panel.panel-default
+        .panel-heading Resultat
+        .panel-body
+          p Hello, John (070 123 45 67)
+          p Missed call (1).
+          p Missed call (2).
+          p Missed call (3).
+
+      p Således är det ofta bättre att försöka hålla de filer som arbetar med <code>html</code> fokuserade på just det &mdash; <code>html</code>. Och istället se det som att <code>php</code> kommer in i små korta svängar &mdash; antingen för att kontrollera programflödet eller hålla variabel data. Låt oss se hur det skulle kunna se ut.
+      pre
+        code.language-php
+          | &lt;?
+          |   $name   = "John";
+          |   $number = "070 123 45 67";
+          | ?&gt;
+          | 
+          | &lt;p&gt;Hello, &lt;?=$name?&gt; (&lt;?=$number?&gt;)&lt;/p&gt;
+          | 
+          | &lt;? for($i=0; $i<3; $++): ?&gt;
+          |   &lt;p&gt;Missed call (&lt;?=$i?&gt;)&lt;/p&gt;
+          | &lt;? endfor;?&gt;
+
+      p Denna andra strategi har den mycket positiva effekten att vi även kan indentera vår <code>html</code>. Och vi skulle argumentera för att just denna indentering verkligen hjälper till att öka kodens läsbarhet.
+
+
+h4 Kolon-metoder
 p Kommer snart...
