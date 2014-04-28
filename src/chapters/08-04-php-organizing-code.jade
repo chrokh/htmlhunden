@@ -198,46 +198,140 @@ p Utan att gräva ned oss i det här för mycket så kan vi säga att det finns 
     li skriver vi <code>php</code> och <code>echo</code>:ar <code>html</code>,
     li eller så skriver vi <code>html</code> och lägger in små block av <code>php</code>
 
-  .panel.panel-default
-    .panel-heading Exempel på de två huvudsakliga strategierna för att blanda <code>php</code> och <code>html</code>.
-    .panel-body
-      p Om vi hela tiden <code>echo</code>/<code>print</code>:ar ut <code>html</code> blir det lätt att få sig en uppfattning om det "logiska" flödet i programmet, men mycket svårt med det visuella. Vid första anblick skulle vi argumentera att det inte är solklart vad nedan program gör.
+.panel.panel-default
+  .panel-heading Exempel på de två huvudsakliga strategierna för att blanda <code>php</code> och <code>html</code>.
+  .panel-body
+    p Om vi hela tiden <code>echo</code>/<code>print</code>:ar ut <code>html</code> blir det lätt att få sig en uppfattning om det "logiska" flödet i programmet, men mycket svårt med det visuella. Vid första anblick skulle vi argumentera att det inte är solklart vad nedan program gör.
+    pre
+      code.language-php
+        | &lt;?php
+        |   $name   = "John";
+        |   $number = "070 123 45 67";
+        |   echo "&lt;h1&gt;Hello, $name ($number).&lt;/h1&gt;";
+        |   echo "&lt;ul&gt;";
+        |   for($i=0; $i<3; $i++){
+        |     echo "&lt;li&gt;Missed call ($i).&lt;/li&gt;"
+        |   }
+        |   echo "&lt;/ul&gt;"
+        | ?&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p Hello, John (070 123 45 67)
+        p Missed call (1).
+        p Missed call (2).
+        p Missed call (3).
+
+    p Således är det ofta bättre att försöka hålla de filer som arbetar med <code>html</code> fokuserade på just det &mdash; <code>html</code>. Och istället se det som att <code>php</code> kommer in i små korta svängar &mdash; antingen för att kontrollera programflödet eller hålla variabel data. Låt oss se hur det skulle kunna se ut.
+    pre
+      code.language-php
+        | &lt;?
+        |   $name   = "John";
+        |   $number = "070 123 45 67";
+        | ?&gt;
+        | 
+        | &lt;p&gt;Hello, &lt;?=$name?&gt; (&lt;?=$number?&gt;)&lt;/p&gt;
+        | 
+        | &lt;? for($i=0; $i<3; $++): ?&gt;
+        |   &lt;p&gt;Missed call (&lt;?=$i?&gt;)&lt;/p&gt;
+        | &lt;? endfor;?&gt;
+
+    p Denna andra strategi har den mycket positiva effekten att vi även kan indentera vår <code>html</code>. Och vi skulle argumentera för att just denna indentering verkligen hjälper till att öka kodens läsbarhet.
+
+
+h4 Kolon-varianter
+
+p Som du kanske märkte använde vi i ovan en alternativ syntax för konstruktionen <code>for</code>. Låt oss kalla dessa för "kolon-varianter". Det finns några grundläggande konstruktioner i <code>php</code> som har just sådana här kolon-motsvarigheter. Varför de som skapade språket valt att implementera dessa kan vi inte svara på &mdash; men det kan vara rimligt att anta att även de insåg att det snabbt blir problematiskt när vi försöker blanda <code>php</code> och något annat språk.
+
+p Med hjälp av dessa kolon-varianter kan vi istället skriva våra dokument som om de var skrivna i just det språket vi vill nå som output. I vårat fall alltså <code>html</code>. Sedan kan vi strategiskt placera ett antal <code>php</code>-kommandon som kontrollerar applikationsflödet. Låt oss se till några exempel på konstruktioner som har kolon-motsvarigheter.
+
+table.table.table-condensed.table.striped
+  tr
+    th Konstruktion
+    th Kolon-motsvarighet
+  tr
+    td
       pre
         code.language-php
-          | &lt;?php
-          |   $name   = "John";
-          |   $number = "070 123 45 67";
-          |   echo "&lt;h1&gt;Hello, $name ($number).&lt;/h1&gt;";
-          |   echo "&lt;ul&gt;";
-          |   for($i=0; $i<3; $i++){
-          |     echo "&lt;li&gt;Missed call ($i).&lt;/li&gt;"
-          |   }
-          |   echo "&lt;/ul&gt;"
-          | ?&gt;
-      .panel.panel-default
-        .panel-heading Resultat
-        .panel-body
-          p Hello, John (070 123 45 67)
-          p Missed call (1).
-          p Missed call (2).
-          p Missed call (3).
-
-      p Således är det ofta bättre att försöka hålla de filer som arbetar med <code>html</code> fokuserade på just det &mdash; <code>html</code>. Och istället se det som att <code>php</code> kommer in i små korta svängar &mdash; antingen för att kontrollera programflödet eller hålla variabel data. Låt oss se hur det skulle kunna se ut.
+          | for(..){
+          |   ..
+          | }
+    td
       pre
         code.language-php
-          | &lt;?
-          |   $name   = "John";
-          |   $number = "070 123 45 67";
-          | ?&gt;
-          | 
-          | &lt;p&gt;Hello, &lt;?=$name?&gt; (&lt;?=$number?&gt;)&lt;/p&gt;
-          | 
-          | &lt;? for($i=0; $i<3; $++): ?&gt;
-          |   &lt;p&gt;Missed call (&lt;?=$i?&gt;)&lt;/p&gt;
-          | &lt;? endfor;?&gt;
+          | for(..):
+          |   ..
+          | endif;
+  tr
+    td
+      pre
+        code.language-php
+          | foreach(..){
+          |   ..
+          | }
+    td
+      pre
+        code.language-php
+          | foreach(..):
+          |   ..
+          | endforeach;
+  tr
+    td
+      pre
+        code.language-php
+          | while(..){
+          |   ..
+          | }
+    td
+      pre
+        code.language-php
+          | while(..):
+          |   ..
+          | endwhile;
+  tr
+    td
+      pre
+        code.language-php
+          | if(..){
+          |   ..
+          | }else if(..){
+          |   ..
+          | }else{
+          |   ..
+          | }
+    td
+      pre
+        code.language-php
+          | if(..):
+          |   ..
+          | elseif(..):
+          |   ..
+          | else:
+          |   ..
+          | endif;
 
-      p Denna andra strategi har den mycket positiva effekten att vi även kan indentera vår <code>html</code>. Och vi skulle argumentera för att just denna indentering verkligen hjälper till att öka kodens läsbarhet.
+p Dessa "kolon-motsvarigheter" är alltså mycket användbara när vi vill blanda <code>html</code> och <code>php</code> eftersom vi kan "bryta upp" våra <code>php</code>-block. Beakta följande exempel.
+
+.panel.panel-default
+  .panel-heading Exempel på varför vi behöver kolon-motsvarigheterna i <code>php</code>
+  .panel-body
+    p Detta fungerar ej...
+    pre
+      code.language-php
+        | &lt;? if(someCondition){ ?&gt;
+        |   &lt;p&gt;Then display this text&lt;/p&gt;
+        | &lt;? } ?&gt;
+
+    p Men detta fungerar...
+    pre
+      code.language-php
+        | &lt;? if(someCondition): ?&gt;
+        |   &lt;p&gt;Then display this text&lt;/p&gt;
+        | &lt;? endif; ?&gt;
+
+p Nu säger vi förstås inte att alla måste prioritera att använda "kolon-versionerna". Inte heller säger vi att det i alla fallet är det bästa sättet att designa sina <code>php</code>-filer. Men om du inte har en annan medveten strategi du tror på, så skulle vi rösta för att du följer ovan.
 
 
-h4 Kolon-metoder
-p Kommer snart...
+
+
+
