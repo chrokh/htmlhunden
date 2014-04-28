@@ -708,18 +708,16 @@ $('p').click(onClick);</code></pre></p><p>Detta kommer nu alltså att ge oss fö
 ?&gt;</code></pre><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><p>Hello woldizzle</p></div></div></div></div><p>Självklart kan vi ju inte bara ge <code>echo</code> strängar. Vi kan ge den vilket uttryck som helst som evaluerar till en sträng, eller implicit kan omvandlas till en sträng. Det senare är sant för nedan uyttryck:</p><pre><code class="language-php">&lt;?php
   echo 100 + 20 + 33;
   // Skriver ut 153
-?&gt;</code></pre><p><code>echo</code> tar alltså antingen ett literal-värde, ett uttryck eller en variabel.</p><h3>Variabler</h3><p>Låt oss nu istället prata om variabler. En variabel deklareras i <code>php</code> genom att placera ett dollartecken (<code>$</code>) före ett ord. Ordet blir då vår identifierare för variabeln.</p><pre><code class="language-php">$my_variable_name;</code></pre><p>Ett par regler gäller när vi namnger våra variabler.</p><ul><li>Namnet måste börja med en bokstav eller underscore (<code>_</code>).</li><li>Namnet kan <em>inte</em> börja med en siffra.</li><li>Namnet får endast innehålla alpha-numeriska tecken och underscrores. Alltså (<code>A-z</code>, <code>0-9</code>, och <code>_</code> ).</li><li>Variabelnamn är skiftlägeskänsliga. <code>$hej</code> och <code>$Hej</code> är alltså två olika variabler.</li></ul><p>Men nu har vi ju bara deklarerat en variabel. Vi har inte diskuterat hur man tilldelar till den. Som i de flesta språk tilldelar vi med hjälp av likhetstecknet (<code>=</code>). Och som i de flesta språk kan vi tilldela en varibel ett literal-värde, en annan variabel, eller evalueringen av ett uttryck. Alla nedan är alltså rimliga tilldelningar.</p><div class="panel panel-default"><div class="panel-heading">Deklarering och tilldelning av variabler i <code>php</code></div><div class="panel-body"><pre><code class="language-php">&lt;?php
-  // Assigning literals
-  $age    = 22;
-  $name   = "Snow"
-  
-  // Assigning variables
-  $anos   = $age;
-  $nombre = $name;
-  
-  // Assigning an evaluated expression
-  $born   = $current_year - $age;
-?&gt;</code></pre></div></div><h3>Selektion</h3><p>I <code>php</code> kan vi, precis som i de flesta andra språk, förändra ett programs exekveringsbana genom att konditionella selektioner. Låt oss börja med att kika på ett exempel på hur vi skriver en enkel <code>if-else</code>-selektion i <code>php</code>.</p><div class="panel panel-default"><div class="panel-heading">If-else i <code>php</code></div><div class="panel-body"><pre><code class="language-php">if (3 > 5){
+?&gt;</code></pre><p><code>echo</code> tar alltså antingen ett literal-värde, ett uttryck eller en variabel.</p><h3>Variabler</h3><p>Låt oss nu istället prata om variabler. En variabel deklareras i <code>php</code> genom att placera ett dollartecken (<code>$</code>) före ett ord. Ordet blir då vår identifierare för variabeln.</p><pre><code class="language-php">$my_variable_name;</code></pre><p>Ett par regler gäller när vi namnger våra variabler.</p><ul><li>Namnet måste börja med en bokstav eller underscore (<code>_</code>).</li><li>Namnet kan <em>inte</em> börja med en siffra.</li><li>Namnet får endast innehålla alpha-numeriska tecken och underscrores. Alltså (<code>A-z</code>, <code>0-9</code>, och <code>_</code> ).</li><li>Variabelnamn är skiftlägeskänsliga. <code>$hej</code> och <code>$Hej</code> är alltså två olika variabler.</li></ul><p>Men nu har vi ju bara deklarerat en variabel. Vi har inte diskuterat hur man tilldelar till den. Som i de flesta språk tilldelar vi med hjälp av likhetstecknet (<code>=</code>). Och som i de flesta språk kan vi tilldela en varibel ett literal-värde, en annan variabel, eller evalueringen av ett uttryck. Alla nedan är alltså rimliga tilldelningar.</p><div class="panel panel-default"><div class="panel-heading">Deklarering och tilldelning av variabler i <code>php</code></div><div class="panel-body"><pre><code class="language-php">// Assigning literals
+$age    = 22;
+$name   = "Snow"
+ 
+// Assigning variables
+$anos   = $age;
+$nombre = $name;
+ 
+// Assigning an evaluated expression
+$born   = $current_year - $age;</code></pre></div></div><h3>Selektion</h3><p>I <code>php</code> kan vi, precis som i de flesta andra språk, förändra ett programs exekveringsbana genom att konditionella selektioner. Låt oss börja med att kika på ett exempel på hur vi skriver en enkel <code>if-else</code>-selektion i <code>php</code>.</p><div class="panel panel-default"><div class="panel-heading">If-else i <code>php</code></div><div class="panel-body"><pre><code class="language-php">if (3 > 5){
   echo "The world has gone mad!";
 }else{
   echo "Puh.. sanity remains..";
