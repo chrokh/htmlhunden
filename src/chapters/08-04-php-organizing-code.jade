@@ -189,4 +189,55 @@ p Det sista alternativet för att inkludera filer i filer som vi ska kika på ä
 
 
 h3 Strategier för att bädda in <code>html</code>
+p Eftersom vi pratar om att använda <code>php</code> till att skapa webbsidor så behöver vi förstås blanda <code>html</code> och <code>php</code>. Något vi tidigare diskuterat är idéen om <a href="http://en.wikipedia.org/wiki/Separation_of_presentation_and_content">separera presentation och content</a>. Då i relation till ansvarsskillnader mellan <code>html</code> och <code>css</code>. Ett annat vanligt idiom inom programmering är <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a>. Det är en mer generell idé än den om just behovet av att separera presentation ifrån content. När vi nu använder ett kraftfullare skriptspråk, såsom <code>php</code>, kommer vi plötsligt ha en mängd nya "concerns". T.ex. <a href="http://en.wikipedia.org/wiki/Business_logic">Business logic</a> (affärslogik) och databaslogik. Om vi ska respektera idéen om att separera concerns så behöver vi alltså hitta strategier för att separera t.ex. affärslogik ifrån presentation.
+
+p Låt oss först prata om varför det är viktigt att separera olika "concerns". Kom ihåg tidigare diskussion om att vi behöver sikta på en hög nivå av beredskap inför förändring. Vår applikation behöver vara lätt att förändra. Så när (ps: vi väljer medvetet ordet <em>när</em> och inte <em>om</em>) vi väl behöver utföra en förändring löper vi inte risken att behöva koda om hela systemet ifrån grunden. Föreställ dig t.ex. att vi utvecklar en webbshop. Anta att vi har listat shoppens produkterna på listform. Anta nu att vi får in ett nytt krav på att även kunna presentera produkterna som ett rutnät. Jahapp tänker vi, och börjar kika på koden. Om vår databaskod då är beblandad med vår presentationskod så kommer förändringen bli mycket dyrare än om de är ordentligt separerade.
+
+p Utan att gräva ned oss i det här för mycket så kan vi säga att det finns en uppsjö av <a href="http://en.wikipedia.org/wiki/Software_design_pattern">design patterns</a> &mdash; alltså dokumenterade kodstruktureringsstrategier &mdash; som syftar just till att angripa denna typ av problem. Men det får vi diskutera på djupet en annan gång. Vad vi vill belysa i detta kapitel är hur det går att identifiera två vanliga strategier utvecklare använder för att "blanda" <code>html</code> och <code>php</code>. Antingen så...
+  ul
+    li skriver vi <code>php</code> och <code>echo</code>:ar <code>html</code>,
+    li eller så skriver vi <code>html</code> och lägger in små block av <code>php</code>
+
+  .panel.panel-default
+    .panel-heading Exempel på de två huvudsakliga strategierna för att blanda <code>php</code> och <code>html</code>.
+    .panel-body
+      p Om vi hela tiden <code>echo</code>/<code>print</code>:ar ut <code>html</code> blir det lätt att få sig en uppfattning om det "logiska" flödet i programmet, men mycket svårt med det visuella. Vid första anblick skulle vi argumentera att det inte är solklart vad nedan program gör.
+      pre
+        code.language-php
+          | &lt;?php
+          |   $name   = "John";
+          |   $number = "070 123 45 67";
+          |   echo "&lt;h1&gt;Hello, $name ($number).&lt;/h1&gt;";
+          |   echo "&lt;ul&gt;";
+          |   for($i=0; $i<3; $i++){
+          |     echo "&lt;li&gt;Missed call ($i).&lt;/li&gt;"
+          |   }
+          |   echo "&lt;/ul&gt;"
+          | ?&gt;
+      .panel.panel-default
+        .panel-heading Resultat
+        .panel-body
+          p Hello, John (070 123 45 67)
+          p Missed call (1).
+          p Missed call (2).
+          p Missed call (3).
+
+      p Således är det ofta bättre att försöka hålla de filer som arbetar med <code>html</code> fokuserade på just det &mdash; <code>html</code>. Och istället se det som att <code>php</code> kommer in i små korta svängar &mdash; antingen för att kontrollera programflödet eller hålla variabel data. Låt oss se hur det skulle kunna se ut.
+      pre
+        code.language-php
+          | &lt;?
+          |   $name   = "John";
+          |   $number = "070 123 45 67";
+          | ?&gt;
+          | 
+          | &lt;p&gt;Hello, &lt;?=$name?&gt; (&lt;?=$number?&gt;)&lt;/p&gt;
+          | 
+          | &lt;? for($i=0; $i<3; $++): ?&gt;
+          |   &lt;p&gt;Missed call (&lt;?=$i?&gt;)&lt;/p&gt;
+          | &lt;? endfor;?&gt;
+
+      p Denna andra strategi har den mycket positiva effekten att vi även kan indentera vår <code>html</code>. Och vi skulle argumentera för att just denna indentering verkligen hjälper till att öka kodens läsbarhet.
+
+
+h4 Kolon-metoder
 p Kommer snart...
