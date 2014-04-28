@@ -47,18 +47,16 @@ p Men nu har vi ju bara deklarerat en variabel. Vi har inte diskuterat hur man t
   .panel-body
     pre
       code.language-php
-        | &lt;?php
-        |   // Assigning literals
-        |   $age    = 22;
-        |   $name   = "Snow"
-        |   
-        |   // Assigning variables
-        |   $anos   = $age;
-        |   $nombre = $name;
-        |   
-        |   // Assigning an evaluated expression
-        |   $born   = $current_year - $age;
-        | ?&gt;
+        | // Assigning literals
+        | $age    = 22;
+        | $name   = "Snow"
+        | 
+        | // Assigning variables
+        | $anos   = $age;
+        | $nombre = $name;
+        | 
+        | // Assigning an evaluated expression
+        | $born   = $current_year - $age;
 
        
 h3 Selektion
@@ -68,7 +66,7 @@ p I <code>php</code> kan vi, precis som i de flesta andra språk, förändra ett
   .panel-heading If-else i <code>php</code>
   .panel-body
     pre
-      code.language-javascript
+      code.language-php
         | if (3 > 5){
         |   echo "The world has gone mad!";
         | }else{
@@ -81,7 +79,7 @@ p Självklart kan vi ju som vanligt "kedja" hur många <code>else if</code>'s vi
   .panel-heading If-else i <code>php</code>
   .panel-body
     pre
-      code.language-javascript
+      code.language-php
         | if (timeOfDay() == "morning"){
         |   echo "Good morning.";
         | }else if(timeOfDay() == "day"){
@@ -102,7 +100,7 @@ p Men eftersom <code>php</code> även stödjer <code>switch case</code>-satser s
   .panel-heading Switch case i <code>php</code>
   .panel-body
     pre
-      code.language-javascript
+      code.language-php
         | switch( timeOfDay() ){
         |   "morning":
         |     echo "Good morning.";
@@ -168,7 +166,7 @@ p Ok, låt oss nu prata om iteration. Vi börjar med att kika på den gamla gode
   .panel-heading <code>while</code>-loop i <code>php</code>
   .panel-body
     pre
-      code.language-javascript
+      code.language-php
         | $x = 0;
         | $y = 10;
         | 
@@ -187,7 +185,7 @@ p Men om det hade varit det ovanstående problemet vi ville lösa så hade vi f�
   .panel-heading <code>for</code>-loop i <code>php</code>
   .panel-body
     pre
-      code.language-javascript
+      code.language-php
         | for($i=0; $i<10; $i++){
         |   echo $i . ", ";
         | }
@@ -202,7 +200,7 @@ p Och när vi ändå talar om <code>for</code>-loopen, så har ju även <code>ph
   .panel-heading <code>foreach</code>-loop i <code>php</code>
   .panel-body
     pre
-      code.language-javascript
+      code.language-php
         | $apples = ["red", "green", "blue"];
         | 
         | foreach($apples as $a){
@@ -228,7 +226,7 @@ p Funktioner i <code>php</code> beter sig väldigt mycket som funktioner i de fl
   .panel-heading Funktioner i <code>php</code>
   .panel-body
     pre
-      code.language-javascript
+      code.language-php
         | function add($x, $y){
         |   return $x + y;
         | }
@@ -286,6 +284,3 @@ p En intressant idé som finns implementerad i många språk är idéen om defau
         | //=> "Carl: 125kr. No pickup."
 
 p Något att tänka på är att vi i ovan exempel inte kan ange ett värde för det sista argumentet utan att ange ett värde för det andra. Med andra ord: om vi vill ange ett värde för ett valfri argument, så måste vi ange värden för alla argument före. Med andra ord gäller det att välja sin argumentordning noga.
-
-
->>>>>>> fe61f74b8028a06b2c97b7ecc5d54da92c77092b
