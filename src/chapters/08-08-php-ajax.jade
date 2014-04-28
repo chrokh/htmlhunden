@@ -1,0 +1,87 @@
+h2 AJAX och PHP
+p AJAX (Asynkron JavaScript och XML) är ett samlingsnamn som innefattar flera olika tekniker för att kunna uppdatera en sida utan 
+p XMLHttpRequest- är ett API för att kunna överföra och ta emot XML mellan server och klienten. 
+| DOM (Document Object Model) gör att vi tillåts med javascript ändra i dokumentet.
+| HTML och CSS hur sidan representeras och vad som finns på sidan.
+| XML som ibland används för att transportera data. 
+| Det går att skriva detta med javascript men eftersom JQuery underlättar en del använder vi oss av det istället.
+h3 jQuery´s get()
+.panel.panel-default
+  .panel-heading Ändra innehåll med utan att ladda om sidan med jQuery.
+  .panel-body
+    pre
+      code.language-php
+        |$("button").click(function(){
+        |  $.get("test.php",function(data,status){
+        |  $( ".result" ).html( data );
+        |  });
+        | });
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+p Som ni ser har vi på en knapp som vid ett knapptryck gör ett HTTP GET request till servern. Innan vi börjar gå igenom i detalj
+| om vad som händer kan det vara en god idé att se den sidan som vi efterfrågar.
+.panel.panel-default
+  .panel-heading Sidan som efterfrågas 
+  .panel-body
+    pre
+      code.language-php
+        | &lt;?php
+        |   echo "Hello med AJAX";
+        | ?&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+p jQuery´s get tar emot två argument (1) URL:en till vilken sida som efterfrågas (2) en callback, alltså vad som skall göras 
+| när requesten är klar. 
+h3 jQuery get() med parametrar 
+.panel.panel-default
+  .panel-heading Sidan som efterfrågas 
+  .panel-body
+    pre
+      code.language-php
+        | $("button").click(function(){
+        |   $.post("test.php",
+        |   {
+        |     name:"Me",
+        |     lname:"Myself"
+        |   },
+        |   function(data,status){
+        |    alert("Lyssna på vad sidan säger dig!"");
+        |   });
+        | });
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+p php test ser nu ut som denna: 
+.panel.panel-default
+  .panel-heading Sidan som efterfrågas 
+  .panel-body
+    pre
+      code.language-php
+        | &lt;?php
+        |   $fname ,city
+        |   $fname= $_GET["name"]
+        |   $lname= $_GET["lname"]
+        |   echo "kära" . $fname . $lname . "du duger!";
+        | ?&gt;
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+
+
+h3 jQuery´s load()
+p jQurey´s load method är ganska lika get men den har en implicit callbackfunktion som gör det möjligt att kunna skriva:
+| $( "#result" ).load( "test.php" ); och det som händer är att den själv fyller på elementet med innehållet. Man kan även köra
+| ett ytterligare callback och då kommer det köras EFTER det matchande elementet har fyllts på med innehållet från test.php.
+.panel.panel-default
+  .panel-heading Load() med callback.
+  .panel-body
+    pre
+      code.language-php
+        |$( "#result" ).load( "test.php", function() {
+        | alert( "Success!" );
+        |});
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
