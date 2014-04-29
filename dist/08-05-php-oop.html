@@ -35,4 +35,80 @@ class Animal{
  
 // And then instantiate it...
 $dog = new Animal('Whiskey');
-$cat = new Animal('Socks');</code></pre><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><p>Hello, my name is Whiskey.</p><p>Hello, my name is Socks.</p></div></div></div></div><h3>Klass- och instansmetoder</h3><p>Kommer snart...</p><h3>Klass- och instansvariabler</h3><p>Kommer snart...</p><h3>Överkurs</h3><p>Kommer snart...</p><h4>Interfaces och Abstrakta klasser</h4><p>Kommer snart...</p><h4>Automatisk inladdning av klassfiler</h4><a href="http://www.php.net/manual/en/function.spl-autoload-register.php">Kommer snart...</a><div class="chapter-pagination"><p class="text-muted">Det här kapitlet är en del av en den interaktiva och pragmatiska höghastighetsguiden till webbutveckling &mdash; <a href="http://htmlhunden.se">HTMLHunden</a>. Använd knapparna nedan för att läsa vidare eller navigera till innehållsförteckningen.</p><div class="text-center"><div class="btn-group"><a href="08-04-php-organizing-code.html" title="Föregående kapitel" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-arrow-left"></span></a><a href="/" title="Hem" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-home"></span></a><a href="/dist/toc.html" title="Innehållsförteckning" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-list"></span></a><a href="08-06-php-data-forms.html" title="Nästa kapitel" class="btn btn-lg btn-default pagination-next"><span class="glyphicon glyphicon-arrow-right"></span></a></div></div></div></div> <!-- container --><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/jquery.fittext.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body>
+$cat = new Animal('Socks');</code></pre><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><p>Hello, my name is Whiskey.</p><p>Hello, my name is Socks.</p></div></div></div></div><h3>Klass- och instansmedlemmar</h3><p>Precis som i vilket annat språk med klasser som helst så kan vi definera både klass- och instansmedlemmar för en given klass. När vi pratar om "medlemmar" så pratar vi alltså både om metoder och variabler. Så när vi pratar om klass- och instalsmedlemmar så pratar vi alltså både om (1) klass- och instansvariabler, samt (2) klass- och instansmetoder.</p><p>Låt oss börja med att repetera vad skillnaden mellan en klass- och instansmedlem är. En klassmedlem är vad som brukar kallas för en statisk medlem. En klassmedlem tillhör klassen medan en instansmedlem tillhör instansen. Låt oss omformulera. En klassmedlem tillhör alla instansmedlemmar samtidigt, medan en instansmedlem är unik per instans. Detta betyder alltså att om vi deklarerar en klassvariabel &mdash; så existerar det endast en enda av den variabeln (tänk: minnesplats). Men om vi deklarerar en instansvariabel så kommer det existera exakt lika många  variabler (tänk återigen: minnesplatser) som vi skapar instanser av den klassen.</p><h4>Klass- och instansvariabler</h4><p>Låt oss tänka i termer av ett exempel. Anta att vi har en klass som heter <code>Animal</code>. Anta att varje instans av ett djur har ett namn. Vi lagrar namnet i en instansvariabel. Varför? Jo, eftersom varje djur har ett unikt namn. Och om det är unikt per djur så måste vi skapa lika många variabler som instanser. Varje variabel måste tillhöra varje unik instans.</p><p>Anta nu istället att vi vill ha en variabel i vilken vi kan hålla koll på det totala antal djur som existerar i vår applikation. Visst skulle vi skulle kunna skapa en variabel vartsomhelst och sedan öka den varje gång vi skapar ett nytt djur. Men det är riskabelt. Om vi glömmer att öka variabeln en enda gång så har vi helt plötsligt en applikation som talar osanning. Som du kanske redan har gissat så kommer vi istället föreslå att vi skapar en statisk (alltså en klass-) variabel. Om vi sedan i klassens konstruktor ser till att öka denna statiska variabel med ett så kommer det betyda att vi omöjligen kunna hamna i ett läge där vi har instantierat fler djur än gånger vi ökat variabeln. En klassvariabel är alltså en bra idé för detta scenario eftersom vi vill lagra information som är relaterad till alla instanser av klassen <code>animal</code> och inte till varje specifik instans.</p><p>Låt oss snabbt kika på hur syntaxen ser ut för att deklarera klass- och instansvariabler.</p><div class="panel panel-default"><div class="panel-heading">Deklarera klass- och instansvariabler</div><div class="panel-body"><pre><code class="language-php">class Animal{
+  // class variables are declared
+  // by using the keyword 'static'
+  private static $foo;
+ 
+  // instance variables are declared
+  // by not using the keyword 'static'
+  private $bar;
+}</code></pre></div></div><p>Notera alltså att skillnaden emellan att deklarera en statisk (klass-) variabel och en instansvariabel helt enkelt är existensen eller avsaknaden av nyckelordet <code>static</code>. Skriver vi <code>static</code> blir variabeln statisk (alltså en klassvariabel). Om vi inte skriver någonting så implicerar det att det är en instansvariabel.</p><h4>Access modifiers</h4><p>Vi kommer att implementera det exempel som diskuterats ovan i helhet, i detta kapitel. Men vi måste ta det steg för steg för att verkligen förstå alla delar. Låt oss först diskutera det som kallas <code>access modifiers</code>. Detta handlar alltså om huruvida en medlem är <code>public</code>, <code>private</code> eller <code>protected</code>. Som du kanske märkte så markerade vi i ovan exempel att de två variablerna var <code>private</code>. På samma sätt som en medlem måste markeras som statisk eller inte, måste en medlem också ha en <code>access modifier</code>. Denna avgör "vilka" som kommer att få komma åt medlemen. Den "modify":ar alltså "access" &mdash; för att prata svengelska :)</p><table class="table table-condensed table-striped"><tr><th>Keyword</th><th>Förklaring</th></tr><tr><td><code>public</code></td><td>Alla som har tillgång till klassen/instansen har tillgång till medlemmen.</td></tr><tr><td><code>private</code></td><td>Endast klassen/instansen själv har tillgång till medlemmen.</td></tr><tr><td><code>protected</code></td><td>Endast klassen/instansen själv, samt klasser/instanser i samma arvskedja, har tillgång till medlemmen.</td></tr></table><h4>Klass- och instansmetoder</h4><p>Att deklarera klass- och instansmetoder påminner väldigt mycket om att deklarera klass- eller instansvariabler. Vi börjar med att ange en access modifier. Sedan anger vi huruvida den är statisk inte. Och slutligen en metod som vanligt. Det vill säga med namn och parametrar. Låt oss se till några exempel.</p><div class="panel panel-default"><div class="panel-heading">Deklarera klass- och instansmetoder</div><div class="panel-body"><pre><code class="language-php">class Animal{
+  private static function foo(){
+    // Not accessible from the outside since it's private.
+    // Lives on the class because it's static.
+  }
+ 
+  private function bar(){
+    // Accessible from the outside since it's private.
+    // Lives on the instance beacuse it's not static.
+  }
+}</code></pre></div></div><h4>Att anropa medlemmar</h4><p>Nu har vi bara pratat om hur vi deklarerar medlemmar. Vi har inte pratat om hur vi "kommer åt" dem. Egentligen är det väldigt enkelt. Instansmedlemmar når vi med hjälp av pil-notation (<code>-&gt;</code>). Klassmedlemmar å andra sidan, når vi med hjälp av kolon-kolon-notation (<code>::</code>). Det blir antagligen klarare om vi ser till ett par exempel.</p><div class="panel panel-default"><div class="panel-heading">Anropa medlemmar av en instans eller klass utifrån</div><div class="panel-body"><pre><code class="language-php">// Assuming we have a class called Dog...
+$dog = new Dog("Brian");
+ 
+// accessing a public instance variable
+$dog->someVariable;
+ 
+// accessing a public static/class variable
+Dog::$someVariable;
+ 
+// accessing a public instance method
+$dog->someMethod();
+ 
+// accessing a public static/class method
+Dog::someMethod();</code></pre></div></div><p>Ovan exempel visar endast hur vi anropar publika medlemmar utifrån. Det vill säga inte ifrån instansen eller klassen själv. Om vi istället vill anropa medlemmar tillhörande klassen eller instansen själv ifrån klassen eller instansen själv så kan vi använda nästan samma syntax. Högersidan om kolon-kolon- eller pil-syntaxen förblir densamma, eftersom metoden/variabeln vi vill anropa är densamma. Däremot förändras vänstersidan. Eftersom kontexten vi försöker anropa medlemmen ifrån har förändrats. Låt oss se till ett exempel.</p><div class="panel panel-default"><div class="panel-heading">Anropa medlemmar av en instans eller klass utifrån</div><div class="panel-body"><pre><code class="language-php">class Dog{
+  function __construct(){
+    /* We're making our calls from the constructor
+       for the sole reason of illustrating that we're
+       calling the members from inside an instance. */
+    
+    // accessing a private instance variable
+    $this->someVariable;
+    
+    // accessing a private static/class variable
+    self::$someVariable;
+    
+    // accessing a private instance method
+    $this->someMethod();
+    
+    // accessing a private static/class method
+    self::someMethod();
+  }
+ ...
+}</code></pre></div></div><p>Det viktigaste att notera med ovan exempel är användandet av <code>$this</code> och <code>self</code>. Förstnämnda refererar alltså till den instans som anropet görs i. Om vi befinner oss i en instansmetod i en instans av en animal och använder nyckelordet <code>$this</code> så refererar det ordet alltså till den egna instansen. Om vi å andra sidan använder uttrycket <code>self</code> så refererar vi till klassen. Inte instansen utan klassen. Om vi befinner oss i en instans av (eller en klassmetod för) klassen <code>Animal</code>, så refererar <code>self</code> alltså till själva klassen <code>Animal</code>. Inte till någon unik instans utan den generella klassen. Där vi förstås även kan ha statiska medlemmar definerade.</p><h4>Exempel</h4><p>Ok, låt oss nu se till en full implementation av klassen <code>Animal</code> som den tidigare diskuterades.</p><div class="panel panel-default"><div class="panel-heading">Exempel på användande av klass- och instansmedlemmar</div><div class="panel-body"><pre><code class="language-php">class Animal{
+  private static $count = 0;
+  private $name = "Unnamed";
+ 
+  function __construct($name){
+    $this->name = $name;
+    self::$count++;
+  }
+ 
+  public function speak(){
+    echo "Hi, I am $this->name.&lt;br&gt;";
+  }
+ 
+  public static function count(){
+    $num = self::$count;
+    echo "There's $num animal(s) in the world.&lt;br&gt;";
+  }
+}
+ 
+ 
+$cat = new Animal("Whiskers");
+$cat->speak(); 
+Animal::count();
+ 
+$dog = new Animal("Frolic");
+$dog->speak(); 
+Animal::count();</code></pre><div class="panel panel-default"><div class="panel-heading">Resultat</div><div class="panel-body"><p>Hi, I am Whiskers.</p><p>There's 1 animal(s) in the world.</p><p>Hi, I am Frolic.</p><p>There's 2 animal(s) in the world.</p></div></div></div></div><h3>Överkurs</h3><p>Kommer snart...</p><h4>Interfaces och Abstrakta klasser</h4><p>Kommer snart...</p><h4>Automatisk inladdning av klassfiler</h4><a href="http://www.php.net/manual/en/function.spl-autoload-register.php">Kommer snart...</a><div class="chapter-pagination"><p class="text-muted">Det här kapitlet är en del av en den interaktiva och pragmatiska höghastighetsguiden till webbutveckling &mdash; <a href="http://htmlhunden.se">HTMLHunden</a>. Använd knapparna nedan för att läsa vidare eller navigera till innehållsförteckningen.</p><div class="text-center"><div class="btn-group"><a href="08-04-php-organizing-code.html" title="Föregående kapitel" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-arrow-left"></span></a><a href="/" title="Hem" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-home"></span></a><a href="/dist/toc.html" title="Innehållsförteckning" class="btn btn-lg btn-default pagination-prev"><span class="glyphicon glyphicon-list"></span></a><a href="08-06-php-data-forms.html" title="Nästa kapitel" class="btn btn-lg btn-default pagination-next"><span class="glyphicon glyphicon-arrow-right"></span></a></div></div></div></div> <!-- container --><script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script><script src="/dist/assets/javascripts/jquery.fittext.js"></script><script src="/dist/assets/javascripts/prism.js"></script><script src="/dist/assets/javascripts/main.js"></script></body>
