@@ -19,13 +19,75 @@ p Som nämnt i syntax-kapitlet så räknar vi med att du har en viss erfarenhet 
 
 
 
+
+
+
 h3 Klasser och instantiering
-p Kommer snart...
+p En klass deklareras i <code>php</code> rätt och slätt genom keyword:et <code>class</code>. Låt oss se till ett exempel.
+.panel.panel-default
+  .panel-heading Deklarera en klass i <code>php</code>
+  .panel-body
+    pre
+      code.language-php
+        | class Animal{ ... }
+
+p Om vi har en klass, så kan vi förstås instantiera den. Och när vi instantierar ett objekt så anropas förstås dess <a href="http://en.wikipedia.org/wiki/Constructor_(object-oriented_programming)">konstruktor</a>. En klass som inte har en konstruktur kan förstås konstrueras i vilket fall, och klassen har då en implicit konstruktor som inte tar några argument. Om vi däremot vill deklarera en konstruktor själva så använder vi det "magiska" namnet <code>__construct</code>.
+
+.panel.panel-default
+  .panel-heading Konstruktor i <code>php</code>
+  .panel-body
+    pre
+      code.language-php
+        | class Animal{
+        |   function __construct($name){
+        |     echo "Hello, my name is $name.";
+        |   }
+        | }
+
+p Vi använde termen "magisk" tidigare eftersom dokumentationen för <code>php</code> själv kallar de metoder som börjar med två underscore-tecken (i.e. <code>__someMethodName</code>) för "magiska" metoder. Det är inte förbjudet i språket att deklarera egna metoder som börjar med två understreck, men det är rekommenderat att undvika det. Av den enkla anledning att språket har en del <a href="http://www.php.net/manual/en/language.oop5.magic.php">inbyggda metoder som är namngivna på just detta sätt</a>.
+
+p Låt oss nu se på hur vi <a href="http://en.wikipedia.org/wiki/Instance_(computer_science)">instantierar en en klass</a>, alltså skapar ett objekt, i <code>php</code>.
+
+.panel.panel-default
+  .panel-heading Instantiering av en klass i <code>php</code>
+  .panel-body
+    pre
+      code.language-php
+        | $dog = new Animal('Whiskey');
+
+p När vi instantierar en klass så körs ju, som nämnt och bekant, konstruktorn. Låt oss då kombinera dessa två (ovan) exempel för att se vad som händer när vi kör programmet.
+
+.panel.panel-default
+  .panel-heading Att deklarera en klass med konstruktor, och sedan instantiera klassen.
+  .panel-body
+    pre
+      code.language-php
+        | // Assume we have a class with a constructor...
+        | class Animal{
+        |   function __construct($name){
+        |     echo "Hello, my name is $name.";
+        |   }
+        | }
+        |  
+        | // And then instantiate it...
+        | $dog = new Animal('Whiskey');
+        | $cat = new Animal('Socks');
+    .panel.panel-default
+      .panel-heading Resultat
+      .panel-body
+        p Hello, my name is Whiskey.
+        p Hello, my name is Socks.
+
+
+
 
 
 
 h3 Klass- och instansmetoder
 p Kommer snart...
+
+
+
 
 
 
