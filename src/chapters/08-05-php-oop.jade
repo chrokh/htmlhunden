@@ -1,5 +1,20 @@
 h2 Objektorienterad PHP
-p Kommer snart...
+p.lead Dags för objektorienterad <code>php</code>! Äntligen! De flesta skulle nog mena att <code>php</code>, sedan en tid tillbaka ( men inte ifrån dag ett) är objekt-orienterat. Men <a href="http://stackoverflow.com/questions/4699519/is-php-object-oriented">det finns förstås en debatt om det</a>. En kan anta att denna diskussion bland annat grundar sig i faktumet att <code>php</code> inte alltid varit objektorienterat. Ett tydligt tecken på detta är att det fortfarande finns många "fria" metoder.
+
+p Låt oss exemplifiera vad vi menar med att det finns en massa icke-objektorienterade kvarlevor kvar i språket. För att hämta en substräng av en sträng i <code>php</code> skulle vi kunna skriva följande:
+
+  pre
+    code.language-php
+      | substr($mystring, $n);
+
+p Om språket hade varit mer uppenbart objektorienterat hade vi rimligen skrivit följande:
+
+  pre
+    code.language-php
+      | $mystring->substring($n);
+
+p Men, allt detta hindrar oss inte ifrån erövra världen med allsmäktig och objektorienterad <code>php</code>. Bara för att många befintliga metoder inte är objektorienterade, så betyder det inte att den kod vi själva skriver inte kan vara objektorienterad.
+
 
 
 h3 Klasser och instantiering
