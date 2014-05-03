@@ -53,9 +53,9 @@ p Låt oss även snabbt se till hur vi skulle kunna hantera eventuella fel som k
     p Procedurell syntax.
       pre
         code.language-php
-          | $error = $mysqli_connect_error;
+          | $error = mysqli_connect_error();
           | if ($error) {
-          |   $code  = $mysqli_connect_errno;
+          |   $code  = mysqli_connect_errno();
           |   die("Error: ($code) $error");
           | }
 
