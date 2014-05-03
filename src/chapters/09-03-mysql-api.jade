@@ -31,11 +31,11 @@ p Så, låt oss se till ett faktiskt exempel. Viktigt att notera är alltså att
     p OOP syntax.
       pre
         code.language-php
-          | $connection = new mysqli('host', 'user', 'password', 'database');
+          | $mysqli = new mysqli('host', 'user', 'password', 'database');
     p Procedurell syntax.
       pre
         code.language-php
-          | $connection = mysqli_connect('host', 'user', 'password', 'database');
+          | $mysqli = mysqli_connect('host', 'user', 'password', 'database');
 
 p Låt oss även snabbt se till hur vi skulle kunna hantera eventuella fel som kan uppstå när vi försöker koppla upp oss till databasen. Om vi t.ex. råkat ange fel lösenord, eller inte har läsrättigheter till den databas vi försöker koppla till med den användaren vi angett, eller om datbasen helt enkelt inte existerar (o.s.v.).
 
