@@ -61,8 +61,37 @@ p Låt oss även snabbt se till hur vi skulle kunna hantera eventuella fel som k
 
 p Notera i ovan exempel att vi alltid har tillgång till både själva felmeddelandet som sträng (<a href="http://www.php.net/manual/en/mysqli.connect-error.php">conect_error</a>), men även dess felkod (<a href="http://www.php.net/manual/en/mysqli.connect-errno.php">connect_errno</a>).
 
-p Notera också att den jämförelse vi gör för att upptäcka om ett fel har inträffat eller inte sker genom att vi helt enkelt slänger in den sträng som potentiellt innehåller ett felmeddelande. Om vi läser <a href="http://www.php.net/manual/en/mysqli.connect-error.php">dokumentationen för metoden</a> så ser vi att den returnerar <code>null</code> om inget fel har inträffat och en sträng innehållandes ett felmeddelande om ett fel har inträffat. Detta är en av styrkorna med dynamiska språk. Vi kan returnera helt olika saker utan att i förväg bestämma oss. Men det finns en anledning till att detta fungerar &mdash; nämligen att jämförelsen <code>(null == true)</code> evaluerar till <code>false</code> i <code>php</code>. En sträng däremot, evaluerar till <code>true</code> så länge den inte är tom eller endast innehåller en nolla (<code>0</code>). Vi behöver alltså inte ens uttrycka vårt boolska uttryck som <code>($error != null)</code>. Återigen, eftersom <code>null</code> i sig evaluerar till <code>false</code>. Och eftersom om vi har fått ett fel så kommer vi ha fått en sträng, och alla strängar utom tom sträng och noll evaluerar till <code>true</code>. Du kan <a href="http://us3.php.net/manual/en/types.comparisons.php">läsa mer om vilka värden som ger <code>true</code> och vilka som ger <code>false</code> här.
+p Notera också att den jämförelse vi gör för att upptäcka om ett fel har inträffat eller inte sker genom att vi helt enkelt slänger in den sträng som potentiellt innehåller ett felmeddelande. Om vi läser <a href="http://www.php.net/manual/en/mysqli.connect-error.php">dokumentationen för metoden</a> så ser vi att den returnerar <code>null</code> om inget fel har inträffat och en sträng innehållandes ett felmeddelande om ett fel har inträffat. Detta är en av styrkorna med dynamiska språk. Vi kan returnera helt olika saker utan att i förväg bestämma oss. Men det finns en anledning till att detta fungerar &mdash; nämligen att jämförelsen <code>(null == true)</code> evaluerar till <code>false</code> i <code>php</code>. En sträng däremot, evaluerar till <code>true</code> så länge den inte är tom eller endast innehåller en nolla (<code>0</code>). Vi behöver alltså inte ens uttrycka vårt boolska uttryck som <code>($error != null)</code>. Återigen, eftersom <code>null</code> i sig evaluerar till <code>false</code>. Och eftersom om vi har fått ett fel så kommer vi ha fått en sträng, och alla strängar utom tom sträng och noll evaluerar till <code>true</code>. Du kan <a href="http://us3.php.net/manual/en/types.comparisons.php">läsa mer om vilka värden som ger <code>true</code> och vilka som ger <code>false</code> här</a>.
 
+
+
+
+h3 Att köra en query emot databasen
+p När vi väl har en koppling uppe kan vi använda vår variabel som innehåller kopplingen (i.e. <code>mysqli</code>-objektet) för att köra queries emot databasen. Oavsett vi vill skriva en query som ska skapa en tabell, lägga in en ny rad, uppdatera en existerande, förändra en kolumn eller någonting helt annat &mdash; så kan vi använda samma metod. Nämligen <code>mysqli->query($sql)</code>. Låt oss se till ett par exempel.
+
+.panel.panel-default
+  .panel-heading Köra queries emot en existerande databaskoppling.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | $result = $mysqli->query("SELECT *  FROM posts");
+          | 
+          | if ($result) {
+          |   echo "Number of rows: " . $result->num_rows;
+          | }
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | $result = $mysqli->query("SELECT * FROM posts")
+          | 
+          | if ($result) {
+          |   echo "Number of rows: " . mysqli_num_rows($result);
+          | }
+
+p Det mest intressanta med denna <code>php</code>-metod är att den returnerar olika typer av saker beroende på vad vi kör för query. <a href="http://se1.php.net/mysqli_query">Detta denoteras genom returtypen <code>mixed</code> i dokumentationen</a>. Om vi t.ex. skulle köra en <code>INSERT INTO</code> får vi en bool tillbaka som innehåller <code>true</code> om query:n lyckades och <code>false</code> om den ej gjorde det. Faktum är att vi i alla fall får tillbaka en bool som säger <code>false</code> om en query misslyckas p.g.a. t.ex. fel syntax eller en icke-existerande kolumn.
+
+p Om vi däremot t.ex. skulle köra query:n <code>SELECT * FROM users</code>. Så får vi tillbaka ett objekt av typen <code>mysqli_result</code>. Så länge vår query är en valid query får vi den typen av resultat tillbaka. Även om det skulle vara så att den inte hittade några rader alls. I ovan kodexempel är det just den typen av ett objekt vi får tillbaka, och det är således därför vi kan fråga objektet om dess antal rader.
 
 
 
