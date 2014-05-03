@@ -17,3 +17,53 @@ p Eftersom vi på htmlhunden subjektivt tror på objektorientering skulle vi vil
 
 p Men vad hände med den fjärde syntaxen då? Jo, det finns ett sätt till. Med <code>php 5</code> så introducerades även någonging som heter <a href="http://en.wikipedia.org/wiki/PHP_Data_Objects">PDO (PHP Data Objects)</a> som i essens är ett abstraktionslager emellan databasen och applikationskoden. För att hålla det så enkelt som möjligt så kommer vi inte att kika någonting på <code>PDO</code> i detta kapitel, men däremot kommer vi att titta lite på att bygga vårt eget abstraktionslager för en databas, i ett kommande kapitel :)
 
+
+
+
+h3 Att koppla upp till databasen
+p Innan vi kan börja ställa frågor till databasen behöver vi koppla upp oss till den. Detta skulle kunna jämföras med att logga in till en host genom <a href="http://en.wikipedia.org/wiki/PhpMyAdmin">phpMyAdmin</a>, <a href="http://en.wikipedia.org/wiki/MySQL_Workbench">MySQL Workbench</a>, genom en terminal (eller någon annan mysql klient). Men när vi kopplar upp till <code>mysql</code> via <code>php</code> så väljer vi även databasschema. Vilket kan jämföras med att köra <code>sql</code>-kommandot <code>USE name_of_db;</code>, eller att helt enkelt välja en databas/ett schema i något av de tidigare nämnda grafiska klienterna.
+
+p Så, låt oss se till ett faktiskt exempel. Viktigt att notera är alltså att vi i båda lagrar resultatet av evalueringen i en variabel. Vi får alltså tillbaka en instans av <code>mysqli</code>. Som alltså motsvarar en uppkoppling till vår databas. Läs mer om att sätta upp en koppling <a href="http://www.php.net/manual/en/mysqli.construct.php">i manualen</a>.
+
+.panel.panel-default
+  .panel-heading Öppna koppling till mysql-databas.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | $connection = new mysqli('host', 'user', 'password', 'database');
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | $connection = mysqli_connect('host', 'user', 'password', 'database');
+
+p Låt oss även snabbt se till hur vi skulle kunna hantera eventuella fel som kan uppstå när vi försöker koppla upp oss till databasen. Om vi t.ex. råkat ange fel lösenord, eller inte har läsrättigheter till den databas vi försöker koppla till med den användaren vi angett, eller om datbasen helt enkelt inte existerar (o.s.v.).
+
+.panel.panel-default
+  .panel-heading Felhantering vid öppning av koppling till mysql-databas.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | $error = $mysqli->connect_error;
+          | if ($error) {
+          |   $code  = $mysqli->connect_errno;
+          |   die("Error: ($code) $error");
+          | }
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | $error = $mysqli_connect_error;
+          | if ($error) {
+          |   $code  = $mysqli_connect_errno;
+          |   die("Error: ($code) $error");
+          | }
+
+p Notera i ovan exempel att vi alltid har tillgång till både själva felmeddelandet som sträng (<a href="http://www.php.net/manual/en/mysqli.connect-error.php">conect_error</a>), men även dess felkod (<a href="http://www.php.net/manual/en/mysqli.connect-errno.php">connect_errno</a>).
+
+p Notera också att den jämförelse vi gör för att upptäcka om ett fel har inträffat eller inte sker genom att vi helt enkelt slänger in den sträng som potentiellt innehåller ett felmeddelande. Om vi läser <a href="http://www.php.net/manual/en/mysqli.connect-error.php">dokumentationen för metoden</a> så ser vi att den returnerar <code>null</code> om inget fel har inträffat och en sträng innehållandes ett felmeddelande om ett fel har inträffat. Detta är en av styrkorna med dynamiska språk. Vi kan returnera helt olika saker utan att i förväg bestämma oss. Men det finns en anledning till att detta fungerar &mdash; nämligen att jämförelsen <code>(null == true)</code> evaluerar till <code>false</code> i <code>php</code>. En sträng däremot, evaluerar till <code>true</code> så länge den inte är tom eller endast innehåller en nolla (<code>0</code>). Vi behöver alltså inte ens uttrycka vårt boolska uttryck som <code>($error != null)</code>. Återigen, eftersom <code>null</code> i sig evaluerar till <code>false</code>. Och eftersom om vi har fått ett fel så kommer vi ha fått en sträng, och alla strängar utom tom sträng och noll evaluerar till <code>true</code>. Du kan <a href="http://us3.php.net/manual/en/types.comparisons.php">läsa mer om vilka värden som ger <code>true</code> och vilka som ger <code>false</code> här.
+
+
+
+
+
