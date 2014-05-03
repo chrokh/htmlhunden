@@ -95,4 +95,62 @@ p Om vi däremot t.ex. skulle köra query:n <code>SELECT * FROM users</code>. S�
 
 
 
+h3 Att få ut resultatet ur ett mysqli_result
+p Om du skrivit och exekverat en query som returnerar ett <code>mysqli_result</code> så kan du inte direkt enumerera över datan. Det finns två enkla sätt. Antingen så använder du en <code>while</code>-loop och snurrar över varje rad i resultatset:et en för en. Detta gör du med hjälp av metoden <a href="http://www.php.net/manual/en/mysqli-result.fetch-row.php">$result->fetch_row()</a> eller <a href="http://www.php.net/manual/en/mysqli-result.fetch-assoc.php">$result->fetch_assoc()</a>. Eller så hämtar du helt enkelt alla rader på en gång så att du kan lagra resultatet i en array. Detta gör du genom <a href="http://www.php.net/manual/en/mysqli-result.fetch-all.php">$result->fetch_all()</a>. Det senare kan ju förstås vara smidigt om du inte vill använda resultatet på en gång utan snarare skicka det vidare. Låt oss se till ett par användningsexempel. Vi börjar med att iterera och hämta rad för rad.
+
+.panel.panel-default
+  .panel-heading Iterera över data ifrån ett resultat-set och hämta varje rad som en numrerad array.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | // Iterates over each row (into $row) as a numeric array
+          | while($row = $result->fetch_row()){
+          |   var_dump($row);
+          | }
+          | 
+          | // But we could also iterate over each row as an associative array
+          | while($row = $result->fetch_assoc()){
+          |   var_dump($row);
+          | }
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | // Iterates over each row (into $row) as a numeric array
+          | while($row = mysqli_fetch_row($result)){
+          |   var_dump($row);
+          | }
+          | 
+          | // But we could also iterate over each row as an associative array
+          | while($row = mysqli_fetch_assoc($result)){
+          |   var_dump($row);
+          | }
+
+
+
+p I de fall där vi hämtar varje rad som en associativ array så innebär det att varje rads nycklar motsvarar namnet på databasens kolumner. I de numeriska fallen så når vi helt enkelt argumenten i samma ordning som de är definierade i datbasen.
+
+p Men som sagt, vi kan ju, som tidigare nämnt, även hämta alla rader på en gång och slänga in de i en array. Vilket ju kan vara smidigt om vi inte vill iterera över resultatet än. Detta kan vi göra genom att använda oss av <a href="http://www.php.net/manual/en/mysqli-result.fetch-all.php">$result-fetch_all()</a>. Denna metod tar även ytterligare en valfri parameter. Denna parameter ska vara en konstant som berättar om vi vill ha resultatet som en numrerad array (<code>MYSQLI_NUM</code>), eller en associativ array (<code>MYSQLI_ASSOC</code>). Om inget värde anges så är "default" numerisk. Låt oss kika på några exempel.
+
+.panel.panel-default
+  .panel-heading Hämta data ifrån ett resultat-set som array direkt.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | // As numbered array
+          | $arr = $result->fetch_all();
+          | 
+          | // Or as an associative array
+          | $arr = $result->fetch_all(MYSQLI_ASSOC);
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | // As numbered array
+          | $arr = mysqli_fetch_all($result);
+          | 
+          | // Or as an associative array
+          | $arr = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
 
