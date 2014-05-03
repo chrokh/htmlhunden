@@ -1,2 +1,5 @@
 h2 MySQL PHP API
-p Kommer snart...
+p.lead Nu är det dags att knyta ihop säcken lite och diskutera hur vi kan använda <code>php</code> för att arbeta emot en <code>mysql</code>-databas. Vi ska alltså prata om det <a href="http://en.wikipedia.org/wiki/Application_programming_interface">API</a> som <code>php</code> erbjuder för att intergagera med <code>MySQL</code>.
+
+p Om det inte redan är självklart varför vi skulle vilja göra detta &mdash; låt oss iterera. Om vi ifrån vår <code>php</code>-applikation kan koppla till en <code>mysql</code>-databas så innebär detta att vi kan spara och förändra data i databasen. Självklart är detta essentiellt! Helt plötsligt har vi möjlighet att t.ex. skapa användarkonton. Genom att lagra e-post-adresser tillsammans med lösenord. Och när användare sedan ska logga in så jämför vi bara de uppgifter vi får ifrån användaren med de som finns i databasen. Om uppgifterna stämmer med någon användare så kan vi logga in personen. Men du har som sagt säkert redan förstått varför detta är viktigt, så låt oss övergå till hur vi ifrån <code>php</code> kan använda oss utav <code>mysql</code>.
+
