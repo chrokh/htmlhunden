@@ -4,7 +4,7 @@ p.lead Nu är det dags att knyta ihop säcken lite och diskutera hur vi kan anv�
 p Om det inte redan är självklart varför vi skulle vilja göra detta &mdash; låt oss iterera. Om vi ifrån vår <code>php</code>-applikation kan koppla till en <code>mysql</code>-databas så innebär detta att vi kan spara och förändra data i databasen. Självklart är detta essentiellt! Helt plötsligt har vi möjlighet att t.ex. skapa användarkonton. Genom att lagra e-post-adresser tillsammans med lösenord. Och när användare sedan ska logga in så jämför vi bara de uppgifter vi får ifrån användaren med de som finns i databasen. Om uppgifterna stämmer med någon användare så kan vi logga in personen. Men du har som sagt säkert redan förstått varför detta är viktigt, så låt oss övergå till hur vi ifrån <code>php</code> kan använda oss utav <code>mysql</code>.
 
 
-h3 Ett gammalt API och ett nytt med dubbel syntax
+h3 Välja API
 p Efter några sökningar på nätet kommer du att märka att när vi letar resurser relaterade till det <code>API</code> som <code>php</code> erbjuder oss för att interagera med <code>mysql</code> &mdash; så hittar vi inte bara en syntax. Istället hittar vi minst tre. Är vi riktigt noga så hittar vi fyra. För att undvika förvirring när du sedan letar information på egen hand så ska vi först bara bena ut vad alla dessa olika syntaxer är och handlar om.
 
 p Först fanns ett API som hette <a href="http://www.php.net/manual/en/book.mysql.php">mysql</a>. Detta finns och fungerar fortfarande. Men <a href="http://www.w3schools.com/php/php_ref_mysqli.asp">med php 5.0.0</a> så kom ett nytt <code>api</code> vid namn <a href="http://www.php.net/manual/en/book.mysqli.php">mysqli</a>. I essens så är detta helt enkelt en uppdaterad version av <code>mysql</code> och det extra "i":et på slutet står för "improved". Således finns det idag egentligen ingen anledning att använda det gamla <code>mysql</code>-api:et när det finns ett nyare. När du surfar omkring i nätdjungeln så kan du lätt avgöra om en metod tillhör det gamla eller det nya api:et genom att helt enkelt läsa namnet på metoden. Alla de gamla metoderna innehåller termen <code>mysql</code>, medan alla de nya innehåller <code>mysqli</code>. Lätt som en plätt! Vi kommer således endast att fokusera på det nyare <code>mysqli</code>.
@@ -20,8 +20,8 @@ p Men vad hände med den fjärde syntaxen då? Jo, det finns ett sätt till. Med
 
 
 
-h3 Att koppla upp till databasen
-p Innan vi kan börja ställa frågor till databasen behöver vi koppla upp oss till den. Detta skulle kunna jämföras med att logga in till en host genom <a href="http://en.wikipedia.org/wiki/PhpMyAdmin">phpMyAdmin</a>, <a href="http://en.wikipedia.org/wiki/MySQL_Workbench">MySQL Workbench</a>, genom en terminal (eller någon annan mysql klient). Men när vi kopplar upp till <code>mysql</code> via <code>php</code> så väljer vi även databasschema. Vilket kan jämföras med att köra <code>sql</code>-kommandot <code>USE name_of_db;</code>, eller att helt enkelt välja en databas/ett schema i något av de tidigare nämnda grafiska klienterna.
+h3 Ansluta till databasen
+p Innan vi kan börja ställa frågor till databasen behöver vi ansluta till den. Detta skulle kunna jämföras med att logga in till en host genom <a href="http://en.wikipedia.org/wiki/PhpMyAdmin">phpMyAdmin</a>, <a href="http://en.wikipedia.org/wiki/MySQL_Workbench">MySQL Workbench</a>, genom en terminal (eller någon annan mysql klient). Men när vi kopplar upp till <code>mysql</code> via <code>php</code> så väljer vi även databasschema. Vilket kan jämföras med att köra <code>sql</code>-kommandot <code>USE name_of_db;</code>, eller att helt enkelt välja en databas/ett schema i något av de tidigare nämnda grafiska klienterna.
 
 p Så, låt oss se till ett faktiskt exempel. Viktigt att notera är alltså att vi i båda lagrar resultatet av evalueringen i en variabel. Vi får alltså tillbaka en instans av <code>mysqli</code>. Som alltså motsvarar en uppkoppling till vår databas. Läs mer om att sätta upp en koppling <a href="http://www.php.net/manual/en/mysqli.construct.php">i manualen</a>.
 
@@ -66,7 +66,7 @@ p Notera också att den jämförelse vi gör för att upptäcka om ett fel har i
 
 
 
-h3 Att köra en query emot databasen
+h3 Exekvera en query
 p När vi väl har en koppling uppe kan vi använda vår variabel som innehåller kopplingen (i.e. <code>mysqli</code>-objektet) för att köra queries emot databasen. Oavsett vi vill skriva en query som ska skapa en tabell, lägga in en ny rad, uppdatera en existerande, förändra en kolumn eller någonting helt annat &mdash; så kan vi använda samma metod. Nämligen <code>mysqli->query($sql)</code>. Låt oss se till ett par exempel.
 
 .panel.panel-default
@@ -95,7 +95,7 @@ p Om vi däremot t.ex. skulle köra query:n <code>SELECT * FROM users</code>. S�
 
 
 
-h3 Att få ut resultatet ur ett mysqli_result
+h3 Läsa resultatet
 p Om du skrivit och exekverat en query som returnerar ett <code>mysqli_result</code> så kan du inte direkt enumerera över datan. Det finns två enkla sätt. Antingen så använder du en <code>while</code>-loop och snurrar över varje rad i resultatset:et en för en. Detta gör du med hjälp av metoden <a href="http://www.php.net/manual/en/mysqli-result.fetch-row.php">$result->fetch_row()</a> eller <a href="http://www.php.net/manual/en/mysqli-result.fetch-assoc.php">$result->fetch_assoc()</a>. Eller så hämtar du helt enkelt alla rader på en gång så att du kan lagra resultatet i en array. Detta gör du genom <a href="http://www.php.net/manual/en/mysqli-result.fetch-all.php">$result->fetch_all()</a>. Det senare kan ju förstås vara smidigt om du inte vill använda resultatet på en gång utan snarare skicka det vidare. Låt oss se till ett par användningsexempel. Vi börjar med att iterera och hämta rad för rad.
 
 .panel.panel-default
