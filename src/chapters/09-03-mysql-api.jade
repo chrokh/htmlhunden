@@ -1,0 +1,156 @@
+h2 MySQL PHP API
+p.lead Nu är det dags att knyta ihop säcken lite och diskutera hur vi kan använda <code>php</code> för att arbeta emot en <code>mysql</code>-databas. Vi ska alltså prata om det <a href="http://en.wikipedia.org/wiki/Application_programming_interface">API</a> som <code>php</code> erbjuder för att intergagera med <code>MySQL</code>.
+
+p Om det inte redan är självklart varför vi skulle vilja göra detta &mdash; låt oss iterera. Om vi ifrån vår <code>php</code>-applikation kan koppla till en <code>mysql</code>-databas så innebär detta att vi kan spara och förändra data i databasen. Självklart är detta essentiellt! Helt plötsligt har vi möjlighet att t.ex. skapa användarkonton. Genom att lagra e-post-adresser tillsammans med lösenord. Och när användare sedan ska logga in så jämför vi bara de uppgifter vi får ifrån användaren med de som finns i databasen. Om uppgifterna stämmer med någon användare så kan vi logga in personen. Men du har som sagt säkert redan förstått varför detta är viktigt, så låt oss övergå till hur vi ifrån <code>php</code> kan använda oss utav <code>mysql</code>.
+
+
+h3 Välja API
+p Efter några sökningar på nätet kommer du att märka att när vi letar resurser relaterade till det <code>API</code> som <code>php</code> erbjuder oss för att interagera med <code>mysql</code> &mdash; så hittar vi inte bara en syntax. Istället hittar vi minst tre. Är vi riktigt noga så hittar vi fyra. För att undvika förvirring när du sedan letar information på egen hand så ska vi först bara bena ut vad alla dessa olika syntaxer är och handlar om.
+
+p Först fanns ett API som hette <a href="http://www.php.net/manual/en/book.mysql.php">mysql</a>. Detta finns och fungerar fortfarande. Men <a href="http://www.w3schools.com/php/php_ref_mysqli.asp">med php 5.0.0</a> så kom ett nytt <code>api</code> vid namn <a href="http://www.php.net/manual/en/book.mysqli.php">mysqli</a>. I essens så är detta helt enkelt en uppdaterad version av <code>mysql</code> och det extra "i":et på slutet står för "improved". Således finns det idag egentligen ingen anledning att använda det gamla <code>mysql</code>-api:et när det finns ett nyare. När du surfar omkring i nätdjungeln så kan du lätt avgöra om en metod tillhör det gamla eller det nya api:et genom att helt enkelt läsa namnet på metoden. Alla de gamla metoderna innehåller termen <code>mysql</code>, medan alla de nya innehåller <code>mysqli</code>. Lätt som en plätt! Vi kommer således endast att fokusera på det nyare <code>mysqli</code>.
+
+p Men vi nämnde ju att det fanns tre, och t.o.m. fyra olika API:er. Låt oss förklara. Kanske kommer du ihåg ifrån <code>php</code>-kapitlet att vi diskuterade hur <code>php</code> inte var objektorienterat ifrån början? Men hur det successivt håller på att utvecklas till att stödja mer och mer objektorienterad syntax. Så är det iallafall. Och det speglar även av sig här.
+
+p Det äldre api:et, alltså <code>mysql</code>, är helt procedurellt, och stödjer ingen objektorienterad syntax. Det nyare <code>mysqli</code> stödjer däremot två olika syntaxer. Först en procedurell syntax (som påminner otroligt mycket om det gamla api:et). Men sedan stödjer det även en objektorienterad syntax.
+
+p Eftersom vi på htmlhunden subjektivt tror på objektorientering skulle vi vilja slå ett starkt slag för att du redan ifrån början vänjer dig vid att använda den objektorienterade syntaxen. Men vi kommer att redogöra för båda två i detta kapitel.
+
+p Men vad hände med den fjärde syntaxen då? Jo, det finns ett sätt till. Med <code>php 5</code> så introducerades även någonging som heter <a href="http://en.wikipedia.org/wiki/PHP_Data_Objects">PDO (PHP Data Objects)</a> som i essens är ett abstraktionslager emellan databasen och applikationskoden. För att hålla det så enkelt som möjligt så kommer vi inte att kika någonting på <code>PDO</code> i detta kapitel, men däremot kommer vi att titta lite på att bygga vårt eget abstraktionslager för en databas, i ett kommande kapitel :)
+
+
+
+
+h3 Ansluta till databasen
+p Innan vi kan börja ställa frågor till databasen behöver vi ansluta till den. Detta skulle kunna jämföras med att logga in till en host genom <a href="http://en.wikipedia.org/wiki/PhpMyAdmin">phpMyAdmin</a>, <a href="http://en.wikipedia.org/wiki/MySQL_Workbench">MySQL Workbench</a>, genom en terminal (eller någon annan mysql klient). Men när vi kopplar upp till <code>mysql</code> via <code>php</code> så väljer vi även databasschema. Vilket kan jämföras med att köra <code>sql</code>-kommandot <code>USE name_of_db;</code>, eller att helt enkelt välja en databas/ett schema i något av de tidigare nämnda grafiska klienterna.
+
+p Så, låt oss se till ett faktiskt exempel. Viktigt att notera är alltså att vi i båda lagrar resultatet av evalueringen i en variabel. Vi får alltså tillbaka en instans av <code>mysqli</code>. Som alltså motsvarar en uppkoppling till vår databas. Läs mer om att sätta upp en koppling <a href="http://www.php.net/manual/en/mysqli.construct.php">i manualen</a>.
+
+.panel.panel-default
+  .panel-heading Öppna koppling till mysql-databas.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | $mysqli = new mysqli('host', 'user', 'password', 'database');
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | $mysqli = mysqli_connect('host', 'user', 'password', 'database');
+
+p Låt oss även snabbt se till hur vi skulle kunna hantera eventuella fel som kan uppstå när vi försöker koppla upp oss till databasen. Om vi t.ex. råkat ange fel lösenord, eller inte har läsrättigheter till den databas vi försöker koppla till med den användaren vi angett, eller om datbasen helt enkelt inte existerar (o.s.v.).
+
+.panel.panel-default
+  .panel-heading Felhantering vid öppning av koppling till mysql-databas.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | $error = $mysqli->connect_error;
+          | if ($error) {
+          |   $code  = $mysqli->connect_errno;
+          |   die("Error: ($code) $error");
+          | }
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | $error = mysqli_connect_error();
+          | if ($error) {
+          |   $code  = mysqli_connect_errno();
+          |   die("Error: ($code) $error");
+          | }
+
+p Notera i ovan exempel att vi alltid har tillgång till både själva felmeddelandet som sträng (<a href="http://www.php.net/manual/en/mysqli.connect-error.php">conect_error</a>), men även dess felkod (<a href="http://www.php.net/manual/en/mysqli.connect-errno.php">connect_errno</a>).
+
+p Notera också att den jämförelse vi gör för att upptäcka om ett fel har inträffat eller inte sker genom att vi helt enkelt slänger in den sträng som potentiellt innehåller ett felmeddelande. Om vi läser <a href="http://www.php.net/manual/en/mysqli.connect-error.php">dokumentationen för metoden</a> så ser vi att den returnerar <code>null</code> om inget fel har inträffat och en sträng innehållandes ett felmeddelande om ett fel har inträffat. Detta är en av styrkorna med dynamiska språk. Vi kan returnera helt olika saker utan att i förväg bestämma oss. Men det finns en anledning till att detta fungerar &mdash; nämligen att jämförelsen <code>(null == true)</code> evaluerar till <code>false</code> i <code>php</code>. En sträng däremot, evaluerar till <code>true</code> så länge den inte är tom eller endast innehåller en nolla (<code>0</code>). Vi behöver alltså inte ens uttrycka vårt boolska uttryck som <code>($error != null)</code>. Återigen, eftersom <code>null</code> i sig evaluerar till <code>false</code>. Och eftersom om vi har fått ett fel så kommer vi ha fått en sträng, och alla strängar utom tom sträng och noll evaluerar till <code>true</code>. Du kan <a href="http://us3.php.net/manual/en/types.comparisons.php">läsa mer om vilka värden som ger <code>true</code> och vilka som ger <code>false</code> här</a>.
+
+
+
+
+h3 Exekvera en query
+p När vi väl har en koppling uppe kan vi använda vår variabel som innehåller kopplingen (i.e. <code>mysqli</code>-objektet) för att köra queries emot databasen. Oavsett vi vill skriva en query som ska skapa en tabell, lägga in en ny rad, uppdatera en existerande, förändra en kolumn eller någonting helt annat &mdash; så kan vi använda samma metod. Nämligen <code>mysqli->query($sql)</code>. Låt oss se till ett par exempel.
+
+.panel.panel-default
+  .panel-heading Köra queries emot en existerande databaskoppling.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | $result = $mysqli->query("SELECT *  FROM posts");
+          | 
+          | if ($result) {
+          |   echo "Number of rows: " . $result->num_rows;
+          | }
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | $result = $mysqli->query("SELECT * FROM posts")
+          | 
+          | if ($result) {
+          |   echo "Number of rows: " . mysqli_num_rows($result);
+          | }
+
+p Det mest intressanta med denna <code>php</code>-metod är att den returnerar olika typer av saker beroende på vad vi kör för query. <a href="http://se1.php.net/mysqli_query">Detta denoteras genom returtypen <code>mixed</code> i dokumentationen</a>. Om vi t.ex. skulle köra en <code>INSERT INTO</code> får vi en bool tillbaka som innehåller <code>true</code> om query:n lyckades och <code>false</code> om den ej gjorde det. Faktum är att vi i alla fall får tillbaka en bool som säger <code>false</code> om en query misslyckas p.g.a. t.ex. fel syntax eller en icke-existerande kolumn.
+
+p Om vi däremot t.ex. skulle köra query:n <code>SELECT * FROM users</code>. Så får vi tillbaka ett objekt av typen <code>mysqli_result</code>. Så länge vår query är en valid query får vi den typen av resultat tillbaka. Även om det skulle vara så att den inte hittade några rader alls. I ovan kodexempel är det just den typen av ett objekt vi får tillbaka, och det är således därför vi kan fråga objektet om dess antal rader.
+
+
+
+h3 Läsa resultatet
+p Om du skrivit och exekverat en query som returnerar ett <code>mysqli_result</code> så kan du inte direkt enumerera över datan. Det finns två enkla sätt. Antingen så använder du en <code>while</code>-loop och snurrar över varje rad i resultatset:et en för en. Detta gör du med hjälp av metoden <a href="http://www.php.net/manual/en/mysqli-result.fetch-row.php">$result->fetch_row()</a> eller <a href="http://www.php.net/manual/en/mysqli-result.fetch-assoc.php">$result->fetch_assoc()</a>. Eller så hämtar du helt enkelt alla rader på en gång så att du kan lagra resultatet i en array. Detta gör du genom <a href="http://www.php.net/manual/en/mysqli-result.fetch-all.php">$result->fetch_all()</a>. Det senare kan ju förstås vara smidigt om du inte vill använda resultatet på en gång utan snarare skicka det vidare. Låt oss se till ett par användningsexempel. Vi börjar med att iterera och hämta rad för rad.
+
+.panel.panel-default
+  .panel-heading Iterera över data ifrån ett resultat-set och hämta varje rad som en numrerad array.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | // Iterates over each row (into $row) as a numeric array
+          | while($row = $result->fetch_row()){
+          |   var_dump($row);
+          | }
+          | 
+          | // But we could also iterate over each row as an associative array
+          | while($row = $result->fetch_assoc()){
+          |   var_dump($row);
+          | }
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | // Iterates over each row (into $row) as a numeric array
+          | while($row = mysqli_fetch_row($result)){
+          |   var_dump($row);
+          | }
+          | 
+          | // But we could also iterate over each row as an associative array
+          | while($row = mysqli_fetch_assoc($result)){
+          |   var_dump($row);
+          | }
+
+
+
+p I de fall där vi hämtar varje rad som en associativ array så innebär det att varje rads nycklar motsvarar namnet på databasens kolumner. I de numeriska fallen så når vi helt enkelt argumenten i samma ordning som de är definierade i datbasen.
+
+p Men som sagt, vi kan ju, som tidigare nämnt, även hämta alla rader på en gång och slänga in de i en array. Vilket ju kan vara smidigt om vi inte vill iterera över resultatet än. Detta kan vi göra genom att använda oss av <a href="http://www.php.net/manual/en/mysqli-result.fetch-all.php">$result-fetch_all()</a>. Denna metod tar även ytterligare en valfri parameter. Denna parameter ska vara en konstant som berättar om vi vill ha resultatet som en numrerad array (<code>MYSQLI_NUM</code>), eller en associativ array (<code>MYSQLI_ASSOC</code>). Om inget värde anges så är "default" numerisk. Låt oss kika på några exempel.
+
+.panel.panel-default
+  .panel-heading Hämta data ifrån ett resultat-set som array direkt.
+  .panel-body
+    p OOP syntax.
+      pre
+        code.language-php
+          | // As numbered array
+          | $arr = $result->fetch_all();
+          | 
+          | // Or as an associative array
+          | $arr = $result->fetch_all(MYSQLI_ASSOC);
+    p Procedurell syntax.
+      pre
+        code.language-php
+          | // As numbered array
+          | $arr = mysqli_fetch_all($result);
+          | 
+          | // Or as an associative array
+          | $arr = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+

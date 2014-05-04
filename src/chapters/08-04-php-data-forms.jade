@@ -1,0 +1,72 @@
+h2 Skicka data till servern
+p Kommer ni ihåg att vi förut pratade om formulär i HTML-avsnittet? Den gången så pratade vi om hur vi skulle skapa 
+  | formulär men att de var statiska genom att inget hände när vi tryckte på knappen. Om vi begrundar det formuläret kan 
+  | vi se att det står <code> method="GET" </code> det indikerar att vi kommer kommer att göra en HTTP GET request till servern
+  | och <code> action="test.php" </code> anger att vi efterfrågar sidan test.php. 
+
+pre
+  code.language-markup
+    |&lt;form action="test.php" method="GET"&gt;
+    |   &lt;label for="field-name"&gt;Ditt namn&lt;/label&gt;
+    |   &lt;input type="text" id="field-name" name="name" placeholder="Ditt namn" required&gt;
+    | 
+    |   &lt;label&gt;Vad vill du äta till frukost?&lt;/label&gt;
+    | 
+    |   &lt;label for="field-pancakes"&gt;Pannkakor&lt;/label&gt;
+    |   &lt;input type="radio" id="field-pancakes" name="breakfast" value="pancakes"&gt;
+    | 
+    |   &lt;label for="field-scrambled"&gt;Äggröra&lt;/label&gt;
+    |   &lt;input type="radio" id="field-scrambled" name="breakfast" value="scrambled"&gt;
+    | 
+    |   &lt;label for="field-toast"&gt;Övrigt&lt;/label&gt;
+    |   &lt;input type="radio" id="field-toast" name="breakfast" value="toast"&gt;
+    | 
+    |   &lt;input type="submit" value="Skicka!"&gt;
+    |&lt;/form&gt;
+.panel.panel-default
+  .panel-heading Resultat
+  .panel-body
+    form(action="#", method="GET")
+      .form-group
+        label(for="99986458-field-name") Ditt namn
+        input(type="text", id="99986458-field-name", name="name", placeholder="Ditt namn", required).form-control
+      label Vad vill du äta till frukost?
+      .form-group
+        .radio
+          input(id="99986458-field-pancakes", type="radio", name="breakfast", value="pancakes", required) 
+          label(for="99986458-field-pancakes") Pannkakor
+        .radio
+          input(id="99986458-field-scrambled", type="radio", name="breakfast", value="scrambled", required) 
+          label(for="99986458-field-scrambled") Äggröra
+        .radio
+          input(id="99986458-field-toast", type="radio", name="breakfast", value="toast", required) 
+          label(for="99986458-field-toast") Toast
+      input(type="submit", value="Skicka!").btn.btn-default
+p Eftersom vi efterfrågar test.php och faktiskt skickar med data som vi är intresserade av så bör vi nu fånga upp det. 
+
+.panel.panel-default
+  .panel-heading Att fånga upp med $_GET["xxx"]
+  .panel-body
+    pre
+      code.language-php
+        | &lt;?php
+        |   $name= $_GET["name"]
+        |   $choice= $_GET["breakfast"]
+        |   echo "kära" . $name . " , jag skall absolut fixa ". $choice . "till dig!" ;
+        | ?&gt;
+    .panel.panel-default
+p SÅ vad är då <code> $_GET["xxx"]</code>? Det finns inom PHP två globala variabler som man kan fånga upp parametrar som skickats
+  | till servern, <code> $_GET["xxx"] </code> eller <code>  $_POST["xxx"] </code>. Skillnaden mellan post och get är att: utifall
+  | man skickar med get kommer parametrarna synas i URL:en (exempel: test.php?breakfast=toast&name=Klara ) medan i post finns den inbäddad i requesten som görs. Det betyder att
+  | utifall man faktiskt skickar med data som man inte vill visa bör man välja att skicka den med post. post skickas fortfarande 
+  | som en ren text därav är den inte säker utan att man krypterar texten innan. Som regel brukar man alltid skicka större mängd data
+  | med post och utifall man skall processa datat på något sätt. 
+
+p Man måste inte skicka data med ett formulär utan kan göra det med hjälp av functionen header. för att kunna skicka med data 
+  | behövs då att man skriver det manuellt. <code> header('Location: test.php?breakfast=toast&name=Klara'); </code>. Som ni ser
+  | så har jag nu manuellt skrivit till efter frågetecknet olika parametrar och särskilt dem med hjälp av ett &
+
+
+
+
+
