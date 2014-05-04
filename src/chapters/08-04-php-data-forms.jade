@@ -67,6 +67,47 @@ p När användaren klickar på <code>submit</code>-knappen i detta formulär så
 
 
 
+h3 Skillnader emellan POST och GET
+p Låt oss nu diskutera lite skillnader emellan POST och GET. Det enda rätta är väl egentligen att gräva ned oss och snabbt kika på hur dessa olika requests ser ut. Så att vi är överens om att det inte är någon slags svart magi. Men låt oss först kika på deras utvärtes skillnader.
+
+p När du knappar in en <code>url</code> i din webbläsare och trycker enter så är det alltid ett <code>GET</code> request du kommer att skicka. Så länge du inte använder en webbläsare som är designad för att skicka andra typer av requests. Rent "design"-mässigt så används <code>GET</code> för att <em>hämta</em> resurser. Alltså <em>inte</em> för att förändra. Med andra termer skulle vi kunna säga att idealfallet är att ett <code>GET request</code> är <a href="http://en.wikipedia.org/wiki/Side_effect_(computer_science)">fritt ifrån sidoeffekter</a> på servern. Vi använder ordet "design" eftersom detta ju är en rekommendation. Således en rekommendation som inte alltid följs. Om vi låter användare göra <code>GET requests</code> till en given sida, och sedan ökar en räknare i en databas för att föra användarstatistik så är det ju en s.k. "sidoeffekt". Denna diskussion är helt enkelt inte svartvit.
+
+p Det är även rimligt att anta att vi i exempelrutan ovan med frukosten har brutit emot regeln om att använda <code>GET</code> för sidoeffektsfria anrop. Men eftersom vi ännu inte berättat vad vi ska göra med datat som användaren skickar så är det förstås svårt att säga :)
+
+p Ett lättare sätt att belysa distinktionen lär vara detta. Vi skulle hävda att ett sökformulär bör skicka sin data via <code>GET</code>. Medan ett registreringsformulär rimligen bör skickas över <code>POST</code>. Även ett inloggningsformulär skulle vi nog skicka över <code>POST</code>. De två senare förändrar ju faktiskt "state" på servern. I första fallet genom att lagra en till användare i databasen. I andra fallet genom att skapa en session för användaren (alltså markera den som inloggad). Medan i det allra första fallet &mdash; sökfallet &mdash; så vill vi ju faktiskt bara filtrera information. Ingenting förändras på servern. Vi vill, till användaren, returnera information som rimligen är ett subset av någonting annat. 
+
+p Det är fullt förståeligt om du tycker att det här är förvirrande. Det blir mycket på en gång. Men låt oss se det ifrån en annan vinkel. Låt oss fundera på hur data (exempelvis alltså formulärdata) skickas med de olika anropstyperna. Nedan följer två exempel på hur ett request till en sida skulle kunna se ut. Den ena varianten användet <code>GET</code> och den andra använder <code>POST</code>. Det viktiga är att du fokuserar på hur datat skickas.
+
+.panel.panel-default
+  .panel-heading Exempel på HTTP requests genom GET och POST
+  .panel-body
+    p Låt oss kika på hur dessa requests faktiskt ser ut. Vi gör anrop till adressen <code>example.com</code>. Och vi vill skicka med följande data: <code>color = red</code> och <code>shape = circle</code>. Fokusera framförallt på hur denna data i de två exemplena skickas olika.
+
+    p Ett request genom <code>HTTP GET</code> skulle då kunna se ut som så...
+      pre
+        code.language-http
+          | GET https://example.com/?shape=circle&color=red
+          | Accept: */*
+          | User-Agent: runscope/0.1
+
+    p Och ett request genom <code>HTTP POST</code> skulle istället kunna se ut som så...
+      pre
+        code.language-http
+          | POST https://example.com/
+          | Accept: */*
+          | Content-Length: 22
+          | Content-Type: application/x-www-form-urlencoded
+          | User-Agent: runscope/0.1
+          | shape=circle&color=red
+
+    p Båda dessa requests skickades tjänsten <a href="http://www.hurl.it/">hurl.it</a>. Prova gärna och utförska själv!
+
+p Märkte du vad som var lustigt i ovan exempel? Det är förstås mycket som känns (o)lustigt med <code>http requests</code> första gången man ser dem. Rena mumbo jumbon. Men det viktiga vi behöver förstå är att den data som vi skickar med i ett <code>GET</code>-anrop blir en del av själva <code>url</code>:en vi anropar. Studera de två exemplena ovan. I det första fallet så anropar vi en url med ett frågetecken och en massa text på slutet. Detta är vår data "inkodad" i url:en enligt en standard som kallas <a href="http://www.w3schools.com/tags/ref_urlencode.asp">url encoding</a>. I det andra fallet däremot. Där anropade vi helt enkelt bara den <code>url</code> vi ville till. Utan en massa urlkodad information i slutet av adressen. Istället skickade vi informationen längst ned i vårt <code>request</code>.
+
+p Som du kanske har misstänkt betyder detta alltså att när vi gör anrop via <code>GET</code> så syns all data vi skickar med i anropet i <code>url</code>:en själv. När vi däremot gör ett <code>POST</code>-anrop så syns inte all data i adressen. Bara denna information gör att vi kan göra smartare val kring när vi ska använda den ena och när den andra. En fördel med att t.ex. skicka data i <code>url</code>:en själv är ju att en användare kan kopiera den adressen och skicka till en kompis. Om vi istället skulle skicka datat "gömt" genom <code>POST</code> så skulle datat inte "följa" med när användaren kopierade url:en. Användaren skulle då istället behöva kopiera hela <code>HTTP requestet</code>. Vilket inte riktigt är något den vardaglige användaren ens skulle orka bry sig om att tänka på.
+
+
+
 h3 Läsa POST och GET i PHP
 p Eftersom vi efterfrågar process.php och faktiskt skickar med data som vi är intresserade av så bör vi nu fånga upp det. 
 
