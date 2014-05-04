@@ -1,12 +1,11 @@
 h2 Skicka data till servern
-p Kommer ni ihåg att vi förut pratade om formulär i HTML-avsnittet? Den gången så pratade vi om hur vi skulle skapa 
-  | formulär men att de var statiska genom att inget hände när vi tryckte på knappen. Om vi begrundar det formuläret kan 
-  | vi se att det står <code> method="GET" </code> det indikerar att vi kommer kommer att göra en HTTP GET request till servern
-  | och <code> action="test.php" </code> anger att vi efterfrågar sidan test.php. 
+p.lead När vi pratade om formulär i <code>html</code> så fokuserade vi endast på hur vi får webbläsaren att visa upp de formulärkomponenter vi vill. Textfält, radioknappar, checkboxar, knappar och så vidare. Dock pratade vi aldrig om hur vi som utvecklare kan använda oss av och komma åt den datan som användaren skriver i formulären. Vi nämnde att vi behöver ett server-side-språk för att kunna göra någonting permanent med datat &mdash; såsom att spara det i en databas. Så, eftersom vi nu befinner oss i kapitlet om server-side-språk så är det just det vi ska prata om. Alltså, hur vi på olika sätt kan läsa "input" ifrån användaren.
+
+p Låt oss börja med att repetera hur ett vanligt <code>html</code>-formulär ser ut. Beakta nedan exempel, och fundera över faktumet att attributet <code>method</code> är tillskrivet värdet <code>GET</code>. Fundera även över faktumet att attributet <code>action</code> är tillskrivet värdet <code>process.php</code>.
 
 pre
   code.language-markup
-    |&lt;form action="test.php" method="GET"&gt;
+    |&lt;form action="process.php" method="GET"&gt;
     |   &lt;label for="field-name"&gt;Ditt namn&lt;/label&gt;
     |   &lt;input type="text" id="field-name" name="name" placeholder="Ditt namn" required&gt;
     | 
@@ -42,7 +41,32 @@ pre
           input(id="99986458-field-toast", type="radio", name="breakfast", value="toast", required) 
           label(for="99986458-field-toast") Toast
       input(type="submit", value="Skicka!").btn.btn-default
-p Eftersom vi efterfrågar test.php och faktiskt skickar med data som vi är intresserade av så bör vi nu fånga upp det. 
+
+
+p Vi bad dig att framförallt notera användandet av nyckel-värde-paren <code>action="process.php"</code> och <code>method="GET"</code>. Kanske har du redan ett hum. Men låt oss prata om det. Vad betyder dessa två egentligen? Varför behöver vi ange dessa attribut? Och vad kan vi ge de för värden? Låt oss ta de en efter en.
+
+h3 Form action
+p När användaren klickar på <code>submit</code>-knappen i ovan formulär så kommer formulärdatat att skickas till sidan <code>process.php</code>. Eller mer specifikt uttryckt så kommer klickandet på knappen att orska användarens webbläsare att utfärda ett nytt <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP Request</a>. Alltså i stort sätt samma sak som händer när man trycker på en länk. Webbläsaren utfärdar ett nytt request till den <a href="http://en.wikipedia.org/wiki/Uniform_resource_locator">url</a> som gömmer sig under länken. Vi väntar. Och så fort webbläsaren får ett <code>response</code> så är vi på den nya sidan.
+
+p När användaren trycker på "submit"-knappen så "skickas" denne helt enkelt till en annan sida. Vilken sida användaren skickas till bestäms utav den <code>url</code> vi anger som nyckel i attributet <code>action="[url]"</code>.
+
+p I fallet ovan så hade vi angett filnamnet <code>process.php</code>. Eftersom vår url varken börjar med ett protokoll eller ett slashtecken (<code>/</code>) så är det en <a href="http://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2">relativ url</a> och vi kommer helt enkelt att skicka användarens webbläsare till sidan <code>process.php</code> om det finns en sådan sida på den "plats" användaren befinner sig just nu. Med andra ord. Om användaren (och således även formuläret) befann sig på adressen <code>http://example.com/breakfast.php</code> så skulle användaren, när den klickar på "submit" i formuläret att skickas till adressen <code>http://example.com/process.php</code>.
+
+p Det kanske <strong>viktigaste</strong> med allt detta &mdash; är ju förstås inte att vi skickar användaren till en ny <code>url</code>. Det viktigaste är att den data som användaren fyllt i i formuläret <strong>skickas med i detta http request</strong>.
+
+h3 Form method
+p Så vad gör då attributet <code>method="[HTTP METHOD]"</code>? Egentligen är det inte särskilt konstigt. Vi har redan klargjort att när användaren klickar på formulärets "submit"-knapp så kommer användarens webbläsare att utföra ett nytt <code>http request</code>. Alltså omdirigeras till en ny <code>url</code>. Samt att den data som användaren matat in i formuläret faktiskt <strong>skickas med i samma request</strong>. Notera ordvalet "i samma request". Den uppenbara frågan är ju förstås &mdash; hur? Hur kan en massa data som användaren har fyllt i skickas med ett <code>http request</code>. Det kan ju vara precis viiiilken data som helst. Det är alltså just här attributet <code>method="[HTTP METHOD]"</code> kommer in i bilden.
+
+p Det går alltså att bädda in en massa data i ett <code>http request</code>. Gärna på <a href="http://en.wikipedia.org/wiki/Attribute%E2%80%93value_pair">nyckel-värde-par</a>-form. Men eftersom det finns <a href="http://www.w3schools.com/tags/ref_httpmethods.asp">olika typer av http requests</a> så kan data alltså skickas på olika sätt. Eller snarare olika "form" (no pun intended). Detta är vad attributet <code>method</code> styr över. Attributet avgör alltså vilken typ av <code>http request</code> vi ber användarens webbläsare att göra. 
+
+p De två vanligaste typerna av <code>http request</code> är <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">GET</a> och <a href="http://en.wikipedia.org/wiki/POST_(HTTP)">POST</a>. Det finns ett par andra typer, men eftersom <a href="http://stackoverflow.com/questions/8054165/using-put-method-in-html-form">formulär i <code>html</code> endast tillåter dessa två</a> så är det endast dessa vi kommer att fokusera på här. Du kan <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">läsa om fler metoder hos standardsorganet W3C</a>.
+
+p När användaren klickar på <code>submit</code>-knappen i detta formulär så kommer formulärdatat att skickas genom metoden <code>HTTP GET</code>. Eller mer specifikt &mdash; när användaren klickar på knappen kommer användarens webbläsare utföra ett nytt <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP Request</a>. Detta request kommer att göras till den <code>url</code> som är specificerad av attribtuet <code>action</code>. Men eftersom det finns olika typer av <code>HTTP requests</code> (t.ex. <code>POST</code> och <code>GET</code>) så anger vi vilken typ av request vi vill göra under <code>action</code>.
+
+
+
+h3 Läsa POST och GET i PHP
+p Eftersom vi efterfrågar process.php och faktiskt skickar med data som vi är intresserade av så bör vi nu fånga upp det. 
 
 .panel.panel-default
   .panel-heading Att fånga upp med $_GET["xxx"]
@@ -57,13 +81,13 @@ p Eftersom vi efterfrågar test.php och faktiskt skickar med data som vi är int
     .panel.panel-default
 p SÅ vad är då <code> $_GET["xxx"]</code>? Det finns inom PHP två globala variabler som man kan fånga upp parametrar som skickats
   | till servern, <code> $_GET["xxx"] </code> eller <code>  $_POST["xxx"] </code>. Skillnaden mellan post och get är att: utifall
-  | man skickar med get kommer parametrarna synas i URL:en (exempel: test.php?breakfast=toast&name=Klara ) medan i post finns den inbäddad i requesten som görs. Det betyder att
+  | man skickar med get kommer parametrarna synas i URL:en (exempel: process.php?breakfast=toast&name=Klara ) medan i post finns den inbäddad i requesten som görs. Det betyder att
   | utifall man faktiskt skickar med data som man inte vill visa bör man välja att skicka den med post. post skickas fortfarande 
   | som en ren text därav är den inte säker utan att man krypterar texten innan. Som regel brukar man alltid skicka större mängd data
   | med post och utifall man skall processa datat på något sätt. 
 
 p Man måste inte skicka data med ett formulär utan kan göra det med hjälp av functionen header. för att kunna skicka med data 
-  | behövs då att man skriver det manuellt. <code> header('Location: test.php?breakfast=toast&name=Klara'); </code>. Som ni ser
+  | behövs då att man skriver det manuellt. <code> header('Location: process.php?breakfast=toast&name=Klara'); </code>. Som ni ser
   | så har jag nu manuellt skrivit till efter frågetecknet olika parametrar och särskilt dem med hjälp av ett &
 
 
