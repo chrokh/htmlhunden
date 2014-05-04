@@ -1,12 +1,13 @@
-h2 Skicka data till servern
-p Kommer ni ihåg att vi förut pratade om formulär i HTML-avsnittet? Den gången så pratade vi om hur vi skulle skapa 
-  | formulär men att de var statiska genom att inget hände när vi tryckte på knappen. Om vi begrundar det formuläret kan 
-  | vi se att det står <code> method="GET" </code> det indikerar att vi kommer kommer att göra en HTTP GET request till servern
-  | och <code> action="test.php" </code> anger att vi efterfrågar sidan test.php. 
+h2 Läsa formulärdata med PHP
+p.lead När vi pratade om formulär i <code>html</code> så fokuserade vi endast på hur vi får webbläsaren att visa upp de formulärkomponenter vi vill. Textfält, radioknappar, checkboxar, knappar och så vidare. Dock pratade vi aldrig om hur vi som utvecklare kan använda oss av och komma åt den datan som användaren skriver i formulären. Vi nämnde att vi behöver ett server-side-språk för att kunna göra någonting permanent med datat &mdash; såsom att spara det i en databas. Så, eftersom vi nu befinner oss i kapitlet om server-side-språk så är det just det vi ska prata om. Alltså, hur vi på olika sätt kan läsa "input" ifrån användaren.
+
+p Faktum är att detta kapitels rubrik egentligen är ganska missvisande. Vi pratar inte bara om hur du kan läsa data ifrån ett formulär ifyllt av en användare. De tekniker vi kommer att prata om här har mycket bredare användning. Och borde kanske snarare kalla detta kapitel för &mdash; "Att genom php och html läsa och skicka ifrån och till ett http request". Men den titeln var inte lika "catchy" :)
+
+p Låt oss börja med att repetera hur ett vanligt <code>html</code>-formulär ser ut. Beakta nedan exempel, och fundera över faktumet att attributet <code>method</code> är tillskrivet värdet <code>GET</code>. Fundera även över faktumet att attributet <code>action</code> är tillskrivet värdet <code>process.php</code>.
 
 pre
   code.language-markup
-    |&lt;form action="test.php" method="GET"&gt;
+    |&lt;form action="process.php" method="GET"&gt;
     |   &lt;label for="field-name"&gt;Ditt namn&lt;/label&gt;
     |   &lt;input type="text" id="field-name" name="name" placeholder="Ditt namn" required&gt;
     | 
@@ -42,29 +43,182 @@ pre
           input(id="99986458-field-toast", type="radio", name="breakfast", value="toast", required) 
           label(for="99986458-field-toast") Toast
       input(type="submit", value="Skicka!").btn.btn-default
-p Eftersom vi efterfrågar test.php och faktiskt skickar med data som vi är intresserade av så bör vi nu fånga upp det. 
+
+
+p Vi bad dig att framförallt notera användandet av nyckel-värde-paren <code>action="process.php"</code> och <code>method="GET"</code>. Kanske har du redan ett hum. Men låt oss prata om det. Vad betyder dessa två egentligen? Varför behöver vi ange dessa attribut? Och vad kan vi ge de för värden? Låt oss ta de en efter en.
+
+h3 Form action
+p När användaren klickar på <code>submit</code>-knappen i ovan formulär så kommer formulärdatat att skickas till sidan <code>process.php</code>. Eller mer specifikt uttryckt så kommer klickandet på knappen att orska användarens webbläsare att utfärda ett nytt <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP Request</a>. Alltså i stort sätt samma sak som händer när man trycker på en länk. Webbläsaren utfärdar ett nytt request till den <a href="http://en.wikipedia.org/wiki/Uniform_resource_locator">url</a> som gömmer sig under länken. Vi väntar. Och så fort webbläsaren får ett <code>response</code> så är vi på den nya sidan.
+
+p När användaren trycker på "submit"-knappen så "skickas" denne helt enkelt till en annan sida. Vilken sida användaren skickas till bestäms utav den <code>url</code> vi anger som nyckel i attributet <code>action="[url]"</code>.
+
+p I fallet ovan så hade vi angett filnamnet <code>process.php</code>. Eftersom vår url varken börjar med ett protokoll eller ett slashtecken (<code>/</code>) så är det en <a href="http://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2">relativ url</a> och vi kommer helt enkelt att skicka användarens webbläsare till sidan <code>process.php</code> om det finns en sådan sida på den "plats" användaren befinner sig just nu. Med andra ord. Om användaren (och således även formuläret) befann sig på adressen <code>http://example.com/breakfast.php</code> så skulle användaren, när den klickar på "submit" i formuläret att skickas till adressen <code>http://example.com/process.php</code>.
+
+p Det kanske <strong>viktigaste</strong> med allt detta &mdash; är ju förstås inte att vi skickar användaren till en ny <code>url</code>. Det viktigaste är att den data som användaren fyllt i i formuläret <strong>skickas med i detta http request</strong>.
+
+h3 Form method
+p Så vad gör då attributet <code>method="[HTTP METHOD]"</code>? Egentligen är det inte särskilt konstigt. Vi har redan klargjort att när användaren klickar på formulärets "submit"-knapp så kommer användarens webbläsare att utföra ett nytt <code>http request</code>. Alltså omdirigeras till en ny <code>url</code>. Samt att den data som användaren matat in i formuläret faktiskt <strong>skickas med i samma request</strong>. Notera ordvalet "i samma request". Den uppenbara frågan är ju förstås &mdash; hur? Hur kan en massa data som användaren har fyllt i skickas med ett <code>http request</code>. Det kan ju vara precis viiiilken data som helst. Det är alltså just här attributet <code>method="[HTTP METHOD]"</code> kommer in i bilden.
+
+p Det går alltså att bädda in en massa data i ett <code>http request</code>. Gärna på <a href="http://en.wikipedia.org/wiki/Attribute%E2%80%93value_pair">nyckel-värde-par</a>-form. Men eftersom det finns <a href="http://www.w3schools.com/tags/ref_httpmethods.asp">olika typer av http requests</a> så kan data alltså skickas på olika sätt. Eller snarare olika "form" (no pun intended). Detta är vad attributet <code>method</code> styr över. Attributet avgör alltså vilken typ av <code>http request</code> vi ber användarens webbläsare att göra. 
+
+p De två vanligaste typerna av <code>http request</code> är <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">GET</a> och <a href="http://en.wikipedia.org/wiki/POST_(HTTP)">POST</a>. Det finns ett par andra typer, men eftersom <a href="http://stackoverflow.com/questions/8054165/using-put-method-in-html-form">formulär i <code>html</code> endast tillåter dessa två</a> så är det endast dessa vi kommer att fokusera på här. Du kan <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">läsa om fler metoder hos standardsorganet W3C</a>.
+
+p När användaren klickar på <code>submit</code>-knappen i detta formulär så kommer formulärdatat att skickas genom metoden <code>HTTP GET</code>. Eller mer specifikt &mdash; när användaren klickar på knappen kommer användarens webbläsare utföra ett nytt <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP Request</a>. Detta request kommer att göras till den <code>url</code> som är specificerad av attribtuet <code>action</code>. Men eftersom det finns olika typer av <code>HTTP requests</code> (t.ex. <code>POST</code> och <code>GET</code>) så anger vi vilken typ av request vi vill göra under <code>action</code>.
+
+
+
+h3 Skillnader emellan POST och GET
+p Låt oss nu diskutera lite skillnader emellan POST och GET. Det enda rätta är väl egentligen att gräva ned oss och snabbt kika på hur dessa olika requests ser ut. Så att vi är överens om att det inte är någon slags svart magi. Men låt oss först kika på deras utvärtes skillnader.
+
+p När du knappar in en <code>url</code> i din webbläsare och trycker enter så är det alltid ett <code>GET</code> request du kommer att skicka. Så länge du inte använder en webbläsare som är designad för att skicka andra typer av requests. Rent "design"-mässigt så används <code>GET</code> för att <em>hämta</em> resurser. Alltså <em>inte</em> för att förändra. Med andra termer skulle vi kunna säga att idealfallet är att ett <code>GET request</code> är <a href="http://en.wikipedia.org/wiki/Side_effect_(computer_science)">fritt ifrån sidoeffekter</a> på servern. Vi använder ordet "design" eftersom detta ju är en rekommendation. Således en rekommendation som inte alltid följs. Om vi låter användare göra <code>GET requests</code> till en given sida, och sedan ökar en räknare i en databas för att föra användarstatistik så är det ju en s.k. "sidoeffekt". Denna diskussion är helt enkelt inte svartvit.
+
+p Det är även rimligt att anta att vi i exempelrutan ovan med frukosten har brutit emot regeln om att använda <code>GET</code> för sidoeffektsfria anrop. Men eftersom vi ännu inte berättat vad vi ska göra med datat som användaren skickar så är det förstås svårt att säga :)
+
+p Ett lättare sätt att belysa distinktionen lär vara detta. Vi skulle hävda att ett sökformulär bör skicka sin data via <code>GET</code>. Medan ett registreringsformulär rimligen bör skickas över <code>POST</code>. Även ett inloggningsformulär skulle vi nog skicka över <code>POST</code>. De två senare förändrar ju faktiskt "state" på servern. I första fallet genom att lagra en till användare i databasen. I andra fallet genom att skapa en session för användaren (alltså markera den som inloggad). Medan i det allra första fallet &mdash; sökfallet &mdash; så vill vi ju faktiskt bara filtrera information. Ingenting förändras på servern. Vi vill, till användaren, returnera information som rimligen är ett subset av någonting annat. 
+
+p Det är fullt förståeligt om du tycker att det här är förvirrande. Det blir mycket på en gång. Men låt oss se det ifrån en annan vinkel. Låt oss fundera på hur data (exempelvis alltså formulärdata) skickas med de olika anropstyperna. Nedan följer två exempel på hur ett request till en sida skulle kunna se ut. Den ena varianten användet <code>GET</code> och den andra använder <code>POST</code>. Det viktiga är att du fokuserar på hur datat skickas.
 
 .panel.panel-default
-  .panel-heading Att fånga upp med $_GET["xxx"]
+  .panel-heading Exempel på HTTP requests genom GET och POST
+  .panel-body
+    p Låt oss kika på hur dessa requests faktiskt ser ut. Vi gör anrop till adressen <code>example.com</code>. Och vi vill skicka med följande data: <code>color = red</code> och <code>shape = circle</code>. Fokusera framförallt på hur denna data i de två exemplena skickas olika.
+
+    p Ett request genom <code>HTTP GET</code> skulle då kunna se ut som så...
+      pre
+        code.language-http
+          | GET https://example.com/?shape=circle&color=red
+          | Accept: */*
+          | User-Agent: runscope/0.1
+
+    p Och ett request genom <code>HTTP POST</code> skulle istället kunna se ut som så...
+      pre
+        code.language-http
+          | POST https://example.com/
+          | Accept: */*
+          | Content-Length: 22
+          | Content-Type: application/x-www-form-urlencoded
+          | User-Agent: runscope/0.1
+          | shape=circle&color=red
+
+    p Båda dessa requests skickades tjänsten <a href="http://www.hurl.it/">hurl.it</a>. Prova gärna och utförska själv!
+
+p Märkte du vad som var lustigt i ovan exempel? Det är förstås mycket som känns (o)lustigt med <code>http requests</code> första gången man ser dem. Rena mumbo jumbon. Men det viktiga vi behöver förstå är att den data som vi skickar med i ett <code>GET</code>-anrop blir en del av själva <code>url</code>:en vi anropar. Studera de två exemplena ovan. I det första fallet så anropar vi en url med ett frågetecken och en massa text på slutet. Detta är vår data "inkodad" i url:en enligt en standard som kallas <a href="http://www.w3schools.com/tags/ref_urlencode.asp">url encoding</a>. Själva strängen med det kodade datat kallas för en <a href="http://en.wikipedia.org/wiki/Query_string">query string</a>. I det andra fallet däremot. Där anropade vi helt enkelt bara den <code>url</code> vi ville till. Utan en massa urlkodad information i slutet av adressen. Istället skickade vi informationen längst ned i vårt <code>request</code>.
+
+p Som du kanske har misstänkt betyder detta alltså att när vi gör anrop via <code>GET</code> så syns all data vi skickar med i anropet i <code>url</code>:en själv. När vi däremot gör ett <code>POST</code>-anrop så syns inte all data i adressen. Bara denna information gör att vi kan göra smartare val kring när vi ska använda den ena och när den andra. En fördel med att t.ex. skicka data i <code>url</code>:en själv är ju att en användare kan kopiera den adressen och skicka till en kompis. Om vi istället skulle skicka datat "gömt" genom <code>POST</code> så skulle datat inte "följa" med när användaren kopierade url:en. Användaren skulle då istället behöva kopiera hela <code>HTTP requestet</code>. Vilket inte riktigt är något den vardaglige användaren ens skulle orka bry sig om att tänka på.
+
+
+
+h3 Läsa POST och GET i PHP
+p Låt oss nu istället prata om hur vi i <code>php</code> kan läsa den data som kan skickas genom ett request. När en <code>php</code>-fil körs (i kontexten av en webbapplikation) så körs den rimligen av en webbserver (t.ex. <a href="http://en.wikipedia.org/wiki/Apache_HTTP_Server">Apache</a>). En webbserver kan ju, som vi långt tidigare klargjort, ta emot <code>request</code>:s. Och som vi nu klargjort kan ju <code>request</code>:s (bl.a.) vara av typen <code>POST</code> eller <code>GET</code>. Och i båda fallen kan de innehålla data ifrån den som skickat <code>request</code>:et. Och eftersom det är en just en webbserver som delegerar neråt till <code>php</code> så är det så fantastiskt att de flesta webbservrar låter anropet till server-side-språket få veta vad den har fått för request. Det betyder alltså att om vi använder <em>Apache</em> och <code>php</code> så kommer vi i vår kod åt en hel del information om det anrop som faktiskt orsakat att vi kör den kod vi just nu kör. Låt oss se till några exempel.
+
+table.table.table-condensed.table-striped
+  tr
+    td
+      a(href="http://www.php.net/manual/en/reserved.variables.request.php") $_REQUEST
+    td En <em>superglobal</em> <em>associativ array</em> som innehåller alla requestvariabler oavsett om de kommer ifrån <em>GET</em>, <em>POST</em> eller <em>Cookies</em>.
+  tr
+    td
+      a(href="http://www.php.net/manual/en/reserved.variables.get.php") $_GET
+    td En <em>superglobal</em> <em>associativ array</em> som innehåller alla requestvariabler som återfinns i den nuvarande <em>url</em>:en.
+  tr
+    td
+      a(href="http://www.php.net/manual/en/reserved.variables.server.php") $_SERVER
+    td En <em>superglobal</em> <em>associativ array</em> som innehåller en mängd matnyttig information. Bland annat vilken requesttyp nuvarande <em>request</em> är av, nuvarande <em>querystring</em> eller vilken <em>port</em> skriptet körs på, o.s.v.
+  tr
+    td
+      a(href="http://www.php.net/manual/en/function.getallheaders.php") getallheaders()
+    td En metod som returnerar en <em>array</em> innehållandes alla <em>http headers</em> för det nuvarande <em>http request</em>:et.
+
+p Notera att det är fullt möjligt att skicka <code>GET</code>- och <code>POST</code>-data samtidigt eftersom vi kan göra ett <code>POST</code>-request till en url i vilken vi manuellt adderar urlkodade nyckel-värde-par. Anta alltså t.ex. att vi skulle efterfråga url:en <code>http://example.com/?shape=triangle</code>. Om vi t.ex. skulle ange den <em>url</em>:en som värde till <code>action</code>-attributet i ett formulär, och sedan ange att formulärets <code>method</code> skulle vara <code>POST</code>. Då kommer formulärets data ju alltså skickas i ett <code>POST</code>-request, men eftersom <em>url</em>:en vi angav redan innehöll data formaterad som i ett <code>GET</code>-request så kommer vi även ha skickat med den datan.
+
+p Så med andra ord är det i ärlighetens namn inte möjligt att göra ett <code>POST</code>- och <code>GET</code>-request samtidigt. Men det är däremot absolut möjligt att skicka urlparametrar trots att vi gör ett <code>POST</code>-request. Således kan det, i relation till <code>php</code>, hända att vi har värden i <code>$_GET</code> trots att vi har värden i <code>$_POST</code>. Och trots att ett request var av typen <code>POST</code>. Mycket behändigt kommer du märka!
+
+
+
+h3 Exempel på användning i PHP
+p Låt oss nu då faktiskt se till ett konkret exempel på hur vi kommer åt informationen genom <code>php</code>. Anta att vi anropat följande <em>url</em>: <code>http://example.com/?name=Johnny&breakfast=pancakes</code>. Om du kikar på formuläret vi hade som exempel högre upp i detta kapitel, så ser du nog hur den här <em>url</em>:en faktiskt skulle kunna vara ett resultat av en användare som fyllt i formuläret. I vår <code>php</code> skulle vi då alltså kunna hantera formulärdatat som så:
+
+.panel.panel-default
+  .panel-heading Att läsa värden ifrån $_GET
   .panel-body
     pre
       code.language-php
-        | &lt;?php
-        |   $name= $_GET["name"]
-        |   $choice= $_GET["breakfast"]
-        |   echo "kära" . $name . " , jag skall absolut fixa ". $choice . "till dig!" ;
-        | ?&gt;
+        | // Assuming an incoming GET request for the following url:
+        | // http://example.com/?name=Johnny&breakfast=pancakes
+        | 
+        | $name   = $_GET["name"]
+        | $choice = $_GET["breakfast"]
+        | 
+        | echo "Dear $name, I'll certainly make you some $choice!";
     .panel.panel-default
-p SÅ vad är då <code> $_GET["xxx"]</code>? Det finns inom PHP två globala variabler som man kan fånga upp parametrar som skickats
-  | till servern, <code> $_GET["xxx"] </code> eller <code>  $_POST["xxx"] </code>. Skillnaden mellan post och get är att: utifall
-  | man skickar med get kommer parametrarna synas i URL:en (exempel: test.php?breakfast=toast&name=Klara ) medan i post finns den inbäddad i requesten som görs. Det betyder att
-  | utifall man faktiskt skickar med data som man inte vill visa bör man välja att skicka den med post. post skickas fortfarande 
-  | som en ren text därav är den inte säker utan att man krypterar texten innan. Som regel brukar man alltid skicka större mängd data
-  | med post och utifall man skall processa datat på något sätt. 
+      .panel-heading Resultat
+      .panel-body
+        p Dear Johnny, I'll certainly make you some pancakes.
 
-p Man måste inte skicka data med ett formulär utan kan göra det med hjälp av functionen header. för att kunna skicka med data 
-  | behövs då att man skriver det manuellt. <code> header('Location: test.php?breakfast=toast&name=Klara'); </code>. Som ni ser
-  | så har jag nu manuellt skrivit till efter frågetecknet olika parametrar och särskilt dem med hjälp av ett &
+
+
+
+h3 Att själv konstruera ett GET request
+p Som tidigare nämnt så kan <em>querystring</em>-variabler förekomma även utan att vi använder ett formulär. Som tidigare nämnt så är ju de flesta requests faktiskt <code>GET</code> requests, och således uppenbara kandidater för att innehålla <em>querystring</em>-variabler.
+
+p Vi skulle t.ex. kunna skicka data med en helt vanlig länk.
+
+  pre
+    code.language-markup
+      | &lt;a href="http://example.com/?name=Johnny&breakfast=pancakes"&gt;
+      |   Johnny likes pancakes
+      | &lt;/a&gt;
+
+p Vilket skulle ge:
+
+.panel.panel-default
+  .panel-body
+    a(href="http://example.com/?name=Johnny&breakfast=pancakes") Johnny likes pancakes
+
+p Vi skulle förstås även kunna använda <code>php</code> för att göra precis samma sak men istället byta ut de konkreta värdena emot variabler.
+  
+  pre
+    code.language-php
+      | &lt;a href="http://example.com/?name=&lt;?= $name; ?&gt; &breakfast=&lt;?= $choice; ?&gt;"&gt;
+      |   Johnny likes pancakes
+      | &lt;/a&gt;
+
+p Men eftersom det ändå är så pass vanligt att konstruera en <em>querystring</em> så erbjuder <code>php</code> oss en fantastisk metod som hjälper oss genom att automatiskt transformera en <em>associativ array</em> till en <em>querystring</em>. Med andra ord så här:
+
+  pre
+    code.language-php
+      | &lt;?php
+      |   $data = array(
+      |     'name'      => $name,
+      |     'breakfast' => $choice
+      |   );
+      |   $querystring = http_build_query($data);
+      | ?&gt;
+      | 
+      | &lt;a href="http://example.com/?&lt;?= $querystring; ?&gt;"&gt;
+      |   Johnny likes pancakes
+      | &lt;/a&gt;
+
+p Om vi ifrån en <code>php</code>-sida skulle vilja automatiskt omdirigera (<em>redirect</em>) användaren till en annan sida så kan vi använda <code>php</code>-metoden <code>header('Location: [url]')</code>. Och om vi vill även vill passa på att skicka med parametrar, så kan vi förstås göra det genom att som vanligt lägga till en <em>querystring</em> i slutet av <code>url</code>:en. Alltså som så:
+
+  pre
+    code.language-php
+      | &lt;?php
+      |   $data = array(
+      |     'name'      => $name,
+      |     'breakfast' => $choice
+      |   );
+      |   $querystring = http_build_query($data);
+      | ?&gt;
+      | 
+      | // And then redirect
+      | header("Location: http://example.com/?$querystring");
+
+p Om du inte redan märkt det, så är alltså syntaxen för att bygga upp en querystring följande:
+  <code>nyckel=värde</code> där varje nyckel-värde-par separeras genom ett och-tecken (<code>&amp;</code>). Sedan är det förstås viktigt att komma ihåg att om vi ska lägga till en <em>querystring</em> till en <code>url</code> så måste vi avgränsa slutet på <code>url</code>:en och början på <em>querystring</em>:en med ett frågetecken (<code>?</code>). Så sammantaget blir det alltså:
+
+  pre
+    code http://example.com/?key1=value1&key2=value2&keyN=valueN
 
 
 
