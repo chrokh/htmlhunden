@@ -159,10 +159,66 @@ p Låt oss nu då faktiskt se till ett konkret exempel på hur vi kommer åt inf
 
 
 h3 Att själv konstruera ett GET request
+p Som tidigare nämnt så kan <em>querystring</em>-variabler förekomma även utan att vi använder ett formulär. Som tidigare nämnt så är ju de flesta requests faktiskt <code>GET</code> requests, och således uppenbara kandidater för att innehålla <em>querystring</em>-variabler.
 
-p Man måste inte skicka data med ett formulär utan kan göra det med hjälp av functionen header. för att kunna skicka med data 
-  | behövs då att man skriver det manuellt. <code> header('Location: process.php?breakfast=toast&name=Klara'); </code>. Som ni ser
-  | så har jag nu manuellt skrivit till efter frågetecknet olika parametrar och särskilt dem med hjälp av ett &
+p Vi skulle t.ex. kunna skicka data med en helt vanlig länk.
+
+  pre
+    code.language-markup
+      | &lt;a href="http://example.com/?name=Johnny&breakfast=pancakes"&gt;
+      |   Johnny likes pancakes
+      | &lt;/a&gt;
+
+p Vilket skulle ge:
+
+.panel.panel-default
+  .panel-body
+    a(href="http://example.com/?name=Johnny&breakfast=pancakes") Johnny likes pancakes
+
+p Vi skulle förstås även kunna använda <code>php</code> för att göra precis samma sak men istället byta ut de konkreta värdena emot variabler.
+  
+  pre
+    code.language-php
+      | &lt;a href="http://example.com/?name=&lt;?= $name; ?&gt; &breakfast=&lt;?= $choice; ?&gt;"&gt;
+      |   Johnny likes pancakes
+      | &lt;/a&gt;
+
+p Men eftersom det ändå är så pass vanligt att konstruera en <em>querystring</em> så erbjuder <code>php</code> oss en fantastisk metod som hjälper oss genom att automatiskt transformera en <em>associativ array</em> till en <em>querystring</em>. Med andra ord så här:
+
+  pre
+    code.language-php
+      | &lt;?php
+      |   $data = array(
+      |     'name'      => $name,
+      |     'breakfast' => $choice
+      |   );
+      |   $querystring = http_build_query($data);
+      | ?&gt;
+      | 
+      | &lt;a href="http://example.com/?&lt;?= $querystring; ?&gt;"&gt;
+      |   Johnny likes pancakes
+      | &lt;/a&gt;
+
+p Om vi ifrån en <code>php</code>-sida skulle vilja automatiskt omdirigera (<em>redirect</em>) användaren till en annan sida så kan vi använda <code>php</code>-metoden <code>header('Location: [url]')</code>. Och om vi vill även vill passa på att skicka med parametrar, så kan vi förstås göra det genom att som vanligt lägga till en <em>querystring</em> i slutet av <code>url</code>:en. Alltså som så:
+
+  pre
+    code.language-php
+      | &lt;?php
+      |   $data = array(
+      |     'name'      => $name,
+      |     'breakfast' => $choice
+      |   );
+      |   $querystring = http_build_query($data);
+      | ?&gt;
+      | 
+      | // And then redirect
+      | header("Location: http://example.com/?$querystring");
+
+p Om du inte redan märkt det, så är alltså syntaxen för att bygga upp en querystring följande:
+  <code>nyckel=värde</code> där varje nyckel-värde-par separeras genom ett och-tecken (<code>&amp;</code>). Sedan är det förstås viktigt att komma ihåg att om vi ska lägga till en <em>querystring</em> till en <code>url</code> så måste vi avgränsa slutet på <code>url</code>:en och början på <em>querystring</em>:en med ett frågetecken (<code>?</code>). Så sammantaget blir det alltså:
+
+  pre
+    code http://example.com/?key1=value1&key2=value2&keyN=valueN
 
 
 
