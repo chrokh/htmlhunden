@@ -761,7 +761,7 @@ while($x < $y){
 foreach($apples as $a){
   echo $a . "&lt;br&gt;";
 }</code></pre><div class="panel panel-default"><div class="panel-heading">Result</div><div class="panel-body"><p>red<br>green<br>blue</p></div></div></div></div><p>Om du har använt en <code>foreach</code>-loop i något annat språk så märker du säkert att implementationen i <code>php</code> känns lite "baklänges". I de flesta språk är loopen konstruerad så att syntaxen säger: <code>foreach(item in collection)</code>. Men i <code>php</code> så säger syntaxen: <code>foreach(collection as item)</code>. Men håll tungan rätt i mun, och tänk baklänges så ska nog allt gå sin väg! :)</p><h3>Funktioner</h3><p>Funktioner i <code>php</code> beter sig väldigt mycket som funktioner i de flesta andra stora språk. Du kan skriva funktioner som inte returnerar någonting eller funktioner som returnerar någonting. Om du kommer ifrån ett språk som <code>C#</code> eller <code>Java</code> så gäller det ju dock förstås att komma ihåg att <code>php</code> är ett dynamiskt språk. I <code>php</code> behöver vi alltså inte deklarera huruvida en funktion returnerar någonting eller ej. Inte heller behöver vi berätta vad den returnerar om den gör det. Låt oss se till några exempel.</p><div class="panel panel-default"><div class="panel-heading">Funktioner i <code>php</code></div><div class="panel-body"><pre><code class="language-php">function add($x, $y){
-  return $x + y;
+  return $x + $y;
 }
  
 function show_points($person, $points){
