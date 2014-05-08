@@ -574,7 +574,7 @@ haddock[getKey()];        // =&gt; 'Haddock'</code></pre></div></div><h1 href="#
     return Math.floor(Math.random()*101);
   }
  
-  $('a').click(function(){
+  $('a').click(function(e){
     e.preventDefault();
     var size = 75 + randomNum(),
     x = randomNum() + '%',
@@ -590,7 +590,7 @@ haddock[getKey()];        // =&gt; 'Haddock'</code></pre></div></div><h1 href="#
  
     $('body').append($img);
   });
-});</code></pre></div></div><p>Om du inte själv har valt att implementera den fantastiska jQuery-koden ovan så kan du få en sneak-peak på vilken underbar värld som väntar genom att prova exemplet nedan!</p><div class="panel panel-default"><div class="panel-heading">Resultat (prova!)</div><div class="panel-body"><p><a class="btn btn-large btn-success jquery-intro-example-1">All your base!</a></p><p><a class="btn btn-large btn-danger jquery-intro-example-2">Reset (you will need it I promise);</a></p><script>$(function(){
+});</code></pre></div></div><p>Om du inte själv har valt att implementera den fantastiska jQuery-koden ovan så kan du få en sneak-peak på vilken underbar värld som väntar genom att prova exemplet nedan!</p><div class="panel panel-default"><div class="panel-heading">Resultat (prova!)</div><div class="panel-body"><p><a class="btn btn-large btn-success jquery-intro-example-1">All your base!</a></p><p><a class="btn btn-large btn-danger jquery-intro-example-2">Reset (you will need it I promise)</a></p><script>$(function(){
  (function(){
    $('.jquery-intro-example-2').click(function(e){
      $('.jquery-intro-example-1-output').remove();
