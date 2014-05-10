@@ -18,10 +18,10 @@ p Notera att ovan paragraf inte använder facktermer utan bör istället betrakt
 p Innan vi kan gå över till att diskutera statiska, dynamiska och skillnaden emellan de &mdash; låt oss återigen påminna oss själva om hur språket HTML ser ut.
   pre
     code.language-markup
-      | Ett ord i &lt;b&gt;fetstil&lt;/b&gt; och ett &lt;i&gt;understruket&lt;/i&gt;.
+      | Ett ord i &lt;b&gt;fetstil&lt;/b&gt; och ett &lt;u&gt;understruket&lt;/u&gt;.
   .panel.panel-default
     .panel-body
-      | Ett ord i <b>fetstil</b> och ett <i>kursivt</i>.
+      | Ett ord i <b>fetstil</b> och ett <u>understruket</u>.
 p HTML är alltså det märkesspråk vi använder för att "märka upp" ett stycke media. Vi använder termen media eftersom HTML-dokument inte endast behöver bestå av text. De kan även innehålla bilder, ljud och video.
 p Med ordet statiskt menar vi (krasst) att om vi skulle öppna samma HTML-dokument två gånger i samma webbläsare så kommer vi att se ett precis likadant dokument andra gången som första. Låt oss omformulera detta. Ett icke-dynamiskt dokument är alltså ett icke-förändrande dokument. Ett statiskt dokument är ett dokument som inte förändras oavsett när vi visar upp det.
 p Låt oss uttrycka oss tydligare. När vi har en statisk webbsida så är det alltid samma markup (HTML) och resurser (bilder, css, javascript etc.) som levereras till webbläsaren. När vi bygger statiska sidor så har våran webbapplikation inte heller någon möjlighet att kommunicera med servern. Om sidan inte kan kommunicera med en server så kan den inte heller hålla någon form av "state". Med state menar vi minne. Om vi t.ex. vill bygga en highscore-lista för ett spel så behöver vi ett persistant state för att alla ska
