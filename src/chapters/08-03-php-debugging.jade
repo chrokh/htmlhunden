@@ -75,3 +75,27 @@ p Många gånger har vi inte resurser nog att faktiskt förstå varför ett fel 
 
 p Om felet detsutom berodde på att vi felanvände kod vi själva har skrivit så bör vi lära oss någonting om oss själva. Och sedan <a href="http://en.wikipedia.org/wiki/Code_refactoring">refaktorera</a>. Alltså skriva om vår kod så att den gör samma sak men på ett mer uppenbart sätt.
 
+
+
+
+h3 Tips i php
+p Vi skulle vilja ge ett par konkreta felsökningstips för dig som arbetar i <code>php</code>.
+
+p Det första är att se till att du har konfigurerat din <code>php</code>-installation så att felmeddelande faktiskt visas. Med andra ord behöver du sätta <a href="http://stackoverflow.com/questions/6480425/php-not-displaying-errors-even-though-display-errors-on">display_errors till On</a> i filen <a href="http://www.php.net/manual/en/configuration.file.php">php.ini</a>. I samma fil behöver du i samma veva även se till att inte bara kritiska fel, utan alla fel, rapporteras. Detta genom att <a href="http://www.php.net/manual/en/function.error-reporting.php">sätta error_reporting till E_ALL</a>. Notera att detta förslag inte alls är en bra idé för en "produktionskonfiguration". Med andra ord. När du väl ska konfigurera <code>php</code> på en maskin som ska servera webbsidor publikt på internet, så är dessa direktiv direkt farliga. Alla felmeddelanden bör absolut inte visas för obehöriga användare. Det är en annan historia men vi vill att du ska vara medveten om att det förstås är jättesvårt att isolera fel om vår utvecklingsmiljö inte rapporterar fel.
+
+p Det andra tipset vi har är en liten men ofantligt trevlig metod som heter <code>var_dump</code>. Denna metod används som så: <code>var_dump(expression)</code>. Denna metod printar precis som <code>echo</code> ut strängrepresentationen av en variabel till skärmen. Men utöver det så printar den också en massa annan matnyttig information. Om vi t.ex. har en array som innehåller de två elementen "apples" och "pears". Så skulle vi få följande resultat av <code>var_dump</code>
+
+pre
+  code.language-php array(2) { [0]=> string(6) "apples" [1]=> string(5) "pears" } 
+
+p Medan vi endast skulle få följande om vi använde <code>echo</code>.
+
+pre
+  code.language-php Array
+
+p Med andra ord kan vi snabbt vad en array innehåller och t.o.m. om den är tom. Men den verkliga styrkan kommer i att vi lätt kan upptäcka om en variabel innehåller <code>null</code>. Om vi t.ex. använder <code>echo</code> med en variabel som råkar innehålla <code>null</code> &mdash; så printas helt enkelt ingenting till skärmen. Om vi däremot gör samma sak med <code>var_dump</code> så printas istället texten <code>NULL</code>. Mycket, mycket användbart.
+
+p Det sista essentiella tipset vi har, är en metod som heter <code>die</code> och som används som så: <code>die(expression)</code>. Denna metod är särskilt användbar i kombination med tidigare nämnd <code>var_dump</code>. Metoden är enkel. Den avbryter pågående exekvering, och printar ut strängrepresentationen av det uttryck den får på skärmen. Detta är t.ex. mycket användbart när vi jobbar med webbsidor. Istället för att fortsätta att rendera hela vår webbsida så kan vi avbryta resten av exekveringen och istället printa ut någonting till skärmen. Alltså, t.ex undersöka värdet i en variabel. Vi säger att det är smidigt eftersom vi kan undvika saker som layout, och således undvika saker såsom att vi rent visuellt råkar "gömma" det värde vi försöker undersöka.
+
+
+
