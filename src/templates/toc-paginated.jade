@@ -9,7 +9,7 @@
             b
               span.toc-number #{chapter.contents.number}
               | #{chapter.contents.title}
-            each subchapter in chapter.subchapters
-              a(id="#{subchapter.contents.slug}", class="#{subchapter.contents.todoClass}").toc-h2.btn.btn-menu(href="/dist/#{subchapter.contents.url}")
-                span.toc-number #{subchapter.contents.number}
-                | #{subchapter.contents.title}
+          each subchapter in chapter.subchapters
+            a(id="#{subchapter.contents.slug}", class="#{subchapter.contents.todoClass}").toc-h2.btn.btn-menu(href="/dist/#{subchapter.contents.url}")
+              span.toc-number #{subchapter.contents.number}
+              | #{subchapter.contents.title}
