@@ -1,15 +1,20 @@
 
+mixin toc-icon
+  span.glyphicon.glyphicon-link   
+
 #toc-paginated.toc
   each chapter, index in locals.toc
     if index % 3 == 0
       .row
     .col-md-4
       .btn-group-vertical.toc-list
-          a(id="#{chapter.contents.slug}", class="#{chapter.contents.todoClass}").toc-h1.btn.btn-menu(href="/dist/#{chapter.contents.url}")
-            b
-              span.toc-number #{chapter.contents.number}
-              | #{chapter.contents.title}
-          each subchapter in chapter.subchapters
-            a(id="#{subchapter.contents.slug}", class="#{subchapter.contents.todoClass}").toc-h2.btn.btn-menu(href="/dist/#{subchapter.contents.url}")
-              span.toc-number #{subchapter.contents.number}
-              | #{subchapter.contents.title}
+        a(id="#{chapter.contents.slug}", class="#{chapter.contents.todoClass}").toc-h1.btn.btn-menu(href="/dist/#{chapter.contents.url}")
+          b
+            +toc-icon 
+            span.toc-number  #{chapter.contents.number}
+            | #{chapter.contents.title}
+        each subchapter in chapter.subchapters
+          a(id="#{subchapter.contents.slug}", class="#{subchapter.contents.todoClass}").toc-h2.btn.btn-menu(href="/dist/#{subchapter.contents.url}")
+            +toc-icon 
+            span.toc-number  #{subchapter.contents.number}
+            | #{subchapter.contents.title}
