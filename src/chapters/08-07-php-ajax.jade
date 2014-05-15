@@ -97,20 +97,28 @@ pre Tarzan is a manape
 
 
 
-h3 jQuery´s load()
-p jQurey´s load method är ganska lika get men den har en implicit callbackfunktion som gör det möjligt att kunna skriva:
-| <code>$("#result").load("test.php"); </code> och det som händer är att den själv fyller på elementet med innehållet. Man kan även skicka med 
-| en ytterligare callbackfunktion och då kommer det köras EFTER det matchande elementet har fyllts på med innehållet från test.php.
+
+h3 jQuery load()
+p Denna metod är mycket lik <code>get()</code>. Men den är till för att snabbare kunna lösa ett vanligt problem. Eftersom det är mycket vanligt att asynkront göra ett request till en annan sida och sedan visa body:t av det response vi får tillbaka i ett element så gör denna metod just dessa två saker. Vi kan alltså se metoden <code>load()</code> som en kombination av <code>get()</code> och <code>html()</code>. Låt oss exemplifiera.
 .panel.panel-default
-  .panel-heading Load() med callback.
+  .panel-heading Göra ett asynkront request och ersätta innehållet i ett element med det response som kommer tillbaka &mdash; load()
   .panel-body
+    p Anta att vi uttrycker följande med hjälp av <code>load()</code>...
     pre
       code.language-php
-        |$( "#result" ).load( "test.php", function() {
-        | alert( "Success!" );
+        |$('.result').load('test.php', function() {
+        |   alert('Success! The contents of .result are now updated.');
         |});
-    .panel.panel-default
-      .panel-heading Resultat
-      .panel-body
+    p ..då ger det alltså samma effekt som om vi hade uttryckt följande med hjälp av <code>get()</code>...
+    pre
+      code.language-php
+        | $.get('test.php', function(data, status){
+        |   alert('Success! The contents of .result are now updated.');
+        |   $('.result').html(data);
+        | });
+    p Vi slipper alltså explicit uppdatera html-elementet genom <code>html()</code>. Så om vi skippar callback:et helt så skulle vi t.o.m. kunna kondensera vår kod ner till följande...
+    pre
+      code.language-php
+        |$('.result').load('test.php');
 
 p Att jobba med asynkrona anrop är kraftfullt och bör vara en viktig kunskap i verktygslådan som webbutvecklare. 
