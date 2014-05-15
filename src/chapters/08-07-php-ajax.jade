@@ -23,66 +23,77 @@ p Så, låt oss då utan om och men sluta jiddra och börja trolla!
 
 
 
-h3 jQuery's get()
+h3 jQuery get()
+p Denna metod kan vi använda för att göra ett asynkront <code>GET request</code>. Alltså i <code>JavsaScript</code>. Och alltså utan att sidan vi är på laddas om.
 .panel.panel-default
   .panel-heading Ändra innehåll med utan att ladda om sidan med jQuery.
   .panel-body
     pre
       code.language-php
-        |$("button").click(function(){
-        |  $.get("test.php",function(data,status){
-        |  $( ".result" ).html( data );
-        |  });
-        | });
-    .panel.panel-default
-
-p Som ni ser har vi på en knapp som vid ett knapptryck gör ett HTTP GET request till servern. Innan vi börjar gå igenom i detaljom vad som händer kan det vara en god idé att se den sidan som vi efterfrågar, alltså test.php.
-.panel.panel-default
-  .panel-heading Sidan som efterfrågas 
-  .panel-body
-    pre
-      code.language-php
-        | &lt;?php
-        |   echo "Hello med AJAX";
-        | ?&gt;
-    .panel.panel-default
-
-p jQuery´s get tar emot två argument (1) URL:en till vilken sida som efterfrågas (2) en callback, alltså vad som skall göras 
-  | när requesten är klar. Det kan ibland finnas tillfällen då vi vill skicka med information till servern för att göra något med 
-  | datat, exempelvis lägga in eller hämta något från en databas. Att skicka med argument görs med <code> { name:"Me", lname:"Myself" } </code>. 
-  | Det skickas med som ett andra argument i functionen get().
-
-h3 jQuery get() med parametrar 
-.panel.panel-default
-  .panel-heading Sidan som efterfrågas 
-  .panel-body
-    pre
-      code.language-php
-        | $("button").click(function(){
-        |   $.get("test.php",
-        |   {
-        |     name:"Me",
-        |     lname:"Myself"
-        |   },
-        |   function(data,status){
-        |    alert("Lyssna på vad sidan säger dig!"");
+        | $('button').click(function(){
+        |   $.get('test.php',function(data, status){
+        |    // the argument 'data' now contains the response
+        |    $('.result').html(data);
         |   });
         | });
     .panel.panel-default
 
-p php test ser nu ut som denna: 
+p Som ni ser har vi på en knapp som vid ett knapptryck gör ett <code>HTTP GET</code> request till servern. Innan vi tittar lite närmare på vad som faktiskt kommer att hända. Låt oss först undersöka vad sidan vi skickar ett request till (alltså <code>test.php</code>) innehåller.
+.panel.panel-default
+  .panel-heading Sidan som efterfrågas (i.e. <code>test.php</code>)
+  .panel-body
+    pre
+      code.language-php
+        | &lt;?php
+        |   echo "Hello from AJAX!";
+        | ?&gt;
+
+p jQuery-metoden get tar emot två argument. Först en (1) URL som motsvarar den sida vi vill request:a. Vidare en (2) callback-funktion. Alltså en funktion som kommer att anropas när request:et är avslutat och vi får ett response tillbaka.
+
+
+
+h3 jQuery get() med parametrar
+p Tänk på hur ett <code>HTTP GET request</code> fungerar. Kanske kommer du ihåg att vi alltid kan skicka parametrar. Alltså såsom nedan:
+
+pre
+  code http://example.com?name=Tarzan&breed=manape
+
+p Självklart tillåter även jQuery-metoden GET att vi skickar parametrar. För att vi ska slippa konstruera denna url med url-enkodade parametrar själva, så är jQuery-metoden get konstruerad så att vi istället kan skicka ett javascript-objekt med nycklar och värden som motsvarar den data vi vill skicka.
+p Parametrarna skickar vi som andra argument. Och eftersom vårt callback ska vara det sista argument så blir det nu det tredje argumentet. Såsom i exemplet nedan.
+
+ 
+.panel.panel-default
+  .panel-heading Att göra ett anrop via jQuery get() med parametrar
+  .panel-body
+    pre
+      code.language-php
+        | $('button').click(function(){
+        |   $.get('test.php',
+        |     {
+        |       name:  'Tarzan',
+        |       breed: 'manape'
+        |     },
+        |     function(data, status){
+        |       alert(data);
+        |     }
+        |   );
+        | });
+
+p Anta då att vår php-sida (<code>test.php</code>) istället ser ut så här:
 .panel.panel-default
   .panel-heading Sidan som efterfrågas 
   .panel-body
     pre
       code.language-php
         | &lt;?php
-        |   $fname ,city
-        |   $fname= $_GET["name"]
-        |   $lname= $_GET["lname"]
-        |   echo "kära" . $fname . $lname . "du duger!";
+        |   $name  = $_GET["name"]
+        |   $breed = $_GET["breed"]
+        |   echo "$name is a $breed";
         | ?&gt;
-    .panel.panel-default
+
+p Om vi har ovan server-side-sida, och kör klientkoden &mdash; så kommer callbacket som avfyras att öppna en <code>alert</code>-ruta. I den rutan kommer det att stå:
+
+pre Tarzan is a manape  
 
 
 
