@@ -29,11 +29,11 @@ p Denna metod kan vi använda för att göra ett asynkront <code>GET request</co
   .panel-heading Ändra innehåll med utan att ladda om sidan med jQuery.
   .panel-body
     pre
-      code.language-php
+      code.language-javascript
         | $('button').click(function(){
         |   $.get('test.php',function(data, status){
-        |    // the argument 'data' now contains the response
-        |    $('.result').html(data);
+        |     // the argument 'data' now contains the response
+        |     $('.result').html(data);
         |   });
         | });
     .panel.panel-default
@@ -66,7 +66,7 @@ p Parametrarna skickar vi som andra argument. Och eftersom vårt callback ska va
   .panel-heading Att göra ett anrop via jQuery get() med parametrar
   .panel-body
     pre
-      code.language-php
+      code.language-javascript
         | $('button').click(function(){
         |   $.get('test.php',
         |     {
@@ -105,7 +105,7 @@ p Denna metod är mycket lik <code>get()</code>. Men den är till för att snabb
   .panel-body
     p Anta att vi uttrycker följande med hjälp av <code>load()</code>...
     pre
-      code.language-php
+      code.language-javascript
         |$('.result').load('test.php', function() {
         |   alert('Success! The contents of .result are now updated.');
         |});
@@ -118,7 +118,7 @@ p Denna metod är mycket lik <code>get()</code>. Men den är till för att snabb
         | });
     p Vi slipper alltså explicit uppdatera html-elementet genom <code>html()</code>. Så om vi skippar callback:et helt så skulle vi t.o.m. kunna kondensera vår kod ner till följande...
     pre
-      code.language-php
+      code.language-javascript
         |$('.result').load('test.php');
 
 p Att jobba med asynkrona anrop är kraftfullt och bör vara en viktig kunskap i verktygslådan som webbutvecklare. 
