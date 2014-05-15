@@ -1,11 +1,21 @@
 h2 AJAX och PHP
 p AJAX (Asynkron JavaScript och XML) är ett samlingsnamn som innefattar flera olika tekniker för att kunna uppdatera en sida utan att ladda om hela sidan. Detta kan vara praktiskt då vi kan behöva göra något på servern utan att störa användaren genom att behöva vänta på att sidan laddas om. De tekniker som används i samband med AJAX är:
+
+
 p <code>XMLHttpRequest </code> är ett API för att kunna överföra och ta emot XML mellan server och klienten. 
+
 p <code>DOM </code> (Document Object Model) gör att vi tillåts med javascript ändra i dokumentet.
+
 p <code>HTML</code> och <code>CSS</code> hur sidan representeras och vad som finns på sidan.
+
 p <code> XML </code> som ibland används för att transportera och strukturera data. 
+
 p <code> Javascript </code> programmeringspråk.
+
 p Det går att använda AJAX med annat än php (exemepelvis ASP) men vi har gjort ett val att använda php. Egentligen skulle vi också kunna använda oss av javascript för att göra asynkrona anrop men eftersom det redan finns någon som abstraherat bort komplexitet så är det lika bra att utnyttja det, jQuery! Detta innebär att vi gör ett aktivt val att inte gå djupare i de nämnda teknikerna utan att vi "slutar jiddrar och börjar trolla".
+
+
+
 h3 jQuery´s get()
 .panel.panel-default
   .panel-heading Ändra innehåll med utan att ladda om sidan med jQuery.
@@ -18,6 +28,7 @@ h3 jQuery´s get()
         |  });
         | });
     .panel.panel-default
+
 p Som ni ser har vi på en knapp som vid ett knapptryck gör ett HTTP GET request till servern. Innan vi börjar gå igenom i detaljom vad som händer kan det vara en god idé att se den sidan som vi efterfrågar, alltså test.php.
 .panel.panel-default
   .panel-heading Sidan som efterfrågas 
@@ -28,10 +39,12 @@ p Som ni ser har vi på en knapp som vid ett knapptryck gör ett HTTP GET reques
         |   echo "Hello med AJAX";
         | ?&gt;
     .panel.panel-default
+
 p jQuery´s get tar emot två argument (1) URL:en till vilken sida som efterfrågas (2) en callback, alltså vad som skall göras 
   | när requesten är klar. Det kan ibland finnas tillfällen då vi vill skicka med information till servern för att göra något med 
   | datat, exempelvis lägga in eller hämta något från en databas. Att skicka med argument görs med <code> { name:"Me", lname:"Myself" } </code>. 
   | Det skickas med som ett andra argument i functionen get().
+
 h3 jQuery get() med parametrar 
 .panel.panel-default
   .panel-heading Sidan som efterfrågas 
@@ -63,6 +76,9 @@ p php test ser nu ut som denna:
         |   echo "kära" . $fname . $lname . "du duger!";
         | ?&gt;
     .panel.panel-default
+
+
+
 h3 jQuery´s load()
 p jQurey´s load method är ganska lika get men den har en implicit callbackfunktion som gör det möjligt att kunna skriva:
 | <code>$("#result").load("test.php"); </code> och det som händer är att den själv fyller på elementet med innehållet. Man kan även skicka med 
@@ -78,4 +94,5 @@ p jQurey´s load method är ganska lika get men den har en implicit callbackfunk
     .panel.panel-default
       .panel-heading Resultat
       .panel-body
+
 p Att jobba med asynkrona anrop är kraftfullt och bör vara en viktig kunskap i verktygslådan som webbutvecklare. 
