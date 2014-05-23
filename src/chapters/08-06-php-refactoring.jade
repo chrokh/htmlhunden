@@ -350,19 +350,35 @@ p Dessa "kolon-motsvarigheter" är alltså mycket användbara när vi vill bland
 .panel.panel-default
   .panel-heading Exempel på varför vi behöver kolon-motsvarigheterna i <code>php</code>
   .panel-body
-    p Detta fungerar ej...
+    p Om vi vill "bryta" ett php-block efter en kontrollstruktur såsom t.ex. <code>if</code> kan vi absolut göra det så här...
     pre
       code.language-php
         | &lt;? if(someCondition){ ?&gt;
         |   &lt;p&gt;Then display this text&lt;/p&gt;
         | &lt;? } ?&gt;
 
-    p Men detta fungerar...
+    p Men det är förstås inte lika tydligt som att använda kolon-motsvarigheterna så här...
     pre
       code.language-php
         | &lt;? if(someCondition): ?&gt;
         |   &lt;p&gt;Then display this text&lt;/p&gt;
         | &lt;? endif; ?&gt;
+
+    p Fundera t.ex. över hur förvirrande det skulle vara att försöka avgöra vilken "stängande måsvinge" som hör till vilken "öppnande" när vi börjar hantera komplexare fall såsom det nedan...
+    pre
+      code.language-php
+        | &lt;? if(someCondition){ ?&gt;
+        |   &lt;p&gt;Then display 
+        |   &lt;? for($i=0; $i<10; $i++){ ?&gt;
+        |     this
+        |     &lt;? if($i%2==0){ ?&gt;
+        |       text&lt;/p&gt;
+        |     &lt;? } ?&gt;
+        |   &lt;? } ?&gt;
+        |   &lt;? for($i=0; $i<10; $i++){ ?&gt;
+        |       many times 
+        |   &lt;? } ?&gt;
+        | &lt;? } ?&gt;
 
 p Nu säger vi förstås inte att alla måste prioritera att använda "kolon-versionerna". Inte heller säger vi att det i alla fallet är det bästa sättet att designa sina <code>php</code>-filer. Men om du inte har en annan medveten strategi du tror på, så skulle vi rösta för att du följer ovan.
 
